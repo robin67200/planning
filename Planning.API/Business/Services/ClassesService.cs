@@ -16,7 +16,7 @@ namespace Planning.API.Business.Services
     {
         private readonly IClassesRepository _repo;
 
-        public ClassesService(IClassesRepository repo, IUnitOfWork unitOfWork, IMapper mapper) : base(repo, unitOfWork)
+        public ClassesService(IClassesRepository repo, IUnitOfWork unitOfWork, IMapper mapper) : base(repo, unitOfWork, mapper)
         {
             _repo = repo;
         }
