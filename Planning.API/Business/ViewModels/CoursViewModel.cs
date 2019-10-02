@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+
+namespace Planning.API.Business.ViewModels
+{
+    public class CoursViewModel
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Contenu { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+
+        public string Color { get; set; }
+
+        public int MatiereId { get; set; }
+        public int AnneeId { get; set; }
+        public int ProfesseurId { get; set; }
+
+        public ICollection<ClasseViewModel> Classes { get; set; }
+    }
+}
