@@ -2,4 +2,11 @@
 bin
 obj
 *.db
+migrations
+
+# dependencies
+node_modules
+
+
+
 
