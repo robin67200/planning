@@ -10,14 +10,14 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Cours");
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("int").UseSqlServerIdentityColumn().IsRequired();
-            builder.Property(x => x.Title).HasColumnName("Title").HasColumnType("nvarchar(50)").IsRequired();
-            builder.Property(x => x.Contenu).HasColumnName("Contenu").HasColumnType("nvarchar(50)").IsRequired();
-            builder.Property(x => x.Start).HasColumnName("Start").HasColumnType("datetime").IsRequired();
-            builder.Property(x => x.End).HasColumnName("End").HasColumnType("datetime").IsRequired();
-            builder.Property(x => x.ProfesseurId).HasColumnName("ProfesseurId").HasColumnType("int").IsRequired();
-            builder.Property(x => x.Color).HasColumnName("Color").HasColumnType("varchar(10)").IsRequired();
-            builder.Property(x => x.MatiereId).HasColumnName("MatiereId").HasColumnType("int").IsRequired();
+            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Title).HasColumnName("Title").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.Contenu).HasColumnName("Contenu").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.Start).HasColumnName("Start").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.End).HasColumnName("End").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.ProfesseurId).HasColumnName("ProfesseurId").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Color).HasColumnName("Color").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.MatiereId).HasColumnName("MatiereId").HasColumnType("INTEGER").IsRequired();
 
         }
     }

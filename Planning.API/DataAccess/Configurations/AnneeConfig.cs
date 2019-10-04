@@ -10,8 +10,8 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Annees");
             builder.HasKey(a => a.Id);
 
-            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("int").IsRequired();
-            builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("nvarchar(50)").IsRequired();
+            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("TEXT").IsRequired();
 
             builder.HasMany(z => z.Classes).WithOne(z => z.Annee).HasForeignKey(z => z.AnneeId);
         }

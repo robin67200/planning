@@ -10,10 +10,10 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Classes");
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("int").UseSqlServerIdentityColumn().IsRequired();
-            builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("nvarchar(50)").IsRequired();
-            builder.Property(x => x.NiveauId).HasColumnName("NiveauId").HasColumnType("int").IsRequired();
-            builder.Property(x => x.AnneeId).HasColumnName("AnneeId").HasColumnType("int").IsRequired();
+            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.NiveauId).HasColumnName("NiveauId").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.AnneeId).HasColumnName("AnneeId").HasColumnType("INTEGER").IsRequired();
 
 
             builder.HasMany(y => y.Eleves).WithOne(x => x.Classe).HasForeignKey(y => y.ClasseId);

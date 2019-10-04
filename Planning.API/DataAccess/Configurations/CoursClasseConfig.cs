@@ -10,8 +10,8 @@ namespace Planning.API.DataAccess {
             builder.ToTable("CoursClasse");
             builder.HasKey(keyExpression: p => new { p.ClasseId, p.CoursId });
 
-            builder.Property(x => x.ClasseId).HasColumnName("ClasseId").HasColumnType("int").IsRequired();
-            builder.Property(x => x.CoursId).HasColumnName("CoursId").HasColumnType("int").IsRequired();
+            builder.Property(x => x.ClasseId).HasColumnName("ClasseId").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.CoursId).HasColumnName("CoursId").HasColumnType("INTEGER").IsRequired();
 
             builder.HasOne(y => y.Classe).WithMany(x => x.ClasseCours).HasForeignKey(y => y.ClasseId);
             builder.HasOne(y => y.Cours).WithMany(x => x.CoursClasses).HasForeignKey(y => y.CoursId);

@@ -10,8 +10,8 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Matieres");
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("int").UseSqlServerIdentityColumn().IsRequired();
-            builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("nvarchar(50)").IsRequired();
+            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("TEXT").IsRequired();
             
         }
     }
