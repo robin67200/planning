@@ -34,6 +34,7 @@ namespace Planning.API.Business.Services
         }
 
 
+
         public void AddProf(ProfClasseViewModel model)
         {
             var obj = this._mapper.Map<ProfClasse>(model);
