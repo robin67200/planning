@@ -1,6 +1,7 @@
-import { AnneeDetailComponent } from './annee-detail/annee-detail.component';
-import { AnneeListComponent } from './annee-list/annee-list.component';
-import { AnneeService } from './services/annee.service';
+import { MatieresRoutingModule } from './matiere.routing';
+import { MatiereService } from './services/matiere.service';
+import { MatiereListComponent } from './matiere-list/matiere-list.component';
+import { MatiereDetailComponent } from './matiere-detail/matiere-detail.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,16 +13,16 @@ import { ModalModule } from 'ngx-bootstrap';
   imports: [CommonModule,
             ReactiveFormsModule,
             FormsModule,
-            AnneeRoutingModule,
+            MatieresRoutingModule,
             AppSharedModule,
             ModalModule.forRoot()
             ],
   declarations: [
-    AnneeListComponent,
-    AnneeDetailComponent,
+    MatiereDetailComponent,
+    MatiereListComponent,
   ],
-  providers: [AnneeService],
+  providers: [MatiereService],
   entryComponents: [],
   exports: []
 })
-export class JurysModule {}
+export class MatiereModule {}

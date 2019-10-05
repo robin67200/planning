@@ -1,3 +1,36 @@
-<p>
-  classe-list works!
-</p>
+<div class="container">
+    <br />
+    <h2 style="text-align:center">Classes : </h2>
+    <hr>
+    <br />
+    <br />
+    <div class="widget-body">
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>
+            nom
+          </th>
+        </tr>
+      </thead>
+        <tr id="list" *ngFor="let classe of classes">
+          <td>
+            {{ classe.nom }}
+
+            <td style="width: 10%">
+              <div class="dropdown">
+                <button class="btn btn-outline-info dropdown-toggle text-blue pull-right" type="button"
+                  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Actions
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item text-dark glyphicon glyphicon-zoom-in" role="button" [routerLink]="['/classes/detail/',classes.id]">
+                      Details
+                    </a>
+                </div>
+              </div>
+            </td>
+        </tr>
+    </table>
+  </div>
+  </div>

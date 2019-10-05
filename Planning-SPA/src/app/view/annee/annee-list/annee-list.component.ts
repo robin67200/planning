@@ -1,6 +1,7 @@
 import { Annee } from './../models/annee';
 import { AnneeService } from './../services/annee.service';
 import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-annee-list',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnneeListComponent implements OnInit {
 
-  jurys: any;
+  annees: any;
   bsModalRef: BsModalRef;
   annne: Annee;
 
@@ -21,18 +22,20 @@ export class AnneeListComponent implements OnInit {
   ngOnInit() {
     this.service.getAnnee().subscribe(
       response => {
-        this.jurys = response;
+        this.annees = response;
       },
       error => {
         console.log(error);
       }
     );
   }
-  deleteJury(annee: Annee) {
+
+ /* deleteJury(annee: Annee) {
     const initialState = {
       annee
     };
     this.bsModalRef = this.modalService.show(JuryModalsComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
   }
+}*/
 }

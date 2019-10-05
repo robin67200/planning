@@ -1,3 +1,50 @@
-<p>
-  prof-list works!
-</p>
+<div class="container">
+  <br />
+  <h2 style="text-align:center">Prof</h2>
+  <hr>
+  <br />
+  <br />
+  <div class="widget-body">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          nom
+        </th>
+        <th>
+          prenom
+        </th>
+        <th>
+          adresse
+        </th>
+        <th>
+          mail
+        </th>
+        <th>
+          telephone
+        </th>
+      </tr>
+    </thead>
+      <tr id="list" *ngFor="let prof of profs">
+        <td>
+          {{ prof.nom }}
+        </td>
+        <td>
+          {{ prof.prenom }}
+        </td>
+        <td>
+          {{ prof.adresse }}
+        </td>
+        <td>
+          {{ prof.mail }}
+        </td>
+        <td>
+          {{ prof.telephone }}
+        </td>
+          <td style="width: 10%">
+            <button class="btn btn-primary"[routerLink]="['/profs/detail/',profs.id]">Details</button>
+          </td>
+      </tr>
+  </table>
+</div>
+</div>

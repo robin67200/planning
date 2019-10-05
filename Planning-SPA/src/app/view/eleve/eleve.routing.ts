@@ -1,7 +1,8 @@
-import { AnneeListComponent } from './annee-list/annee-list.component';
-import { AnneeDetailComponent } from './annee-detail/annee-detail.component';
+import { EleveListComponent } from './eleve-list/eleve-list.component';
+import { EleveDetailComponent } from './eleve-detail/eleve-detail.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+
 
 export const routes: Routes = [
   {
@@ -10,9 +11,9 @@ export const routes: Routes = [
   pathMatch : 'prefix'
   },
     // {path: 'create', component: },
-    {path: 'detail/:id', component: AnneeDetailComponent},
+    {path: 'detail/:id', component: EleveDetailComponent},
    // {path: 'edit/:id', component: JuryEditComponent},
-    {path: 'list', component: AnneeListComponent},
+    {path: 'list', component: EleveListComponent},
     // {path: 'detail/:id/delete/:id', component: AnneeModalsComponent},
 
   ];
@@ -21,4 +22,4 @@ export const routes: Routes = [
     imports: [ RouterModule.forChild(routes) ],
     exports: [ RouterModule ]
   })
-  export class AnneesRoutingModule {}
+  export class ElevesRoutingModule {}

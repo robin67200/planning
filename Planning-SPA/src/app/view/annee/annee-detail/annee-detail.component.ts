@@ -2,6 +2,7 @@ import { AnneeService } from './../services/annee.service';
 import { Annee } from './../models/annee';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-annee-detail',
@@ -12,7 +13,7 @@ export class AnneeDetailComponent implements OnInit {
 
 
   id: number;
-  Annee: Annee = new Annee('');
+  annees: Annee = new Annee('');
   bsModalRef: BsModalRef;
 
   constructor(
@@ -30,14 +31,16 @@ export class AnneeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAnneeById(this.id).subscribe(res => {
-      this.annee = res;
+      this.annees = res;
     });
   }
-  deleteJury(jury: Annee) {
+  /*deleteJury(jury: Annee) {
     const initialState = {
       jury
     };
     this.bsModalRef = this.modalService.show(AnneeModalComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
   }
+}
+*/
 }
