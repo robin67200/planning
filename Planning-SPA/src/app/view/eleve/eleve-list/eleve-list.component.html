@@ -1,3 +1,56 @@
-<p>
-  eleve-list works!
-</p>
+<div class="container">
+  <br />
+  <h2 style="text-align:center">Eleve</h2>
+  <hr>
+  <br />
+  <br />
+  <div class="widget-body">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          nom
+        </th>
+        <th>
+          prenom
+        </th>
+        <th>
+          adresse
+        </th>
+        <th>
+          mail
+        </th>
+        <th>
+          telephone
+        </th>
+        <th>
+          Date de Naissance
+        </th>
+      </tr>
+    </thead>
+      <tr id="list" *ngFor="let eleve of eleves">
+        <td>
+          {{ eleve.nom }}
+        </td>
+        <td>
+          {{ eleve.prenom }}
+        </td>
+        <td>
+          {{ eleve.adresse }}
+        </td>
+        <td>
+          {{ eleve.mail }}
+        </td>
+        <td>
+          {{ eleve.telephone }}
+        </td>
+        <td>
+          {{ eleve.dateNaissance }}
+        </td>
+          <td style="width: 10%">
+            <button class="btn btn-primary"[routerLink]="['/eleves/detail/',eleves.id]">Details</button>
+          </td>
+      </tr>
+  </table>
+</div>
+</div>

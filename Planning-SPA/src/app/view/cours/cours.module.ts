@@ -19,9 +19,11 @@ import { NgModule } from '@angular/core';
             ModalModule.forRoot()
             ],
   declarations: [
-  ],
+    CoursListComponent,
+    CoursDetailComponent
+    ],
   providers: [CoursService],
   entryComponents: [],
   exports: []
 })
-export class CoursModule {}
+export class CourssModule {}

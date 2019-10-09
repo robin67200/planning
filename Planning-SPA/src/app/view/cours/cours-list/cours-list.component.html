@@ -41,19 +41,9 @@
           <td>
             {{ cours.color }}
           </td>
-            <td style="width: 10%">
-              <div class="dropdown">
-                <button class="btn btn-outline-info dropdown-toggle text-blue pull-right" type="button"
-                  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Actions
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item text-dark glyphicon glyphicon-zoom-in" role="button" [routerLink]="['/courss/detail/',courss.id]">
-                      Details
-                    </a>
-                </div>
-              </div>
-            </td>
+          <td style="width: 10%">
+            <button class="btn btn-primary"[routerLink]="['/courss/detail/' + courss.id]">Details</button>
+          </td>
         </tr>
     </table>
   </div>

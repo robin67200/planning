@@ -7,13 +7,12 @@ export const routes: Routes = [
   {
   path: '',
   redirectTo: 'list',
-  pathMatch : 'prefix'
   },
     // {path: 'create', component: },
     {path: 'detail/:id', component: CoursDetailComponent},
-   // {path: 'edit/:id', component: JuryEditComponent},
+   // {path: 'edit/:id', component: },
     {path: 'list', component: CoursListComponent},
-    // {path: 'detail/:id/delete/:id', component: AnneeModalsComponent},
+    // {path: 'detail/:id/delete/:id', component: },
 
   ];
 

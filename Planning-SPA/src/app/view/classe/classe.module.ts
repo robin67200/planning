@@ -18,10 +18,11 @@ import { ClassesRoutingModule } from './classe.routing';
             ModalModule.forRoot()
             ],
   declarations: [
-
+    ClasseListComponent,
+    ClasseDetailComponent,
   ],
   providers: [ClasseService],
   entryComponents: [],
   exports: []
 })
-export class AnneesModule {}
+export class ClasseModule {}

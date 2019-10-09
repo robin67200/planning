@@ -1,3 +1,52 @@
-<p>
-  eleve-detail works!
-</p>
+<div class="container">
+  <section class="widget">
+    <header>
+      <br />
+      <h2 style="text-align: center">Eleve numéro {{eleves.id}}</h2>
+      <hr/>
+    </header>
+    <br />
+    <div class="widget-controls" style="text-align: right">
+    </div>
+    <br>
+    <table class="table table-hover table-bordered table-striped">
+        <tbody>
+          <tr>
+            <th style="width: 50%" scope="row">Nom</th>
+            <td style="text-align: center">
+                {{ eleves.nom }}
+              </td>
+          </tr>
+          <tr>
+            <th scope="row">Prénom</th>
+            <td style="text-align: center">
+                {{ eleves.prenom }}
+          </tr>
+          <tr>
+            <th scope="row">Adresse</th>
+            <td style="text-align: center">
+                {{ eleves.adresse }}
+              </td>
+          </tr>
+          <tr>
+          <th scope="row">Mail</th>
+          <td style="text-align: center">
+                {{ eleves.mail }}
+            </td>
+        </tr>
+        <tr>
+        <th scope="row">Téléphone</th>
+        <td style="text-align: center">
+            {{ eleves.telephone }}
+          </td>
+      </tr>
+        </tbody>
+    </table>
+    <br />
+      <button class="btn btn-primary btn-rounded-f" [routerLink]="['/eleves/list']">
+        Retour
+      </button>
+  </section>
+  </div>
+
+

@@ -32,7 +32,7 @@ export class ProfDetailComponent implements OnInit {
     this.service.getProfById(this.id).subscribe(res => {
       this.profs = res;
     });
-  }
+}
   /*deleteJury(jury: Prof) {
     const initialState = {
       jury

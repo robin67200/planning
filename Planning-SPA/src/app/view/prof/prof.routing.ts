@@ -10,9 +10,9 @@ export const routes: Routes = [
   },
     // {path: 'create', component: },
     {path: 'detail/:id', component: ProfDetailComponent},
-   // {path: 'edit/:id', component: JuryEditComponent},
+   // {path: 'edit/:id', component: },
     {path: 'list', component: ProfListComponent},
-    // {path: 'detail/:id/delete/:id', component: AnneeModalsComponent},
+    // {path: 'detail/:id/delete/:id', component: },
 
   ];
 
