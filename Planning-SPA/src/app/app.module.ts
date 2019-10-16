@@ -73,14 +73,14 @@ const appRoutes: Routes = [
     AppRoutingModule,
     SimpleModalModule.forRoot(
       { container: 'modal-container' },
-      {
+      /*{
         closeOnEscape: true,
         closeOnClickOutside: true,
         bodyClass: 'modal-open',
         wrapperDefaultClasses: 'modal fade',
         wrapperClass: 'show',
         animationDuration: 300
-      }
+      }*/
     )
 
   ],
