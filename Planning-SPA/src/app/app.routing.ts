@@ -4,9 +4,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 export const routes: Routes = [
 
-  {path: 'annees', component: AnneeListComponent},
-  {path: 'annees/detail/:id', component: AnneeDetailComponent},
-  { path: '', redirectTo: 'nav', pathMatch: 'full' },
 ];
 
 @NgModule({
