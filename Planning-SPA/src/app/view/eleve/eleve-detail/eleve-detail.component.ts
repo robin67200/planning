@@ -32,9 +32,6 @@ export class EleveDetailComponent implements OnInit {
     this.service.getEleveById(this.id).subscribe(res => {
       this.eleves = res;
     },
-    error => {
-      console.log(error);
-    }
   );
 }
 
