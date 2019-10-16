@@ -7,7 +7,6 @@ export const routes: Routes = [
   {
   path: '',
   redirectTo: 'list',
-  pathMatch : 'prefix'
   },
     // {path: 'create', component: },
     {path: 'detail/:id', component: AnneeDetailComponent},

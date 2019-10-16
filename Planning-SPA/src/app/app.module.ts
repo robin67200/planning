@@ -1,9 +1,6 @@
 import { ModalSimpleInputComponent } from './components/modals/simple-input-modals';
 import { ModalConfirmComponent } from './components/modals/confirm-modal';
-import { ClasseService } from './view/classe/services/classe.service';
-import { AnneeService } from './view/annee/services/annee.service';
-import { AnneeListComponent } from './view/annee/annee-list/annee-list.component';
-import { AnneeDetailComponent } from './view/annee/annee-detail/annee-detail.component';
+
 import { NavComponent } from './view/nav/nav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component, APP_INITIALIZER } from '@angular/core';
@@ -88,4 +85,7 @@ const appRoutes: Routes = [
   providers: [ ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+
+}

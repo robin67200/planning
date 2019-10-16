@@ -4,7 +4,7 @@ import { ModalConfirmComponent } from './components/modals/confirm-modal';
 import { AppSlidePanelComponent } from './components/app-slide-panel/app-slide-panel.component';
 import { RouterModule } from '@angular/router';
 import { NgModule, Input } from '@angular/core';
-import {MatInputModule } from '@angular/material/input';
+import {MatInputModule} from '@angular/material/input';
 
 const APP_COMPONENTS = [ AppSlidePanelComponent, ];
 
