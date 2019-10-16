@@ -1,3 +1,26 @@
-<p>
-  annee-list works!
-</p>
+<div class="container">
+  <br />
+  <h2 style="text-align:center">Annee</h2>
+  <hr>
+  <br />
+  <br />
+  <div class="widget-body">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          nom
+        </th>
+      </tr>
+    </thead>
+      <tr id="list" *ngFor="let annee of annees">
+        <td>
+          {{ annee.nom }}
+        </td>
+          <td style="width: 10%">
+            <button class="btn btn-primary"[routerLink]="['/annees/detail/',annee.id]">Details</button>
+          </td>
+      </tr>
+  </table>
+</div>
+</div>
