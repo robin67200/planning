@@ -70,7 +70,6 @@ const appRoutes: Routes = [
     AppRoutingModule,
     SimpleModalModule.forRoot(
       { container: 'modal-container' },
-      this.animation()
     )
 
   ],
@@ -80,14 +79,5 @@ const appRoutes: Routes = [
 })
 export class AppModule {
 
-public animation() {
-  return {
-    closeOnEscape: true,
-    closeOnClickOutside: true,
-    bodyClass: 'modal-open',
-    wrapperDefaultClasses: 'modal fade',
-    wrapperClass: 'show',
-    animationDuration: 300
-  };
-}
+
 }
