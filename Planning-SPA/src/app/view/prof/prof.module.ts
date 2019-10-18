@@ -1,3 +1,4 @@
+import { ProfCreateComponent } from './prof-create/prof-create.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -19,7 +20,7 @@ import { ProfsRoutingModule } from './prof.routing';
             ],
   declarations: [
     ProfDetailComponent,
-    ProfListComponent
+    ProfListComponent,
   ],
   providers: [ProfService],
   entryComponents: [],
