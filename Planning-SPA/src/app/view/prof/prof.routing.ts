@@ -1,4 +1,3 @@
-import { ProfCreateComponent } from './prof-create/prof-create.component';
 import { ProfListComponent } from './prof-list/prof-list.component';
 import { ProfDetailComponent } from './prof-detail/prof-detail.component';
 import { Routes, RouterModule } from '@angular/router';

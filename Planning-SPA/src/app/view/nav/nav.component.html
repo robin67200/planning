@@ -1,26 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">Planning</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active"routerLinkActive="active">
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="annees">Annees</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="courss">Cours</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="eleves">Eleve</a>
-      </li>
-      <li class="nav-item">
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="profs">Profs</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<mat-sidenav-container>
+  <mat-sidenav mode="over" [(opened)]="opened">
+          <a class="navbar-brand">Planning</a>
+            <ul class="navbar-nav">
+              <li class="nav-item active" routerLinkActive="active">
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="annees">Annees</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="courss">Cours</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="eleves">Eleve</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="profs">Profs</a>
+              </li>
+            </ul>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand"><button (click)="opened=!opened" class="btn btn-primary">Planning</button></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+  </mat-sidenav-content>
+</mat-sidenav-container>

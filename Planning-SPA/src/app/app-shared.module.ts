@@ -11,7 +11,7 @@ const APP_COMPONENTS = [ AppSlidePanelComponent, ];
 const APP_MODULES = [
   CommonModule,
   FormsModule,
-  MatInputModule
+  MatInputModule,
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { ModalSimpleInputComponent } from './components/modals/simple-input-modals';
 import { ModalConfirmComponent } from './components/modals/confirm-modal';
-
+import { MatSliderModule } from '@angular/material/slider';
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavComponent } from './view/nav/nav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component, APP_INITIALIZER } from '@angular/core';
@@ -70,7 +71,10 @@ const appRoutes: Routes = [
     AppRoutingModule,
     SimpleModalModule.forRoot(
       { container: 'modal-container' },
-    )
+    ),
+    MatSliderModule,
+    MatSidenavModule,
+
 
   ],
   entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent],
