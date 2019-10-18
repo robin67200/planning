@@ -1,3 +1,4 @@
+import { LayoutComponent } from './view/layout/layout.component';
 import { ModalSimpleInputComponent } from './components/modals/simple-input-modals';
 import { ModalConfirmComponent } from './components/modals/confirm-modal';
 import { MatSliderModule } from '@angular/material/slider';
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     ModalConfirmComponent,
     ModalItemSelectorComponent,
     ModalSimpleInputComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
