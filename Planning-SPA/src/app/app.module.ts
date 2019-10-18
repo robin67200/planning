@@ -75,6 +75,14 @@ const appRoutes: Routes = [
     MatSliderModule,
     MatSidenavModule,
 
+      /*{
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        bodyClass: 'modal-open',
+        wrapperDefaultClasses: 'modal fade',
+        wrapperClass: 'show',
+        animationDuration: 300
+      }*/
 
   ],
   entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent],

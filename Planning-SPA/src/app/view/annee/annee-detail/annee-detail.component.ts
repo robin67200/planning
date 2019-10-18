@@ -1,8 +1,10 @@
 import { AnneeService } from './../services/annee.service';
 import { Annee } from './../models/annee';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 
 @Component({
   selector: 'app-annee-detail',
@@ -19,7 +21,8 @@ export class AnneeDetailComponent implements OnInit {
   constructor(
     route: ActivatedRoute,
     private service: AnneeService,
-    private modalService: BsModalService,
+    private modals: SimpleModalService,
+    private router: Router
 
   ) {
     route.params.forEach((params: Params) => {
@@ -43,4 +46,20 @@ export class AnneeDetailComponent implements OnInit {
   }
 }
 */
+
+deleteClasse(annee: Annee) {
+  this.modals
+    .addModal(ModalConfirmComponent, {
+      title: `Supprimer ${annee.nom} ?`,
+      message: 'Êtes-vous sûr de vouloir supprimer cette année ?'
+    })
+    .subscribe((result) => {
+      if (result) {
+        this.service.deleteAnneById(annee.id).subscribe((res) => {
+          this.router.navigate([ 'classes/list/' ]);
+        });
+      } else {
+      }
+    });
+}
 }
