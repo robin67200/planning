@@ -2,6 +2,7 @@ import { AnneeDetailComponent } from './view/annee/annee-detail/annee-detail.com
 import { AnneeListComponent } from './view/annee/annee-list/annee-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 export const routes: Routes = [
 
 ];

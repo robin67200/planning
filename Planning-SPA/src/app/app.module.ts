@@ -1,9 +1,7 @@
-import { LayoutComponent } from './view/layout/layout.component';
 import { ModalSimpleInputComponent } from './components/modals/simple-input-modals';
 import { ModalConfirmComponent } from './components/modals/confirm-modal';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { NavComponent } from './view/nav/nav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule, BsDatepickerModule, TabsModule, ModalModule } from 'ngx-bootstrap';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { ModalItemSelectorComponent } from './components/modals/item-selector-modal';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { NavModule } from './view/nav/nav.module';
 
 const appRoutes: Routes = [
   {
@@ -51,11 +51,9 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
     ModalConfirmComponent,
     ModalItemSelectorComponent,
     ModalSimpleInputComponent,
-    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +63,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     FormsModule,
+    NavModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
@@ -92,6 +91,5 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
-
-}
+  constructor(
+  overlayContainer: OverlayContainer) { overlayContainer.getContainerElement().classList.add('Planning'); } }
