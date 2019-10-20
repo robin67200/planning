@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule, BsDatepickerModule, TabsModule, ModalModule } from 'ngx-bootstrap';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { ModalItemSelectorComponent } from './components/modals/item-selector-modal';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     BrowserAnimationsModule,
     AppSharedModule,
     HttpClientModule,

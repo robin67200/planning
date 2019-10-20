@@ -1,6 +1,7 @@
 <div class="container">
   <br />
-  <h2 style="text-align:center">Annee</h2>
+  <h2 style="text-align:center">Annees</h2>
+  <button class="btn btn-outline-primary" style="margin-left: 91%;">Ajouter</button>
   <hr>
   <br />
   <br />
@@ -18,9 +19,17 @@
           {{ annee.nom }}
         </td>
           <td style="width: 10%">
-            <button class="btn btn-primary"[routerLink]="['/annees/detail/',annee.id]">Details</button>
+            <div class="dropdown">
+              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item"[routerLink]="['/annees/detail/',annee.id]">Details</a>
+                <a class="dropdown-item" (click)="modifyAnnee(annee)" style="cursor: pointer;" >Modifier</a>
+                <a class="dropdown-item" (click)="addAnnee()" style="cursor: pointer;">Supprimer</a>
+              </div>
+            </div>
           </td>
       </tr>
   </table>
-</div>
 </div>
