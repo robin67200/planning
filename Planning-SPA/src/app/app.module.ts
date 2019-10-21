@@ -43,6 +43,10 @@ const appRoutes: Routes = [
         path: 'eleves',
         loadChildren: './view/eleve/eleve.module#ElevesModule',
       },
+      {
+      path: 'niveaux',
+      loadChildren: './view/niveau/niveau.module#NiveauModule',
+     },
     ]
   },
 
