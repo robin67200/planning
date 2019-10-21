@@ -10,6 +10,7 @@ namespace Planning.API.Business.ViewModels
         public string Adresse {get; set;}
         public string Mail {get; set;}
         public string Telephone {get; set;}
+        public int ClasseId {get; set;}
 
         public DateTime DateNaissance {get; set;}
 

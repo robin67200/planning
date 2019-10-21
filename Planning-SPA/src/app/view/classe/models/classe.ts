@@ -1,5 +1,7 @@
 export class Classe {
   id: number;
+  niveauName: string;
+  anneeName: string;
 
   constructor(
     public nom: string,

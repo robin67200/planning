@@ -12,10 +12,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule, BsDatepickerModule, TabsModule, ModalModule } from 'ngx-bootstrap';
-import { SimpleModalModule } from 'ngx-simple-modal';
+import { SimpleModalModule, SimpleModalOptions } from 'ngx-simple-modal';
 import { ModalItemSelectorComponent } from './components/modals/item-selector-modal';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { NavModule } from './view/nav/nav.module';
+import { defaultSimpleModalOptions } from 'ngx-simple-modal/dist/simple-modal/simple-modal-options';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 const appRoutes: Routes = [
   {
@@ -70,24 +72,21 @@ const appRoutes: Routes = [
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,
-    SimpleModalModule.forRoot(
-      { container: 'modal-container' },
-    ),
+    SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{
+      closeOnEscape: true,
+      closeOnClickOutside: true,
+      bodyClass: 'modal-open',
+      wrapperDefaultClasses: 'modal fade',
+      wrapperClass: 'show',
+      animationDuration: 300,
+    }}),
     MatSliderModule,
     MatSidenavModule,
-
-      /*{
-        closeOnEscape: true,
-        closeOnClickOutside: true,
-        bodyClass: 'modal-open',
-        wrapperDefaultClasses: 'modal fade',
-        wrapperClass: 'show',
-        animationDuration: 300
-      }*/
-
+    AngularFontAwesomeModule
   ],
   entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent],
-  providers: [ ],
+  providers: [
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -12,7 +12,7 @@ import { EleveService } from '../services/eleve.service';
 export class EleveDetailComponent implements OnInit {
 
   id: number;
-  eleves: Eleve = new Eleve('', '', '', '', 0, new Date(), 0);
+  eleves: Eleve = new Eleve('', '', '', '', '', new Date(), 0);
   bsModalRef: BsModalRef;
 
   constructor(

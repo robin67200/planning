@@ -1,13 +1,15 @@
 import { ElevesRoutingModule } from './eleve.routing';
-import { EleveService } from './services/eleve.service';
+import { EleveService, EleveService2 } from './services/eleve.service';
 import { EleveDetailComponent } from './eleve-detail/eleve-detail.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AppSharedModule } from '../../app-shared.module';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { EleveListComponent } from './eleve-list/eleve-list.component';
+import { EleveFormComponent } from './components/eleve-form/eleve-form.component';
+import { ClasseModule } from '../classe/classe.module';
 
 @NgModule({
   imports: [CommonModule,
@@ -15,14 +17,17 @@ import { EleveListComponent } from './eleve-list/eleve-list.component';
             FormsModule,
             ElevesRoutingModule,
             AppSharedModule,
-            ModalModule.forRoot()
+            ModalModule.forRoot(),
+            BsDatepickerModule.forRoot(),
+            ClasseModule
             ],
   declarations: [
     EleveDetailComponent,
     EleveListComponent,
+    EleveFormComponent
   ],
-  providers: [EleveService],
+  providers: [EleveService, EleveService2],
   entryComponents: [],
-  exports: []
+  exports: [EleveFormComponent]
 })
 export class ElevesModule {}

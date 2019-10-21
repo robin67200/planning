@@ -1,7 +1,7 @@
 <div class="container">
   <br />
   <h2 style="text-align:center">Annees</h2>
-  <button class="btn btn-outline-primary" style="margin-left: 91%;">Ajouter</button>
+  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="addAnnee()">Ajouter</button>
   <hr>
   <br />
   <br />
@@ -26,7 +26,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item"[routerLink]="['/annees/detail/',annee.id]">Details</a>
                 <a class="dropdown-item" (click)="modifyAnnee(annee)" style="cursor: pointer;" >Modifier</a>
-                <a class="dropdown-item" (click)="addAnnee()" style="cursor: pointer;">Supprimer</a>
+                <a class="dropdown-item" (click)="deleteAnnee(annee)" style="cursor: pointer;">Supprimer</a>
               </div>
             </div>
           </td>

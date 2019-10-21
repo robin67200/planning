@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
 import { ClassesRoutingModule } from './classe.routing';
+import { ClasseSelectComponent } from './components/classe-select/classe-select.component';
+import { AnneesModule } from '../annee/annee.module';
+import { NiveauModule } from '../niveau/niveau.module';
 
 @NgModule({
   imports: [CommonModule,
@@ -15,14 +18,17 @@ import { ClassesRoutingModule } from './classe.routing';
             FormsModule,
             ClassesRoutingModule,
             AppSharedModule,
-            ModalModule.forRoot()
+            ModalModule.forRoot(),
+            AnneesModule,
+            NiveauModule
             ],
   declarations: [
     ClasseListComponent,
     ClasseDetailComponent,
+    ClasseSelectComponent
   ],
   providers: [ClasseService],
   entryComponents: [],
-  exports: []
+  exports: [ClasseSelectComponent]
 })
 export class ClasseModule {}

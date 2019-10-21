@@ -5,6 +5,7 @@ import { AppSlidePanelComponent } from './components/app-slide-panel/app-slide-p
 import { RouterModule } from '@angular/router';
 import { NgModule, Input } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const APP_COMPONENTS = [ AppSlidePanelComponent, ];
 
@@ -12,6 +13,7 @@ const APP_MODULES = [
   CommonModule,
   FormsModule,
   MatInputModule,
+  MatDatepickerModule
 ];
 
 @NgModule({

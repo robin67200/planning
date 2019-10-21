@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
+import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 
 @Component({
   selector: 'app-annee-list',
@@ -33,26 +34,17 @@ export class AnneeListComponent implements OnInit {
     );
   }
 
- /* deleteJury(annee: Annee) {
-    const initialState = {
-      annee
-    };
-    this.bsModalRef = this.modalService.show(JuryModalsComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
-  }
-}*/
-
  addAnnee() {
     this.modals.addModal(ModalSimpleInputComponent, {
       title: `Ajout d'une nouvelle année`,
       message: 'Veuillez entrer son nom',
       defaultValue: '',
-      label: 'Nom'
+      label: 'nom'
     }).subscribe(result => {
       if (result) {
-        const annee = new Annee('');
+        const annee = new Annee(result.toString());
         this.service.postAnnee(annee).subscribe(res => {
-          this.anneess.push(res);
+          this.ngOnInit();
         });
       }
     });
@@ -60,17 +52,35 @@ export class AnneeListComponent implements OnInit {
 
    modifyAnnee(annee: Annee) {
     this.modals.addModal(ModalSimpleInputComponent, {
-      title: 'Modification de la matière',
-      message: 'Veuillez entrer le nom de la matière',
+      title:  `Modification`,
+      message: `Veuillez modifier l'année`,
       defaultValue: annee.nom,
-      label: 'Nom'
+      label: 'nom'
     }).subscribe(result => {
       if (result) {
         annee.nom = result.toString();
         this.service.putAnnee(annee.id, annee).subscribe(res => {
-          this.ngOnInit();
+          this.anneess.push(res);
         });
       }
     });
+  }
+
+
+  deleteAnnee(annee: Annee) {
+    this.modals
+      .addModal(ModalConfirmComponent, {
+        title: `Supprimer l'année ${annee.nom} ?`,
+        message: 'Êtes-vous sûr de vouloir supprimer cette année ?'
+      })
+      .subscribe(result => {
+        if (result) {
+          this.service.deleteAnneById(annee.id).subscribe(res => {
+            // const index = this.anneess.indexOf(annee);
+            // this.anneess.splice(index, 1);
+            this.ngOnInit();
+          });
+        }
+      });
   }
 }

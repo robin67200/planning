@@ -7,7 +7,7 @@ namespace Planning.API.DataAccess {
     {
         public void Configure(EntityTypeBuilder<Annee> builder)
         {
-            builder.ToTable("Annees");
+            builder.ToTable("Anneess");
             builder.HasKey(a => a.Id);
 
             builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired();

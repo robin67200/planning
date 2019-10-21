@@ -1,6 +1,7 @@
 <div class="container">
   <br />
   <h2 style="text-align:center">Eleve</h2>
+  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlEleve.display()">Ajouter</button>
   <hr>
   <br />
   <br />
@@ -54,3 +55,15 @@
   </table>
 </div>
 </div>
+<app-app-slide-panel #pnlEleve>
+  <div panel-header style="text-align: center;">
+    <h4>Formulaire Elève</h4>
+  </div>
+  <div panel-body>
+    <app-eleve-form
+      (onCreating)="onEleveCreated($event); pnlEleve.hide()"
+      (onUpdating)="onEleveUpdated($event); pnlEleve.hide()"
+      (onClose)="pnlEleve.hide()">
+    </app-eleve-form>
+  </div>
+</app-app-slide-panel>

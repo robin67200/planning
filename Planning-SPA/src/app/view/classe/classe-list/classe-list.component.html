@@ -1,6 +1,6 @@
 <div class="container">
     <br />
-    <h2 style="text-align:center">Classes : </h2>
+    <h2 style="text-align:center">Classes </h2>
     <hr>
     <br />
     <br />
@@ -11,15 +11,27 @@
           <th>
             nom
           </th>
+          <th>
+            Niveau
+          </th>
+          <th>
+            Année
+          </th>
         </tr>
       </thead>
         <tr id="list" *ngFor="let classe of classes">
           <td>
             {{ classe.nom }}
-
-            <td style="width: 10%">
-              <button class="btn btn-primary"[routerLink]="['/classes/detail/',classe.id]">Details</button>
-            </td>
+          </td>
+          <td>
+            {{ classe.niveauName }}
+          </td>
+          <td>
+            {{ classe.anneeName }}
+          </td>
+          <td style="width: 10%">
+            <button class="btn btn-outline-info">Actions</button>
+          </td>
         </tr>
     </table>
   </div>
