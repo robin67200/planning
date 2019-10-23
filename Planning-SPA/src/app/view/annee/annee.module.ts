@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
 import { AnneesRoutingModule } from './annee.routing';
+import { AnneeSelectComponent } from './components/annee-select/annee-select.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -20,9 +21,10 @@ import { AnneesRoutingModule } from './annee.routing';
   declarations: [
     AnneeListComponent,
     AnneeDetailComponent,
+    AnneeSelectComponent
   ],
   providers: [AnneeService],
   entryComponents: [],
-  exports: []
+  exports: [AnneeSelectComponent]
 })
 export class AnneesModule {}
