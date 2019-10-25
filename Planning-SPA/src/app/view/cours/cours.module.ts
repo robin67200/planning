@@ -1,3 +1,4 @@
+import { MatiereModule } from './../matiere/matiere.module';
 import { AnneesModule } from './../annee/annee.module';
 import { ProfsModule } from './../prof/prof.module';
 import { MatInputModule } from '@angular/material/input';
@@ -32,6 +33,7 @@ import { MatNativeDateModule } from '@angular/material';
             MatNativeDateModule,
             ProfsModule,
             AnneesModule,
+            MatiereModule
             ],
   declarations: [
     CoursListComponent,

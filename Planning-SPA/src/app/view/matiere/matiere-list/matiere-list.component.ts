@@ -14,7 +14,7 @@ import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 export class MatiereListComponent implements OnInit {
 
   matierex: Matiere[] = [];
-  matiere: any;
+  matieres: any;
   bsModalRef: BsModalRef;
   matierep: Matiere;
 
@@ -26,7 +26,7 @@ export class MatiereListComponent implements OnInit {
   ngOnInit() {
     this.service.getMatiere().subscribe(
       response => {
-        this.matiere = response;
+        this.matieres = response;
       },
       error => {
         console.log(error);
@@ -36,7 +36,7 @@ export class MatiereListComponent implements OnInit {
 
  addmatiere() {
     this.modals.addModal(ModalSimpleInputComponent, {
-      title: `Ajout d'un nouveau matiere`,
+      title: `Ajout d'une nouvelle matière`,
       message: 'Veuillez entrer son nom',
       defaultValue: '',
       label: 'nom'
@@ -53,7 +53,7 @@ export class MatiereListComponent implements OnInit {
    modifymatiere(matiere: Matiere) {
     this.modals.addModal(ModalSimpleInputComponent, {
       title:  `Modification`,
-      message: `Veuillez modifier le matiere`,
+      message: `Veuillez modifier la matière`,
       defaultValue: matiere.nom,
       label: 'nom'
     }).subscribe(result => {
@@ -71,7 +71,7 @@ export class MatiereListComponent implements OnInit {
     this.modals
       .addModal(ModalConfirmComponent, {
         title: `Supprimer le matiere ${matiere.nom} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer ce matiere ?'
+        message: 'Êtes-vous sûr de vouloir supprimer cette matière ?'
       })
       .subscribe(result => {
         if (result) {

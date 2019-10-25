@@ -47,6 +47,10 @@ const appRoutes: Routes = [
       path: 'niveaux',
       loadChildren: './view/niveau/niveau.module#NiveauModule',
      },
+     {
+      path: 'matieres',
+      loadChildren: './view/matiere/matiere.module#MatiereModule',
+     },
     ]
   },
 
