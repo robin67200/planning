@@ -1,7 +1,7 @@
 <div class="container">
   <br />
   <h2 style="text-align:center">Eleve</h2>
-  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlEleve.display()">Ajouter</button>
+  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlEleve.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
   <hr>
   <br />
   <br />
@@ -46,11 +46,19 @@
           {{ eleve.telephone }}
         </td>
         <td>
-          {{ eleve.dateNaissance }}
+          {{ eleve.dateNaissance | date: 'mediumDate' }}
         </td>
-          <td style="width: 10%">
-            <button class="btn btn-primary"[routerLink]="['/eleves/detail/',eleve.id]">Details</button>
-          </td>
+        <td style="width: 10%">
+          <div class="dropdown">
+            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-cogs"></i>&nbsp; Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="openEleve(eleve); pnlEleve.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+              <a class="dropdown-item" (click)="deleteEleve(eleve)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+            </div>
+          </div>
+        </td>
       </tr>
   </table>
 </div>
