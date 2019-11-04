@@ -1,8 +1,9 @@
 import { EleveService2 } from './../../services/eleve.service';
 import { Eleve } from './../../models/eleve';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-eleve-form',
@@ -12,6 +13,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap';
 export class EleveFormComponent implements OnInit {
 
   form: FormGroup;
+  id: number;
   hasError = false;
   isUpdating = false;
   error: string;
@@ -27,17 +29,18 @@ export class EleveFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: EleveService2
+    private service: EleveService2,
+    route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
-      // id: new FormControl(0, [Validators.required]),
+      id: new FormControl(0, [Validators.required]),
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
       mail: new FormControl('', [Validators.required,
         Validators.email]),
       telephone: new FormControl('', [Validators.required]),
-      dateNaissance: new FormControl(new Date(), [Validators.required]),
+      dateNaissance: new FormControl('', [Validators.required]),
       classeId: new FormControl(0, [Validators.required])
     });
   }
@@ -60,24 +63,25 @@ export class EleveFormComponent implements OnInit {
   save() {
     if (this.form.valid) {
       this.hasError = false;
-      const eleves = new Eleve('', '', '', '', '', new Date(), 0);
-      // eleves.id = this.form.value.id;
-      eleves.nom = this.form.value.nom;
-      eleves.prenom = this.form.value.prenom;
-      eleves.adresse = this.form.value.adresse;
-      eleves.mail = this.form.value.mail;
-      eleves.telephone = this.form.value.telephone;
-      eleves.dateNaissance = this.form.value.dateNaissance;
-      eleves.classeId = this.form.value.classeId;
+      const eleve = new Eleve('', '', '', '', '', new Date(), 0);
+      eleve.id = this.form.value.id;
+      eleve.nom = this.form.value.nom;
+      eleve.prenom = this.form.value.prenom;
+      eleve.adresse = this.form.value.adresse;
+      eleve.mail = this.form.value.mail;
+      eleve.telephone = this.form.value.telephone;
+      eleve.dateNaissance = this.form.value.dateNaissance;
+      eleve.classeId = this.form.value.classeId;
 
       if (this.isUpdating) {
-        this.onUpdating.emit(eleves);
+        this.onUpdating.emit(eleve);
       } else {
-        this.onCreating.emit(eleves);
+        this.onCreating.emit(eleve);
       }
 
       this.form.reset();
       this.form.controls.id.setValue(0);
+
 
     } else {
       this.hasError = true;
