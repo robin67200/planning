@@ -1,6 +1,7 @@
 <div class="container">
     <br />
     <h2 style="text-align:center">cours</h2>
+    <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlCours.display()">Ajouter</button>
     <hr>
     <br />
     <br />
@@ -15,6 +16,9 @@
             Contenu
           </th>
           <th>
+            Date
+          </th>
+          <th>
             Heure de début
           </th>
           <th>
@@ -22,6 +26,15 @@
           </th>
           <th>
             Couleur
+          </th>
+          <th>
+            professeurId
+          </th>
+          <th>
+            matiereId
+          </th>
+          <th>
+            anneeId
           </th>
         </tr>
       </thead>
@@ -41,6 +54,15 @@
           <td>
             {{ cours.color }}
           </td>
+          <td>
+            {{ cours.professeurId }}
+          </td>
+          <td>
+            {{ cours.matiereId }}
+          </td>
+          <td>
+            {{ cours.anneeId }}
+          </td>
           <td style="width: 10%">
             <button class="btn btn-primary"[routerLink]="['/courss/detail/' + cours.id]">Details</button>
           </td>
@@ -48,3 +70,15 @@
     </table>
   </div>
   </div>
+  <app-app-slide-panel #pnlCours>
+    <div panel-header style="text-align: center;">
+      <h4>Remplissage Planning</h4>
+    </div>
+    <div panel-body>
+      <app-cours-form
+        (onCreating)="onCoursCreated($event); pnlCours.hide()"
+        (onUpdating)="onCoursUpdated($event); pnlCours.hide()"
+        (onClose)="pnlCours.hide()">
+      </app-cours-form>
+    </div>
+  </app-app-slide-panel>

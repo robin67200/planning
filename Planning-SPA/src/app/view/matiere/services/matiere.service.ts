@@ -18,7 +18,7 @@ putMatiere(id: number, matiere: any) {
 postMatiere(matiere: Matiere) {
   return this.http.post<Matiere>('http://localhost:5000/api/matieres/', matiere);
 }
-deleteAnneById(id: number) {
+deleteMatiereById(id: number) {
   return this.http.delete<Matiere>('http://localhost:5000/api/matieres/' + id);
 }
 

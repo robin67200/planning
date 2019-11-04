@@ -1,0 +1,148 @@
+<div class="container">
+<form
+  class="form-horizontal form-label-left parsleyjs ng-untouched ng-pristine ng-valid"
+  [formGroup]="form"
+  (submit)="save()"
+  #formDir="ngForm"
+>
+<fieldset>
+    <h5 style="text-align: center;">Veuillez renseigner les informations ci-dessous...</h5>
+  <br/>
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+            </span>
+            <mat-form-field class="example-full-width">
+              <input
+                formControlName="title"
+                type="text"
+                matInput placeholder="Titre"
+                required
+                >
+            </mat-form-field>
+        </div>
+      </div>
+  </div>
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+            </span>
+            <mat-form-field class="example-full-width">
+            <textarea
+              class="form-control form-control-sm"
+              formControlName="contenu"
+              type="text"
+              matInput placeholder="Contenu"
+              required
+            ></textarea>
+            </mat-form-field>
+        </div>
+      </div>
+  </div>
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-3"></label>
+        <div class="col-7">
+            <div class="input-group">
+              <span class="input-group-prepend">
+              </span>
+              <mat-form-field class="example-full-width">
+                  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+  </div>
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-3"></label>
+        <div class="col-7">
+            <div class="input-group">
+              <span class="input-group-prepend">
+              </span>
+              <mat-form-field class="example-full-width">
+                  <input
+                    formControlName="start"
+                    type="time"
+                    matInput placeholder="Heure de début"
+                    atp-time-picker
+                    required
+                    >
+                </mat-form-field>
+            </div>
+        </div>
+  </div>
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-3" ></label>
+      <div class="col-7">
+          <div class="input-group ">
+            <mat-form-field class="example-full-width">
+                <input
+                  formControlName="end"
+                  type="time"
+                  matInput placeholder="Heure de fin"
+                  atp-time-picker
+                  required
+                  >
+              </mat-form-field>
+        </div>
+      </div>
+  </div>
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+            </span>
+            <mat-form-field class="example-full-width">
+                <input
+                  formControlName="color"
+                  type="text"
+                  matInput placeholder="Couleur"
+                  required
+                  >
+              </mat-form-field>
+        </div>
+      </div>
+  </div>
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-3" >Prof :</label>
+      <div class="col-7">
+          <app-prof-select [form]="form"></app-prof-select>
+      </div>
+  </div>
+  <br>
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-3" >Année :</label>
+      <div class="col-7">
+          <app-annee-select [form]="form"></app-annee-select>
+      </div>
+  </div>
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-3">Matière :</label>
+    <div class="col-7">
+        <app-matiere-select [form]="form"></app-matiere-select>
+    </div>
+</div>
+  </fieldset>
+<br/>
+<div class="form-actions" style="text-align: center;">
+  <button
+  type="button"
+  class="btn btn-outline-danger btn-rounded "
+  (click)="close()"
+  >
+<i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
+</button>
+<button type="submit" class="btn btn-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
+</div>
+<div style="float:right;margin-left:5px;">
+  <h5>
+    <span class="badge badge-danger" *ngIf="hasError">{{ error }}</span>
+  </h5>
+</div>
+</form>
+</div>

@@ -1,3 +1,4 @@
+import { MatiereSelectComponent } from './components/matiere-select/matiere-select.component';
 import { MatieresRoutingModule } from './matiere.routing';
 import { MatiereService } from './services/matiere.service';
 import { MatiereListComponent } from './matiere-list/matiere-list.component';
@@ -20,9 +21,10 @@ import { ModalModule } from 'ngx-bootstrap';
   declarations: [
     MatiereDetailComponent,
     MatiereListComponent,
+    MatiereSelectComponent,
   ],
   providers: [MatiereService],
   entryComponents: [],
-  exports: []
+  exports: [MatiereSelectComponent]
 })
 export class MatiereModule {}

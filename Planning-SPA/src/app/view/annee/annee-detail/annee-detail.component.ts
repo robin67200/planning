@@ -37,15 +37,6 @@ export class AnneeDetailComponent implements OnInit {
       this.annees = res;
     });
   }
-  /*deleteJury(jury: Annee) {
-    const initialState = {
-      jury
-    };
-    this.bsModalRef = this.modalService.show(AnneeModalComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
-  }
-}
-*/
 
 deleteClasse(annee: Annee) {
   this.modals

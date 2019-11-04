@@ -1,0 +1,4 @@
+<div [formGroup]="form">
+    <select formControlName="anneeId" class="form-control" required >
+            <option *ngFor="let annee of annees" value="{{annee.id}}">{{annee.nom}}</option>
+    </select>

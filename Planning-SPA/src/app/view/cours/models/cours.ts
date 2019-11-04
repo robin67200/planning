@@ -4,6 +4,7 @@ export class Cours {
   constructor(
     public title: string,
     public contenu: string,
+    public date: Date,
     public start: number,
     public end: number,
     public color: string,
