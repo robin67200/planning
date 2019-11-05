@@ -17,6 +17,8 @@ import { NgModule } from '@angular/core';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import {MatDatepickerModule, MatDatepickerToggle, MatDatepickerToggleIcon} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { MatNativeDateModule } from '@angular/material';
             FormsModule,
             CoursRoutingModule,
             MatInputModule,
+            MatIconModule,
             AppSharedModule,
             ModalModule.forRoot(),
             BsDatepickerModule.forRoot(),

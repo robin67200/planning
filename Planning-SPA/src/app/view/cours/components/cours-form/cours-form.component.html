@@ -7,7 +7,6 @@
 >
 <fieldset>
     <h5 style="text-align: center;">Veuillez renseigner les informations ci-dessous...</h5>
-  <br/>
   <div class="form-group row">
       <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
@@ -15,30 +14,13 @@
             <span class="input-group-prepend">
             </span>
             <mat-form-field class="example-full-width">
-              <input
+                <mat-icon matSuffix>phone</mat-icon>
+                <input
                 formControlName="title"
                 type="text"
                 matInput placeholder="Titre"
                 required
                 >
-            </mat-form-field>
-        </div>
-      </div>
-  </div>
-  <div class="form-group row">
-      <label class="form-control-label text-md-right col-3"></label>
-      <div class="col-7">
-          <div class="input-group ">
-            <span class="input-group-prepend">
-            </span>
-            <mat-form-field class="example-full-width">
-            <textarea
-              class="form-control form-control-sm"
-              formControlName="contenu"
-              type="text"
-              matInput placeholder="Contenu"
-              required
-            ></textarea>
             </mat-form-field>
         </div>
       </div>
@@ -114,7 +96,6 @@
           <app-prof-select [form]="form"></app-prof-select>
       </div>
   </div>
-  <br>
   <div class="form-group row">
       <label class="form-control-label text-md-right col-3" >Année :</label>
       <div class="col-7">
@@ -128,7 +109,6 @@
     </div>
 </div>
   </fieldset>
-<br/>
 <div class="form-actions" style="text-align: center;">
   <button
   type="button"

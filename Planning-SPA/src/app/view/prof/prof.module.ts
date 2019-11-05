@@ -1,3 +1,4 @@
+import { ProfFormComponent } from './components/prof-form/prof-form.component';
 import { ProfSelectComponent } from './components/prof-select/prof-select.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -22,6 +23,7 @@ import { ProfsRoutingModule } from './prof.routing';
     ProfDetailComponent,
     ProfListComponent,
     ProfSelectComponent,
+    ProfFormComponent
   ],
   providers: [ProfService],
   entryComponents: [],
