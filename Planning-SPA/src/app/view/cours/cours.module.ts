@@ -23,6 +23,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { RouterModule } from '@angular/router';
             FormsModule,
             CoursRoutingModule,
             MatInputModule,
+            MatIconModule,
             AppSharedModule,
             ModalModule.forRoot(),
             BsDatepickerModule.forRoot(),

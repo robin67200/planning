@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Prof } from '../models/prof';
+import { CrudService } from 'src/app/_services/crud.service';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 @Injectable()
 export class ProfService {
@@ -24,3 +26,14 @@ deleteProfById(id: number) {
 }
 
 }
+
+export class ProfService2 extends CrudService<Prof, number> {
+  constructor(protected http: HttpClient, protected modals: SimpleModalService) {
+      super(http, modals);
+      // this.baseUrl = 'http://localhost:5000/api/';
+      this.controller = 'profs';
+      this.url = `${this.baseUrl}${this.controller}/`;
+    }
+
+
+  }
