@@ -18,6 +18,10 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { NavModule } from './view/nav/nav.module';
 import { defaultSimpleModalOptions } from 'ngx-simple-modal/dist/simple-modal/simple-modal-options';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {
@@ -90,7 +94,14 @@ const appRoutes: Routes = [
     }}),
     MatSliderModule,
     MatSidenavModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
+
   ],
   entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent],
   providers: [

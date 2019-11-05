@@ -13,7 +13,7 @@ const APP_MODULES = [
   CommonModule,
   FormsModule,
   MatInputModule,
-  MatDatepickerModule
+  MatDatepickerModule,
 ];
 
 @NgModule({
