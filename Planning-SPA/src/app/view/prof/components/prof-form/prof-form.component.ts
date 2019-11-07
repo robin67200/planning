@@ -18,7 +18,6 @@ export class ProfFormComponent implements OnInit {
   isUpdating = false;
   error: string;
   profs: Prof[] = [];
-  bsConfig: Partial<BsDatepickerConfig>;
 
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();
@@ -38,7 +37,7 @@ export class ProfFormComponent implements OnInit {
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
       mail: new FormControl('', [Validators.required,
-        Validators.email]),
+      Validators.email]),
       telephone: new FormControl('', [Validators.required]),
     });
   }
@@ -104,6 +103,11 @@ export class ProfFormComponent implements OnInit {
           break;
       }
     }
+  }
+  myFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
   }
 
   close() {

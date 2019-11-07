@@ -2,7 +2,6 @@ import { MatiereSelectComponent } from './components/matiere-select/matiere-sele
 import { MatieresRoutingModule } from './matiere.routing';
 import { MatiereService } from './services/matiere.service';
 import { MatiereListComponent } from './matiere-list/matiere-list.component';
-import { MatiereDetailComponent } from './matiere-detail/matiere-detail.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -19,7 +18,6 @@ import { ModalModule } from 'ngx-bootstrap';
             ModalModule.forRoot()
             ],
   declarations: [
-    MatiereDetailComponent,
     MatiereListComponent,
     MatiereSelectComponent,
   ],

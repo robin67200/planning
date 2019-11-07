@@ -1,6 +1,6 @@
 import { AnneeService } from './../../annee/services/annee.service';
 import { Annee } from './../../annee/models/annee';
-import { ClasseService } from './../services/classe.service';
+import { ClasseService, ClasseService2 } from './../services/classe.service';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Classe } from '../models/classe';
@@ -25,14 +25,15 @@ export class ClasseListComponent implements OnInit {
 
   constructor(
     private service: ClasseService,
+    private service2: ClasseService2,
     private modals: SimpleModalService,
     private niveauService: NiveauService,
     private anneeService: AnneeService
     ) { }
 
   ngOnInit() {
-    this.service.getClasse().subscribe(classes => {
-      this.classes = classes;
+    this.service.getClasse().subscribe(response => {
+      this.classes = response;
       this.niveauService.getNiveau().subscribe(niveaux => {
         this.niveaux = niveaux;
         this.anneeService.getAnnee().subscribe(annees => {
@@ -47,14 +48,36 @@ export class ClasseListComponent implements OnInit {
       });
     });
   }
+  deleteClasse(classe: Classe) {
+    this.modals
+      .addModal(ModalConfirmComponent, {
+        title: `Supprimer ${classe.nom} ?`,
+        message: 'Êtes-vous sûr de vouloir supprimer cette classe ?'
+      })
+      .subscribe(result => {
+        if (result) {
+          this.service.deleteClasseById(classe.id).subscribe(res => {
+            this.ngOnInit();
+          });
+        }
+      });
+  }
 
-  /*getNiveauName(id: number) {
-    const niveau = this.niveaux.find(m => m.id === id);
-    return niveau.nom;
-  }*/
+  openClasse(classe: Classe) {
+    this.service2.pushObject(classe);
+  }
 
-  /*getAnneeName(id: number) {
-    const annee = this.annees.find(m => m.id === id);
-    return annee.nom;
-  }*/
+  onClasseUpdated(classe: Classe) {
+    this.service.putClasse(classe.id, classe).subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
+
+  onClasseCreated(classe: Classe) {
+    this.service.postClasse(classe).subscribe(result => {
+      // this.classes.push(result);
+      this.ngOnInit();
+    });
+  }
 }
+

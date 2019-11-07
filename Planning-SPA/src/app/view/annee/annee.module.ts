@@ -1,4 +1,3 @@
-import { AnneeDetailComponent } from './annee-detail/annee-detail.component';
 import { AnneeListComponent } from './annee-list/annee-list.component';
 import { AnneeService } from './services/annee.service';
 import { NgModule } from '@angular/core';
@@ -20,7 +19,6 @@ import { AnneeSelectComponent } from './components/annee-select/annee-select.com
             ],
   declarations: [
     AnneeListComponent,
-    AnneeDetailComponent,
     AnneeSelectComponent
   ],
   providers: [AnneeService],

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { MatiereDetailComponent } from './matiere-detail.component';
+import { NiveauSelectComponent } from './niveau-select.component';
 
-describe('MatiereDetailComponent', () => {
-  let component: MatiereDetailComponent;
-  let fixture: ComponentFixture<MatiereDetailComponent>;
+describe('NiveauSelectComponent', () => {
+  let component: NiveauSelectComponent;
+  let fixture: ComponentFixture<NiveauSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatiereDetailComponent ]
+      declarations: [ NiveauSelectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatiereDetailComponent);
+    fixture = TestBed.createComponent(NiveauSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

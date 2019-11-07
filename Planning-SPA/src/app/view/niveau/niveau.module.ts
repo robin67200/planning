@@ -1,5 +1,5 @@
+import { NiveauSelectComponent } from './components/niveau-select/niveau-select.component';
 import { NiveauxRoutingModule } from './niveau.routing';
-import { NiveauDetailComponent } from './niveau-detail/niveau-detail.component';
 import { NiveauListComponent } from './niveau-list/niveau-list.component';
 import { NiveauService } from './services/niveau.service';
 import { NgModule } from '@angular/core';
@@ -19,10 +19,10 @@ import { ModalModule } from 'ngx-bootstrap';
             ],
   declarations: [
     NiveauListComponent,
-    NiveauDetailComponent
+    NiveauSelectComponent
   ],
   providers: [NiveauService],
   entryComponents: [],
-  exports: []
+  exports: [NiveauSelectComponent]
 })
 export class NiveauModule {}

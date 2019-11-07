@@ -1,35 +1,43 @@
 <mat-sidenav-container>
     <mat-sidenav mode="over" [(opened)]="opened">
+        <mat-toolbar>
+            <mat-toolbar-row>
+              <h2>Gestion de Planning</h2>
+            </mat-toolbar-row>
+          </mat-toolbar>
+          <mat-divider></mat-divider>
+          <mat-nav-list>
           <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" style="text-align: center;" class="list-group-item list-group-item-action list-group-item-light" routerLink="annees" (click)="opened=!opened">Annees</a>
+                <mat-list-item routerLink="annees" (click)="opened=!opened">Annees<mat-icon matListIcon>date_range</mat-icon></mat-list-item>
             </li>
             <br>
             <li class="nav-item">
-                <a class="nav-link" style="text-align: center;" class="list-group-item list-group-item-action list-group-item-light" routerLink="courss" (click)="opened=!opened">Cours</a>
+                <mat-list-item class="nav-link" style="text-align: center;" routerLink="courss" (click)="opened=!opened">Cours<mat-icon matListIcon>book</mat-icon></mat-list-item>
             </li>
             <br>
             <li class="nav-item">
-               <a class="nav-link" style="text-align: center;" class="list-group-item list-group-item-action list-group-item-light" routerLink="eleves" (click)="opened=!opened">Eleve</a>
+               <mat-list-item class="nav-link" style="text-align: center;" routerLink="eleves" (click)="opened=!opened">Eleve<mat-icon matListIcon>account_box</mat-icon></mat-list-item>
             </li>
             <br>
             <li class="nav-item">
-               <a class="nav-link" style="text-align: center;" class="list-group-item list-group-item-action list-group-item-light" routerLink="profs" (click)="opened=!opened">Profs</a>
+               <mat-list-item class="nav-link" style="text-align: center;" routerLink="profs" (click)="opened=!opened">Profs<mat-icon matListIcon>supervisor_account</mat-icon></mat-list-item>
             </li>
             <br>
             <li class="nav-item">
-               <a class="nav-link" style="text-align: center;" class="list-group-item list-group-item-action list-group-item-light" routerLink="classes" (click)="opened=!opened">Classes</a>
+               <mat-list-item class="nav-link" style="text-align: center;" routerLink="classes" (click)="opened=!opened">Classes<mat-icon matListIcon>work</mat-icon></mat-list-item>
             </li>
             <br>
             <li class="nav-item">
-              <a class="nav-link" style="text-align: center;" class="list-group-item list-group-item-action list-group-item-light" routerLink="niveaux" (click)="opened=!opened">Niveau</a>
+              <mat-list-item class="nav-link" style="text-align: center;" routerLink="niveaux" (click)="opened=!opened">Niveau<mat-icon matListIcon>trending_up</mat-icon></mat-list-item>
            </li>
            <br>
            <li class="nav-item">
-             <a class="nav-link" style="text-align: center;" class="list-group-item list-group-item-action list-group-item-light" routerLink="matieres" (click)="opened=!opened">Matières</a>
+             <mat-list-item class="nav-link" style="text-align: center;" routerLink="matieres" (click)="opened=!opened">Matières<mat-icon matListIcon>menu_book</mat-icon></mat-list-item>
           </li>
           </ul>
-</mat-sidenav>
+        </mat-nav-list>
+            </mat-sidenav>
 
   <mat-sidenav-content>
     <mat-toolbar>
@@ -40,7 +48,6 @@
         (click)="opened=!opened">
         <mat-icon>menu</mat-icon>
       </button>
-
       <h2 style="margin-right: 40%">Gestion de Planning</h2>
       </mat-toolbar>
     <router-outlet></router-outlet>
