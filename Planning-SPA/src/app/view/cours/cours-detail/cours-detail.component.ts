@@ -12,7 +12,7 @@ import { CoursService } from '../services/cours.service';
 export class CoursDetailComponent implements OnInit {
 
   id: number;
-  courss: Cours = new Cours('', '', new Date(), 0, 0, '', 0, 0, 0);
+  courss: Cours = new Cours('', '', new Date(),  new Date(),  new Date(), '', 0, 0, 0);
   bsModalRef: BsModalRef;
 
   constructor(

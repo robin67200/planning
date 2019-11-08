@@ -64,7 +64,7 @@ export class CoursFormComponent implements OnInit {
   save() {
     if (this.form.valid) {
       this.hasError = false;
-      const courss = new Cours('', '', new Date() , 0 , 0, '', 0, 0, 0);
+      const courss = new Cours('', '', new Date() , new Date() , new Date(), '', 0, 0, 0);
       // courss.id = this.form.value.id;
       courss.title = this.form.value.title;
       courss.room = this.form.value.room;

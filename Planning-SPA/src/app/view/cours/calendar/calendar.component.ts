@@ -10,6 +10,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { Cours } from '../models/cours';
 
 const colors: any = {
   red: {
@@ -104,6 +105,7 @@ export class CalendarComponent implements OnInit {
 
   activeDayIsOpen = true;
 
+
   constructor(private modal: NgbModal) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -174,5 +176,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
 
 }
