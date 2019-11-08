@@ -1,15 +1,19 @@
+import { MatIconModule } from '@angular/material/icon';
 import { ProfFormComponent } from './components/prof-form/prof-form.component';
 import { ProfSelectComponent } from './components/prof-select/prof-select.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
 import { ProfDetailComponent } from './prof-detail/prof-detail.component';
 import { ProfListComponent } from './prof-list/prof-list.component';
-import { ProfService } from './services/prof.service';
+import { ProfService, ProfService2 } from './services/prof.service';
 import { ProfsRoutingModule } from './prof.routing';
+import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   imports: [CommonModule,
@@ -17,7 +21,11 @@ import { ProfsRoutingModule } from './prof.routing';
             FormsModule,
             ProfsRoutingModule,
             AppSharedModule,
-            ModalModule.forRoot()
+            ModalModule.forRoot(),
+            MatIconModule,
+            MatInputModule,
+            MatDatepickerModule,
+            MatNativeDateModule,
             ],
   declarations: [
     ProfDetailComponent,
@@ -25,8 +33,8 @@ import { ProfsRoutingModule } from './prof.routing';
     ProfSelectComponent,
     ProfFormComponent
   ],
-  providers: [ProfService],
+  providers: [ProfService, ProfService2],
   entryComponents: [],
-  exports: [ProfSelectComponent]
+  exports: [ProfSelectComponent, ProfFormComponent]
 })
 export class ProfsModule {}

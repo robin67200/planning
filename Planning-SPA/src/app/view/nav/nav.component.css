@@ -8,5 +8,12 @@ mat-sidenav, mat-sidenav-content {
 
 mat-sidenav {
   background-color: whitesmoke;
-  width:200px;
+  width:250px;
+}
+
+mat-toolbar {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 998;
 }

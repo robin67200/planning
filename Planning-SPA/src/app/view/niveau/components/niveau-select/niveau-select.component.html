@@ -1,0 +1,4 @@
+<div [formGroup]="form">
+  <select formControlName="niveauId" class="form-control" required>
+          <option *ngFor="let niveau of niveaux" value="{{niveau.id}}">{{niveau.nom}}</option>
+  </select>

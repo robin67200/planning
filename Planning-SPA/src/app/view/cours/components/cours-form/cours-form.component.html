@@ -14,16 +14,36 @@
             <span class="input-group-prepend">
             </span>
             <mat-form-field class="example-full-width">
-                <mat-icon matSuffix>phone</mat-icon>
+                <mat-icon matSuffix>contacts</mat-icon>
                 <input
                 formControlName="title"
                 type="text"
                 matInput placeholder="Titre"
-                required
+                #message maxlength="10"
                 >
+              <mat-hint align="end">{{message.value.length}} / 10</mat-hint>
             </mat-form-field>
         </div>
       </div>
+  </div>
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-3"></label>
+    <div class="col-7">
+        <div class="input-group ">
+          <span class="input-group-prepend">
+          </span>
+          <mat-form-field class="example-full-width">
+              <mat-icon matSuffix>contacts</mat-icon>
+              <input
+              formControlName="room"
+              type="text"
+              matInput placeholder="Numéro Salle"
+              #message maxlength="10"
+              >
+            <mat-hint align="end">{{message.value.length}} / 10</mat-hint>
+          </mat-form-field>
+      </div>
+    </div>
   </div>
   <div class="form-group row">
     <label class="form-control-label text-md-right col-3"></label>
@@ -32,7 +52,7 @@
               <span class="input-group-prepend">
               </span>
               <mat-form-field class="example-full-width">
-                  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Choose a date">
+                  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Choisir une date">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -46,12 +66,12 @@
               <span class="input-group-prepend">
               </span>
               <mat-form-field class="example-full-width">
+                  <mat-icon matSuffix>access_time</mat-icon>
                   <input
                     formControlName="start"
                     type="time"
                     matInput placeholder="Heure de début"
                     atp-time-picker
-                    required
                     >
                 </mat-form-field>
             </div>
@@ -62,12 +82,12 @@
       <div class="col-7">
           <div class="input-group ">
             <mat-form-field class="example-full-width">
+                <mat-icon matSuffix>timelapse</mat-icon>
                 <input
                   formControlName="end"
                   type="time"
                   matInput placeholder="Heure de fin"
                   atp-time-picker
-                  required
                   >
               </mat-form-field>
         </div>
@@ -80,11 +100,11 @@
             <span class="input-group-prepend">
             </span>
             <mat-form-field class="example-full-width">
+                <mat-icon matSuffix>color_lens</mat-icon>
                 <input
                   formControlName="color"
                   type="text"
                   matInput placeholder="Couleur"
-                  required
                   >
               </mat-form-field>
         </div>
@@ -118,11 +138,6 @@
 <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
 </button>
 <button type="submit" class="btn btn-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
-</div>
-<div style="float:right;margin-left:5px;">
-  <h5>
-    <span class="badge badge-danger" *ngIf="hasError">{{ error }}</span>
-  </h5>
 </div>
 </form>
 </div>

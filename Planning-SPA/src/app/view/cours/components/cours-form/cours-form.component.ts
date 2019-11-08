@@ -32,7 +32,7 @@ export class CoursFormComponent implements OnInit {
     this.form = this.fb.group({
       // id: new FormControl(0, [Validators.required]),
       title: new FormControl('', [Validators.required]),
-      contenu: new FormControl('', [Validators.required]),
+      room: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
       start: new FormControl('', [Validators.required]),
       end: new FormControl('', [Validators.required]),
@@ -45,7 +45,7 @@ export class CoursFormComponent implements OnInit {
   }
 
   get title() {return this.form.get('title'); }
-  get contenu() {return this.form.get('contenu'); }
+  get room() {return this.form.get('room'); }
   get date() {return this.form.get('date'); }
   get start() {return this.form.get('start'); }
   get end() {return this.form.get('end'); }
@@ -67,7 +67,7 @@ export class CoursFormComponent implements OnInit {
       const courss = new Cours('', '', new Date() , new Date() , new Date(), '', 0, 0, 0);
       // courss.id = this.form.value.id;
       courss.title = this.form.value.title;
-      courss.contenu = this.form.value.contenu;
+      courss.room = this.form.value.room;
       courss.date = this.form.value.date;
       courss.start = this.form.value.start;
       courss.end = this.form.value.end;
@@ -99,10 +99,10 @@ export class CoursFormComponent implements OnInit {
         case this.form.controls.title:
           this.error = 'Le titre est obligatoire';
           break;
-        case this.form.controls.contenu:
-          this.error = `Le contenu est obligatoire`;
+        case this.form.controls.room:
+          this.error = `La salle est obligatoire`;
           break;
-        case this.form.controls.contenu:
+        case this.form.controls.date:
           this.error = `La date est à rentrer`;
           break;
         case this.form.controls.start:

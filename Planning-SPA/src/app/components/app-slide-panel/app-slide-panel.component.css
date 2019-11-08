@@ -1,4 +1,3 @@
-
 .panel {
   border-top: 0;
   border-bottom: 0;
@@ -15,6 +14,8 @@
   box-shadow: 2px 5px 15px rgba(0,0,0,0.21);
   -moz-box-shadow: 2px 5px 15px rgba(0,0,0,0.21);
   -webkit-box-shadow: 2px 5px 15px rgba(0,0,0,0.21);
+  overflow-y:scroll;
+
 }
 .back-panel {
   position: fixed;
@@ -24,4 +25,5 @@
   left: 0;
   right: 0;
   z-index: 999;
+
 }

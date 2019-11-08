@@ -3,7 +3,7 @@ export class Cours {
 
   constructor(
     public title: string,
-    public contenu: string,
+    public room: string,
     public date: Date,
     public start: Date,
     public end: Date,

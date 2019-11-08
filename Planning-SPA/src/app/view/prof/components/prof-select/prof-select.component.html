@@ -1,4 +1,4 @@
 <div [formGroup]="form">
-    <select formControlName="profId" class="form-control" required >
+    <select formControlName="professeurId" class="form-control" required >
             <option *ngFor="let prof of profs" value="{{prof.id}}">{{prof.nom}}</option>
     </select>

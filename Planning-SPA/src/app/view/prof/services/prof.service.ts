@@ -22,7 +22,7 @@ postProf(prof: Prof) {
   return this.http.post<Prof>('http://localhost:5000/api/profs/', prof);
 }
 deleteProfById(id: number) {
-  return this.http.delete<Prof>('http://localhost:5000/api/prof/' + id);
+  return this.http.delete<Prof>('http://localhost:5000/api/profs/' + id);
 }
 
 }

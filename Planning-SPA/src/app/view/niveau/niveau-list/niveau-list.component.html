@@ -1,7 +1,7 @@
 <div class="container">
   <br />
   <h2 style="text-align:center">Niveaux</h2>
-  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="addniveau()">Ajouter</button>
+  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="addniveau()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
   <hr>
   <br />
   <br />
@@ -20,13 +20,11 @@
         </td>
           <td style="width: 10%">
             <div class="dropdown">
-              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions
+              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i>&nbsp; Action
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item"[routerLink]="['/niveaux/detail/',niveau.id]">Details</a>
-                <a class="dropdown-item" (click)="modifyniveau(niveau)" style="cursor: pointer;" >Modifier</a>
-                <a class="dropdown-item" (click)="deleteniveau(niveau)" style="cursor: pointer;">Supprimer</a>
+                <a class="dropdown-item" (click)="modifyniveau(niveau)" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+                <a class="dropdown-item" (click)="deleteniveau(niveau)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
               </div>
             </div>
           </td>

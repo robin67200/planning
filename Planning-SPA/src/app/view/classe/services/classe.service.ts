@@ -1,9 +1,13 @@
 import { Classe } from './../models/classe';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CrudService } from 'src/app/_services/crud.service';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class ClasseService {
+  protected $object: Subject<Classe> = new Subject<Classe>();
 
 constructor(private http: HttpClient) { }
 getClasse() {
@@ -23,3 +27,14 @@ deleteClasseById(id: number) {
 }
 
 }
+
+export class ClasseService2 extends CrudService<Classe, number> {
+  constructor(protected http: HttpClient, protected modals: SimpleModalService) {
+      super(http, modals);
+      // this.baseUrl = 'http://localhost:5000/api/';
+      this.controller = 'classes';
+      this.url = `${this.baseUrl}${this.controller}/`;
+    }
+
+
+  }
