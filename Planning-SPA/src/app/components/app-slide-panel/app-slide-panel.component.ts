@@ -10,17 +10,16 @@ import { animate, transition, trigger, state, style } from '@angular/animations'
     state(
       'in',
       style({
-        transform: 'translate3d(0, 0, 0)'
+        transform: 'translateX(0)'
       })
     ),
     state(
       'out',
       style({
-        transform: 'translate3d(100%, 0, 0)'
+        transform: 'translateX(-50%)'
       })
     ),
-    transition('in => out', animate('2s ease-in-out')),
-    transition('out => in', animate('2s ease-in-out'))
+    transition('* => *', animate('2s ease-in-out')),
   ])
 ]
 })
