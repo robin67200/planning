@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Planning.API.Models
 {
@@ -10,12 +11,16 @@ namespace Planning.API.Models
         public DateTime Start {get; set;}
         public DateTime End { get; set; }
         public string Room { get; set; }
-        public string Color { get; set; }
+        public Color Couleur {get; set;}
         public int ProfesseurId { get; set; }
         public Prof Professeur { get; set; }
         public int MatiereId { get; set; }
         public int AnneeId { get; set; }
 
         public ICollection<CoursClasse> CoursClasses { get; set; }
+
+        
+
+        
     }
 }

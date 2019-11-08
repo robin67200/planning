@@ -16,7 +16,7 @@ namespace Planning.API.DataAccess {
             builder.Property(x => x.End).HasColumnName("End").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.Room).HasColumnName("Room").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.ProfesseurId).HasColumnName("ProfesseurId").HasColumnType("INTEGER").IsRequired();
-            builder.Property(x => x.Color).HasColumnName("Color").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.Couleur).HasColumnName("Color").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.MatiereId).HasColumnName("MatiereId").HasColumnType("INTEGER").IsRequired();
 
         }
