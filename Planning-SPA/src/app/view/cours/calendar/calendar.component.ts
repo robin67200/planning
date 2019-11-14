@@ -10,7 +10,17 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr'; // to register french
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { CoursService, CoursService2 } from '../services/cours.service';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { Cours } from '../models/cours';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+registerLocaleData(localeFr);
+
 
 const colors: any = {
   red: {
@@ -34,9 +44,15 @@ const colors: any = {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+
+  locale = 'fr';
+  courss: any;
+  bsModalRef: BsModalRef;
+  cours: Cours;
+
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   modalData: {
@@ -62,51 +78,20 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  events: CalendarEvent[] = [];
 
   activeDayIsOpen = true;
+  form: FormGroup;
 
+  constructor(
+    private modal: NgbModal,
+    private service: CoursService,
+    private modalService: BsModalService,
+    private service2: CoursService2,
+    private modals: SimpleModalService,
+    private fb: FormBuilder,
 
-  constructor(private modal: NgbModal) {}
+    ) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -175,8 +160,44 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.service.getCours().subscribe(
+      response => {
+        this.courss = response;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  deleteCours(cours: Cours) {
+    this.modals
+      .addModal(ModalConfirmComponent, {
+        title: `Supprimer ${cours.title} ?`,
+        message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
+      })
+      .subscribe(result => {
+        if (result) {
+          this.service.deleteCoursById(cours.id).subscribe(res => {
+            this.ngOnInit();
+          });
+        }
+      });
   }
 
+  openCours(cours: Cours) {
+    this.service2.pushObject(cours);
+  }
 
+  onCoursUpdated(cours: Cours) {
+    this.service.putCours(cours.id, cours).subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
 
+  onCoursCreated(cours: Cours) {
+    this.service.postCours(cours).subscribe(result => {
+      // this.courss.push(result);
+      this.ngOnInit();
+    });
+  }
 }

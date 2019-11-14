@@ -12,10 +12,11 @@ import { CoursService2 } from '../../services/cours.service';
 export class CoursFormComponent implements OnInit {
 
   form: FormGroup;
+  id: number;
   hasError = false;
   isUpdating = false;
   error: string;
-  courss: Cours[] = [];
+  cours: Cours[] = [];
   bsConfig: Partial<BsDatepickerConfig>;
 
   // tslint:disable-next-line: no-output-on-prefix
@@ -39,7 +40,7 @@ export class CoursFormComponent implements OnInit {
       color: new FormControl('', [Validators.required]),
       professeurId: new FormControl(0, [Validators.required]),
       matiereId: new FormControl(0, [Validators.required]),
-      anneeId: new FormControl(0, [Validators.required]),
+      classeId: new FormControl(0, [Validators.required]),
     });
 
   }
@@ -64,23 +65,23 @@ export class CoursFormComponent implements OnInit {
   save() {
     if (this.form.valid) {
       this.hasError = false;
-      const courss = new Cours('', '', new Date() , new Date() , new Date(), '', 0, 0, 0);
-      // courss.id = this.form.value.id;
-      courss.title = this.form.value.title;
-      courss.room = this.form.value.room;
-      courss.date = this.form.value.date;
-      courss.start = this.form.value.start;
-      courss.end = this.form.value.end;
-      courss.color = this.form.value.color;
-      courss.professeurId = this.form.value.professeurId;
-      courss.matiereId = this.form.value.matiereId;
-      courss.anneeId = this.form.value.anneeId;
+      const cours = new Cours('', '', new Date() , new Date() , new Date(), '', 0, 0, 0);
+      // cours.id = this.form.value.id;
+      cours.title = this.form.value.title;
+      cours.room = this.form.value.room;
+      cours.date = this.form.value.date;
+      cours.start = this.form.value.start;
+      cours.end = this.form.value.end;
+      cours.color = this.form.value.color;
+      cours.professeurId = this.form.value.professeurId;
+      cours.matiereId = this.form.value.matiereId;
+      cours.classeId = this.form.value.classeId;
 
 
       if (this.isUpdating) {
-        this.onUpdating.emit(courss);
+        this.onUpdating.emit(cours);
       } else {
-        this.onCreating.emit(courss);
+        this.onCreating.emit(cours);
       }
 
       this.form.reset();

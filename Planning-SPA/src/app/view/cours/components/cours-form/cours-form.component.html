@@ -52,7 +52,9 @@
               <span class="input-group-prepend">
               </span>
               <mat-form-field class="example-full-width">
-                  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Choisir une date">
+                  <input matInput [matDatepickerFilter]="myFilter"
+                  formControlName="date"
+                  [matDatepicker]="picker" placeholder="Choisir une date">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -119,7 +121,7 @@
   <div class="form-group row">
       <label class="form-control-label text-md-right col-3" >Année :</label>
       <div class="col-7">
-          <app-annee-select [form]="form"></app-annee-select>
+          <app-classe-select [form]="form"></app-classe-select>
       </div>
   </div>
   <div class="form-group row">

@@ -10,7 +10,7 @@ export class Cours {
     public color: string,
     public professeurId: number,
     public matiereId: number,
-    public anneeId: number
+    public classeId: number
 
   ) {
     this.id = 0;

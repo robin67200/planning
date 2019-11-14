@@ -24,8 +24,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
-
-
+import { ClasseModule } from '../classe/classe.module';
 
 @NgModule({
   imports: [CommonModule,
@@ -42,7 +41,7 @@ import {MatIconModule} from '@angular/material/icon';
             MatDatepickerModule,
             MatNativeDateModule,
             ProfsModule,
-            AnneesModule,
+            ClasseModule,
             MatiereModule,
             FormsModule,
             NgbModalModule,

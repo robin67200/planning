@@ -15,7 +15,7 @@
             Titre
           </th>
           <th>
-            Contenu
+            Salle
           </th>
           <th>
             Date
@@ -36,7 +36,7 @@
             matiereId
           </th>
           <th>
-            anneeId
+            classeId
           </th>
         </tr>
       </thead>
@@ -45,7 +45,7 @@
             {{ cours.title }}
           </td>
           <td>
-            {{ cours.contenu }}
+            {{ cours.room }}
           </td>
           <td>
             {{ cours.start }}
@@ -63,7 +63,7 @@
             {{ cours.matiereId }}
           </td>
           <td>
-            {{ cours.anneeId }}
+            {{ cours.classeId }}
           </td>
           <td style="width: 10%">
             <button class="btn btn-primary"[routerLink]="['/courss/detail/' + cours.id]">Details</button>

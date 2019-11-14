@@ -38,7 +38,7 @@ export class EleveFormComponent implements OnInit {
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
       mail: new FormControl('', [Validators.required,
-        Validators.email]),
+      Validators.email]),
       telephone: new FormControl('', [Validators.required]),
       dateNaissance: new FormControl('', [Validators.required]),
       classeId: new FormControl(0, [Validators.required])

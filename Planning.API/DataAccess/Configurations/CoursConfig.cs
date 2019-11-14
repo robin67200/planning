@@ -12,12 +12,15 @@ namespace Planning.API.DataAccess {
 
             builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.Title).HasColumnName("Title").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.Date).HasColumnName("Date").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.Start).HasColumnName("Start").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.End).HasColumnName("End").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.Room).HasColumnName("Room").HasColumnType("TEXT").IsRequired();
-            builder.Property(x => x.ProfesseurId).HasColumnName("ProfesseurId").HasColumnType("INTEGER").IsRequired();
-            builder.Property(x => x.Couleur).HasColumnName("Color").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Color).HasColumnName("Color").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.MatiereId).HasColumnName("MatiereId").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.ClasseId).HasColumnName("ClasseId").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.ProfesseurId).HasColumnName("ProfesseurId").HasColumnType("INTEGER").IsRequired();
+
 
         }
     }

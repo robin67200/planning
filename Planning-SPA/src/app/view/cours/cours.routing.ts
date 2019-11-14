@@ -7,7 +7,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 export const routes: Routes = [
   {
   path: '',
-  redirectTo: 'list',
+  redirectTo: 'calendar',
   },
     // {path: 'create', component: },
     {path: 'detail/:id', component: CoursDetailComponent},
