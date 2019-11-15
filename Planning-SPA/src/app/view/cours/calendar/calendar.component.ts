@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Cours } from './../models/cours';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import {startOfDay, endOfDay, subDays,
         addDays, endOfMonth, isSameDay,
         isSameMonth, addHours} from 'date-fns';
@@ -8,7 +9,11 @@ import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
-  CalendarView
+  CalendarView,
+  CalendarViewPeriod,
+  CalendarWeekViewBeforeRenderEvent,
+  CalendarMonthViewBeforeRenderEvent,
+  CalendarDayViewBeforeRenderEvent
 } from 'angular-calendar';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr'; // to register french
@@ -16,7 +21,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { CoursService, CoursService2 } from '../services/cours.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
-import { Cours } from '../models/cours';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 registerLocaleData(localeFr);
@@ -46,13 +50,13 @@ const colors: any = {
 export class CalendarComponent implements OnInit {
 
   locale = 'fr';
-  courss: any;
+  cours: Cours[]
   bsModalRef: BsModalRef;
-  cours: Cours;
+  courss: any;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
-  view: CalendarView = CalendarView.Week;
+  view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   modalData: {
@@ -65,6 +69,7 @@ export class CalendarComponent implements OnInit {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
+        this.ngOnInit();
       }
     },
     {
@@ -72,14 +77,17 @@ export class CalendarComponent implements OnInit {
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
+        this.deleteCours(this.courss);
       }
     }
   ];
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [];
+  events: CalendarEvent[] = [
+  ];
 
+  period: CalendarViewPeriod;
   activeDayIsOpen = true;
   form: FormGroup;
 
@@ -90,8 +98,33 @@ export class CalendarComponent implements OnInit {
     private service2: CoursService2,
     private modals: SimpleModalService,
     private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
 
     ) {}
+
+    ngOnInit() {
+      this.service.getCours().subscribe(
+        response => {
+          this.events = response;
+          console.log(this.events);
+        },
+        error => {
+          console.log(error);
+        },
+      );
+    }
+
+  beforeViewRender(
+    event:
+      | CalendarMonthViewBeforeRenderEvent
+      | CalendarWeekViewBeforeRenderEvent
+      | CalendarDayViewBeforeRenderEvent
+  ) {
+    this.period = event.period;
+    this.cdr.detectChanges();
+    this.ngOnInit();
+
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -131,6 +164,7 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(): void {
+
     this.events = [
       ...this.events,
       {
@@ -159,16 +193,8 @@ export class CalendarComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  ngOnInit() {
-    this.service.getCours().subscribe(
-      response => {
-        this.courss = response;
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+///////////////////////////////////////////////////////////////////////
+
   deleteCours(cours: Cours) {
     this.modals
       .addModal(ModalConfirmComponent, {

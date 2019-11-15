@@ -7,7 +7,7 @@ export class Cours {
     public date: Date,
     public start: Date,
     public end: Date,
-    public color: string,
+    public color: any,
     public professeurId: number,
     public matiereId: number,
     public classeId: number

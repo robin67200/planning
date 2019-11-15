@@ -1,10 +1,8 @@
 import { MatiereModule } from './../matiere/matiere.module';
-import { AnneesModule } from './../annee/annee.module';
 import { ProfsModule } from './../prof/prof.module';
 import { MatInputModule } from '@angular/material/input';
 import { CoursFormComponent } from './components/cours-form/cours-form.component';
 import { CoursService, CoursService2 } from './services/cours.service';
-import { CoursListComponent } from './cours-list/cours-list.component';
 import { CoursDetailComponent } from './cours-detail/cours-detail.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -52,7 +50,6 @@ import { ClasseModule } from '../classe/classe.module';
             })
             ],
   declarations: [
-    CoursListComponent,
     CoursDetailComponent,
     CoursFormComponent,
     CalendarComponent

@@ -6,8 +6,18 @@ import { RouterModule } from '@angular/router';
 import { NgModule, Input } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.component';
+import { UserManagementComponent } from './view/admin/user-management/user-management.component';
+import { RolesModalComponent } from './view/admin/roles-modal/roles-modal.component';
+import { AuthService } from './view/_services/auth.service';
+import { AuthGuard } from './view/_guards/auth.guard';
+import { AdminService } from './view/_services/admin.service';
+import { UserService } from './view/user/_services/user.service';
 
-const APP_COMPONENTS = [ AppSlidePanelComponent, ];
+const APP_COMPONENTS = [ AppSlidePanelComponent,
+  AdminPanelComponent,
+  UserManagementComponent,
+  RolesModalComponent, ];
 
 const APP_MODULES = [
   CommonModule,
@@ -20,8 +30,14 @@ const APP_MODULES = [
   declarations: [ APP_COMPONENTS ],
   imports: [ APP_MODULES ],
   providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminService
   ],
-  entryComponents: [],
+  entryComponents: [
+    RolesModalComponent
+  ],
   exports: [ APP_MODULES, APP_COMPONENTS ]
 })
 export class AppSharedModule {}
