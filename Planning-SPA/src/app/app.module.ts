@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app.routing';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, BsDatepickerModule, TabsModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule, BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
 import { SimpleModalModule, SimpleModalOptions } from 'ngx-simple-modal';
 import { ModalItemSelectorComponent } from './components/modals/item-selector-modal';
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -82,7 +82,6 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    TabsModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,
     SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{
