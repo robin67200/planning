@@ -9,6 +9,10 @@ namespace Planning.API.DataAccess.Repositories.Interface
     {
         void AddMatiere(ProfMatiere model);
         void RemoveMatiere(ProfMatiere model);
+        void AddClasse(ProfClasse model);
+        void RemoveClasse(ProfClasse model);
+        IEnumerable<Prof> GetAvalaibles(int classeId);
+        IEnumerable<Prof> GetProfsClasse(int classeId);
         
     }
 }

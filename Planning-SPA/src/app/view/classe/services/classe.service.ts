@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CrudService } from 'src/app/_services/crud.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { Subject } from 'rxjs';
+import { Prof } from '../../prof/models/prof';
 
 @Injectable()
 export class ClasseService {
@@ -24,6 +25,9 @@ postClasse(classe: Classe) {
 }
 deleteClasseById(id: number) {
   return this.http.delete<Classe>('http://localhost:5000/api/classes/' + id);
+}
+getProfs(id: number) {
+  return this.http.get<Prof[]>('http://localhost:5000/api/classes/' + id + '/profs/classe');
 }
 
 }

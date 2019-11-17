@@ -25,5 +25,14 @@ namespace Planning.API.Business.Services
             var map = _mapper.Map<IEnumerable<MatiereViewModel>>(list);
             return map;
         }
+
+        public IEnumerable<MatiereViewModel> GetProf(int profId)
+        {
+            var list = _repo.GetProfs(profId);
+            var map = _mapper.Map<IEnumerable<MatiereViewModel>>(list);
+            return map;
+        }
+
+        
     }
 }

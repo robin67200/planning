@@ -3,22 +3,36 @@ using Microsoft.EntityFrameworkCore;
 using Planning.API.DataAccess.Repositories.Interface;
 using Planning.API.Models;
 using TechCloud.Tools.DataAccess.Infrastructure;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Planning.API.DataAccess.Repositories {
 
     public class ClassesRepository : GenericRepository<Classe>, IClassesRepository
     {
-        private readonly PPE2APIContext context;
+        private readonly PPE2APIContext _context;
 
         public ClassesRepository(PPE2APIContext context) : base(context)
         {
-            this.context = context;
+            this._context = context;
+        }
+
+        public override Task<Classe> GetByIdAsync(object id)
+        {
+            int converted = id.ToInt();
+            return this._context.Classes
+                .Include(p => p.ClasseProfs)
+                    .ThenInclude(t => t.Prof)
+                .Include(p => p.ClasseCours)
+                    .ThenInclude(t => t.Cours)
+                .Include(d => d.Eleves)
+                .FirstOrDefaultAsync(p => p.Id == converted);
         }
 
         public async Task<Classe> AddClasse(Classe classe)
         {
-            context.Classes.Add(classe);
-            await context.SaveChangesAsync();
+            _context.Classes.Add(classe);
+            await _context.SaveChangesAsync();
 
             return classe;
         }
@@ -36,6 +50,8 @@ namespace Planning.API.DataAccess.Repositories {
                 .FirstOrDefaultAsync(x => x.Id == id.ToInt());
         }
 
+        
+
         public override void Update(Classe entity)
         {
             entity.Niveau = null;
@@ -51,13 +67,25 @@ namespace Planning.API.DataAccess.Repositories {
 
         public void AddProf(ProfClasse model)
         {
-            context.ProfClasses.Add(model);
+            _context.ProfClasses.Add(model);
         }
 
         public void RemoveProf(ProfClasse model)
         {
-            context.ProfClasses.Remove(model);
+            _context.ProfClasses.Remove(model);
         }
+
+        public IEnumerable<Classe> GetProfClasses(int profId)
+        {
+            return _context.Classes.Include(c => c.ClasseProfs).Where(x => x.ClasseProfs.All(a => a.ProfId == profId)); 
+        }
+
+        public IEnumerable<Classe> GetClassesAvailables(int profId)
+        {
+            return _context.Classes.Include(p => p.ClasseProfs).Where(x => x.ClasseProfs.All(a => a.ProfId != profId));
+        }
+
+        
 
     }
 }

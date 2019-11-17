@@ -49,6 +49,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" (click)="openProf(prof); pnlProf.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+              <a class="dropdown-item text-dark" role="button" [routerLink]="['/profs/detail/',prof.id]"><i class="fas fa-info-circle"></i>&nbsp;&nbsp;Details</a>
               <a class="dropdown-item" (click)="deleteProf(prof)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
             </div>
           </div>

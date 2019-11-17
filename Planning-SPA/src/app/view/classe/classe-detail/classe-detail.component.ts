@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Classe } from '../models/classe';
 import { ClasseService } from '../services/classe.service';
+import { Eleve } from '../../eleve/models/eleve';
 
 @Component({
   selector: 'app-classe-detail',
@@ -14,7 +15,10 @@ export class ClasseDetailComponent implements OnInit {
 
   id: number;
   classes: Classe = new Classe('', 0, 0);
+  classe: Classe = new Classe('', 0, 0);
   bsModalRef: BsModalRef;
+  professeurs: Prof[];
+  eleves: Eleve[];
 
   constructor(
     route: ActivatedRoute,
@@ -31,16 +35,7 @@ export class ClasseDetailComponent implements OnInit {
 
   ngOnInit() {
     this.service.getClasseById(this.id).subscribe(res => {
-      this.classes = res;
+      this.classe = res;
     });
   }
-  /*deleteJury(jury: Prof) {
-    const initialState = {
-      jury
-    };
-    this.bsModalRef = this.modalService.show(ProfModalComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
-  }
-}
-*/
 }

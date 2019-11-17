@@ -24,6 +24,7 @@ namespace Planning.API.DataAccess.Repositories {
                     .ThenInclude(t => t.Matiere)
                 .Include(p => p.ProfClasses)
                     .ThenInclude(t => t.Classe)
+                .Include(g => g.Cours)
                 .FirstOrDefaultAsync(p => p.Id == converted);
         }
 
@@ -37,10 +38,31 @@ namespace Planning.API.DataAccess.Repositories {
             _context.ProfMatieres.Remove(model);
         }
 
+        public void AddClasse(ProfClasse model)
+        {
+            _context.ProfClasses.Add(model);
+        }
+
+        public void RemoveClasse(ProfClasse model)
+        {
+            _context.ProfClasses.Remove(model);
+        }
+
+        
+
         public IEnumerable<Prof> GetAvalaibles(int classeId)
         {
             return _context.Profs.Include(e => e.ProfClasses).Where(x => x.ProfClasses.All(z => z.ClasseId != classeId));
             
         }
+
+        public IEnumerable<Prof> GetProfsClasse(int classeId)
+        {
+            return _context.Profs.Include(e => e.ProfClasses).Where(x => x.ProfClasses.All(z => z.ClasseId == classeId));
+            
+        }
+       
+
+        
     }
 }

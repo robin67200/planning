@@ -9,5 +9,6 @@ namespace Planning.API.Business.Services.Interface
         //Task<IEnumerable<MatiereViewModel>> GetAllMatieres();
         //Task<MatiereViewModel> GetMatiereById(int id);
         IEnumerable<MatiereViewModel> GetProfAvailables(int profId);
+        IEnumerable<MatiereViewModel> GetProf(int profId);
     }
 }

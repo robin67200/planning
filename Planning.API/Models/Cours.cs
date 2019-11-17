@@ -19,6 +19,7 @@ namespace Planning.API.Models
 
 
         public ICollection<CoursClasse> CoursClasses { get; set; }
+        // public ICollection<CoursProf> CoursProfs { get; set; }
 
         
 

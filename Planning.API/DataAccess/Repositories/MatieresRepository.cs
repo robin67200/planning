@@ -28,5 +28,11 @@ namespace Planning.API.DataAccess.Repositories {
             return _context.Matieres.Include(c => c.MatiereProfs).Where(m => m.MatiereProfs.All(a => a.ProfId != profId));
         }
 
+        public IEnumerable<Matiere> GetProfs(int profId)
+        {
+            return _context.Matieres.Include(c => c.MatiereProfs).Where(m => m.MatiereProfs.All(a => a.ProfId == profId)); 
+        }
+
+
     }
 }

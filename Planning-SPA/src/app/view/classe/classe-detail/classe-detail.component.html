@@ -2,7 +2,10 @@
     <section class="widget">
       <header>
         <br />
-        <h2 style="text-align: center">Prof numéro {{classes.id}}</h2>
+        <h2 style="text-align: center">Classe {{classe.nom}}</h2>
+        <button class="btn btn-primary btn-rounded-f" [routerLink]="['/classes/list/']">
+          <i class="fas fa-arrow-alt-circle-left"></i>&nbsp;Retour
+        </button>
         <hr/>
       </header>
       <br />
@@ -14,15 +17,51 @@
             <tr>
               <th style="width: 50%" scope="row">Nom</th>
               <td style="text-align: center">
-                  {{ classes.nom }}
-                </td>
+                  {{ classe.nom }}
+              </td>
             </tr>
           </tbody>
       </table>
-      <br />
-        <button class="btn btn-primary btn-rounded-f" [routerLink]="['/classes/list/']">
-          Retour
-        </button>
+      <div class="row">
+          <div class="col-6">
+            <section class="widget">
+              <header>
+                <h2>Professeurs</h2>
+              </header>
+              <table class="table table-hover table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="row">Nom</th>
+                  </tr>
+                </thead>
+                  <tr id="list" *ngFor="let professeur of classe.professeurs">
+                      <td>{{professeur.prenom}} {{professeur.nom}}</td>
+                  </tr>
+            </table>
+            </section>
+          </div>
+          <div class="col-6">
+              <section class="widget">
+                <header>
+                  <h2>Eleves</h2>
+                </header>
+                <table class="table table-hover table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="row">Identité</th>
+                    </tr>
+                  </thead>
+                    <tr id="list" *ngFor="let eleve of classe.eleves">
+                        <td>{{eleve.prenom}} {{eleve.nom}}</td>
+                    </tr>
+              </table>
+              </section>
+            </div>
+
+        </div>
+
+
+
     </section>
     </div>
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Planning.API.Business.Services.Interface;
@@ -52,6 +53,12 @@ namespace Planning.API.Controllers
             model.ClasseId = id;
             this._service.RemoveProf(model);
             return Ok();
+        }
+
+        [HttpGet("{id}/profs/classe")]
+        public IEnumerable<ProfViewModel> GetProfs([FromRoute]int id)
+        {
+            return this._profs.GetProfsClasse(id);
         }
 
     
