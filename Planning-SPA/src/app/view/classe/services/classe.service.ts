@@ -5,6 +5,7 @@ import { CrudService } from 'src/app/_services/crud.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { Subject } from 'rxjs';
 import { Prof } from '../../prof/models/prof';
+import { Cours } from '../../cours/models/cours';
 
 @Injectable()
 export class ClasseService {
@@ -28,6 +29,15 @@ deleteClasseById(id: number) {
 }
 getProfs(id: number) {
   return this.http.get<Prof[]>('http://localhost:5000/api/classes/' + id + '/profs/classe');
+}
+getCoursAvailable(id: number) {
+  return this.http.get<Cours[]>('http://localhost:5000/api/classes/' + id + '/cours/availables');
+}
+addCours(id: number, coursId: number) {
+  return this.http.put<Cours>('http://localhost:5000/api/classes' + `/${id}/cours/${coursId}`, null );
+}
+deleteCours(id: number, coursId: number) {
+  return this.http.delete<Cours>('http://localhost:5000/api/classes' + `/${id}/cours/${coursId}`);
 }
 
 }

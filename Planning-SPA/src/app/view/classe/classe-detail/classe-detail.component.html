@@ -57,6 +57,31 @@
               </table>
               </section>
             </div>
+            <div class="col-12">
+              <section class="widget">
+                <header>
+                  <h2>Cours</h2>
+                </header>
+                <table class="table table-hover table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="row">Titre</th>
+                      <th scope="row">Début</th>
+                      <th scope="row">Fin</th>
+                      <th scope="row">Professeur</th>
+                      <th><button class="btn btn-success btn-rounded-f" (click)="addCours()"><i class="fas fa-plus"></i></button> </th>
+                    </tr>
+                  </thead>
+                    <tr id="list" *ngFor="let cours of classe.cours">
+                        <td>{{cours.title}}</td>
+                        <td>{{cours.start}}</td>
+                        <td>{{cours.end}}</td>
+                        <td>{{cours.professeurId}}</td>
+                        <td style="width: 5%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteCours(classe, cours)"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>
+              </table>
+              </section>
+            </div>
 
         </div>
 

@@ -21,6 +21,13 @@ namespace Planning.API.Business.Services
             _repo = repo;
         }
 
+        public IEnumerable<CoursViewModel> GetCoursAvailables(int classeId)
+        {
+            var list = _repo.GetCoursAvailables(classeId);
+            var map = _mapper.Map<IEnumerable<CoursViewModel>>(list);
+            return map;
+        }
+
         public async override Task<CoursViewModel> GetByIdAsync(object id)
         {
             var cours = await _repo.GetByIdAsync(id);
@@ -29,7 +36,8 @@ namespace Planning.API.Business.Services
 
             return mapped;
         }
-        public async override Task<IResult<CoursViewModel>> CreateAsync(CoursViewModel entity)
+        
+        /*public async override Task<IResult<CoursViewModel>> CreateAsync(CoursViewModel entity)
         {
             IResult<CoursViewModel> result = new Result<CoursViewModel>();
             var domain = _mapper.Map<Cours>(entity);
@@ -40,7 +48,7 @@ namespace Planning.API.Business.Services
 
 
             domain = _repo.GetById(domain.Id);
-            var coursClasses = entity.Classes.Select(c => new CoursClasse() { ClasseId = c.Id, CoursId = domain.Id }).ToList();
+            var coursClasses = entity.Classes.Select(c => new Planning.API.Models.CoursClasse() { ClasseId = c.Id, CoursId = domain.Id }).ToList();
 
             _repo.AddClasses(coursClasses);
 
@@ -51,7 +59,7 @@ namespace Planning.API.Business.Services
 
             return result;
 
-        }
+        }*/
 
         public IEnumerable<CoursViewModel> CoursSchedules(int? classeId, int? profId, int? matiereId)
         {

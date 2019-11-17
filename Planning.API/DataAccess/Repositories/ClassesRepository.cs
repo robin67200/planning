@@ -85,6 +85,16 @@ namespace Planning.API.DataAccess.Repositories {
             return _context.Classes.Include(p => p.ClasseProfs).Where(x => x.ClasseProfs.All(a => a.ProfId != profId));
         }
 
+        public void AddCours(CoursClasse model)
+        {
+            _context.CoursClasses.Add(model);
+        }
+
+        public void RemoveCours(CoursClasse model)
+        {
+            _context.CoursClasses.Remove(model);
+        }
+
         
 
     }
