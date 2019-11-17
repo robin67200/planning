@@ -26,6 +26,9 @@ constructor(private http: HttpClient) { }
   deleteEleveById(id: number) {
     return this.http.delete<Eleve>('http://localhost:5000/api/eleves/' + id);
   }
+  getByName(nom: string) {
+    return this.http.get<Eleve[]>('http://localhost:5000/api/eleves/nom' + nom);
+  }
   pushObject(object: Eleve) {
     this.$object.next(object);
   }
