@@ -1,15 +1,11 @@
 <div class="container">
-  <br />
   <h2 style="text-align:center">Eleve</h2>
   <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlEleve.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
   <hr>
+  <div class="searchC">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Rechercher un élève">
+  </div>
   <br />
-  <br />
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Chercher">
-  </mat-form-field>
-  </form>
   <div class="widget-body">
   <table class="table table-hover table-striped table-bordered">
     <thead>
@@ -37,7 +33,7 @@
           </th>
       </tr>
     </thead>
-      <tr id="list" *ngFor="let eleve of eleves">
+      <tr id="list" *ngFor="let eleve of eleves | filter:searchText">
         <td>
           {{ eleve.nom }}
         </td>

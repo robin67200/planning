@@ -4,8 +4,8 @@ using Planning.API.Business.ViewModels;
 using TechCloud.Tools.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
-
+using Planning.API.Models;
+using System.Threading.Tasks;
 
 namespace Planning.API.Controllers
 {
@@ -16,6 +16,13 @@ namespace Planning.API.Controllers
         public ElevesController(IElevesService service) : base(service)
         {
 
+        }
+
+        [HttpGet("nom/{nom}")]
+        public async Task<IActionResult> GetByName([FromRoute]string nom)
+        {
+            var eleves = await this._service.GetByName(nom);
+            return Ok(eleves);
         }
         
     }

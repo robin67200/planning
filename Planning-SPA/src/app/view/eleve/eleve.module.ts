@@ -10,6 +10,7 @@ import { ModalModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { EleveListComponent } from './eleve-list/eleve-list.component';
 import { EleveFormComponent } from './components/eleve-form/eleve-form.component';
 import { ClasseModule } from '../classe/classe.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [CommonModule,
@@ -19,7 +20,8 @@ import { ClasseModule } from '../classe/classe.module';
             AppSharedModule,
             ModalModule.forRoot(),
             BsDatepickerModule.forRoot(),
-            ClasseModule
+            ClasseModule,
+            Ng2SearchPipeModule
             ],
   declarations: [
     EleveDetailComponent,

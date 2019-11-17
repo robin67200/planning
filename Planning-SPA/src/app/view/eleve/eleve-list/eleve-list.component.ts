@@ -17,6 +17,7 @@ export class EleveListComponent implements OnInit {
   eleves: Eleve[] = [];
   id: number;
   eleve: Eleve;
+  searchText: any;
 
   constructor(
     private service: EleveService,
@@ -69,4 +70,11 @@ export class EleveListComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  searchByName(name: string) {
+    this.service.getByName(name).subscribe(res => {
+      this.eleves = res;
+    });
+  }
+
 }
