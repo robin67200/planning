@@ -176,15 +176,15 @@ export class CalendarComponent implements OnInit {
 
 ///////////////////////////////////////////////////////////////////////
 
-  deleteCours(event: Cours) {
+  deleteCours(cours: Cours) {
     this.modals
       .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${event.title} ?`,
+        title: `Supprimer ${cours.title} ?`,
         message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
       })
       .subscribe(result => {
         if (result) {
-          this.service.deleteCoursById(event.id).subscribe(res => {
+          this.service.deleteCoursById(cours.id).subscribe(res => {
             this.ngOnInit();
           });
         }

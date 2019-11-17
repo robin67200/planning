@@ -39,7 +39,6 @@ export class CoursFormComponent implements OnInit {
       color2: new FormControl('', [Validators.required]),
       professeurId: new FormControl(0, [Validators.required]),
       matiereId: new FormControl(0, [Validators.required]),
-      classeId: new FormControl(0, [Validators.required]),
     });
 
   }
@@ -52,7 +51,6 @@ export class CoursFormComponent implements OnInit {
   get color2() {return this.form.get('color2'); }
   get professeurId() {return this.form.get('professeurId'); }
   get matiereId() {return this.form.get('matiereId'); }
-  get anneeId() {return this.form.get('anneeId'); }
 
   ngOnInit() {
     this.service.objectChanged().subscribe(courss => {
@@ -74,7 +72,6 @@ export class CoursFormComponent implements OnInit {
       cours.color2 = this.form.value.color2;
       cours.professeurId = this.form.value.professeurId;
       cours.matiereId = this.form.value.matiereId;
-      cours.classeId = this.form.value.classeId;
 
 
       if (this.isUpdating) {
