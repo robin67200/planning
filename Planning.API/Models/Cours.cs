@@ -14,7 +14,6 @@ namespace Planning.API.Models
         public string Color2 { get; set;}
         public Prof Professeur { get; set; }
         public int MatiereId { get; set; }
-        public int ClasseId { get; set; }
         public int ProfesseurId { get; set; }
 
 
