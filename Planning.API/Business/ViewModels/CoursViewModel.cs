@@ -13,7 +13,6 @@ namespace Planning.API.Business.ViewModels
         public string Color { get; set; }
         public string Color2 { get; set; }
         public int MatiereId { get; set; }
-        public int ClasseId { get; set; }
         public int ProfesseurId { get; set; }
 
         public ICollection<ClasseViewModel> Classes { get; set; }
