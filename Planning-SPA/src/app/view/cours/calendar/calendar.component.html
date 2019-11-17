@@ -1,6 +1,7 @@
 <div class="container">
 <br>
 <h2 style="text-align: center;">Planning</h2>
+<button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlCours.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
 <hr>
 <br>
 <div class="row text-center">
@@ -128,7 +129,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let event of events">
+      <tr id="list" *ngFor="let event of events">
         <td>
           <input
             type="text"
@@ -183,7 +184,7 @@
           />
         </td>
         <td>
-          <button class="btn btn-danger" (click)="deleteEvent(cours)">
+          <button class="btn btn-danger" (click)="deleteCours(event)">
             Supprimer
           </button>
         </td>
@@ -192,80 +193,6 @@
   </table>
 </div>
 </div>
-<div class="container">
-    <br />
-    <h2 style="text-align:center">cours</h2>
-    <button class="btn btn-outline-primary"  (click)="pnlCours.display()">Ajouter</button>
-    &nbsp;&nbsp;
-    <button class="btn btn-primary"[routerLink]="['/courss/calendar/']">Calendrier</button>
-    <hr>
-    <br />
-    <br />
-    <div class="widget-body">
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>
-            Titre
-          </th>
-          <th>
-            Salle
-          </th>
-          <th>
-            Date
-          </th>
-          <th>
-            Heure de début
-          </th>
-          <th>
-            Heure de fin
-          </th>
-          <th>
-            Couleur
-          </th>
-          <th>
-            professeurId
-          </th>
-          <th>
-            matiereId
-          </th>
-          <th>
-            classeId
-          </th>
-        </tr>
-      </thead>
-        <tr id="list" *ngFor="let cours of courss">
-          <td>
-            {{ cours.title }}
-          </td>
-          <td>
-            {{ cours.room }}
-          </td>
-          <td>
-            {{ cours.start }}
-          </td>
-          <td>
-            {{ cours.end }}
-          </td>
-          <td>
-            {{ cours.color }}
-          </td>
-          <td>
-            {{ cours.professeurId }}
-          </td>
-          <td>
-            {{ cours.matiereId }}
-          </td>
-          <td>
-            {{ cours.classeId }}
-          </td>
-          <td style="width: 10%">
-            <button class="btn btn-primary"[routerLink]="['/courss/detail/' + cours.id]">Details</button>
-          </td>
-        </tr>
-    </table>
-  </div>
-  </div>
   <app-app-slide-panel #pnlCours>
     <div panel-header style="text-align: center;">
       <h4>Remplissage Planning</h4>

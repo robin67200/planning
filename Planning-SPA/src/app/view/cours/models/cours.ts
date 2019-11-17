@@ -4,10 +4,10 @@ export class Cours {
   constructor(
     public title: string,
     public room: string,
-    public date: Date,
     public start: Date,
     public end: Date,
     public color: any,
+    public color2: any,
     public professeurId: number,
     public matiereId: number,
     public classeId: number

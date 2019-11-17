@@ -37,7 +37,7 @@ const appRoutes: Routes = [
         loadChildren: './view/prof/prof.module#ProfsModule',
       },
       {
-        path: 'courss',
+        path: 'calendars',
         loadChildren: './view/cours/cours.module#CourssModule',
       },
       {

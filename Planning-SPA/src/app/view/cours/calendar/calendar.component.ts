@@ -25,34 +25,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 registerLocaleData(localeFr);
 
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
-
 @Component({
   selector: 'app-calendar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
 
   locale = 'fr';
-  cours: Cours[]
+  courss: Cours[];
   bsModalRef: BsModalRef;
-  courss: any;
+  cours: any;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -77,18 +60,18 @@ export class CalendarComponent implements OnInit {
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
-        this.deleteCours(this.courss);
+        this.deleteCours(this.cours);
+        this.ngOnInit();
       }
     }
   ];
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-  ];
+  events: CalendarEvent[] = [];
 
   period: CalendarViewPeriod;
-  activeDayIsOpen = true;
+  activeDayIsOpen = false;
   form: FormGroup;
 
   constructor(
@@ -103,15 +86,22 @@ export class CalendarComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-      this.service.getCours().subscribe(
-        response => {
-          this.events = response;
-          console.log(this.events);
-        },
-        error => {
-          console.log(error);
-        },
-      );
+      this.service.getCours().subscribe(courss => {
+        this.events = courss.map(cours => {
+          return {
+            start: new Date(cours.start),
+            end: new Date(cours.end),
+            title: cours.title,
+            actions: this.actions,
+            color: {
+              primary: cours.color,
+              secondary: cours.color2
+            }
+          };
+        });
+      }, err => {
+          console.log(err);
+      });
     }
 
   beforeViewRender(
@@ -123,7 +113,6 @@ export class CalendarComponent implements OnInit {
     this.period = event.period;
     this.cdr.detectChanges();
     this.ngOnInit();
-
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -138,6 +127,7 @@ export class CalendarComponent implements OnInit {
       }
       this.viewDate = date;
     }
+    this.ngOnInit();
   }
 
   eventTimesChanged({
@@ -156,54 +146,45 @@ export class CalendarComponent implements OnInit {
       return iEvent;
     });
     this.handleEvent('Dropped or resized', event);
+    this.ngOnInit();
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
-  }
+    this.modal.open(this.modalContent, { size: 'xl' });
+    this.ngOnInit();
 
-  addEvent(): void {
-
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        }
-      }
-    ];
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter(event => event !== eventToDelete);
+    this.ngOnInit();
+
   }
 
   setView(view: CalendarView) {
     this.view = view;
+    this.ngOnInit();
+
   }
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+    this.ngOnInit();
+
   }
 
 ///////////////////////////////////////////////////////////////////////
 
-  deleteCours(cours: Cours) {
+  deleteCours(event: Cours) {
     this.modals
       .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${cours.title} ?`,
+        title: `Supprimer ${event.title} ?`,
         message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
       })
       .subscribe(result => {
         if (result) {
-          this.service.deleteCoursById(cours.id).subscribe(res => {
+          this.service.deleteCoursById(event.id).subscribe(res => {
             this.ngOnInit();
           });
         }

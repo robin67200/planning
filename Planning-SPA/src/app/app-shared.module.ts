@@ -13,7 +13,6 @@ import { AuthService } from './view/_services/auth.service';
 import { AuthGuard } from './view/_guards/auth.guard';
 import { AdminService } from './view/_services/admin.service';
 import { UserService } from './view/user/_services/user.service';
-import { TabsModule } from 'ngx-tabset';
 
 const APP_COMPONENTS = [ AppSlidePanelComponent,
   AdminPanelComponent,
@@ -25,7 +24,6 @@ const APP_MODULES = [
   FormsModule,
   MatInputModule,
   MatDatepickerModule,
-  TabsModule.forRoot(),
 
 ];
 
