@@ -49,17 +49,15 @@ export class CalendarComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+      label: '<i class="fa fa-fw fa-edit"></i>',
+      onClick: (): void => {
+        this.openCours(this.cours);
         this.ngOnInit();
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
+      onClick: (): void => {
         this.deleteCours(this.cours);
         this.ngOnInit();
       }
@@ -89,14 +87,18 @@ export class CalendarComponent implements OnInit {
       this.service.getCours().subscribe(courss => {
         this.events = courss.map(cours => {
           return {
+            id: cours.id,
             start: new Date(cours.start),
             end: new Date(cours.end),
             title: cours.title,
+            room: cours.room,
             actions: this.actions,
             color: {
               primary: cours.color,
               secondary: cours.color2
-            }
+            },
+            professeurId: cours.professeurId,
+            matiereId: cours.matiereId,
           };
         });
       }, err => {
@@ -145,19 +147,12 @@ export class CalendarComponent implements OnInit {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
     this.ngOnInit();
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'xl' });
-    this.ngOnInit();
-
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter(event => event !== eventToDelete);
     this.ngOnInit();
 
   }
@@ -179,7 +174,7 @@ export class CalendarComponent implements OnInit {
   deleteCours(cours: Cours) {
     this.modals
       .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${cours.title} ?`,
+        title: `Supprimer ${cours.title} ${cours.id} ?`,
         message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
       })
       .subscribe(result => {

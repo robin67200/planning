@@ -10,7 +10,6 @@ export class Cours {
     public color2: any,
     public professeurId: number,
     public matiereId: number,
-    public classeId: number
 
   ) {
     this.id = 0;

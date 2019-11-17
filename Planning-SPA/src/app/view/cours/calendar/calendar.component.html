@@ -1,9 +1,8 @@
 <div class="container">
 <br>
 <h2 style="text-align: center;">Planning</h2>
-<button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlCours.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+<button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlCours.display()"><i class="fas fa-plus"></i></button>
 <hr>
-<br>
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
@@ -116,12 +115,10 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Primary color</th>
-        <th>Secondary color</th>
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
+        <th>Titre</th>
+        <th>Commence à</th>
+        <th>Finis le</th>
+        <th>Supprimer</th>
       </tr>
     </thead>
 
@@ -138,20 +135,6 @@
         </td>
         <td>
           <input
-            type="color"
-            [(ngModel)]="event.color.primary"
-            (change)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color.secondary"
-            (change)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
             class="form-control"
             type="text"
             mwlFlatpickr
@@ -163,6 +146,7 @@
             dateFormat="Y-m-dTH:i"
             altFormat="F j, Y H:i"
             placeholder="Not set"
+            disabled
           />
         </td>
         <td>
@@ -178,12 +162,19 @@
             dateFormat="Y-m-dTH:i"
             altFormat="F j, Y H:i"
             placeholder="Not set"
+            disabled
           />
         </td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteCours(event)">
-            Supprimer
-          </button>
+        <td style="width: 10%">
+          <div class="dropdown">
+            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-cogs"></i>&nbsp; Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="openCours(event); pnlCours.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+              <a class="dropdown-item" (click)="deleteCours(event)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+            </div>
+          </div>
         </td>
       </tr>
     </tbody>
