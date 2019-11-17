@@ -9,5 +9,6 @@ namespace Planning.API.Models
         public string Nom {get; set;}
 
         public ICollection<ProfMatiere> MatiereProfs { get; set;}
+        
     }
 }

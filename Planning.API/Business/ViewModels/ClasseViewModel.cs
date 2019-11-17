@@ -14,6 +14,7 @@ namespace Planning.API.Business.ViewModels
 
         public ICollection<EleveViewModel> Eleves {get; set;}
         public ICollection<ProfViewModel> Professeurs {get; set;}
+        public ICollection<CoursViewModel> Cours {get; set;}
         
     }
 }

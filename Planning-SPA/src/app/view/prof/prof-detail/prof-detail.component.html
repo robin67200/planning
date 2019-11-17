@@ -2,7 +2,10 @@
     <section class="widget">
       <header>
         <br />
-        <h2 style="text-align: center">Prof numéro {{profs.id}}</h2>
+        <h2 style="text-align: center">{{prof.prenom}} {{prof.nom}}</h2>
+        <button class="btn btn-outline-primary btn-rounded-f" [routerLink]="['/profs/list']">
+          <i class="fas fa-arrow-alt-circle-left"></i>&nbsp;Retour
+        </button>
         <hr/>
       </header>
       <br />
@@ -14,38 +17,100 @@
             <tr>
               <th style="width: 50%" scope="row">Nom</th>
               <td style="text-align: center">
-                  {{ profs.nom }}
+                  {{ prof.nom }}
                 </td>
             </tr>
             <tr>
               <th scope="row">Prénom</th>
               <td style="text-align: center">
-                  {{ profs.prenom }}
+                  {{ prof.prenom }}
             </tr>
             <tr>
               <th scope="row">Adresse</th>
               <td style="text-align: center">
-                  {{ profs.adresse }}
+                  {{ prof.adresse }}
                 </td>
             </tr>
             <tr>
             <th scope="row">Mail</th>
             <td style="text-align: center">
-                  {{ profs.mail }}
+                  {{ prof.mail }}
               </td>
           </tr>
           <tr>
           <th scope="row">Téléphone</th>
           <td style="text-align: center">
-              {{ profs.telephone }}
+              {{ prof.telephone }}
             </td>
         </tr>
           </tbody>
       </table>
       <br />
-        <button class="btn btn-primary btn-rounded-f" [routerLink]="['/profs/list']">
-          Retour
-        </button>
+      <div class="row">
+        <div class="col-6">
+          <section class="widget">
+            <header>
+              <h2>Matieres</h2>
+            </header>
+            <table class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th scope="row">Nom</th>
+                  <th><button class="btn btn-success btn-rounded-f" (click)="addMatiere()"><i class="fas fa-plus"></i></button> </th>
+                </tr>
+              </thead>
+                <tr id="list" *ngFor="let mat of prof.matieres">
+                  <td>{{mat.nom}}</td>
+                  <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteMatiere2(prof, mat)"><i class="fas fa-trash-alt"></i></button></td>
+                </tr>
+            </table>
+          </section>
+        </div>
+        <div class="col-6">
+          <section class="widget">
+            <header>
+              <h2>Classes</h2>
+            </header>
+            <table class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th scope="row">Nom</th>
+                  <th><button class="btn btn-success btn-rounded-f" (click)="addClasse()"><i class="fas fa-plus"></i></button> </th>
+                </tr>
+              </thead>
+                <tr id="list" *ngFor="let classe of prof.classes">
+                    <td>{{classe.nom}}</td>
+                    <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteClasse(prof, classe)"><i class="fas fa-trash-alt"></i></button></td>
+                </tr>
+          </table>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-6">
+              <section class="widget">
+                <header>
+                  <h2>Cours</h2>
+                </header>
+                <table class="table table-hover table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="row">Titre</th>
+                      <th scope="row">Début</th>
+                      <th scope="row">Fin</th>
+                      <th scope="row">Salle</th>
+                    </tr>
+                  </thead>
+                    <tr id="list" *ngFor="let cour of prof.cours">
+                      <td>{{cour.title}}</td>
+                      <td>{{cour.start}}</td>
+                      <td>{{cour.end}}</td>
+                      <td>{{cour.room}}</td>
+                    </tr>
+                </table>
+              </section>
+            </div>
+      </div>
     </section>
     </div>
 

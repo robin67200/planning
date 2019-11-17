@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Prof } from '../models/prof';
 import { CrudService } from 'src/app/_services/crud.service';
 import { SimpleModalService } from 'ngx-simple-modal';
+import { Matiere } from '../../matiere/models/matiere';
+import { Classe } from '../../classe/models/classe';
 
 @Injectable()
 export class ProfService {
@@ -24,6 +26,31 @@ postProf(prof: Prof) {
 deleteProfById(id: number) {
   return this.http.delete<Prof>('http://localhost:5000/api/profs/' + id);
 }
+getMatiere(id: number) {
+  return this.http.get<Matiere[]>('http://localhost:5000/api/profs/' + id + '/matieres/prof');
+}
+getMatieresAvailable(id: number) {
+  return this.http.get<Matiere[]>('http://localhost:5000/api/profs/' + id + '/matieres/availables');
+}
+getClasse(id: number) {
+  return this.http.get<Classe[]>('http://localhost:5000/api/profs/' + id + '/classes/prof');
+}
+getClasseAvailable(id: number) {
+  return this.http.get<Classe[]>('http://localhost:5000/api/profs/' + id + '/classes/availables');
+}
+addMatiere(id: number, matiereId: number) {
+  return this.http.put<Matiere>('http://localhost:5000/api/profs' + `/${id}/matieres/${matiereId}`, null );
+}
+deleteMatiere(id: number, matiereId: number) {
+  return this.http.delete<Matiere>('http://localhost:5000/api/profs' + `/${id}/matieres/${matiereId}`);
+}
+addClasse(id: number, classeId: number) {
+  return this.http.put<Classe>('http://localhost:5000/api/profs' + `/${id}/classes/${classeId}`, null );
+}
+deleteClasse(id: number, classeId: number) {
+  return this.http.delete<Classe>('http://localhost:5000/api/profs' + `/${id}/classes/${classeId}`);
+}
+
 
 }
 

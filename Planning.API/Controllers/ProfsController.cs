@@ -11,16 +11,36 @@ namespace Planning.API.Controllers
     public class ProfsController : CrudController<IProfsService, ProfViewModel, int>
     {
         private readonly IMatieresService _matieres;
+        private readonly IClassesService _classes;
 
-        public ProfsController (IProfsService service, IMatieresService matieres) : base(service)
+        public ProfsController (IProfsService service, IMatieresService matieres, IClassesService classes) : base(service)
         {
             this._matieres = matieres;
+            this._classes = classes;
         }
 
         [HttpGet("{id}/matieres/availables")]
         public IEnumerable<MatiereViewModel> GetAvailables([FromRoute]int id)
         {
             return this._matieres.GetProfAvailables(id);
+        }
+
+        [HttpGet("{id}/matieres/prof")]
+        public IEnumerable<MatiereViewModel> GetMatieres([FromRoute]int id)
+        {
+            return this._matieres.GetProf(id);
+        }
+
+        [HttpGet("{id}/classes/availables")]
+        public IEnumerable<ClasseViewModel> GetClassesAvailables([FromRoute]int id)
+        {
+            return this._classes.GetClassesAvailables(id);
+        }
+
+        [HttpGet("{id}/classes/prof")]
+        public IEnumerable<ClasseViewModel> GetClasses([FromRoute]int id)
+        {
+            return this._classes.GetProfClasse(id);
         }
 
         [HttpPut("{id}/matieres/{matiereId}")]
@@ -45,6 +65,32 @@ namespace Planning.API.Controllers
                 MatiereId = matiereId
             };
             this._service.RemoveMatiere(model);
+            return Ok();
+        }
+
+        [HttpPut("{id}/classes/{classeId}")]
+        public IActionResult AddClasse([FromRoute]int id, [FromRoute]int classeId)
+        {
+            ProfClasseViewModel model = new ProfClasseViewModel()
+            {
+                ProfId = id,
+                ClasseId = classeId
+            };
+
+            this._service.AddClasse(model);
+            return Ok();
+        }
+
+        [HttpDelete("{id}/classes/{classeId}")]
+        public IActionResult RemoveClasse([FromRoute]int id, [FromRoute]int classeId)
+        {
+            ProfClasseViewModel model = new ProfClasseViewModel()
+            {
+                ProfId = id,
+                ClasseId = classeId
+            };
+
+            this._service.RemoveClasse(model);
             return Ok();
         }
     }

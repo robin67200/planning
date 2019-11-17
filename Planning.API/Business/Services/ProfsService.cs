@@ -26,6 +26,7 @@ namespace Planning.API.Business.Services
             var mapped = this._mapper.Map<ProfViewModel>(prof);
             mapped.Matieres = _mapper.Map<ICollection<MatiereViewModel>>(prof.ProfMatieres.Select(e => e.Matiere));
             mapped.Classes = _mapper.Map<ICollection<ClasseViewModel>>(prof.ProfClasses.Select(e => e.Classe));
+            mapped.Cours = _mapper.Map<ICollection<CoursViewModel>>(prof.Cours.ToList());
 
             return mapped;
         }
@@ -43,6 +44,36 @@ namespace Planning.API.Business.Services
             this._repo.RemoveMatiere(obj);
             this._unitOfWork.Commit();
         }
+
+        public void AddClasse(ProfClasseViewModel model)
+        {
+            var obj = this._mapper.Map<ProfClasse>(model);
+            this._repo.AddClasse(obj);
+            this._unitOfWork.Commit();
+        }
+
+        public void RemoveClasse(ProfClasseViewModel model)
+        {
+            var obj = this._mapper.Map<ProfClasse>(model);
+            this._repo.RemoveClasse(obj);
+            this._unitOfWork.Commit();
+        }
+
+        public IEnumerable<ProfViewModel> GetAvailables(int classeId)
+        {
+            var list = _repo.GetAvalaibles(classeId);
+            var map = _mapper.Map<IEnumerable<ProfViewModel>>(list);
+            return map;
+        }
+
+        public IEnumerable<ProfViewModel> GetProfsClasse(int classeId)
+        {
+            var list = _repo.GetProfsClasse(classeId);
+            var map = _mapper.Map<IEnumerable<ProfViewModel>>(list);
+            return map;
+        }
+
+        
 
     }
 }

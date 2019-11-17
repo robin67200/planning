@@ -8,5 +8,10 @@ namespace Planning.API.Business.Services.Interface
     {
         void AddMatiere(ProfMatiereViewModel model);
         void RemoveMatiere(ProfMatiereViewModel model);
+        void AddClasse(ProfClasseViewModel model);
+        void RemoveClasse(ProfClasseViewModel model);
+        IEnumerable<ProfViewModel> GetAvailables(int classeId);
+        IEnumerable<ProfViewModel> GetProfsClasse(int classeId);
+        
     } 
 }

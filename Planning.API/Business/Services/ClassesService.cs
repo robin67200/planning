@@ -21,15 +21,25 @@ namespace Planning.API.Business.Services
             _repo = repo;
         }
 
+        public async override Task<ClasseViewModel> GetByIdAsync(object id)
+        {
+            var classe = await _repo.GetByIdAsync(id);
+            var mapped = this._mapper.Map<ClasseViewModel>(classe);
+            mapped.Professeurs = _mapper.Map<ICollection<ProfViewModel>>(classe.ClasseProfs.Select(e => e.Prof));
+            mapped.Cours = _mapper.Map<ICollection<CoursViewModel>>(classe.ClasseCours.Select(e => e.Classe));
+            mapped.Eleves = _mapper.Map<ICollection<EleveViewModel>>(classe.Eleves.ToList());
+
+            return mapped;
+        }
+
         
 
         public async Task<ClasseViewModel> GetByIdFullAsync(int id)
         {
-            var classe = await ((IClassesRepository)_repository).GetByIdFullAsync(id);
-            var mapped = _mapper.Map<ClasseViewModel>(classe);
+            var classe = await _repo.GetByIdFullAsync(id);
+            var mapped = this._mapper.Map<ClasseViewModel>(classe);
             
             mapped.Professeurs = _mapper.Map<ICollection<ProfViewModel>>(classe.ClasseProfs.Select(e => e.Prof));
-
             return mapped;
         }
 
@@ -47,6 +57,20 @@ namespace Planning.API.Business.Services
             var obj = this._mapper.Map<ProfClasse>(model);
             this._repo.RemoveProf(obj);
             this._unitOfWork.Commit();
+        }
+
+        public IEnumerable<ClasseViewModel> GetProfClasse(int profId)
+        {
+            var list = _repo.GetProfClasses(profId);
+            var map = _mapper.Map<IEnumerable<ClasseViewModel>>(list);
+            return map;
+        }
+
+        public IEnumerable<ClasseViewModel> GetClassesAvailables(int profId)
+        {
+            var list = _repo.GetClassesAvailables(profId);
+            var map = _mapper.Map<IEnumerable<ClasseViewModel>>(list);
+            return map;
         }
 
     }
