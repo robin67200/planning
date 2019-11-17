@@ -14,6 +14,8 @@ import { ProfService, ProfService2 } from './services/prof.service';
 import { ProfsRoutingModule } from './prof.routing';
 import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   imports: [CommonModule,
@@ -26,6 +28,7 @@ import { HttpClient } from '@angular/common/http';
             MatInputModule,
             MatDatepickerModule,
             MatNativeDateModule,
+            MatSelectModule,
             ],
   declarations: [
     ProfDetailComponent,

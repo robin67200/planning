@@ -1,4 +1,11 @@
 <div [formGroup]="form">
-    <select formControlName="professeurId" class="form-control" required >
-            <option *ngFor="let prof of profs" value="{{prof.id}}">{{prof.nom}}</option>
-    </select>
+    <mat-form-field>
+      <mat-label>Professeur :</mat-label>
+      <mat-select formControlName="professeurId" required>
+        <mat-option *ngFor="let prof of profs"
+        value={{prof.id}}>
+          {{prof.nom}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>

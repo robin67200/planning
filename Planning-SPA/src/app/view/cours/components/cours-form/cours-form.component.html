@@ -19,9 +19,9 @@
                 formControlName="title"
                 type="text"
                 matInput placeholder="Titre"
-                #message maxlength="10"
+                #titre maxlength="10"
                 >
-              <mat-hint align="end">{{message.value.length}} / 10</mat-hint>
+              <mat-hint align="end">{{titre.value.length}} / 10</mat-hint>
             </mat-form-field>
         </div>
       </div>
@@ -120,13 +120,13 @@
     </div>
 </div>
   <div class="form-group row">
-      <label class="form-control-label text-md-right col-3" >Prof :</label>
+      <label class="form-control-label text-md-right col-3" ></label>
       <div class="col-7">
           <app-prof-select [form]="form"></app-prof-select>
       </div>
   </div>
   <div class="form-group row">
-    <label class="form-control-label text-md-right col-3">Matière :</label>
+    <label class="form-control-label text-md-right col-3"></label>
     <div class="col-7">
         <app-matiere-select [form]="form"></app-matiere-select>
     </div>

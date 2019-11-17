@@ -8,12 +8,14 @@ import { CommonModule } from '@angular/common';
 
 import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
+import { MatSelectModule } from '@angular/material';
 
 @NgModule({
   imports: [CommonModule,
             ReactiveFormsModule,
             FormsModule,
             MatieresRoutingModule,
+            MatSelectModule,
             AppSharedModule,
             ModalModule.forRoot()
             ],
