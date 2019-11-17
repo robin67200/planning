@@ -1,0 +1,33 @@
+<div class="container">
+  <br />
+  <h2 style="text-align:center">Membres</h2>
+  <hr />
+  <br />
+  <br />
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+      <tr>
+        <th>
+          Nom
+        </th>
+        <th>
+          Age
+        </th>
+        <th>
+          Creation
+        </th>
+      </tr>
+    </thead>
+      <tr id="list" *ngFor="let user of users" >
+        <td>
+          {{ user.username }}
+        </td>
+        <td>
+          {{ user.age }}
+        </td>
+        <td>
+          {{ user.created | date: 'mediumDate' }}
+        </td>
+      </tr>
+  </table>
+</div>

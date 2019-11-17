@@ -7,10 +7,10 @@ export class Cours {
     public date: Date,
     public start: Date,
     public end: Date,
-    public color: string,
+    public color: any,
     public professeurId: number,
     public matiereId: number,
-    public anneeId: number
+    public classeId: number
 
   ) {
     this.id = 0;

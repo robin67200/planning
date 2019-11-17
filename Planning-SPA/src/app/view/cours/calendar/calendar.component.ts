@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Cours } from './../models/cours';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import {startOfDay, endOfDay, subDays,
         addDays, endOfMonth, isSameDay,
         isSameMonth, addHours} from 'date-fns';
@@ -8,9 +9,22 @@ import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
-  CalendarView
+  CalendarView,
+  CalendarViewPeriod,
+  CalendarWeekViewBeforeRenderEvent,
+  CalendarMonthViewBeforeRenderEvent,
+  CalendarDayViewBeforeRenderEvent
 } from 'angular-calendar';
-import { Cours } from '../models/cours';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr'; // to register french
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { CoursService, CoursService2 } from '../services/cours.service';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+registerLocaleData(localeFr);
+
 
 const colors: any = {
   red: {
@@ -34,6 +48,12 @@ const colors: any = {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+
+  locale = 'fr';
+  cours: Cours[]
+  bsModalRef: BsModalRef;
+  courss: any;
+
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -49,6 +69,7 @@ export class CalendarComponent implements OnInit {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
+        this.ngOnInit();
       }
     },
     {
@@ -56,6 +77,7 @@ export class CalendarComponent implements OnInit {
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
+        this.deleteCours(this.courss);
       }
     }
   ];
@@ -63,50 +85,46 @@ export class CalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
   ];
 
+  period: CalendarViewPeriod;
   activeDayIsOpen = true;
+  form: FormGroup;
 
+  constructor(
+    private modal: NgbModal,
+    private service: CoursService,
+    private modalService: BsModalService,
+    private service2: CoursService2,
+    private modals: SimpleModalService,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
 
-  constructor(private modal: NgbModal) {}
+    ) {}
+
+    ngOnInit() {
+      this.service.getCours().subscribe(
+        response => {
+          this.events = response;
+          console.log(this.events);
+        },
+        error => {
+          console.log(error);
+        },
+      );
+    }
+
+  beforeViewRender(
+    event:
+      | CalendarMonthViewBeforeRenderEvent
+      | CalendarWeekViewBeforeRenderEvent
+      | CalendarDayViewBeforeRenderEvent
+  ) {
+    this.period = event.period;
+    this.cdr.detectChanges();
+    this.ngOnInit();
+
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -146,6 +164,7 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(): void {
+
     this.events = [
       ...this.events,
       {
@@ -174,9 +193,37 @@ export class CalendarComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  ngOnInit() {
+///////////////////////////////////////////////////////////////////////
+
+  deleteCours(cours: Cours) {
+    this.modals
+      .addModal(ModalConfirmComponent, {
+        title: `Supprimer ${cours.title} ?`,
+        message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
+      })
+      .subscribe(result => {
+        if (result) {
+          this.service.deleteCoursById(cours.id).subscribe(res => {
+            this.ngOnInit();
+          });
+        }
+      });
   }
 
+  openCours(cours: Cours) {
+    this.service2.pushObject(cours);
+  }
 
+  onCoursUpdated(cours: Cours) {
+    this.service.putCours(cours.id, cours).subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
 
+  onCoursCreated(cours: Cours) {
+    this.service.postCours(cours).subscribe(result => {
+      // this.courss.push(result);
+      this.ngOnInit();
+    });
+  }
 }

@@ -32,6 +32,9 @@
         <th>
           Date de Naissance
         </th>
+        <th>
+          Classe
+          </th>
       </tr>
     </thead>
       <tr id="list" *ngFor="let eleve of eleves">
@@ -52,6 +55,9 @@
         </td>
         <td>
           {{ eleve.dateNaissance | date: 'mediumDate' }}
+        </td>
+        <td>
+          {{ eleve.classeId }}
         </td>
         <td style="width: 10%">
           <div class="dropdown">

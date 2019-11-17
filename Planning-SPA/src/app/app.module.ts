@@ -1,7 +1,7 @@
 import { ModalSimpleInputComponent } from './components/modals/simple-input-modals';
 import { ModalConfirmComponent } from './components/modals/confirm-modal';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app.routing';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, BsDatepickerModule, TabsModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule, BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
 import { SimpleModalModule, SimpleModalOptions } from 'ngx-simple-modal';
 import { ModalItemSelectorComponent } from './components/modals/item-selector-modal';
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -22,6 +22,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 const appRoutes: Routes = [
   {
@@ -81,7 +82,6 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    TabsModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,
     SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{

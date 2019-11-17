@@ -20,7 +20,7 @@ putCours(id: number, cours: any) {
 postCours(cours: Cours) {
   return this.http.post<Cours>('http://localhost:5000/api/cours/', cours);
 }
-deleteAnneById(id: number) {
+deleteCoursById(id: number) {
   return this.http.delete<Cours>('http://localhost:5000/api/cours/' + id);
 }
 

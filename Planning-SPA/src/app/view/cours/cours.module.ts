@@ -1,10 +1,8 @@
 import { MatiereModule } from './../matiere/matiere.module';
-import { AnneesModule } from './../annee/annee.module';
 import { ProfsModule } from './../prof/prof.module';
 import { MatInputModule } from '@angular/material/input';
 import { CoursFormComponent } from './components/cours-form/cours-form.component';
 import { CoursService, CoursService2 } from './services/cours.service';
-import { CoursListComponent } from './cours-list/cours-list.component';
 import { CoursDetailComponent } from './cours-detail/cours-detail.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -24,8 +22,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
-
-
+import { ClasseModule } from '../classe/classe.module';
 
 @NgModule({
   imports: [CommonModule,
@@ -42,7 +39,7 @@ import {MatIconModule} from '@angular/material/icon';
             MatDatepickerModule,
             MatNativeDateModule,
             ProfsModule,
-            AnneesModule,
+            ClasseModule,
             MatiereModule,
             FormsModule,
             NgbModalModule,
@@ -53,7 +50,6 @@ import {MatIconModule} from '@angular/material/icon';
             })
             ],
   declarations: [
-    CoursListComponent,
     CoursDetailComponent,
     CoursFormComponent,
     CalendarComponent
