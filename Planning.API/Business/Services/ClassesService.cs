@@ -26,7 +26,7 @@ namespace Planning.API.Business.Services
             var classe = await _repo.GetByIdAsync(id);
             var mapped = this._mapper.Map<ClasseViewModel>(classe);
             mapped.Professeurs = _mapper.Map<ICollection<ProfViewModel>>(classe.ClasseProfs.Select(e => e.Prof));
-            mapped.Cours = _mapper.Map<ICollection<CoursViewModel>>(classe.ClasseCours.Select(e => e.Classe));
+            mapped.Cours = _mapper.Map<ICollection<CoursViewModel>>(classe.ClasseCours.Select(e => e.Cours));
             mapped.Eleves = _mapper.Map<ICollection<EleveViewModel>>(classe.Eleves.ToList());
 
             return mapped;
@@ -71,6 +71,20 @@ namespace Planning.API.Business.Services
             var list = _repo.GetClassesAvailables(profId);
             var map = _mapper.Map<IEnumerable<ClasseViewModel>>(list);
             return map;
+        }
+
+        public void AddCours(CoursClasse model)
+        {
+            var obj = this._mapper.Map<CoursClasse>(model);
+            this._repo.AddCours(obj);
+            this._unitOfWork.Commit();
+        }
+
+        public void RemoveCours(CoursClasse model)
+        {
+            var obj = this._mapper.Map<CoursClasse>(model);
+            this._repo.RemoveCours(obj);
+            this._unitOfWork.Commit();
         }
 
     }

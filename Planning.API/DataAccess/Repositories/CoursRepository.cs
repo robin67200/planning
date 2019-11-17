@@ -12,8 +12,10 @@ namespace Planning.API.DataAccess.Repositories {
 
     public class CoursRepository : GenericRepository<Cours>, ICoursRepository
     {
+        private readonly PPE2APIContext _context;
         public CoursRepository(PPE2APIContext context) : base(context)
         {
+            this._context = context;
         }
         //public override async Task<List<Cours>> GetAllAsync()
         //{
@@ -49,6 +51,10 @@ namespace Planning.API.DataAccess.Repositories {
         {
             ((PPE2APIContext)DbContext).CoursClasses.AddRange(classes.ToArray());
         }
+        public IEnumerable<Cours> GetCoursAvailables(int classeId)
+        {
+            return _context.Cours.Include(c => c.CoursClasses).Where(m => m.CoursClasses.All(a => a.ClasseId != classeId));
+        }
 
     }
 }
@@ -72,4 +78,6 @@ public static class PredicateBuilder
         return Expression.Lambda<Func<T, bool>>
               (Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
     }
+
+    
 }

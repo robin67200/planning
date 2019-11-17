@@ -16,5 +16,6 @@ namespace Planning.API.Business.ViewModels
         public int ProfesseurId { get; set; }
 
         public ICollection<ClasseViewModel> Classes { get; set; }
+        
     }
 }
