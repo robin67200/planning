@@ -51,11 +51,15 @@ const appRoutes: Routes = [
       {
       path: 'niveaux',
       loadChildren: './view/niveau/niveau.module#NiveauModule',
-     },
-     {
-      path: 'matieres',
-      loadChildren: './view/matiere/matiere.module#MatiereModule',
-     },
+      },
+      {
+        path: 'matieres',
+        loadChildren: './view/matiere/matiere.module#MatiereModule',
+      },
+      {
+        path: 'indisponibilites',
+        loadChildren: './view/indisponibilite/indisponibilite.module#IndisponibiliteModule',
+      }
     ]
   },
 

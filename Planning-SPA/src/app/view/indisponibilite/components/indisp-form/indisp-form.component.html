@@ -1,0 +1,41 @@
+<div class="container">
+  <form
+    class="form-horizontal form-label-left parsleyjs ng-untouched ng-pristine ng-valid"
+    [formGroup]="form"
+    (submit)="save()"
+    #formDir="ngForm"
+  >
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-4"></label>
+      <div class="col-7">
+          <div class="input-group">
+            <span class="input-group-prepend">
+            </span>
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp" formControlName="date" placeholder="date" style="width: 85%" id="prepend-input">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field>
+        </div>
+      </div>
+  </div>
+  <br />
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-4" >Professeur</label>
+    <div class="col-7">
+        <app-prof-select [form]="form"></app-prof-select>
+    </div>
+</div>
+<br/>
+<div class="form-actions" style="text-align: center;">
+    <button
+    type="button"
+    class="btn btn-outline-danger btn-rounded"
+    (click)="close()"
+    >
+  <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
+  </button>
+  <button type="submit" class="btn btn-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
+  </div>
+  </form>
+</div>

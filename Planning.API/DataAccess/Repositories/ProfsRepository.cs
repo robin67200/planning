@@ -25,6 +25,7 @@ namespace Planning.API.DataAccess.Repositories {
                 .Include(p => p.ProfClasses)
                     .ThenInclude(t => t.Classe)
                 .Include(g => g.Cours)
+                .Include(i => i.Indisponibiltes)
                 .FirstOrDefaultAsync(p => p.Id == converted);
         }
 

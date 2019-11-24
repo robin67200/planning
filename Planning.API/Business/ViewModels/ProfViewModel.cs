@@ -13,5 +13,6 @@ namespace Planning.API.Business.ViewModels
         public ICollection<MatiereViewModel> Matieres {get; set;}
         public ICollection<ClasseViewModel> Classes {get; set;}
         public ICollection<CoursViewModel> Cours {get; set;}
+        public ICollection<IndisponibiliteViewModel> Indisponibilites {get; set;}
     }
 }

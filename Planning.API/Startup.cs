@@ -41,6 +41,7 @@ namespace Planning.API
             services.AddScoped<ICoursService, CoursService>();
             services.AddScoped<INiveauService, NiveauService>();
             services.AddScoped<IAnneeService, AnneeService>();
+            services.AddScoped<IIndisponibiliteService, IndisponibiliteService>();
 
 
             services.AddScoped<IAnneesRepository, AnneesRepository>();
@@ -50,6 +51,7 @@ namespace Planning.API
             services.AddScoped<IMatieresRepository, MatieresRepository>();
             services.AddScoped<IProfsRepository, ProfsRepository>();
             services.AddScoped<ICoursRepository, CoursRepository>();
+            services.AddScoped<IIndisponibilitesRepository, IndisponibilitesRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDbContext>(f => {
                 return f.GetService<PPE2APIContext>();

@@ -18,6 +18,7 @@ namespace Planning.API.DataAccess {
             builder.Property(x => x.Telephone).HasColumnName("Telephone").HasColumnType("TEXT").IsRequired();
             
             builder.HasMany(z => z.Cours).WithOne(x => x.Professeur).HasForeignKey(z => z.ProfesseurId);
+            builder.HasMany(x => x.Indisponibiltes).WithOne(z => z.Professeur).HasForeignKey(a => a.ProfesseurId);
         }
     }
 }

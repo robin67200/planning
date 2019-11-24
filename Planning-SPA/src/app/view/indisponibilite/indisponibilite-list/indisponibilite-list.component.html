@@ -1,0 +1,64 @@
+<div class="container">
+  <br />
+  <h2 style="text-align:center">Indisponibilités </h2>
+  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlIndisp2.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+  <hr>
+  <br/>
+  <br/>
+  <div class="widget-body">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th>
+          Professeur
+        </th>
+      </tr>
+    </thead>
+      <tr id="list" *ngFor="let indisp of indispos">
+        <td>
+          {{ indisp.date }}
+        </td>
+        <td>
+          {{ indisp.profName }}
+        </td>
+        <td style="width: 10%">
+          <div class="dropdown">
+            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-cogs"></i>&nbsp; Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="openIndisp(indisp); pnlIndisp.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+              <a class="dropdown-item" (click)="deleteIndisp(indisp)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+  </table>
+</div>
+</div>
+<app-app-slide-panel #pnlIndisp>
+  <div panel-header style="text-align: center;">
+    <h4>Formulaire Indisponibilités</h4>
+  </div>
+  <div panel-body>
+    <app-indisponibilite-form
+      (onUpdating)="onIndispUpdated($event); pnlIndisp.hide()"
+      (onClose)="pnlIndisp.hide()">
+    </app-indisponibilite-form>
+  </div>
+</app-app-slide-panel>
+
+<app-slide-create #pnlIndisp2>
+  <div panel-header style="text-align: center;">
+    <h4>Formulaire Indisponibilités</h4>
+  </div>
+  <div panel-body>
+    <app-indisp-form
+      (onCreating2)="onIndispCreated($event); pnlIndisp2.hide()"
+      (onClose)="pnlIndisp2.hide()">
+    </app-indisp-form>
+  </div>
+</app-slide-create>
