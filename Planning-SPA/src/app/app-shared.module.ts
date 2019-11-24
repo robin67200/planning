@@ -13,8 +13,11 @@ import { AuthService } from './view/_services/auth.service';
 import { AuthGuard } from './view/_guards/auth.guard';
 import { AdminService } from './view/_services/admin.service';
 import { UserService } from './view/user/_services/user.service';
+import { SlideCreateComponent } from './components/slide-create/slide-create.component';
 
-const APP_COMPONENTS = [ AppSlidePanelComponent,
+const APP_COMPONENTS = [
+  AppSlidePanelComponent,
+  SlideCreateComponent,
   AdminPanelComponent,
   UserManagementComponent,
   RolesModalComponent, ];

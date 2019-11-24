@@ -37,7 +37,6 @@ export class ClasseFormComponent implements OnInit {
       anneeId: new FormControl(0, [Validators.required]),
       niveauId: new FormControl(0, [Validators.required]),
     });
-
   }
   get nom() {return this.form.get('nom'); }
   get niveauId() {return this.form.get('niveauId'); }

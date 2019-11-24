@@ -20,6 +20,7 @@ namespace Planning.API.Business.Services
             CreateMap<Niveau, NiveauViewModel>();
             CreateMap<Annee, AnneeViewModel>();
             CreateMap<ProfMatiere, ProfMatiereViewModel>();
+            CreateMap<Indisponibilite, IndisponibiliteViewModel>();
         }
     }
 
@@ -36,6 +37,7 @@ namespace Planning.API.Business.Services
             CreateMap<AnneeViewModel, Annee>();
             CreateMap<ProfClasseViewModel, ProfClasse>();
             CreateMap<ProfMatiereViewModel, ProfMatiere>();
+            CreateMap<IndisponibiliteViewModel, Indisponibilite>();
         }
     }
 }

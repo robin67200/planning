@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Renderer, } from '@angular/core';
+import { Component, OnInit, Input, Renderer, Renderer2, } from '@angular/core';
 import { animate, transition, trigger, state, style } from '@angular/animations';
 
 @Component({

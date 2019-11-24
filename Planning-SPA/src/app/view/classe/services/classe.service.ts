@@ -51,4 +51,4 @@ export class ClasseService2 extends CrudService<Classe, number> {
     }
 
 
-  }
+}

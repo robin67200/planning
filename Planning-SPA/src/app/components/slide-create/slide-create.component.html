@@ -1,0 +1,13 @@
+<div class="back-panel" *ngIf="displayed">
+  <div class="panel card" [style.width]="width" [@slideInOut]="displayed ? 'in' : 'out'">
+    <div class="card-header" *ngIf="displayHeader">
+        <ng-content select="[panel-header]"></ng-content>
+    </div>
+    <div class="card-body">
+      <ng-content select="[panel-body]"></ng-content>
+    </div>
+    <div class="card-footer" *ngIf="displayFooter">
+        <ng-content select="[panel-footer]"></ng-content>
+    </div>
+</div>
+</div>

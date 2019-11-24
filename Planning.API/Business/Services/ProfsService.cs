@@ -27,6 +27,7 @@ namespace Planning.API.Business.Services
             mapped.Matieres = _mapper.Map<ICollection<MatiereViewModel>>(prof.ProfMatieres.Select(e => e.Matiere));
             mapped.Classes = _mapper.Map<ICollection<ClasseViewModel>>(prof.ProfClasses.Select(e => e.Classe));
             mapped.Cours = _mapper.Map<ICollection<CoursViewModel>>(prof.Cours.ToList());
+            mapped.Indisponibilites = _mapper.Map<ICollection<IndisponibiliteViewModel>>(prof.Indisponibiltes.ToList());
 
             return mapped;
         }

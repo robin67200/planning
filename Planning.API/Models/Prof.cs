@@ -15,5 +15,6 @@ namespace Planning.API.Models
         public ICollection<ProfMatiere> ProfMatieres { get; set;}
         public ICollection<ProfClasse> ProfClasses { get; set;}
         public ICollection<Cours> Cours {get; set;}
+        public ICollection<Indisponibilite> Indisponibiltes {get; set;}
     }
 }
