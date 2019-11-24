@@ -10,7 +10,10 @@
     <thead>
       <tr>
         <th>
-          Date
+          Début
+        </th>
+        <th>
+          Fin
         </th>
         <th>
           Professeur
@@ -19,7 +22,10 @@
     </thead>
       <tr id="list" *ngFor="let indisp of indispos">
         <td>
-          {{ indisp.date }}
+          {{ indisp.start }}
+        </td>
+        <td>
+          {{ indisp.end }}
         </td>
         <td>
           {{ indisp.profName }}

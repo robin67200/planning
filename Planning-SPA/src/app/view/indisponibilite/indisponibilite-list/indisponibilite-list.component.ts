@@ -40,7 +40,7 @@ export class IndisponibiliteListComponent implements OnInit {
   deleteIndisp(indisp: Indisponibilite) {
     this.modals
       .addModal(ModalConfirmComponent, {
-        title: `Supprimer l'indisponibilite du ${indisp.date} de ${indisp.profName} ?`,
+        title: `Supprimer l'indisponibilite du ${indisp.start} au ${indisp.end} de ${indisp.profName} ?`,
         message: 'Êtes-vous sûr de cette suppression ?'
       })
       .subscribe(result => {

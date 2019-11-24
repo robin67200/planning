@@ -12,16 +12,30 @@
             <span class="input-group-prepend">
             </span>
             <mat-form-field>
-              <input matInput [matDatepicker]="dp" formControlName="date" placeholder="date" style="width: 85%" id="prepend-input">
+              <input matInput [matDatepicker]="dp" formControlName="start" placeholder="debut" style="width: 85%" id="prepend-input">
               <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
               <mat-datepicker #dp></mat-datepicker>
             </mat-form-field>
         </div>
       </div>
   </div>
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-4"></label>
+      <div class="col-7">
+          <div class="input-group">
+            <span class="input-group-prepend">
+            </span>
+            <mat-form-field>
+              <input matInput [matDatepicker]="dpp" formControlName="end" placeholder="fin" style="width: 85%" id="prepend-input">
+              <mat-datepicker-toggle matSuffix [for]="dpp"></mat-datepicker-toggle>
+              <mat-datepicker #dpp></mat-datepicker>
+            </mat-form-field>
+        </div>
+      </div>
+  </div>
   <br />
   <div class="form-group row">
-    <label class="form-control-label text-md-right col-4" >Professeur</label>
+    <label class="form-control-label text-md-right col-4" ></label>
     <div class="col-7">
         <app-prof-select [form]="form"></app-prof-select>
     </div>

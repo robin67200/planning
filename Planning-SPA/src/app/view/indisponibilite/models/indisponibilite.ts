@@ -3,7 +3,8 @@ export class Indisponibilite {
   profName: string;
 
   constructor(
-    public date: Date,
+    public start: Date,
+    public end: Date,
     public professeurId: number
 
   ) {

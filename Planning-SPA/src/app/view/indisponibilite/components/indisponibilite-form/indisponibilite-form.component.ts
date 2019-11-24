@@ -30,7 +30,8 @@ export class IndisponibiliteFormComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       id: new FormControl(0, [Validators.required]),
-      date: new FormControl(new Date(), [Validators.required]),
+      start: new FormControl(new Date(), [Validators.required]),
+      end: new FormControl(new Date(), [Validators.required]),
       professeurId: new FormControl(0, [Validators.required]),
     });
    }
@@ -47,9 +48,10 @@ export class IndisponibiliteFormComponent implements OnInit {
   save() {
     if (this.form.valid) {
       this.hasError = false;
-      const indispo = new Indisponibilite(new Date(), 0);
+      const indispo = new Indisponibilite(new Date(), new Date(), 0);
       indispo.id = this.form.value.id;
-      indispo.date = this.form.value.date;
+      indispo.start = this.form.value.start;
+      indispo.end = this.form.value.end;
       indispo.professeurId = this.form.value.professeurId;
 
       this.onUpdating.emit(indispo);
@@ -68,7 +70,10 @@ export class IndisponibiliteFormComponent implements OnInit {
 
       const invalids: AbstractControl[] = controls.filter(a => a.invalid);
       switch (invalids[0]) {
-        case this.form.controls.date:
+        case this.form.controls.start:
+          this.error = 'La date est obligatoire';
+          break;
+        case this.form.controls.end:
           this.error = 'La date est obligatoire';
           break;
         case this.form.controls.ProfId:
