@@ -1,3 +1,6 @@
+import { MatiereService } from './../../matiere/services/matiere.service';
+import { ProfService } from './../../prof/services/prof.service';
+import { Matiere } from './../../matiere/models/matiere';
 import { Cours } from './../models/cours';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import {startOfDay, endOfDay, subDays,
@@ -22,6 +25,7 @@ import { CoursService, CoursService2 } from '../services/cours.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Prof } from '../../prof/models/prof';
 
 registerLocaleData(localeFr);
 
@@ -36,6 +40,8 @@ export class CalendarComponent implements OnInit {
   courss: Cours[];
   bsModalRef: BsModalRef;
   cours: any;
+  profs: Prof[] = [];
+  matieres: Matiere[] = [];
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -80,6 +86,8 @@ export class CalendarComponent implements OnInit {
     private modals: SimpleModalService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
+    private profService: ProfService,
+    private matiereService: MatiereService,
 
     ) {}
 
@@ -100,6 +108,18 @@ export class CalendarComponent implements OnInit {
             professeurId: cours.professeurId,
             matiereId: cours.matiereId,
           };
+        });
+        this.profService.getProf().subscribe(profs => {
+          this.profs = profs;
+          this.matiereService.getMatiere().subscribe(matieres => {
+            this.matieres = matieres;
+            this.courss.forEach(c => {
+              const prof = this.profs.find(n => n.id === c.professeurId);
+              c.profName = prof.nom;
+              const matiere = this.matieres.find(a => a.id === c.matiereId);
+              c.matiereName = matiere.nom;
+            });
+          });
         });
       }, err => {
           console.log(err);

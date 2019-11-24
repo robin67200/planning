@@ -12,7 +12,8 @@ import { ProfDetailComponent } from './prof-detail/prof-detail.component';
 import { ProfListComponent } from './prof-list/prof-list.component';
 import { ProfService, ProfService2 } from './services/prof.service';
 import { ProfsRoutingModule } from './prof.routing';
-import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
+import { MatNativeDateModule, MatDatepickerModule, MatTableModule,
+  MatPaginatorModule, MatSortModule, MatButtonModule, MatMenuModule } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 
@@ -29,6 +30,13 @@ import {MatSelectModule} from '@angular/material/select';
             MatDatepickerModule,
             MatNativeDateModule,
             MatSelectModule,
+            MatTableModule,
+            MatPaginatorModule,
+            MatSortModule,
+            MatIconModule,
+            MatMenuModule,
+            MatButtonModule
+
             ],
   declarations: [
     ProfDetailComponent,

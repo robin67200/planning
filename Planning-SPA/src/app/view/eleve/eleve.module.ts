@@ -11,6 +11,11 @@ import { EleveListComponent } from './eleve-list/eleve-list.component';
 import { EleveFormComponent } from './components/eleve-form/eleve-form.component';
 import { ClasseModule } from '../classe/classe.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule, MatIconModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatInputModule } from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   imports: [CommonModule,
@@ -21,7 +26,17 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
             ModalModule.forRoot(),
             BsDatepickerModule.forRoot(),
             ClasseModule,
-            Ng2SearchPipeModule
+            Ng2SearchPipeModule,
+            MatTableModule,
+            MatPaginatorModule,
+            MatSortModule,
+            MatIconModule,
+            MatMenuModule,
+            MatButtonModule,
+            MatInputModule,
+            MatDatepickerModule,
+            MatNativeDateModule,
+            MatSelectModule,
             ],
   declarations: [
     EleveDetailComponent,

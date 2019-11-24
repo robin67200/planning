@@ -1,74 +1,92 @@
 <div class="container">
   <h2 style="text-align:center">Eleve</h2>
-  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlEleve.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
-  <hr>
-  <div class="searchC">
-    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Rechercher un élève">
-  </div>
+  <button
+    class="btn btn-outline-primary"
+    style="margin-left: 91%;"
+    (click)="pnlEleve.display()"
+  >
+    <i class="fas fa-plus"></i>&nbsp;Ajouter
+  </button>
+  <hr />
   <br />
-  <div class="widget-body">
-  <table class="table table-hover table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>
-          nom
-        </th>
-        <th>
-          prenom
-        </th>
-        <th>
-          adresse
-        </th>
-        <th>
-          mail
-        </th>
-        <th>
-          telephone
-        </th>
-        <th>
-          Date de Naissance
-        </th>
-        <th>
-          Classe
-          </th>
-      </tr>
-    </thead>
-      <tr id="list" *ngFor="let eleve of eleves | filter:searchText">
-        <td>
-          {{ eleve.nom }}
-        </td>
-        <td>
-          {{ eleve.prenom }}
-        </td>
-        <td>
-          {{ eleve.adresse }}
-        </td>
-        <td>
-          {{ eleve.mail }}
-        </td>
-        <td>
-          {{ eleve.telephone }}
-        </td>
-        <td>
-          {{ eleve.dateNaissance | date: 'mediumDate' }}
-        </td>
-        <td>
-          {{ eleve.classeId }}
-        </td>
-        <td style="width: 10%">
-          <div class="dropdown">
-            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-cogs"></i>&nbsp; Actions
+
+  <mat-form-field>
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Rechercher un élève"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let eleve">{{ eleve.nom }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="prenom">
+        <th mat-header-cell *matHeaderCellDef>Prénom</th>
+        <td mat-cell *matCellDef="let eleve">{{ eleve.prenom }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateNaissance">
+        <th mat-header-cell *matHeaderCellDef>Date de naissance</th>
+        <td mat-cell *matCellDef="let eleve">{{ eleve.dateNaissance | date: 'shortDate' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="adresse">
+        <th mat-header-cell *matHeaderCellDef>Addresse</th>
+        <td mat-cell *matCellDef="let eleve">{{ eleve.adresse }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="mail">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let eleve">{{ eleve.mail }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="telephone">
+        <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+        <td mat-cell *matCellDef="let eleve">{{ eleve.telephone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="classeId">
+        <th mat-header-cell *matHeaderCellDef>Classe</th>
+        <td mat-cell *matCellDef="let eleve">{{ eleve.classeId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let eleve">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/eleves/detail/', eleve.id]">
+              <mat-icon>info</mat-icon>
+              <span>Détails</span>
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" (click)="openEleve(eleve); pnlEleve.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
-              <a class="dropdown-item" (click)="deleteEleve(eleve)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
-            </div>
-          </div>
+            <button
+              mat-menu-item
+              (click)="openEleve(eleve); pnlEleve.display()"
+            >
+              <mat-icon>edit</mat-icon>
+              <span>Modifier</span>
+            </button>
+            <button mat-menu-item (click)="deleteEleve(eleve)">
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </mat-menu>
         </td>
-      </tr>
-  </table>
-</div>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let eleve; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
 </div>
 <app-app-slide-panel #pnlEleve>
   <div panel-header style="text-align: center;">
@@ -78,7 +96,8 @@
     <app-eleve-form
       (onCreating)="onEleveCreated($event); pnlEleve.hide()"
       (onUpdating)="onEleveUpdated($event); pnlEleve.hide()"
-      (onClose)="pnlEleve.hide()">
+      (onClose)="pnlEleve.hide()"
+    >
     </app-eleve-form>
   </div>
 </app-app-slide-panel>

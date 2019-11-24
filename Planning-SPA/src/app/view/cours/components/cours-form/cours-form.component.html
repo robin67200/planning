@@ -19,9 +19,9 @@
                 formControlName="title"
                 type="text"
                 matInput placeholder="Titre"
-                #titre maxlength="10"
+                #titre maxlength="30"
                 >
-              <mat-hint align="end">{{titre.value.length}} / 10</mat-hint>
+              <mat-hint align="end">{{titre.value.length}} / 30</mat-hint>
             </mat-form-field>
         </div>
       </div>
@@ -34,13 +34,13 @@
           </span>
           <mat-form-field class="example-full-width">
               <mat-icon matSuffix>contacts</mat-icon>
-              <input
-              formControlName="room"
-              type="text"
-              matInput placeholder="Numéro Salle"
-              #message maxlength="10"
+              <mat-label>Choisir la salle</mat-label>
+              <mat-select formControlName="room"
               >
-            <mat-hint align="end">{{message.value.length}} / 10</mat-hint>
+              <mat-option *ngFor="let room of rooms" [value]="room.value">
+                {{room.viewValue}}
+              </mat-option>
+              </mat-select>
           </mat-form-field>
       </div>
     </div>

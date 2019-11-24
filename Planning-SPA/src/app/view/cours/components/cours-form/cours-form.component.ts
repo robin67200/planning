@@ -4,6 +4,11 @@ import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { CoursService2 } from '../../services/cours.service';
 
+export interface Room {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-cours-form',
   templateUrl: './cours-form.component.html',
@@ -17,6 +22,20 @@ export class CoursFormComponent implements OnInit {
   isUpdating = false;
   error: string;
   courss: Cours[] = [];
+
+  rooms: Room[] = [
+    {value: 's1', viewValue: 'S1'},
+    {value: 's2', viewValue: 'S2'},
+    {value: 's3', viewValue: 'S3'},
+    {value: 's4', viewValue: 'S4'},
+    {value: 's5', viewValue: 'S5'},
+    {value: 's6', viewValue: 'S6'},
+    {value: 's7', viewValue: 'S7'},
+    {value: 's8', viewValue: 'S8'},
+    {value: 's9', viewValue: 'S9'},
+    {value: 's10', viewValue: 'S10'},
+
+  ];
 
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();

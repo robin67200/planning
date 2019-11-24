@@ -1,4 +1,4 @@
-import { EleveService2 } from './../../services/eleve.service';
+import { EleveService2, EleveService } from './../../services/eleve.service';
 import { Eleve } from './../../models/eleve';
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -13,9 +13,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class EleveFormComponent implements OnInit {
 
   form: FormGroup;
-  id: number;
   hasError = false;
   isUpdating = false;
+  id: number;
   error: string;
   eleves: Eleve[] = [];
   bsConfig: Partial<BsDatepickerConfig>;
@@ -29,7 +29,9 @@ export class EleveFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: EleveService2,
+    private service: EleveService,
+    private service2: EleveService2,
+
     route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
@@ -43,6 +45,11 @@ export class EleveFormComponent implements OnInit {
       dateNaissance: new FormControl('', [Validators.required]),
       classeId: new FormControl(0, [Validators.required])
     });
+    route.params.forEach((params: Params) => {
+      if (params.id != null) {
+        this.id = +params.id;
+      }
+    });
   }
 
   get nom() {return this.form.get('nom'); }
@@ -54,7 +61,7 @@ export class EleveFormComponent implements OnInit {
   get classeId() {return this.form.get('classeId'); }
 
   ngOnInit() {
-    this.service.objectChanged().subscribe(eleves => {
+    this.service2.objectChanged().subscribe(eleves => {
       this.form.patchValue(eleves);
       this.isUpdating = true;
     });
@@ -81,42 +88,8 @@ export class EleveFormComponent implements OnInit {
 
       this.form.reset();
       this.form.controls.id.setValue(0);
-
-
-    } else {
-      this.hasError = true;
-      const controls: AbstractControl[] = [];
-
-      Object.keys(this.form.controls).forEach(key => {
-        controls.push(this.form.get(key));
-      });
-
-      const invalids: AbstractControl[] = controls.filter(a => a.invalid);
-      switch (invalids[0]) {
-        case this.form.controls.nom:
-          this.error = 'Le nom est obligatoire';
-          break;
-        case this.form.controls.prenom:
-          this.error = `Le prenom est obligatoire`;
-          break;
-        case this.form.controls.adresse:
-          this.error = `L'adresse est obligatoire`;
-          break;
-        case this.form.controls.mail:
-          this.error = `L'adresse mail est obligatoire et doit être valide`;
-          break;
-        case this.form.controls.telephone:
-          this.error = `Le numéro de telephone est obligatoire`;
-          break;
-        case this.form.controls.dateNaissance:
-          this.error = `La date de naissance est obligatoire`;
-          break;
-        case this.form.controls.classeId:
-          this.error = `La date de naissance est obligatoire`;
-          break;
-      }
-    }
   }
+}
 
   close() {
     this.form.reset();

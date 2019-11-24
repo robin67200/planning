@@ -5,46 +5,60 @@
     <hr>
     <br />
     <br />
-    <div class="widget-body">
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>
-            nom
-          </th>
-          <th>
-            Niveau
-          </th>
-          <th>
-            Année
-          </th>
-        </tr>
-      </thead>
-        <tr id="list" *ngFor="let classe of classes">
-          <td>
-            {{ classe.nom }}
-          </td>
-          <td>
-            {{ classe.niveauName }}
-          </td>
-          <td>
-            {{ classe.anneeName }}
-          </td>
-          <td style="width: 10%">
-            <div class="dropdown">
-              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-cogs"></i>&nbsp; Actions
+    <mat-form-field>
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Rechercher un classe"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource2">
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let classe">{{ classe.nom }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="niveauName">
+            <th mat-header-cell *matHeaderCellDef>Niveau</th>
+            <td mat-cell *matCellDef="let classe">{{ classe.niveauName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="anneeName">
+            <th mat-header-cell *matHeaderCellDef>Annee</th>
+            <td mat-cell *matCellDef="let classe">{{ classe.anneeName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let classe">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="openClasse(classe); pnlClasse.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
-                <a class="dropdown-item text-dark" role="button" [routerLink]="['/classes/detail/',classe.id]"><i class="fas fa-info-circle"></i>&nbsp;&nbsp;Details</a>
-                <a class="dropdown-item" (click)="deleteClasse(classe)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-    </table>
-  </div>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/classes/detail/', classe.id]">
+                  <mat-icon>info</mat-icon>
+                  <span>Détails</span>
+                </button>
+                <button mat-menu-item (click)="openClasse(classe); pnlClasse.display()">
+                  <mat-icon>edit</mat-icon>
+                  <span>Modifier</span>
+                </button>
+                <button mat-menu-item (click)="deleteClasse(classe)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let classe; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
   </div>
   <app-app-slide-panel #pnlClasse>
     <div panel-header style="text-align: center;">

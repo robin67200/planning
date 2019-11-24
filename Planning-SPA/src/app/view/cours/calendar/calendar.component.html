@@ -80,6 +80,8 @@
     *ngSwitchCase="CalendarView.Week"
     [viewDate]="viewDate"
     [events]="events"
+    weekStartsOn="1"
+    weekEndsOn="5"
     [dayStartHour]="8"
     [dayEndHour]="17"
     [locale]="locale"
@@ -102,8 +104,6 @@
   </mwl-calendar-day-view>
 </div>
 
-<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-
 <br /><br /><br />
 
 <h3>
@@ -118,9 +118,11 @@
         <th>Titre</th>
         <th>Commence à</th>
         <th>Finis le</th>
-        <th>Finis le</th>
-        <th>Finis le</th>
-        <th>Supprimer</th>
+        <th>Couleur principale</th>
+        <th>Couleur secondaire</th>
+        <th>Prof</th>
+        <th>Matiere</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -167,6 +169,42 @@
             disabled
           />
         </td>
+        <td>
+            <input
+              type="color"
+              class="form-control"
+              [(ngModel)]="event.color.primary"
+              (keyup)="refresh.next()"
+              disabled
+            />
+          </td>
+          <td>
+              <input
+                type="color"
+                class="form-control"
+                [(ngModel)]="event.color.secondary"
+                (keyup)="refresh.next()"
+                disabled
+              />
+            </td>
+            <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="event.professeurId"
+                  (keyup)="refresh.next()"
+                  disabled
+                />
+              </td>
+              <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="event.matiereId"
+                    (keyup)="refresh.next()"
+                    disabled
+                  />
+                </td>
         <td style="width: 10%">
           <div class="dropdown">
             <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

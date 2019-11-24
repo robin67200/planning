@@ -1,11 +1,12 @@
 import { ProfService, ProfService2 } from './../services/prof.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Prof } from '../models/prof';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-prof-list',
@@ -17,6 +18,12 @@ export class ProfListComponent implements OnInit {
   profs: Prof[] =  [];
   id: number;
   prof: Prof;
+  searchText: any;
+  displayedColumns: string[] =  ['nom', 'prenom', 'adresse', 'mail', 'telephone', 'actions'];
+  dataSource: MatTableDataSource<Prof>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private service: ProfService,
@@ -31,13 +38,24 @@ export class ProfListComponent implements OnInit {
   ngOnInit() {
     this.service.getProf().subscribe(
       response => {
-        this.profs = response;
+        this.dataSource = new MatTableDataSource(response);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error => {
         console.log(error);
       }
     );
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   deleteProf(prof: Prof) {
     this.modals
       .addModal(ModalConfirmComponent, {

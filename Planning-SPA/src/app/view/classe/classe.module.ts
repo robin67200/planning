@@ -12,7 +12,9 @@ import { ClassesRoutingModule } from './classe.routing';
 import { ClasseSelectComponent } from './components/classe-select/classe-select.component';
 import { AnneesModule } from '../annee/annee.module';
 import { NiveauModule } from '../niveau/niveau.module';
-import { MatInputModule, MatIconModule, MatNativeDateModule, MatDatepickerModule } from '@angular/material';
+import { MatInputModule, MatIconModule, MatNativeDateModule,
+  MatDatepickerModule, MatSelectModule, MatTableModule, MatSortModule,
+   MatPaginatorModule, MatMenuModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [CommonModule,
@@ -23,10 +25,17 @@ import { MatInputModule, MatIconModule, MatNativeDateModule, MatDatepickerModule
             ModalModule.forRoot(),
             AnneesModule,
             NiveauModule,
-            MatInputModule,
             MatIconModule,
+            MatInputModule,
             MatDatepickerModule,
             MatNativeDateModule,
+            MatSelectModule,
+            MatTableModule,
+            MatPaginatorModule,
+            MatSortModule,
+            MatIconModule,
+            MatMenuModule,
+            MatButtonModule
             ],
   declarations: [
     ClasseListComponent,

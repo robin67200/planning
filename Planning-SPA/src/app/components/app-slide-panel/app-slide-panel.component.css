@@ -15,11 +15,10 @@
   -moz-box-shadow: 2px 5px 15px rgba(0,0,0,0.21);
   -webkit-box-shadow: 2px 5px 15px rgba(0,0,0,0.21);
   overflow-y:scroll;
-
 }
 .back-panel {
   position: fixed;
-  background-color: #7e7d7d91;;
+  background-color: #ffffff52;;
   top: 0;
   bottom: 0;
   left: 0;

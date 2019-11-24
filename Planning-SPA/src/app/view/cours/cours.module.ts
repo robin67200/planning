@@ -14,7 +14,7 @@ import { CoursRoutingModule } from './cours.routing';
 import { NgModule } from '@angular/core';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import {MatDatepickerModule, MatDatepickerToggle, MatDatepickerToggleIcon} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MatSelectModule } from '@angular/material';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -38,6 +38,7 @@ import { ClasseModule } from '../classe/classe.module';
             AmazingTimePickerModule,
             MatDatepickerModule,
             MatNativeDateModule,
+            MatSelectModule,
             ProfsModule,
             ClasseModule,
             MatiereModule,

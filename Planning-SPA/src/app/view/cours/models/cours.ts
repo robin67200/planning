@@ -1,5 +1,7 @@
 export class Cours {
   id: number;
+  profName: string;
+  matiereName: string;
 
   constructor(
     public title: string,
