@@ -1,28 +1,28 @@
-import { Prof } from './../../models/prof';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Prof } from '../../models/prof';
+import { ProfService, ProfService2 } from '../../services/prof.service';
 import { ActivatedRoute } from '@angular/router';
-import { ProfService2 } from '../../services/prof.service';
+import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-prof-form',
-  templateUrl: './prof-form.component.html',
-  styleUrls: ['./prof-form.component.css']
+  selector: 'app-prof-form-edit',
+  templateUrl: './prof-form-edit.component.html',
+  styleUrls: ['./prof-form-edit.component.css']
 })
-export class ProfFormComponent implements OnInit {
+export class ProfFormEditComponent implements OnInit {
 
   form: FormGroup;
   id: number;
   hasError = false;
+  isUpdating = false;
   error: string;
   profs: Prof[] = [];
 
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();
   // tslint:disable-next-line: no-output-on-prefix
-  @Output() onCreating = new EventEmitter<any>();
-  // tslint:disable-next-line: no-output-on-prefix
+  @Output() onUpdating = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +46,11 @@ export class ProfFormComponent implements OnInit {
   get mail() {return this.form.get('mail'); }
   get telephone() {return this.form.get('telephone'); }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.objectChanged().subscribe(profs => {
+      this.form.patchValue(profs);
+    });
+  }
 
   save() {
     if (this.form.valid) {
@@ -59,7 +63,7 @@ export class ProfFormComponent implements OnInit {
       prof.mail = this.form.value.mail;
       prof.telephone = this.form.value.telephone;
 
-      this.onCreating.emit(prof);
+      this.onUpdating.emit(prof);
 
       this.form.reset();
       this.form.controls.id.setValue(0);

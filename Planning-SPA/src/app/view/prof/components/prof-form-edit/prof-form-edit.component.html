@@ -1,0 +1,132 @@
+<form
+  class="form-horizontal form-label-left parsleyjs ng-untouched ng-pristine ng-valid"
+  [formGroup]="form"
+  (submit)="save()"
+  #formDir="ngForm"
+>
+<fieldset>
+  <legend >
+    Veuillez renseigner les informations ci-dessous...
+  </legend>
+  <br/>
+  <div class="form-group row">
+    <label class="form-control-label text-md-right col-4">Nom</label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+              <span class="input-group-text">
+                  <i class="far fa-id-card"></i>
+              </span>
+            </span>
+            <input
+              class="form-control form-control-sm"
+              formControlName="nom"
+              type="text"
+              id="prepend-input"
+              style="width: 85%"
+              required
+            />
+        </div>
+      </div>
+  </div>
+  <br />
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-4">Prénom</label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+              <span class="input-group-text">
+                  <i class="far fa-id-card" ></i>
+              </span>
+            </span>
+            <input
+              class="form-control form-control-sm"
+              formControlName="prenom"
+              type="text"
+              id="prepend-input"
+              style="width: 85%"
+              required
+            />
+        </div>
+      </div>
+  </div>
+  <br />
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-4" >Adresse</label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+              <span class="input-group-text">
+                  <i  class="fas fa-home"></i>
+              </span>
+            </span>
+            <input
+              class="form-control form-control-sm"
+              formControlName="adresse"
+              type="text"
+              id="prepend-input"
+              required
+            />
+        </div>
+      </div>
+  </div>
+  <br />
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-4" >Mail</label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="far fa-envelope"></i>
+              </span>
+            </span>
+            <input
+              class="form-control form-control-sm"
+              formControlName="mail"
+              type="email"
+              id="prepend-input"
+              required
+              style="width: 85%"
+            />
+        </div>
+      </div>
+  </div>
+  <br />
+  <div class="form-group row">
+      <label class="form-control-label text-md-right col-4" >Téléphone</label>
+      <div class="col-7">
+          <div class="input-group ">
+            <span class="input-group-prepend">
+              <span class="input-group-text">
+                  <i class="fas fa-phone-square-alt" ></i>
+              </span>
+            </span>
+            <input
+              class="form-control form-control-sm"
+              formControlName="telephone"
+              type="text"
+              id="prepend-input"
+              required
+              style="width: 85%"
+            />
+        </div>
+      </div>
+  </div>
+<br/>
+</fieldset>
+<div class="form-actions" style="text-align: center;">
+  <button
+  type="button"
+  class="btn btn-outline-danger btn-rounded "
+  (click)="close()"
+  >
+<i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
+</button>
+<button type="submit" class="btn btn-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
+</div>
+<div style="float:right;margin-left:5px;">
+  <h5>
+    <span class="badge badge-danger" *ngIf="hasError">{{ error }}</span>
+  </h5>
+</div>
+</form>

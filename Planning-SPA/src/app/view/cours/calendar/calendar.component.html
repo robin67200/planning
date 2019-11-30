@@ -1,175 +1,181 @@
 <div class="container">
-<br>
-<h2 style="text-align: center;">Planning</h2>
-<button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlCours.display()"><i class="fas fa-plus"></i></button>
-<hr>
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-        Précédent
+  <br />
+  <h2 style="text-align: center;">Planning</h2>
+  <button
+    class="btn btn-outline-primary"
+    style="margin-left: 91%;"
+    (click)="pnlCoursCreated.display()"
+  >
+    <i class="fas fa-plus"></i>
+  </button>
+  <hr />
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Précédent
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          Aujourd'hui
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Suivant
+        </div>
       </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate"
-      >
-        Aujourd'hui
-      </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-        Suivant
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate: view + "ViewTitle":"fr" }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+          Mois
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+          Semaine
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day"
+        >
+          Jour
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'fr' }}</h3>
+  <br />
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [locale]="locale"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="events"
+      [weekStartsOn]="[1]"
+      [dayStartHour]="8"
+      [dayEndHour]="17"
+      [hourSegmentHeight]="27"
+      [locale]="locale"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [locale]="locale"
+      [dayStartHour]="8"
+      [dayEndHour]="17"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-day-view>
   </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Month)"
-        [class.active]="view === CalendarView.Month"
-      >
-        Mois
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Week)"
-        [class.active]="view === CalendarView.Week"
-      >
-        Semaine
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Day)"
-        [class.active]="view === CalendarView.Day"
-      >
-        Jour
-      </div>
-    </div>
-  </div>
-</div>
-<br />
-<div [ngSwitch]="view">
-  <mwl-calendar-month-view
-    *ngSwitchCase="CalendarView.Month"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [locale]="locale"
-    [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="CalendarView.Week"
-    [viewDate]="viewDate"
-    [events]="events"
-    weekStartsOn="1"
-    weekEndsOn="5"
-    [dayStartHour]="8"
-    [dayEndHour]="17"
-    [locale]="locale"
-    [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="CalendarView.Day"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [locale]="locale"
-    [dayStartHour]="8"
-    [dayEndHour]="17"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-  </mwl-calendar-day-view>
-</div>
 
-<br /><br /><br />
+  <br /><br /><br />
 
-<h3>
-  Liste des cours
-  <div class="clearfix"></div>
-</h3>
+  <h3>
+    Liste des cours
+    <div class="clearfix"></div>
+  </h3>
 
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Titre</th>
-        <th>Commence à</th>
-        <th>Finis le</th>
-        <th>Couleur principale</th>
-        <th>Couleur secondaire</th>
-        <th>Prof</th>
-        <th>Matiere</th>
-        <th></th>
-      </tr>
-    </thead>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Commence à</th>
+          <th>Finis le</th>
+          <th>Couleur principale</th>
+          <th>Couleur secondaire</th>
+          <th>Prof</th>
+          <th>Matiere</th>
+          <th></th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr id="list" *ngFor="let event of events">
-        <td>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="event.title"
-            (keyup)="refresh.next()"
-            disabled
-          />
-        </td>
-        <td>
-          <input
-            class="form-control"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.start"
-            (ngModelChange)="refresh.next()"
-            [altInput]="true"
-            [convertModelValue]="true"
-            [enableTime]="true"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-            disabled
-          />
-        </td>
-        <td>
-          <input
-            class="form-control"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.end"
-            (ngModelChange)="refresh.next()"
-            [altInput]="true"
-            [convertModelValue]="true"
-            [enableTime]="true"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-            disabled
-          />
-        </td>
-        <td>
+      <tbody>
+        <tr id="list" *ngFor="let event of events">
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="event.title"
+              (keyup)="refresh.next()"
+              disabled
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              mwlFlatpickr
+              [(ngModel)]="event.start"
+              (ngModelChange)="refresh.next()"
+              [altInput]="true"
+              [convertModelValue]="true"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+              altFormat="F j, Y H:i"
+              placeholder="Not set"
+              disabled
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              mwlFlatpickr
+              [(ngModel)]="event.end"
+              (ngModelChange)="refresh.next()"
+              [altInput]="true"
+              [convertModelValue]="true"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+              altFormat="F j, Y H:i"
+              placeholder="Not set"
+              disabled
+            />
+          </td>
+          <td>
             <input
               type="color"
               class="form-control"
@@ -179,60 +185,89 @@
             />
           </td>
           <td>
-              <input
-                type="color"
-                class="form-control"
-                [(ngModel)]="event.color.secondary"
-                (keyup)="refresh.next()"
-                disabled
-              />
-            </td>
-            <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="event.professeurId"
-                  (keyup)="refresh.next()"
-                  disabled
-                />
-              </td>
-              <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="event.matiereId"
-                    (keyup)="refresh.next()"
-                    disabled
-                  />
-                </td>
-        <td style="width: 10%">
-          <div class="dropdown">
-            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-cogs"></i>&nbsp; Actions
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" (click)="openCours(event); pnlCours.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
-              <a class="dropdown-item" (click)="deleteCours(event)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+            <input
+              type="color"
+              class="form-control"
+              [(ngModel)]="event.color.secondary"
+              (keyup)="refresh.next()"
+              disabled
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="event.professeurId"
+              (keyup)="refresh.next()"
+              disabled
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="event.matiereId"
+              (keyup)="refresh.next()"
+              disabled
+            />
+          </td>
+          <td style="width: 10%">
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-info dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fas fa-cogs"></i>&nbsp; Actions
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a
+                  class="dropdown-item"
+                  (click)="openCours(event); pnlCoursEdit.display()"
+                  style="cursor: pointer;"
+                  ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a
+                >
+                <a
+                  class="dropdown-item"
+                  (click)="deleteCours(event)"
+                  style="cursor: pointer; background-color: rgb(246, 179, 179);"
+                  ><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a
+                >
+              </div>
             </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-</div>
-  <app-app-slide-panel #pnlCours>
-    <div panel-header style="text-align: center;">
-      <h4>Remplissage Planning</h4>
-    </div>
-    <div panel-body>
-      <app-cours-form
-        (onCreating)="onCoursCreated($event); pnlCours.hide()"
-        (onUpdating)="onCoursUpdated($event); pnlCours.hide()"
-        (onClose)="pnlCours.hide()">
-      </app-cours-form>
-    </div>
-  </app-app-slide-panel>
+<app-app-slide-panel #pnlCoursEdit>
+  <div panel-header style="text-align: center;">
+    <h4>Modifier remplissage Planning</h4>
+  </div>
+  <div panel-body>
+    <app-cours-form-edit
+      (onUpdating)="onCoursUpdated($event); pnlCoursEdit.hide()"
+      (onClose)="pnlCoursEdit.hide()"
+    >
+    </app-cours-form-edit>
+  </div>
+</app-app-slide-panel>
+<app-app-slide-panel #pnlCoursCreated>
+  <div panel-header style="text-align: center;">
+    <h4>Remplissage Planning</h4>
+  </div>
+  <div panel-body>
+    <app-cours-form
+      (onCreating)="onCoursCreated($event); pnlCoursCreated.hide()"
+      (onClose)="pnlCoursCreated.hide()"
+    >
+    </app-cours-form>
+  </div>
+</app-app-slide-panel>
 
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
@@ -252,7 +287,11 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="closeOpenMonthViewDay()">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="closeOpenMonthViewDay()"
+    >
       OK
     </button>
   </div>

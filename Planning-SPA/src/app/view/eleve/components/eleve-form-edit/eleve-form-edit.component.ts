@@ -1,28 +1,28 @@
-import { EleveService2, EleveService } from './../../services/eleve.service';
-import { Eleve } from './../../models/eleve';
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Eleve } from '../../models/eleve';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { EleveService, EleveService2 } from '../../services/eleve.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-eleve-form',
-  templateUrl: './eleve-form.component.html',
-  styleUrls: ['./eleve-form.component.css']
+  selector: 'app-eleve-form-edit',
+  templateUrl: './eleve-form-edit.component.html',
+  styleUrls: ['./eleve-form-edit.component.css']
 })
-export class EleveFormComponent implements OnInit {
+export class EleveFormEditComponent implements OnInit {
 
   form: FormGroup;
   hasError = false;
   id: number;
   error: string;
-  eleves: Eleve[] = [];
+  eleves: Eleve[];
   bsConfig: Partial<BsDatepickerConfig>;
 
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();
   // tslint:disable-next-line: no-output-on-prefix
-  @Output() onCreating = new EventEmitter<any>();
+  @Output() onUpdating = new EventEmitter<any>();
   // tslint:disable-next-line: no-output-on-prefix
 
   constructor(
@@ -58,8 +58,11 @@ export class EleveFormComponent implements OnInit {
   get dateNaissance() {return this.form.get('dateNaissance'); }
   get classeId() {return this.form.get('classeId'); }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.service2.objectChanged().subscribe(eleves => {
+      this.form.patchValue(eleves);
+    });
+  }
   save() {
     if (this.form.valid) {
       this.hasError = false;
@@ -73,7 +76,7 @@ export class EleveFormComponent implements OnInit {
       eleve.dateNaissance = this.form.value.dateNaissance;
       eleve.classeId = this.form.value.classeId;
 
-      this.onCreating.emit(eleve);
+      this.onUpdating.emit(eleve);
 
       this.form.reset();
       this.form.controls.id.setValue(0);

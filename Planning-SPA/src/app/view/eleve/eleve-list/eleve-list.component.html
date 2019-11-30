@@ -3,7 +3,7 @@
   <button
     class="btn btn-outline-primary"
     style="margin-left: 91%;"
-    (click)="pnlEleve.display()"
+    (click)="pnlEleveCreated.display()"
   >
     <i class="fas fa-plus"></i>&nbsp;Ajouter
   </button>
@@ -68,7 +68,7 @@
             </button>
             <button
               mat-menu-item
-              (click)="openEleve(eleve); pnlEleve.display()"
+              (click)="openEleve(eleve); pnlEleveEdit.display()"
             >
               <mat-icon>edit</mat-icon>
               <span>Modifier</span>
@@ -88,15 +88,25 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </div>
-<app-app-slide-panel #pnlEleve>
+<app-app-slide-panel #pnlEleveEdit>
+  <div panel-header style="text-align: center;">
+    <h4>Modifications formulaires élèves</h4>
+  </div>
+  <div panel-body>
+    <app-eleve-form-edit
+      (onUpdating)="onEleveUpdated($event); pnlEleveEdit.hide()"
+      (onClose)="pnlEleveEdit.hide()">
+    </app-eleve-form-edit>
+  </div>
+</app-app-slide-panel>
+<app-app-slide-panel #pnlEleveCreated>
   <div panel-header style="text-align: center;">
     <h4>Formulaire Elève</h4>
   </div>
   <div panel-body>
     <app-eleve-form
-      (onCreating)="onEleveCreated($event); pnlEleve.hide()"
-      (onUpdating)="onEleveUpdated($event); pnlEleve.hide()"
-      (onClose)="pnlEleve.hide()"
+      (onCreating)="onEleveCreated($event); pnlEleveCreated.hide()"
+      (onClose)="pnlEleveCreated.hide()"
     >
     </app-eleve-form>
   </div>

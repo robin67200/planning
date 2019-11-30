@@ -1,20 +1,15 @@
-import { Cours } from './../../models/cours';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { Cours } from '../../models/cours';
+import { Room } from '../cours-form/cours-form.component';
 import { CoursService2 } from '../../services/cours.service';
 
-export interface Room {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
-  selector: 'app-cours-form',
-  templateUrl: './cours-form.component.html',
-  styleUrls: ['./cours-form.component.css']
+  selector: 'app-cours-form-edit',
+  templateUrl: './cours-form-edit.component.html',
+  styleUrls: ['./cours-form-edit.component.css']
 })
-export class CoursFormComponent implements OnInit {
+export class CoursFormEditComponent implements OnInit {
 
   form: FormGroup;
   id: number;
@@ -39,7 +34,7 @@ export class CoursFormComponent implements OnInit {
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();
   // tslint:disable-next-line: no-output-on-prefix
-  @Output() onCreating = new EventEmitter<any>();
+  @Output() onUpdating = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -68,7 +63,11 @@ export class CoursFormComponent implements OnInit {
   get professeurId() {return this.form.get('professeurId'); }
   get matiereId() {return this.form.get('matiereId'); }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.objectChanged().subscribe(courss => {
+      this.form.patchValue(courss);
+    });
+  }
 
   save() {
     if (this.form.valid) {
@@ -84,7 +83,7 @@ export class CoursFormComponent implements OnInit {
       cours.professeurId = this.form.value.professeurId;
       cours.matiereId = this.form.value.matiereId;
 
-      this.onCreating.emit(cours);
+      this.onUpdating.emit(cours);
 
       this.form.reset();
       this.form.controls.id.setValue(0);
@@ -136,3 +135,4 @@ export class CoursFormComponent implements OnInit {
   }
 
 }
+

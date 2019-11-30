@@ -1,3 +1,4 @@
+import { ProfFormEditComponent } from './components/prof-form-edit/prof-form-edit.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfFormComponent } from './components/prof-form/prof-form.component';
 import { ProfSelectComponent } from './components/prof-select/prof-select.component';
@@ -35,17 +36,19 @@ import {MatSelectModule} from '@angular/material/select';
             MatSortModule,
             MatIconModule,
             MatMenuModule,
-            MatButtonModule
+            MatButtonModule,
 
             ],
   declarations: [
     ProfDetailComponent,
     ProfListComponent,
     ProfSelectComponent,
-    ProfFormComponent
+    ProfFormComponent,
+    ProfFormEditComponent
+
   ],
   providers: [ProfService, ProfService2],
   entryComponents: [],
-  exports: [ProfSelectComponent, ProfFormComponent]
+  exports: [ProfSelectComponent, ProfFormComponent, ProfFormEditComponent]
 })
 export class ProfsModule {}

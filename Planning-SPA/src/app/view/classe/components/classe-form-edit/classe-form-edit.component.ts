@@ -5,22 +5,22 @@ import { ClasseService2 } from '../../services/classe.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-classe-form',
-  templateUrl: './classe-form.component.html',
-  styleUrls: ['./classe-form.component.css']
+  selector: 'app-classe-form-edit',
+  templateUrl: './classe-form-edit.component.html',
+  styleUrls: ['./classe-form-edit.component.css']
 })
-export class ClasseFormComponent implements OnInit {
-
+export class ClasseFormEditComponent implements OnInit {
   form: FormGroup;
   id: number;
   hasError = false;
+  isUpdating = false;
   error: string;
   classes: Classe[] = [];
 
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();
   // tslint:disable-next-line: no-output-on-prefix
-  @Output() onCreating = new EventEmitter<any>();
+  @Output() onUpdating = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +39,11 @@ export class ClasseFormComponent implements OnInit {
   get niveauId() {return this.form.get('niveauId'); }
   get anneeId() {return this.form.get('anneeId'); }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.objectChanged().subscribe(classes => {
+      this.form.patchValue(classes);
+    });
+  }
 
   save() {
     if (this.form.valid) {
@@ -50,7 +54,7 @@ export class ClasseFormComponent implements OnInit {
       classe.niveauId = this.form.value.niveauId;
       classe.anneeId = this.form.value.anneeId;
 
-      this.onCreating.emit(classe);
+      this.onUpdating.emit(classe);
 
       this.form.reset();
       this.form.controls.id.setValue(0);

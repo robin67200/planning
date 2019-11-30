@@ -5,7 +5,7 @@
   <button
     class="btn btn-outline-primary"
     style="margin-left: 91%;"
-    (click)="pnlProf.display()"
+    (click)="pnlProfCreated.display()"
   >
     <i class="fas fa-plus"></i>&nbsp;Ajouter
   </button>
@@ -57,7 +57,7 @@
               <mat-icon>info</mat-icon>
               <span>Détails</span>
             </button>
-            <button mat-menu-item (click)="openProf(prof); pnlProf.display()">
+            <button mat-menu-item (click)="openProf(prof); pnlProfEdit.display()">
               <mat-icon>edit</mat-icon>
               <span>Modifier</span>
             </button>
@@ -76,15 +76,26 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </div>
-<app-app-slide-panel #pnlProf>
+<app-app-slide-panel #pnlProfEdit>
+  <div panel-header style="text-align: center;">
+    <h4>Modifier formulaire Prof</h4>
+  </div>
+  <div panel-body>
+    <app-prof-form-edit
+      (onUpdating)="onProfUpdated($event); pnlProfEdit.hide()"
+      (onClose)="pnlProfEdit.hide()"
+    >
+    </app-prof-form-edit>
+  </div>
+</app-app-slide-panel>
+<app-app-slide-panel #pnlProfCreated>
   <div panel-header style="text-align: center;">
     <h4>Formulaire Prof</h4>
   </div>
   <div panel-body>
     <app-prof-form
-      (onCreating)="onProfCreated($event); pnlProf.hide()"
-      (onUpdating)="onProfUpdated($event); pnlProf.hide()"
-      (onClose)="pnlProf.hide()"
+      (onCreating)="onProfCreated($event); pnlProfCreated.hide()"
+      (onClose)="pnlProfCreated.hide()"
     >
     </app-prof-form>
   </div>

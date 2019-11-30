@@ -1,7 +1,7 @@
 <div class="container">
     <br />
     <h2 style="text-align:center">Classes </h2>
-    <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlClasse.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+    <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlClasseCreated.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
     <hr>
     <br />
     <br />
@@ -14,7 +14,7 @@
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource2">
+        <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="nom">
             <th mat-header-cell *matHeaderCellDef>Nom</th>
             <td mat-cell *matCellDef="let classe">{{ classe.nom }}</td>
@@ -22,12 +22,12 @@
 
           <ng-container matColumnDef="niveauName">
             <th mat-header-cell *matHeaderCellDef>Niveau</th>
-            <td mat-cell *matCellDef="let classe">{{ classe.niveauName }}</td>
+            <td mat-cell *matCellDef="let classe">{{ classe.niveauId }}</td>
           </ng-container>
 
           <ng-container matColumnDef="anneeName">
             <th mat-header-cell *matHeaderCellDef>Annee</th>
-            <td mat-cell *matCellDef="let classe">{{ classe.anneeName }}</td>
+            <td mat-cell *matCellDef="let classe">{{ classe.anneeId }}</td>
           </ng-container>
 
           <ng-container matColumnDef="actions" stickyEnd>
@@ -41,7 +41,7 @@
                   <mat-icon>info</mat-icon>
                   <span>Détails</span>
                 </button>
-                <button mat-menu-item (click)="openClasse(classe); pnlClasse.display()">
+                <button mat-menu-item (click)="openClasse(classe); pnlClasseEdit.display()">
                   <mat-icon>edit</mat-icon>
                   <span>Modifier</span>
                 </button>
@@ -60,15 +60,25 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
   </div>
-  <app-app-slide-panel #pnlClasse>
+  <app-app-slide-panel #pnlClasseEdit>
+    <div panel-header style="text-align: center;">
+      <h4>Modifier formulaire Classe</h4>
+    </div>
+    <div panel-body>
+      <app-classe-form-edit
+        (onUpdating)="onClasseUpdated($event); pnlClasseEdit.hide()"
+        (onClose)="pnlClasseEdit.hide()">
+      </app-classe-form-edit>
+    </div>
+  </app-app-slide-panel>
+  <app-app-slide-panel #pnlClasseCreated>
     <div panel-header style="text-align: center;">
       <h4>Formulaire Classe</h4>
     </div>
     <div panel-body>
       <app-classe-form
-        (onCreating)="onClasseCreated($event); pnlClasse.hide()"
-        (onUpdating)="onClasseUpdated($event); pnlClasse.hide()"
-        (onClose)="pnlClasse.hide()">
+        (onCreating)="onClasseCreated($event); pnlClasseCreated.hide()"
+        (onClose)="pnlClasseCreated.hide()">
       </app-classe-form>
     </div>
   </app-app-slide-panel>

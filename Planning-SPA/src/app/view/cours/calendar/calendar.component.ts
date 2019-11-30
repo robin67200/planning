@@ -71,7 +71,6 @@ export class CalendarComponent implements OnInit {
   ];
 
   refresh: Subject<any> = new Subject();
-
   events: CalendarEvent[] = [];
 
   period: CalendarViewPeriod;
@@ -113,12 +112,14 @@ export class CalendarComponent implements OnInit {
           this.profs = profs;
           this.matiereService.getMatiere().subscribe(matieres => {
             this.matieres = matieres;
+            /*
             this.courss.forEach(c => {
               const prof = this.profs.find(n => n.id === c.professeurId);
               c.profName = prof.nom;
               const matiere = this.matieres.find(a => a.id === c.matiereId);
               c.matiereName = matiere.nom;
             });
+            */
           });
         });
       }, err => {

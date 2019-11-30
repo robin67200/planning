@@ -1,3 +1,4 @@
+import { CoursFormEditComponent } from './components/cours-form-edit/cours-form-edit.component';
 import { MatiereModule } from './../matiere/matiere.module';
 import { ProfsModule } from './../prof/prof.module';
 import { MatInputModule } from '@angular/material/input';
@@ -53,10 +54,11 @@ import { ClasseModule } from '../classe/classe.module';
   declarations: [
     CoursDetailComponent,
     CoursFormComponent,
-    CalendarComponent
+    CalendarComponent,
+    CoursFormEditComponent
     ],
   providers: [CoursService, CoursService2],
   entryComponents: [],
-  exports: [CoursFormComponent, CalendarComponent]
+  exports: [CoursFormComponent, CalendarComponent, CoursFormEditComponent]
 })
 export class CourssModule {}

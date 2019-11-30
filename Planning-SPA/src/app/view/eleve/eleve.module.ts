@@ -1,3 +1,4 @@
+import { EleveFormEditComponent } from './components/eleve-form-edit/eleve-form-edit.component';
 import { ElevesRoutingModule } from './eleve.routing';
 import { EleveService, EleveService2 } from './services/eleve.service';
 import { EleveDetailComponent } from './eleve-detail/eleve-detail.component';
@@ -41,10 +42,11 @@ import {MatMenuModule} from '@angular/material/menu';
   declarations: [
     EleveDetailComponent,
     EleveListComponent,
-    EleveFormComponent
+    EleveFormComponent,
+    EleveFormEditComponent,
   ],
   providers: [EleveService, EleveService2],
   entryComponents: [],
-  exports: [EleveFormComponent]
+  exports: [EleveFormComponent, EleveFormEditComponent]
 })
 export class ElevesModule {}
