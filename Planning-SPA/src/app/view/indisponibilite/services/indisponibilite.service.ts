@@ -13,6 +13,9 @@ constructor(private http: HttpClient) { }
 getIndisponibilites() {
   return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites');
 }
+getByDateToday() {
+  return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites/date');
+}
 getIndisponibiliteById(id: number) {
   return this.http.get<Indisponibilite>('http://localhost:5000/api/indisponibilites/' + id);
 }

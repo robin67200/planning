@@ -22,6 +22,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 
 const appRoutes: Routes = [
@@ -49,8 +50,8 @@ const appRoutes: Routes = [
         loadChildren: './view/eleve/eleve.module#ElevesModule',
       },
       {
-      path: 'niveaux',
-      loadChildren: './view/niveau/niveau.module#NiveauModule',
+        path: 'niveaux',
+        loadChildren: './view/niveau/niveau.module#NiveauModule',
       },
       {
         path: 'matieres',
@@ -108,7 +109,7 @@ const appRoutes: Routes = [
 
   ],
   entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent],
-  providers: [
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'FR'},
    ],
   bootstrap: [AppComponent]
 })

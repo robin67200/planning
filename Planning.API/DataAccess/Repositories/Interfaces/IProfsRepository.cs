@@ -14,5 +14,6 @@ namespace Planning.API.DataAccess.Repositories.Interface
         IEnumerable<Prof> GetAvalaibles(int classeId);
         IEnumerable<Prof> GetProfsClasse(int classeId);
         
+        
     }
 }

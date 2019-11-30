@@ -65,7 +65,7 @@ export class ClasseFormComponent implements OnInit {
         this.onCreating.emit(classe);
       }
 
-      this.form.reset();
+
       this.form.controls.id.setValue(0);
 
     } else {
@@ -89,6 +89,8 @@ export class ClasseFormComponent implements OnInit {
           break;
       }
     }
+
+    this.form.reset();
   }
 
   close() {

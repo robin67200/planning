@@ -1,3 +1,4 @@
+import { defaultSimpleModalOptions } from 'ngx-simple-modal/dist/simple-modal/simple-modal-options';
 import { Component, OnInit } from '@angular/core';
 import { IndisponibiliteService, IndisponibiliteService3 } from '../services/indisponibilite.service';
 import { SimpleModalService } from 'ngx-simple-modal';
@@ -5,6 +6,11 @@ import { ProfService } from '../../prof/services/prof.service';
 import { Prof } from '../../prof/models/prof';
 import { Indisponibilite } from '../models/indisponibilite';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+
+registerLocaleData(localeFr);
 
 @Component({
   selector: 'app-indisponibilite-list',
@@ -13,9 +19,13 @@ import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 })
 export class IndisponibiliteListComponent implements OnInit {
 
+
+
   indispos: Indisponibilite[] = [];
   profs: Prof[] = [];
   indisp: Indisponibilite;
+  date = new Date();
+  affichage: boolean;
 
   constructor(
     private service: IndisponibiliteService,
@@ -25,6 +35,20 @@ export class IndisponibiliteListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.service.getByDateToday().subscribe(res => {
+      this.indispos = res;
+      this.profService.getProf().subscribe(profs => {
+        this.profs = profs;
+        this.indispos.forEach(i => {
+          const prof = this.profs.find(p => p.id === i.professeurId);
+          i.profName = prof.nom;
+        });
+      });
+    });
+    this.affichage = true;
+  }
+
+  getIndispAll() {
     this.service.getIndisponibilites().subscribe(res => {
       this.indispos = res;
       this.profService.getProf().subscribe(profs => {
@@ -35,7 +59,10 @@ export class IndisponibiliteListComponent implements OnInit {
         });
       });
     });
+    this.affichage = false;
   }
+
+
 
   deleteIndisp(indisp: Indisponibilite) {
     this.modals

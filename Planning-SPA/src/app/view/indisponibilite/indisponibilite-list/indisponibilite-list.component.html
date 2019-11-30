@@ -1,12 +1,15 @@
 <div class="container">
   <br />
-  <h2 style="text-align:center">Indisponibilités </h2>
-  <button class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlIndisp2.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+  <h2 style="text-align:center">Indisponibilités</h2>
+  <button class="btn btn-outline-info" (click)="ngOnInit()"><i></i>&nbsp;Futur</button>
+  <button class="btn btn-outline-dark" (click)="getIndispAll()"><i></i>&nbsp;Historique</button>
+  <button class="btn btn-outline-primary" style="margin-left: 75%;" (click)="pnlIndisp2.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+
   <hr>
   <br/>
   <br/>
   <div class="widget-body">
-  <table class="table table-hover table-striped table-bordered">
+  <table class="table table-hover table-striped table-bordered" >
     <thead>
       <tr>
         <th>
@@ -20,28 +23,54 @@
         </th>
       </tr>
     </thead>
-      <tr id="list" *ngFor="let indisp of indispos">
-        <td>
-          {{ indisp.start }}
-        </td>
-        <td>
-          {{ indisp.end }}
-        </td>
-        <td>
-          {{ indisp.profName }}
-        </td>
-        <td style="width: 10%">
-          <div class="dropdown">
-            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-cogs"></i>&nbsp; Actions
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" (click)="openIndisp(indisp); pnlIndisp.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
-              <a class="dropdown-item" (click)="deleteIndisp(indisp)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+      <ng-container  *ngFor="let indisp of indispos">
+        <tr id="list" *ngIf="!affichage">
+          <td type="datetime-local">
+            {{ indisp.start | date : 'medium'}}
+          </td>
+          <td type="datetime-local">
+            {{ indisp.end | date : 'medium' }}
+          </td>
+          <td>
+            {{ indisp.profName }}
+          </td>
+          <td style="width: 10%">
+            <div class="dropdown">
+              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cogs"></i>&nbsp; Actions
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="openIndisp(indisp); pnlIndisp.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+                <a class="dropdown-item" (click)="deleteIndisp(indisp)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+              </div>
             </div>
-          </div>
-        </td>
-      </tr>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container  *ngFor="let indisp of indispos">
+        <tr id="list" *ngIf="affichage">
+          <td>
+            {{ indisp.start | date : 'medium' }}
+          </td>
+          <td>
+            {{ indisp.end | date : 'medium'}}
+          </td>
+          <td>
+            {{ indisp.profName }}
+          </td>
+          <td style="width: 10%">
+            <div class="dropdown">
+              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cogs"></i>&nbsp; Actions
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="openIndisp(indisp); pnlIndisp.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+                <a class="dropdown-item" (click)="deleteIndisp(indisp)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
   </table>
 </div>
 </div>

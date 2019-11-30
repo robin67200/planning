@@ -72,7 +72,7 @@ export class ProfFormComponent implements OnInit {
         this.onCreating.emit(prof);
       }
 
-      this.form.reset();
+
       this.form.controls.id.setValue(0);
 
 
@@ -103,6 +103,8 @@ export class ProfFormComponent implements OnInit {
           break;
       }
     }
+
+    this.form.reset();
   }
 
   close() {

@@ -10,6 +10,8 @@ import { IndisponibilitesRoutingModule } from './indisponibilite.routing';
 import { ProfsModule } from '../prof/prof.module';
 import { ProfSelectComponent } from '../prof/components/prof-select/prof-select.component';
 import { IndispFormComponent } from './components/indisp-form/indisp-form.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 @NgModule({
   imports: [CommonModule,
@@ -23,10 +25,10 @@ import { IndispFormComponent } from './components/indisp-form/indisp-form.compon
   declarations: [
     IndisponibiliteListComponent,
     IndisponibiliteFormComponent,
-    IndispFormComponent
+    IndispFormComponent,
   ],
   providers: [IndisponibiliteService, IndisponibiliteService3],
   entryComponents: [],
-  exports: [IndisponibiliteFormComponent, IndispFormComponent]
+  exports: [IndisponibiliteFormComponent, IndispFormComponent],
 })
 export class IndisponibiliteModule {}
