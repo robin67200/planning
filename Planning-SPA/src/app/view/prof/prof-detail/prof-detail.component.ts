@@ -27,6 +27,7 @@ export class ProfDetailComponent implements OnInit {
   classes: Classe[];
   cours: Cours[];
   matiere: Matiere;
+  date = Date.now();
 
   constructor(
     route: ActivatedRoute,

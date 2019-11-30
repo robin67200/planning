@@ -125,6 +125,9 @@ export class CalendarComponent implements OnInit {
       }, err => {
           console.log(err);
       });
+      this.service.getCours().subscribe(res => {
+        this.courss = res;
+      });
     }
 
   beforeViewRender(

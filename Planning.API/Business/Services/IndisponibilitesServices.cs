@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using Planning.API.Business.Services.Interface;
 using Planning.API.Business.ViewModels;
@@ -10,8 +11,17 @@ namespace Planning.API.Business.Services
 {
     public class IndisponibiliteService : BaseService<Indisponibilite, IndisponibiliteViewModel>, IIndisponibiliteService
     {
-        public IndisponibiliteService(IIndisponibilitesRepository repository, IUnitOfWork unitOfWork, IMapper mapper) : base(repository, unitOfWork, mapper)
+        private readonly IIndisponibilitesRepository _repo;
+        public IndisponibiliteService(IIndisponibilitesRepository repo, IUnitOfWork unitOfWork, IMapper mapper) : base(repo, unitOfWork, mapper)
         {
+            _repo = repo;
+        }
+
+        public IEnumerable<IndisponibiliteViewModel> GetByDate()
+        {
+            var list = _repo.GetByDate();
+            var map = _mapper.Map<IEnumerable<IndisponibiliteViewModel>>(list);
+            return map;
         }
 
     }
