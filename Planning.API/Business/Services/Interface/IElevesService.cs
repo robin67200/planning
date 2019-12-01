@@ -9,6 +9,6 @@ namespace Planning.API.Business.Services.Interface
     {
         //Task<IEnumerable<EleveViewModel>> GetAllEleves();
         //Task<EleveViewModel> GetEleveById(int id);
-        Task<EleveViewModel> GetByName(string nom);
+        IEnumerable<EleveViewModel> GetByName(string nom);
     }
 }

@@ -1,13 +1,15 @@
-import { defaultSimpleModalOptions } from 'ngx-simple-modal/dist/simple-modal/simple-modal-options';
-import { Component, OnInit } from '@angular/core';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Output } from '@angular/core';
 import { IndisponibiliteService, IndisponibiliteService3 } from '../services/indisponibilite.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ProfService } from '../../prof/services/prof.service';
 import { Prof } from '../../prof/models/prof';
 import { Indisponibilite } from '../models/indisponibilite';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, formatDate } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 
 registerLocaleData(localeFr);
@@ -20,19 +22,34 @@ registerLocaleData(localeFr);
 export class IndisponibiliteListComponent implements OnInit {
 
 
-
+  form: FormGroup;
+  formProf: FormGroup;
   indispos: Indisponibilite[] = [];
   profs: Prof[] = [];
   indisp: Indisponibilite;
   date = new Date();
   affichage: boolean;
+  format = 'yyyy-MM-dd';
+  myDate = '01/01/2019';
+  locale = 'en-FR';
+  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(
     private service: IndisponibiliteService,
     private service2: IndisponibiliteService3<Indisponibilite, number>,
     private profService: ProfService,
-    private modals: SimpleModalService
-  ) { }
+    private modals: SimpleModalService,
+    private fb: FormBuilder,
+  ) {
+    this.form = this.fb.group({
+      datee: new FormControl(null, [Validators.required])
+    });
+    this.formProf = this.fb.group({
+      professeurId: new FormControl(0, [Validators.required])
+    });
+  }
+
+  get datee() {return this.form.get; }
 
   ngOnInit() {
     this.service.getByDateToday().subscribe(res => {
@@ -46,6 +63,36 @@ export class IndisponibiliteListComponent implements OnInit {
       });
     });
     this.affichage = true;
+    this.form.reset();
+  }
+
+  searchByProf() {
+    const professeur = this.formProf.value.professeurId;
+    this.service.searchByProf(professeur).subscribe(res => {
+      this.indispos = res;
+      this.profService.getProf().subscribe(profs => {
+        this.profs = profs;
+        this.indispos.forEach(i => {
+          const prof = this.profs.find(p => p.id === i.professeurId);
+          i.profName = prof.nom;
+        });
+      });
+    });
+    this.formProf.reset();
+  }
+
+  save() {
+    const date = this.form.value.datee;
+    this.service.searchDate(date).subscribe(res => {
+      this.indispos = res;
+      this.profService.getProf().subscribe(profs => {
+        this.profs = profs;
+        this.indispos.forEach(i => {
+          const prof = this.profs.find(p => p.id === i.professeurId);
+          i.profName = prof.nom;
+        });
+      });
+    });
   }
 
   getIndispAll() {

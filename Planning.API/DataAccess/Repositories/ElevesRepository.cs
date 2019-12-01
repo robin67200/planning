@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace Planning.API.DataAccess.Repositories {
         {  
         }
 
-       public async Task<Eleve> GetByName(string nom)
+       public IEnumerable<Eleve> GetByName(string nom)
         {
-            return await DbSet.FirstOrDefaultAsync(x => x.Nom == nom);
+            return DbSet.Where(x => x.Nom == nom);
         }
         
     }

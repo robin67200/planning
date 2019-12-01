@@ -3,12 +3,45 @@
   <h2 style="text-align:center">Indisponibilités</h2>
   <button class="btn btn-outline-info" (click)="ngOnInit()"><i></i>&nbsp;Futur</button>
   <button class="btn btn-outline-dark" (click)="getIndispAll()"><i></i>&nbsp;Historique</button>
-  <button class="btn btn-outline-primary" style="margin-left: 75%;" (click)="pnlIndisp2.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
-
+  <button class="btn btn-primary" style="margin-left: 75%;" (click)="pnlIndisp2.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
   <hr>
   <br/>
   <br/>
   <div class="widget-body">
+  <div class="container">
+    <div class="col-10">
+        <form
+        [formGroup]="form"
+        (submit)="save()"
+        #formDir="ngForm"
+        >
+        <div class="form-group row" class="col-6">
+              <div class="input-group">
+                  <input
+                  formControlName="datee"
+                  class="form-control"
+                  type="text"
+                  required
+                  placeholder="Recherche par date dd/mm/yyyy"
+                  />
+                  <button type="submit" class="btn btn-outline-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
+            </div>
+        </div>
+        </form>
+        <form
+        [formGroup]="formProf"
+        (submit)="searchByProf()"
+        #formDir="ngForm"
+        >
+        <div class="form-group row" class="col-5">
+              <div class="input-group">
+                <app-prof-select [form]="formProf" ></app-prof-select>
+                <button type="submit" class="btn btn-outline-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
+              </div>
+        </div>
+        </form>
+    </div>
+  </div>
   <table class="table table-hover table-striped table-bordered" >
     <thead>
       <tr>
