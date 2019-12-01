@@ -1,3 +1,4 @@
+import { CoursListComponent } from './cours-list/cours-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CoursDetailComponent } from './cours-detail/cours-detail.component';
@@ -8,11 +9,10 @@ export const routes: Routes = [
   path: '',
   redirectTo: 'calendar',
   },
-    // {path: 'create', component: },
     {path: 'detail/:id', component: CoursDetailComponent},
-   // {path: 'edit/:id', component: },
-    // {path: 'detail/:id/delete/:id', component: },
     {path: 'calendar', component: CalendarComponent},
+    {path: 'list', component: CoursListComponent},
+
 
   ];
 

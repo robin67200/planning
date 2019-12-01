@@ -1,3 +1,4 @@
+import { ClasseService } from './../../classe/services/classe.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Eleve } from '../models/eleve';
@@ -5,9 +6,8 @@ import { EleveService, EleveService2 } from '../services/eleve.service';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Classe } from '../../classe/models/classe';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-eleve-list',
@@ -18,14 +18,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 export class EleveListComponent implements OnInit {
 
   eleves: Eleve[] = [];
+  classes: Classe[] = [];
   id: number;
   eleve: Eleve;
   searchText: any;
-  displayedColumns: string[] =  ['nom', 'prenom', 'dateNaissance', 'adresse', 'mail', 'telephone', 'classeId', 'actions'];
-  dataSource: MatTableDataSource<Eleve>;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private service: EleveService,
@@ -33,28 +29,30 @@ export class EleveListComponent implements OnInit {
     private modals: SimpleModalService,
     private route: ActivatedRoute,
     private http: HttpClient,
+    private classeService: ClasseService,
+    private alterifyService: AlertifyService,
+
 
     ) {}
 
   ngOnInit() {
     this.service.getEleve().subscribe(
       response => {
-        this.dataSource = new MatTableDataSource(response);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+        this.eleves = response;
+        this.classeService.getClasse().subscribe(classes => {
+          this.classes = classes;
+          this.eleves.forEach(c => {
+            const classe = this.classes.find(n => n.id === c.classeId);
+            c.classeName = classe.nom;
+        });
+        });
+      });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  searchByName(name: string) {
+    this.service.getByName(name).subscribe(res => {
+      this.eleves = res;
+    });
   }
 
   deleteEleve(eleve: Eleve) {
@@ -74,6 +72,8 @@ export class EleveListComponent implements OnInit {
 
   openEleve(eleve: Eleve) {
     this.service2.pushObject(eleve);
+    this.alterifyService.error('création terminée');
+
   }
 
   onEleveUpdated(eleve: Eleve) {
@@ -86,6 +86,7 @@ export class EleveListComponent implements OnInit {
     this.service.postEleve(eleve).subscribe(result => {
       // this.eleves.push(result);
       this.ngOnInit();
+
     });
   }
 

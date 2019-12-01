@@ -56,8 +56,9 @@ export class CalendarComponent implements OnInit {
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-edit"></i>',
-      onClick: (): void => {
-        this.openCours(this.cours);
+      a11yLabel: 'Edit',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.deleteCours(this.cours);
         this.ngOnInit();
       }
     },
@@ -112,14 +113,12 @@ export class CalendarComponent implements OnInit {
           this.profs = profs;
           this.matiereService.getMatiere().subscribe(matieres => {
             this.matieres = matieres;
-            /*
             this.courss.forEach(c => {
               const prof = this.profs.find(n => n.id === c.professeurId);
               c.profName = prof.nom;
               const matiere = this.matieres.find(a => a.id === c.matiereId);
               c.matiereName = matiere.nom;
             });
-            */
           });
         });
       }, err => {
@@ -153,7 +152,6 @@ export class CalendarComponent implements OnInit {
       }
       this.viewDate = date;
     }
-    this.ngOnInit();
   }
 
   eventTimesChanged({
@@ -171,26 +169,20 @@ export class CalendarComponent implements OnInit {
       }
       return iEvent;
     });
-    this.ngOnInit();
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'xl' });
-    this.ngOnInit();
 
   }
 
   setView(view: CalendarView) {
     this.view = view;
-    this.ngOnInit();
-
   }
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
-    this.ngOnInit();
-
   }
 
 ///////////////////////////////////////////////////////////////////////

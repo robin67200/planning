@@ -14,7 +14,8 @@ import { ClasseModule } from '../classe/classe.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatSortModule, MatIconModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatInputModule } from '@angular/material';
+import { MatSortModule, MatIconModule, MatButtonModule, MatDatepickerModule,
+  MatNativeDateModule, MatSelectModule, MatInputModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 
 

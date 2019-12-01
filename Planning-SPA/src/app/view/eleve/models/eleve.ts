@@ -1,5 +1,6 @@
 export class Eleve {
   id: number;
+  classeName: string;
 
   constructor(
     public nom: string,

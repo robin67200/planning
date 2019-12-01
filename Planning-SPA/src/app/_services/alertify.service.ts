@@ -19,7 +19,7 @@ constructor() { }
   }
 
   succes(message: string) {
-    alertify.success(message);
+    alertify.succes(message);
   }
 
   error(message: string) {

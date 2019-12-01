@@ -1,11 +1,5 @@
 <div [formGroup]="form">
-  <mat-form-field>
-    <mat-label>Matiere :</mat-label>
-    <mat-select formControlName="matiereId" required >
-      <mat-option *ngFor="let matiere of matieres"
-      value={{matiere.id}}>
-        {{matiere.nom}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <select formControlName="matiereId" class="form-control" required >
+          <option *ngFor="let matiere of matieres" value="{{matiere.id}}">{{matiere.nom}}</option>
+  </select>
 </div>

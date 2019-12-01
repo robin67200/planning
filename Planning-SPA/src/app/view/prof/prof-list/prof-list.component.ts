@@ -18,12 +18,6 @@ export class ProfListComponent implements OnInit {
   profs: Prof[] =  [];
   id: number;
   prof: Prof;
-  searchText: any;
-  displayedColumns: string[] =  ['nom', 'prenom', 'adresse', 'mail', 'telephone', 'actions'];
-  dataSource: MatTableDataSource<Prof>;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private service: ProfService,
@@ -38,22 +32,12 @@ export class ProfListComponent implements OnInit {
   ngOnInit() {
     this.service.getProf().subscribe(
       response => {
-        this.dataSource = new MatTableDataSource(response);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.profs = response;
       },
       error => {
         console.log(error);
       }
     );
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   deleteProf(prof: Prof) {

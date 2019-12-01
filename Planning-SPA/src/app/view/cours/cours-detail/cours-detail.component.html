@@ -2,46 +2,46 @@
   <section class="widget">
     <header>
       <br />
-      <h2 style="text-align: center">Cours numéro {{courss.id}}</h2>
-      <hr/>
+      <h2 style="text-align: center">Cours numéro {{ courss.id }}</h2>
+      <hr />
     </header>
     <br />
-    <div class="widget-controls" style="text-align: right">
-    </div>
-    <br>
+    <div class="widget-controls" style="text-align: right"></div>
+    <br />
     <table class="table table-hover table-bordered table-striped">
-        <tbody>
-          <tr>
-            <th style="width: 50%" scope="row">Titre</th>
-            <td style="text-align: center">
-                {{ courss.title }}
-              </td>
-          </tr>
-          <tr>
-            <th scope="row">Heure de début</th>
-            <td style="text-align: center">
-                {{ courss.start }}
-              </td>
-          </tr>
-          <tr>
-          <th scope="row">Heure de fin</th>
+      <tbody>
+        <tr>
+          <th style="width: 50%" scope="row">Titre</th>
           <td style="text-align: center">
-                {{ courss.end }}
-            </td>
+            {{ courss.title }}
+          </td>
         </tr>
         <tr>
-        <th scope="row">Couleur</th>
-        <td style="text-align: center">
+          <th scope="row">Heure de début</th>
+          <td style="text-align: center">
+            {{ courss.start }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Heure de fin</th>
+          <td style="text-align: center">
+            {{ courss.end }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Couleur</th>
+          <td style="text-align: center">
             {{ courss.color }}
           </td>
-      </tr>
-        </tbody>
+        </tr>
+      </tbody>
     </table>
     <br />
-      <button class="btn btn-primary btn-rounded-f" [routerLink]="['/courss/list']">
-        Retour
-      </button>
+    <button
+      class="btn btn-primary btn-rounded-f"
+      [routerLink]="['/courss/list']"
+    >
+      Retour
+    </button>
   </section>
-  </div>
-
-
+</div>

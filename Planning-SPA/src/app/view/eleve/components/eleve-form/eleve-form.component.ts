@@ -4,6 +4,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { ActivatedRoute, Params } from '@angular/router';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-eleve-form',
@@ -29,6 +30,7 @@ export class EleveFormComponent implements OnInit {
     private fb: FormBuilder,
     private service: EleveService,
     private service2: EleveService2,
+    private alterifyService: AlertifyService,
 
     route: ActivatedRoute,
   ) {

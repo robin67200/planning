@@ -1,3 +1,4 @@
+import { CoursListComponent } from './cours-list/cours-list.component';
 import { CoursFormEditComponent } from './components/cours-form-edit/cours-form-edit.component';
 import { MatiereModule } from './../matiere/matiere.module';
 import { ProfsModule } from './../prof/prof.module';
@@ -53,6 +54,7 @@ import { ClasseModule } from '../classe/classe.module';
             ],
   declarations: [
     CoursDetailComponent,
+    CoursListComponent,
     CoursFormComponent,
     CalendarComponent,
     CoursFormEditComponent
