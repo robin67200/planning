@@ -28,6 +28,12 @@ postIndisponibilite(indisponibilite: Indisponibilite) {
 deleteIndisponibiliteById(id: number) {
   return this.http.delete<Indisponibilite>('http://localhost:5000/api/indisponibilites/' + id);
 }
+searchDate(date: Date) {
+  return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites/search?date=' + date);
+}
+searchByProf(profId: number) {
+  return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites/prof/' + profId);
+}
 
 }
 

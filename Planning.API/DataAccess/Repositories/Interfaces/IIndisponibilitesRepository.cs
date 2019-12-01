@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Planning.API.Models;
@@ -8,5 +9,7 @@ namespace Planning.API.DataAccess.Repositories.Interface
     public interface IIndisponibilitesRepository : IRepository<Indisponibilite>
     {
         IEnumerable<Indisponibilite> GetByDate();
+        IEnumerable<Indisponibilite> SearchDate(string date);
+        IEnumerable<Indisponibilite> SearchByProf(int profId);
     }
 }

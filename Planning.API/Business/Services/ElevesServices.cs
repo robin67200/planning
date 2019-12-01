@@ -19,10 +19,10 @@ namespace Planning.API.Business.Services
             _repo = repo;
         }
 
-        public async Task<EleveViewModel> GetByName(string nom)
+        public IEnumerable<EleveViewModel> GetByName(string nom)
         {
-            var dbEleve = await _repo.GetByName(nom);
-            var mapped = _mapper.Map<EleveViewModel>(dbEleve);
+            var dbEleve = _repo.GetByName(nom);
+            var mapped = _mapper.Map<IEnumerable<EleveViewModel>>(dbEleve);
             return mapped;
         }
 

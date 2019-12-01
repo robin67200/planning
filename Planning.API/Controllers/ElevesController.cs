@@ -19,10 +19,10 @@ namespace Planning.API.Controllers
         }
 
         [HttpGet("nom/{nom}")]
-        public async Task<IActionResult> GetByName([FromRoute]string nom)
+        public IEnumerable<EleveViewModel> GetByName([FromRoute]string nom)
         {
-            var eleves = await this._service.GetByName(nom);
-            return Ok(eleves);
+             
+            return this._service.GetByName(nom);
         }
         
     }

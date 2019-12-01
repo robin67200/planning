@@ -7,7 +7,7 @@ namespace Planning.API.DataAccess.Repositories.Interface
 {
     public interface IElevesRepository : IRepository<Eleve>
     {
-        Task<Eleve> GetByName(string nom);
+        IEnumerable<Eleve> GetByName(string nom);
         
 
     }

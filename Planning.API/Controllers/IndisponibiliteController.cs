@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,18 @@ namespace Planning.API.Controllers
         public IEnumerable<IndisponibiliteViewModel> GetByDate()
         {
             return this._service.GetByDate();
+        }
+
+        [HttpGet("search")]
+        public IEnumerable<IndisponibiliteViewModel> SearchDate(string date)
+        {
+            return this._service.SearchDate(date);
+        }
+
+        [HttpGet("prof/{profId}")]
+        public IEnumerable<IndisponibiliteViewModel> SearchByProf([FromRoute]int profId)
+        {
+            return this._service.SearchByProf(profId);
         }
     }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppSharedModule } from 'src/app/app-shared.module';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { IndisponibiliteListComponent } from './indisponibilite-list/indisponibilite-list.component';
 import { IndisponibiliteFormComponent } from './components/indisponibilite-form/indisponibilite-form.component';
 import { IndisponibiliteService, IndisponibiliteService3 } from './services/indisponibilite.service';
@@ -12,6 +12,7 @@ import { ProfSelectComponent } from '../prof/components/prof-select/prof-select.
 import { IndispFormComponent } from './components/indisp-form/indisp-form.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { NgbModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [CommonModule,
@@ -20,7 +21,10 @@ import localeFr from '@angular/common/locales/fr';
             IndisponibilitesRoutingModule,
             AppSharedModule,
             ModalModule.forRoot(),
+            BsDatepickerModule.forRoot(),
             ProfsModule,
+            NgbModule,
+    NgbDatepickerModule
             ],
   declarations: [
     IndisponibiliteListComponent,

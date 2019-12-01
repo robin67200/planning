@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using Planning.API.Business.Services.Interface;
@@ -20,6 +21,20 @@ namespace Planning.API.Business.Services
         public IEnumerable<IndisponibiliteViewModel> GetByDate()
         {
             var list = _repo.GetByDate();
+            var map = _mapper.Map<IEnumerable<IndisponibiliteViewModel>>(list);
+            return map;
+        }
+
+        public IEnumerable<IndisponibiliteViewModel> SearchDate(string date)
+        {
+            var list = _repo.SearchDate(date);
+            var map = _mapper.Map<IEnumerable<IndisponibiliteViewModel>>(list);
+            return map;
+        }
+
+        public IEnumerable<IndisponibiliteViewModel> SearchByProf(int profId)
+        {
+            var list = _repo.SearchByProf(profId);
             var map = _mapper.Map<IEnumerable<IndisponibiliteViewModel>>(list);
             return map;
         }
