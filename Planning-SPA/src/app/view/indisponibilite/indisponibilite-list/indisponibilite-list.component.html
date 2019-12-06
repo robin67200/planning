@@ -43,11 +43,11 @@
       [formGroup]="formProf"
       (submit)="searchByProf()"
       #formDir="ngForm"
-      style="margin-left: 29%;"
+      style="margin-left: 15%;"
     >
       <div class="form-group row">
         <div class="input-group">
-            <app-prof-select [form]="formProf"></app-prof-select>
+            <app-prof-select [form]="formProf" style="width: 75%;"></app-prof-select>
             <button type="submit" class="btn btn-outline-success btn-rounded">
               <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
             </button>
