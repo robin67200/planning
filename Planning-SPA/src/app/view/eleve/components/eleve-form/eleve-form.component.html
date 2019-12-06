@@ -58,7 +58,7 @@
             <span class="input-group-prepend">
             </span>
             <mat-form-field class="example-full-width">
-              <input matInput [matDatepicker]="dp" formControlName="dateNaissance" placeholder="debut" style="width: 85%" id="prepend-input">
+              <input matInput [matDatepicker]="dp" formControlName="dateNaissance" placeholder="Date naissance" style="width: 85%" id="prepend-input">
               <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
               <mat-datepicker #dp></mat-datepicker>
               <mat-error *ngIf="dateNaissance.invalid">Veuillez entrer une date de naissance</mat-error>
