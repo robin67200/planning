@@ -68,7 +68,8 @@
 
 
                <div *ngIf="loggedIn()" class="dropdown" dropdown style="margin-left: 93%">
-                  <button class="btn btn-outline-info" (click)="logout()"><i class="fas fa-power-off"></i></button>
+                  <button matTooltip="Se déconnecter"
+                  class="btn btn-outline-info" (click)="logout()"><i class="fas fa-power-off"></i></button>
                </div>
 
           </div>
