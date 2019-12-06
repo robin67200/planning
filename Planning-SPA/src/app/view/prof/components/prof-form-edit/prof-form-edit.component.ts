@@ -3,7 +3,7 @@ import { Prof } from '../../models/prof';
 import { ProfService, ProfService2 } from '../../services/prof.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-prof-form-edit',
@@ -11,6 +11,8 @@ import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from
   styleUrls: ['./prof-form-edit.component.css']
 })
 export class ProfFormEditComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective, { static: true }) ngForm: { resetForm: () => void; };
 
   form: FormGroup;
   id: number;
@@ -64,6 +66,7 @@ export class ProfFormEditComponent implements OnInit {
       prof.telephone = this.form.value.telephone;
 
       this.onUpdating.emit(prof);
+      this.ngForm.resetForm();
 
       this.form.reset();
       this.form.controls.id.setValue(0);
@@ -78,6 +81,7 @@ export class ProfFormEditComponent implements OnInit {
   }
 }
   close() {
+    this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }

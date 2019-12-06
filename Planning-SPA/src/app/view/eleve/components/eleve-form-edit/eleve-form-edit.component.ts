@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { Eleve } from '../../models/eleve';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { EleveService, EleveService2 } from '../../services/eleve.service';
@@ -11,6 +11,8 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./eleve-form-edit.component.css']
 })
 export class EleveFormEditComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective, { static: true }) ngForm: { resetForm: () => void; };
 
   form: FormGroup;
   hasError = false;
@@ -76,6 +78,7 @@ export class EleveFormEditComponent implements OnInit {
       eleve.classeId = this.form.value.classeId;
 
       this.onUpdating.emit(eleve);
+      this.ngForm.resetForm();
 
       this.form.reset();
       this.form.controls.id.setValue(0);
@@ -92,6 +95,7 @@ export class EleveFormEditComponent implements OnInit {
 }
 
   close() {
+    this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }

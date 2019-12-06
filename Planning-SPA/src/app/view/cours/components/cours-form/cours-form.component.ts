@@ -1,6 +1,6 @@
 import { Cours } from './../../models/cours';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { CoursService2 } from '../../services/cours.service';
 
@@ -14,7 +14,11 @@ export interface Room {
   templateUrl: './cours-form.component.html',
   styleUrls: ['./cours-form.component.css']
 })
+
+
 export class CoursFormComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective, { static: true }) ngForm: { resetForm: () => void; };
 
   form: FormGroup;
   id: number;
@@ -46,7 +50,6 @@ export class CoursFormComponent implements OnInit {
     private service: CoursService2
   ) {
     this.form = this.fb.group({
-      id: new FormControl(0, [Validators.required]),
       title: new FormControl('', [Validators.required]),
       room: new FormControl('', [Validators.required]),
       start: new FormControl('', [Validators.required]),
@@ -90,11 +93,18 @@ export class CoursFormComponent implements OnInit {
       this.form.controls.id.setValue(0);
 
     } else {
-      alert('MDR');
-    }
+      this.hasError = true;
+      const controls: AbstractControl[] = [];
+
+      Object.keys(this.form.controls).forEach(key => {
+        controls.push(this.form.get(key));
+      });
+
   }
+}
 
   close() {
+    this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }

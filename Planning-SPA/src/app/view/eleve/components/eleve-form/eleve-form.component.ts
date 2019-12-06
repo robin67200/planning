@@ -1,8 +1,7 @@
 import { EleveService2, EleveService } from './../../services/eleve.service';
 import { Eleve } from './../../models/eleve';
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 
@@ -12,6 +11,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
   styleUrls: ['./eleve-form.component.css']
 })
 export class EleveFormComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective, { static: true }) ngForm: { resetForm: () => void; };
 
   form: FormGroup;
   hasError = false;
@@ -30,7 +31,6 @@ export class EleveFormComponent implements OnInit {
     route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
-      id: new FormControl(0, [Validators.required]),
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
@@ -67,6 +67,7 @@ export class EleveFormComponent implements OnInit {
       eleve.classeId = this.form.value.classeId;
 
       this.onCreating.emit(eleve);
+      this.ngForm.resetForm();
 
       this.form.reset();
       this.form.controls.id.setValue(0);
@@ -81,6 +82,7 @@ export class EleveFormComponent implements OnInit {
 }
 
   close() {
+    this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }

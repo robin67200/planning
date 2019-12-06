@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { Cours } from '../../models/cours';
 import { Room } from '../cours-form/cours-form.component';
 import { CoursService2 } from '../../services/cours.service';
@@ -10,6 +10,8 @@ import { CoursService2 } from '../../services/cours.service';
   styleUrls: ['./cours-form-edit.component.css']
 })
 export class CoursFormEditComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective, { static: true }) ngForm: { resetForm: () => void; };
 
   form: FormGroup;
   id: number;
@@ -100,6 +102,7 @@ export class CoursFormEditComponent implements OnInit {
 
 
   close() {
+    this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }

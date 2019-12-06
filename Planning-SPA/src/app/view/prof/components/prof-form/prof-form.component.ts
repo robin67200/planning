@@ -1,6 +1,6 @@
 import { Prof } from './../../models/prof';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { ProfService2 } from '../../services/prof.service';
@@ -11,6 +11,8 @@ import { ProfService2 } from '../../services/prof.service';
   styleUrls: ['./prof-form.component.css']
 })
 export class ProfFormComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective, { static: true }) ngForm: { resetForm: () => void; };
 
   form: FormGroup;
   id: number;
@@ -30,7 +32,6 @@ export class ProfFormComponent implements OnInit {
     route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
-      id: new FormControl(0, [Validators.required]),
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
@@ -52,6 +53,7 @@ export class ProfFormComponent implements OnInit {
     if (this.form.valid) {
       this.hasError = false;
       const prof = new Prof('', '', '', '', 0);
+      prof.id = this.form.value.id;
       prof.nom = this.form.value.nom;
       prof.prenom = this.form.value.prenom;
       prof.adresse = this.form.value.adresse;
@@ -60,6 +62,7 @@ export class ProfFormComponent implements OnInit {
 
       this.onCreating.emit(prof);
 
+      this.ngForm.resetForm();
       this.form.reset();
       this.form.controls.id.setValue(0);
 
@@ -75,6 +78,7 @@ export class ProfFormComponent implements OnInit {
 }
 
   close() {
+    this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }

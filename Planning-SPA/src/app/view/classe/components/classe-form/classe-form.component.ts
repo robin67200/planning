@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { Classe } from '../../models/classe';
 import { ClasseService2 } from '../../services/classe.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./classe-form.component.css']
 })
 export class ClasseFormComponent implements OnInit {
+
+  @ViewChild(FormGroupDirective, { static: true }) ngForm: { resetForm: () => void; };
 
   form: FormGroup;
   id: number;
@@ -51,6 +53,8 @@ export class ClasseFormComponent implements OnInit {
 
       this.onCreating.emit(classe);
 
+      this.ngForm.resetForm();
+
       this.form.reset();
       this.form.controls.id.setValue(0);
 
@@ -66,6 +70,7 @@ export class ClasseFormComponent implements OnInit {
   }
 
   close() {
+    this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }
