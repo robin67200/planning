@@ -5,48 +5,53 @@
     (submit)="save()"
     #formDir="ngForm"
   >
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-4">Nom</label>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
-          <div class="input-group">
-            <span class="input-group-prepend">
-              <span class="input-group-text">
-                  <i class="far fa-id-card"></i>
-              </span>
-            </span>
+        <div class="input-group ">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>contacts</mat-icon>
             <input
-              class="form-control form-control-sm"
               formControlName="nom"
               type="text"
-              id="prepend-input"
-              style="width: 85%"
-              required
+              matInput
+              placeholder="Nom"
+              #nom
+              maxlength="30"
             />
+            <mat-hint align="end">{{ nom.value.length }} / 30</mat-hint>
+            <mat-error *ngIf="nom.invalid">Veuillez entrer un titre</mat-error>
+          </mat-form-field>
         </div>
       </div>
-  </div>
-  <br />
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-4" >Annee</label>
-    <div class="col-7">
-        <app-annee-select [form]="form"></app-annee-select>
     </div>
-</div>
-<div class="form-group row">
-  <label class="form-control-label text-md-right col-4" >Niveau</label>
-  <div class="col-7">
-      <app-niveau-select [form]="form"></app-niveau-select>
-  </div>
-</div>
-<div class="form-actions" style="text-align: center;">
-    <button
-    type="button"
-    class="btn btn-outline-danger btn-rounded "
-    (click)="close()"
-    >
-  <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
-  </button>
-  <button type="submit" class="btn btn-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
-  </div>
+    <br />
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+        Année :
+        <app-annee-select [form]="form"></app-annee-select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+        Niveau :
+        <app-niveau-select [form]="form"></app-niveau-select>
+      </div>
+    </div>
+    <div class="form-actions" style="text-align: center;">
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-rounded "
+        (click)="close()"
+      >
+        <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
+      </button>
+      <button type="submit" class="btn btn-success btn-rounded">
+        <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
+      </button>
+    </div>
   </form>
 </div>
