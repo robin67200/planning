@@ -24,3 +24,7 @@ mat-toolbar {
 button:focus {
   outline: 0;
 }
+
+mat-list-item:focus {
+  outline: 0;
+}
