@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Eleve } from '../../models/eleve';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { EleveService, EleveService2 } from '../../services/eleve.service';
@@ -79,7 +79,16 @@ export class EleveFormEditComponent implements OnInit {
 
       this.form.reset();
       this.form.controls.id.setValue(0);
-  }
+
+  } else {
+    this.hasError = true;
+    const controls: AbstractControl[] = [];
+
+    Object.keys(this.form.controls).forEach(key => {
+      controls.push(this.form.get(key));
+    });
+}
+
 }
 
   close() {

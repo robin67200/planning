@@ -53,27 +53,6 @@ export class IndispFormComponent implements OnInit {
       this.form.reset();
       this.form.controls.id.setValue(0);
 
-
-    } else {
-      this.hasError = true;
-      const controls: AbstractControl[] = [];
-
-      Object.keys(this.form.controls).forEach(key => {
-        controls.push(this.form.get(key));
-      });
-
-      const invalids: AbstractControl[] = controls.filter(a => a.invalid);
-      switch (invalids[0]) {
-        case this.form.controls.start:
-          this.error = 'La date est obligatoire';
-          break;
-        case this.form.controls.end:
-          this.error = 'La date est obligatoire';
-          break;
-        case this.form.controls.ProfId:
-          this.error = `Le prof est obligatoire`;
-          break;
-      }
     }
   }
 

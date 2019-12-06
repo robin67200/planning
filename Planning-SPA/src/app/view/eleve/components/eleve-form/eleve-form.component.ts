@@ -30,6 +30,7 @@ export class EleveFormComponent implements OnInit {
     route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
+      id: new FormControl(0, [Validators.required]),
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
@@ -56,6 +57,7 @@ export class EleveFormComponent implements OnInit {
     if (this.form.valid) {
       this.hasError = false;
       const eleve = new Eleve('', '', '', '', '', new Date(), 0);
+      eleve.id = this.form.value.id;
       eleve.nom = this.form.value.nom;
       eleve.prenom = this.form.value.prenom;
       eleve.adresse = this.form.value.adresse;
@@ -68,6 +70,13 @@ export class EleveFormComponent implements OnInit {
 
       this.form.reset();
       this.form.controls.id.setValue(0);
+  } else {
+    this.hasError = true;
+    const controls: AbstractControl[] = [];
+
+    Object.keys(this.form.controls).forEach(key => {
+      controls.push(this.form.get(key));
+    });
   }
 }
 

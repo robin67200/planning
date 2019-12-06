@@ -75,28 +75,8 @@ export class ProfFormEditComponent implements OnInit {
       Object.keys(this.form.controls).forEach(key => {
         controls.push(this.form.get(key));
       });
-
-      const invalids: AbstractControl[] = controls.filter(a => a.invalid);
-      switch (invalids[0]) {
-        case this.form.controls.nom:
-          this.error = 'Le nom est obligatoire';
-          break;
-        case this.form.controls.prenom:
-          this.error = `Le prenom est obligatoire`;
-          break;
-        case this.form.controls.adresse:
-          this.error = `L'adresse est obligatoire`;
-          break;
-        case this.form.controls.mail:
-          this.error = `L'adresse mail est obligatoire et doit être valide`;
-          break;
-        case this.form.controls.telephone:
-          this.error = `Le numéro de telephone est obligatoire`;
-          break;
-      }
-    }
   }
-
+}
   close() {
     this.form.reset();
     this.onClose.emit(null);

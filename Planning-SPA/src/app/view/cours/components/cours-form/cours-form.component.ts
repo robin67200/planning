@@ -89,6 +89,8 @@ export class CoursFormComponent implements OnInit {
       this.form.reset();
       this.form.controls.id.setValue(0);
 
+    } else {
+      alert('MDR');
     }
   }
 
