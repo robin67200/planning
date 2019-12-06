@@ -49,11 +49,12 @@ export class RegisterComponent implements OnInit {
       this.user = Object.assign({}, this.registerForm.value);
       this.authService.register(this.user).subscribe(() => {
         this.alertify.succes('Inscription terminée');
+        this.router.navigate(['/classes']);
       }, error => {
         this.alertify.error('erreur');
       }, () => {
         this.authService.login(this.user).subscribe(() => {
-          this.router.navigate(['/members']);
+          this.router.navigate(['/classes']);
         });
       });
     }

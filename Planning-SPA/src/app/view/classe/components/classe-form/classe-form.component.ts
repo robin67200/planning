@@ -29,7 +29,6 @@ export class ClasseFormComponent implements OnInit {
 
   ) {
     this.form = this.fb.group({
-      id: new FormControl(0, [Validators.required]),
       nom: new FormControl('', [Validators.required]),
       anneeId: new FormControl(0, [Validators.required]),
       niveauId: new FormControl(0, [Validators.required]),
@@ -52,32 +51,13 @@ export class ClasseFormComponent implements OnInit {
 
       this.onCreating.emit(classe);
 
-
+      this.form.reset();
       this.form.controls.id.setValue(0);
 
-    } else {
-      this.hasError = true;
-      const controls: AbstractControl[] = [];
 
-      Object.keys(this.form.controls).forEach(key => {
-        controls.push(this.form.get(key));
-      });
-
-      const invalids: AbstractControl[] = controls.filter(a => a.invalid);
-      switch (invalids[0]) {
-        case this.form.controls.nom:
-          this.error = 'Le titre est obligatoire';
-          break;
-        case this.form.controls.niveauId:
-          this.error = `Le niveau est obligatoire`;
-          break;
-        case this.form.controls.anneeId:
-          this.error = `La date est à rentrer`;
-          break;
-      }
     }
 
-    this.form.reset();
+
   }
 
   close() {
