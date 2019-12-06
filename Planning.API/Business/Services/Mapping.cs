@@ -1,6 +1,7 @@
 using AutoMapper;
 using Planning.API.Business.ViewModels;
 using Planning.API.DataAccess.Repositories.Interface;
+using Planning.API.Dtos;
 using Planning.API.Models;
 using TechCloud.Tools.Business.Services;
 using TechCloud.Tools.DataAccess.Infrastructure;
@@ -21,6 +22,7 @@ namespace Planning.API.Business.Services
             CreateMap<Annee, AnneeViewModel>();
             CreateMap<ProfMatiere, ProfMatiereViewModel>();
             CreateMap<Indisponibilite, IndisponibiliteViewModel>();
+            // CreateMap<User, UserForListDto>();
         }
     }
 

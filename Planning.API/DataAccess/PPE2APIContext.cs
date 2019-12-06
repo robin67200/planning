@@ -22,6 +22,7 @@ namespace Planning.API.Models {
         public DbSet<Planning.API.Models.ProfClasse> ProfClasses { get; set; }
         public DbSet<Planning.API.Models.ProfMatiere> ProfMatieres { get; set; }
         public DbSet<Planning.API.Models.Indisponibilite> Indisponibilites { get; set; }
+        public DbSet<Planning.API.Models.User> Users { get; set; }
         
        
     
@@ -41,8 +42,8 @@ namespace Planning.API.Models {
             modelBuilder.ApplyConfiguration(new ProfClasseConfig());
             modelBuilder.ApplyConfiguration(new ProfMatiereConfig());
             modelBuilder.ApplyConfiguration(new IndisponibiliteConfig());
+            modelBuilder.ApplyConfiguration(new UserConfig());
             
-
         }
     }
 }

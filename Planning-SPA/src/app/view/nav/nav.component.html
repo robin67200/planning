@@ -1,7 +1,7 @@
-<mat-sidenav-container>
+<mat-sidenav-container >
     <mat-sidenav mode="over" [(opened)]="opened">
         <mat-toolbar>
-            <mat-toolbar-row>
+            <mat-toolbar-row style="background-color:rgba(197, 197, 197, 0.404);">
               <h2>Gestion de Planning</h2>
             </mat-toolbar-row>
           </mat-toolbar>
@@ -43,16 +43,36 @@
         </mat-nav-list>
             </mat-sidenav>
 
-  <mat-sidenav-content>
-    <mat-toolbar>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="opened=!opened">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <h2 style="margin-right: 40%">Gestion de Planning</h2>
+  <mat-sidenav-content >
+    <mat-toolbar >
+        <nav class="navbar navbar-expand-md fixed-top" style="background-image: repeating-linear-gradient(white,rgba(197, 197, 197, 0.404)); position:fixed">
+          <div class="navbar-collapse collapse" id="navbarCollapse" style>
+
+                <form *ngIf="!loggedIn()" #LoginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()" style="margin-left: 65%;">
+                    <input class="form-control mr-sm-2" type="text" name="username"
+                      placeholder="Identifiant" required [(ngModel)]="model.username">
+                    <input class="form-control mr-sm-2" type="password" name="password"
+                      placeholder="Mot de passe" required [(ngModel)]="model.password">
+                    <button [disabled]="!LoginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+                  </form>
+
+                <div *ngIf="loggedIn()" >
+                  <button
+                    type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="opened=!opened">
+                    <mat-icon>menu</mat-icon>
+                  </button>
+                </div>
+
+
+               <div *ngIf="loggedIn()" class="dropdown" dropdown style="margin-left: 87%">
+                  <button class="btn btn-outline-info" (click)="logout()">Se déconnecter</button>
+               </div>
+
+          </div>
+        </nav>
       </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
