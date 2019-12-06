@@ -55,9 +55,14 @@ export class ClasseFormComponent implements OnInit {
       this.form.controls.id.setValue(0);
 
 
+    } else {
+      this.hasError = true;
+      const controls: AbstractControl[] = [];
+
+      Object.keys(this.form.controls).forEach(key => {
+        controls.push(this.form.get(key));
+      });
     }
-
-
   }
 
   close() {
