@@ -18,7 +18,6 @@ export class EleveFormComponent implements OnInit {
   id: number;
   error: string;
   eleves: Eleve[] = [];
-  bsConfig: Partial<BsDatepickerConfig>;
 
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();
@@ -28,14 +27,9 @@ export class EleveFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: EleveService,
-    private service2: EleveService2,
-    private alterifyService: AlertifyService,
-
     route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
-      id: new FormControl(0, [Validators.required]),
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
@@ -45,11 +39,7 @@ export class EleveFormComponent implements OnInit {
       dateNaissance: new FormControl('', [Validators.required]),
       classeId: new FormControl(0, [Validators.required])
     });
-    route.params.forEach((params: Params) => {
-      if (params.id != null) {
-        this.id = +params.id;
-      }
-    });
+
   }
 
   get nom() {return this.form.get('nom'); }
@@ -66,7 +56,6 @@ export class EleveFormComponent implements OnInit {
     if (this.form.valid) {
       this.hasError = false;
       const eleve = new Eleve('', '', '', '', '', new Date(), 0);
-      eleve.id = this.form.value.id;
       eleve.nom = this.form.value.nom;
       eleve.prenom = this.form.value.prenom;
       eleve.adresse = this.form.value.adresse;

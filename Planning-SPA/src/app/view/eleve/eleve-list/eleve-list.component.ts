@@ -72,7 +72,6 @@ export class EleveListComponent implements OnInit {
 
   openEleve(eleve: Eleve) {
     this.service2.pushObject(eleve);
-    this.alterifyService.error('création terminée');
 
   }
 

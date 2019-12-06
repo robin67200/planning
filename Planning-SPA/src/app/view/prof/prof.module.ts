@@ -17,6 +17,7 @@ import { MatNativeDateModule, MatDatepickerModule, MatTableModule,
   MatPaginatorModule, MatSortModule, MatButtonModule, MatMenuModule } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {MatSelectModule} from '@angular/material/select';
             ModalModule.forRoot(),
             MatIconModule,
             MatInputModule,
+            Ng2SearchPipeModule,
             MatDatepickerModule,
             MatNativeDateModule,
             MatSelectModule,

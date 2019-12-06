@@ -26,6 +26,9 @@ postProf(prof: Prof) {
 deleteProfById(id: number) {
   return this.http.delete<Prof>('http://localhost:5000/api/profs/' + id);
 }
+getByName(nom: string) {
+  return this.http.get<Prof[]>('http://localhost:5000/api/eleves/nom' + nom);
+}
 getMatiere(id: number) {
   return this.http.get<Matiere[]>('http://localhost:5000/api/profs/' + id + '/matieres/prof');
 }

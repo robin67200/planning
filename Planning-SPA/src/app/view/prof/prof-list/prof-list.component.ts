@@ -18,6 +18,7 @@ export class ProfListComponent implements OnInit {
   profs: Prof[] =  [];
   id: number;
   prof: Prof;
+  searchText: any;
 
   constructor(
     private service: ProfService,
@@ -39,7 +40,11 @@ export class ProfListComponent implements OnInit {
       }
     );
   }
-
+  searchByName(name: string) {
+    this.service.getByName(name).subscribe(res => {
+      this.profs = res;
+    });
+  }
   deleteProf(prof: Prof) {
     this.modals
       .addModal(ModalConfirmComponent, {

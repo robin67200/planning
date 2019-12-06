@@ -4,156 +4,164 @@
   (submit)="save()"
   #formDir="ngForm"
 >
-<fieldset>
-  <legend >
-    Veuillez renseigner les informations ci-dessous...
-  </legend>
-  <br/>
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-4">Nom</label>
+  <fieldset>
+    <legend>
+      Veuillez renseigner les informations suivantes...
+    </legend>
+    <br />
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
-          <div class="input-group ">
-            <span class="input-group-prepend">
-              <span class="input-group-text">
-                  <i class="far fa-id-card"></i>
-              </span>
-            </span>
+        <div class="input-group ">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>contacts</mat-icon>
             <input
-              class="form-control form-control-sm"
               formControlName="nom"
               type="text"
-              id="prepend-input"
-              style="width: 85%"
-              required
+              matInput
+              placeholder="Nom"
+              #nom
+              maxlength="10"
             />
+            <mat-hint align="end">{{ nom.value.length }} / 10</mat-hint>
+            <mat-error *ngIf="nom.invalid">Veuillez entrer un nom</mat-error>
+          </mat-form-field>
         </div>
       </div>
-  </div>
-  <br />
-  <div class="form-group row">
-      <label class="form-control-label text-md-right col-4">Prénom</label>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
-          <div class="input-group ">
-            <span class="input-group-prepend">
-              <span class="input-group-text">
-                  <i class="far fa-id-card" ></i>
-              </span>
-            </span>
+        <div class="input-group ">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>contacts</mat-icon>
             <input
-              class="form-control form-control-sm"
               formControlName="prenom"
               type="text"
-              id="prepend-input"
-              style="width: 85%"
-              required
+              matInput
+              placeholder="Prénom"
+              #prenom
+              maxlength="10"
             />
+            <mat-error *ngIf="prenom.invalid"
+              >Veuillez entrer un prénom</mat-error
+            >
+            <mat-hint align="end">{{ prenom.value.length }} / 10</mat-hint>
+          </mat-form-field>
         </div>
       </div>
-  </div>
-  <br/>
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-4">Date de naissance</label>
-        <div class="col-7">
-            <div class="input-group">
-              <span class="input-group-prepend">
-                <span class="input-group-text">
-                      <i class="fa fa-calendar"></i>
-                </span>
-              </span>
-              <input
-                    formControlName="dateNaissance"
-                    class="form-control"
-                    type="text"
-                    required
-                    bsDatepicker [bsConfig]="bsConfig"
-                    />
-            </div>
-        </div>
-  </div>
-  <br />
-  <div class="form-group row">
-      <label class="form-control-label text-md-right col-4" >Adresse</label>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
-          <div class="input-group ">
-            <span class="input-group-prepend">
-              <span class="input-group-text">
-                  <i  class="fas fa-home"></i>
-              </span>
-            </span>
+        <div class="input-group">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
             <input
-              class="form-control form-control-sm"
+              matInput
+              [matDatepicker]="dp"
+              formControlName="dateNaissance"
+              placeholder="debut"
+              style="width: 85%"
+              id="prepend-input"
+            />
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+            <mat-error *ngIf="dateNaissance.invalid"
+              >Veuillez entrer une date de naissance</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+        <div class="input-group ">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>contacts</mat-icon>
+            <input
               formControlName="adresse"
               type="text"
-              id="prepend-input"
-              required
+              matInput
+              placeholder="Addresse"
+              #adresse
+              maxlength="30"
             />
+            <mat-hint align="end">{{ adresse.value.length }} / 30</mat-hint>
+            <mat-error *ngIf="adresse.invalid"
+              >Veuillez entrer une adresse</mat-error
+            >
+          </mat-form-field>
         </div>
       </div>
-  </div>
-  <br />
-  <div class="form-group row">
-      <label class="form-control-label text-md-right col-4" >Mail</label>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
-          <div class="input-group ">
-            <span class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="far fa-envelope"></i>
-              </span>
-            </span>
+        <div class="input-group ">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>mail</mat-icon>
             <input
-              class="form-control form-control-sm"
               formControlName="mail"
-              type="email"
-              id="prepend-input"
-              required
-              style="width: 85%"
+              type="text"
+              matInput
+              placeholder="Mail"
+              #mail
+              maxlength="30"
             />
+            <mat-hint align="end">{{ mail.value.length }} / 30</mat-hint>
+            <mat-error *ngIf="mail.invalid">Veuillez entrer un mail</mat-error>
+          </mat-form-field>
         </div>
       </div>
-  </div>
-  <br />
-  <div class="form-group row">
-      <label class="form-control-label text-md-right col-4" >Téléphone</label>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
-          <div class="input-group ">
-            <span class="input-group-prepend">
-              <span class="input-group-text">
-                  <i class="fas fa-phone-square-alt" ></i>
-              </span>
-            </span>
+        <div class="input-group ">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>phone</mat-icon>
             <input
-              class="form-control form-control-sm"
               formControlName="telephone"
               type="text"
-              id="prepend-input"
-              required
-              style="width: 85%"
+              matInput
+              placeholder="Téléphone"
+              #telephone
+              maxlength="10"
             />
+            <mat-hint align="end">{{ telephone.value.length }} / 10</mat-hint>
+            <mat-error *ngIf="telephone.invalid"
+              >Veuillez entrer un numéro de téléphone</mat-error
+            >
+          </mat-form-field>
         </div>
       </div>
-  </div>
-  <br />
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-4" >Classe</label>
-    <div class="col-7">
-        <app-classe-select [form]="form"></app-classe-select>
     </div>
-</div>
-<br/>
-</fieldset>
-<div class="form-actions" style="text-align: center;">
-  <button
-  type="button"
-  class="btn btn-outline-danger btn-rounded "
-  (click)="close()"
-  >
-<i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
-</button>
-<button type="submit" class="btn btn-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
-</div>
-<div style="float:right;margin-left:5px;">
-  <h5>
-    <span class="badge badge-danger" *ngIf="hasError">{{ error }}</span>
-  </h5>
-</div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+        <label class="form-control-label">Classe :</label>
+        <app-classe-select [form]="form"></app-classe-select>
+      </div>
+    </div>
+    <br />
+  </fieldset>
+  <div class="form-actions" style="text-align: center;">
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-rounded "
+      (click)="close()"
+    >
+      <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
+    </button>
+    <button type="submit" class="btn btn-success btn-rounded">
+      <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
+    </button>
+  </div>
 </form>

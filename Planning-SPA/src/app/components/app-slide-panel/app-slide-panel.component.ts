@@ -6,22 +6,17 @@ import { animate, transition, trigger, state, style } from '@angular/animations'
   templateUrl: './app-slide-panel.component.html',
   styleUrls: ['./app-slide-panel.component.css'],
   animations: [
-  trigger('slideInOut', [
-    state(
-      'in',
-      style({
-        transform: 'translateX(0)'
-      })
-    ),
-    state(
-      'out',
-      style({
-        transform: 'translateX(-50%)'
-      })
-    ),
-    transition('* => *', animate('2s ease-in-out')),
-  ])
-]
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateX(100%)'}),
+        animate('200ms ease-in-out')
+      ]),
+      transition(':leave', [
+        style({transform: 'translateX(0%)'}),
+        animate('200ms ease-in-out')
+      ])
+    ])
+  ]
 })
 export class AppSlidePanelComponent implements OnInit {
 @Input()
@@ -34,7 +29,7 @@ footer: string;
 displayHeader = true;
 @Input()
 displayFooter = false;
-@Input() width = '700px';
+@Input() width = '600px';
 
 constructor(private renderer: Renderer) { }
 

@@ -25,6 +25,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import { ClasseModule } from '../classe/classe.module';
+import { ColorPickerModule } from 'ngx-color-picker';
+
 
 @NgModule({
   imports: [CommonModule,
@@ -37,6 +39,7 @@ import { ClasseModule } from '../classe/classe.module';
             ModalModule.forRoot(),
             BsDatepickerModule.forRoot(),
             RouterModule,
+            ColorPickerModule,
             AmazingTimePickerModule,
             MatDatepickerModule,
             MatNativeDateModule,

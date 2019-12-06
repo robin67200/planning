@@ -25,6 +25,7 @@
                 maxlength="30"
               />
               <mat-hint align="end">{{ titre.value.length }} / 30</mat-hint>
+              <mat-error *ngIf="title.invalid">Veuillez entrer un titre</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -42,6 +43,7 @@
                   {{ room.viewValue }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="room.invalid">Veuillez mettre une salle</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -57,10 +59,11 @@
                 matInput
                 formControlName="start"
                 mwlFlatpickr
-                placeholder="Choisir une date"
+                placeholder="Choisir la date et l'heure du début du cours"
                 [enableTime]="true"
                 dateFormat="Y-m-dTH:i"
               />
+              <mat-error *ngIf="start.invalid">Veillez rentrer l'heure de début</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -75,10 +78,11 @@
                 matInput
                 formControlName="end"
                 mwlFlatpickr
-                placeholder="Choisir une date"
+                placeholder="Choisir la date et l'heure de la fin du cours"
                 [enableTime]="true"
                 dateFormat="Y-m-dTH:i"
               />
+              <mat-error *ngIf="end.invalid">Veillez rentrer l'heure de fin</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -94,8 +98,9 @@
                 formControlName="color"
                 type="color"
                 matInput
-                placeholder="Couleur"
+                placeholder="Couleur contour"
               />
+              <mat-error *ngIf="color.invalid">Veuillez mettre une couleur pour le contour</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -109,10 +114,11 @@
               <mat-icon matSuffix>color_lens</mat-icon>
               <input
                 formControlName="color2"
-                type="color"
                 matInput
-                placeholder="Couleur"
+                type="color"
+                placeholder="Couleur remplissage"
               />
+              <mat-error *ngIf="color2.invalid">Veuillez mettre une couleur pour le remplissage</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -120,12 +126,14 @@
       <div class="form-group row">
         <label class="form-control-label text-md-right col-3"></label>
         <div class="col-7">
+          <label>Prof :</label>
           <app-prof-select [form]="form"></app-prof-select>
         </div>
       </div>
       <div class="form-group row">
         <label class="form-control-label text-md-right col-3"></label>
         <div class="col-7">
+            <label>Matiere :</label>
           <app-matiere-select [form]="form"></app-matiere-select>
         </div>
       </div>

@@ -1,5 +1,14 @@
 <div [formGroup]="form">
-  <select formControlName="matiereId" class="form-control" required >
-          <option *ngFor="let matiere of matieres" value="{{matiere.id}}">{{matiere.nom}}</option>
-  </select>
+  <div class="input-group ">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        <i class="fas fa-book"></i>
+      </span>
+    </span>
+    <select formControlName="matiereId" class="form-control" required>
+      <option *ngFor="let matiere of matieres" value="{{ matiere.id }}">
+        {{matiere.nom}}
+      </option>
+    </select>
+  </div>
 </div>

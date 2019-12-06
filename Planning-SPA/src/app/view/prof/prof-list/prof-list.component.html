@@ -12,6 +12,14 @@
   <hr />
   <br />
   <br />
+  <mat-form-field>
+      <input
+        matInput
+        [(ngModel)]="searchText"
+        placeholder="Rechercher un prof"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
   <div class="widget-body">
     <table class="table table-hover table-striped table-bordered">
     <thead>
@@ -33,7 +41,7 @@
         </th>
       </tr>
     </thead>
-      <tr id="list" *ngFor="let prof of profs">
+      <tr id="list" *ngFor="let prof of profs | filter: searchText">
         <td>
           {{ prof.nom }}
         </td>

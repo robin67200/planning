@@ -17,7 +17,6 @@ export class EleveFormEditComponent implements OnInit {
   id: number;
   error: string;
   eleves: Eleve[];
-  bsConfig: Partial<BsDatepickerConfig>;
 
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onClose = new EventEmitter<any>();

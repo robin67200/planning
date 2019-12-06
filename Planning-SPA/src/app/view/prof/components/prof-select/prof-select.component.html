@@ -1,5 +1,14 @@
 <div [formGroup]="form">
-  <select formControlName="professeurId" class="form-control" required >
-          <option *ngFor="let prof of profs" value="{{prof.id}}">{{prof.nom}}</option>
-  </select>
+  <div class="input-group ">
+    <span class="input-group-prepend">
+      <span class="input-group-text">
+        <i class="fas fa-users"></i>
+      </span>
+    </span>
+    <select formControlName="professeurId" class="form-control" required>
+      <option *ngFor="let prof of profs" value="{{ prof.id }}">
+        {{prof.nom}}
+      </option>
+    </select>
+  </div>
 </div>

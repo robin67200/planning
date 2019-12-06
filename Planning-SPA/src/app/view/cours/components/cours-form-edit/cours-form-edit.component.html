@@ -57,7 +57,7 @@
                 matInput
                 formControlName="start"
                 mwlFlatpickr
-                placeholder="Choisir une date"
+                placeholder="Choisir la date et l'heure du début du cours"
                 [enableTime]="true"
                 dateFormat="Y-m-dTH:i"
               />
@@ -75,7 +75,7 @@
                 matInput
                 formControlName="end"
                 mwlFlatpickr
-                placeholder="Choisir une date"
+                placeholder="Choisir la date et l'heure de la fin du cours"
                 [enableTime]="true"
                 dateFormat="Y-m-dTH:i"
               />
@@ -94,7 +94,7 @@
                 formControlName="color"
                 type="color"
                 matInput
-                placeholder="Couleur"
+                placeholder="Contour couleur"
               />
             </mat-form-field>
           </div>
@@ -111,7 +111,7 @@
                 formControlName="color2"
                 type="color"
                 matInput
-                placeholder="Couleur"
+                placeholder="Remplissage Couleur"
               />
             </mat-form-field>
           </div>
@@ -120,12 +120,14 @@
       <div class="form-group row">
         <label class="form-control-label text-md-right col-3"></label>
         <div class="col-7">
+            <label>Prof :</label>
           <app-prof-select [form]="form"></app-prof-select>
         </div>
       </div>
       <div class="form-group row">
         <label class="form-control-label text-md-right col-3"></label>
         <div class="col-7">
+            <label>Matière :</label>
           <app-matiere-select [form]="form"></app-matiere-select>
         </div>
       </div>

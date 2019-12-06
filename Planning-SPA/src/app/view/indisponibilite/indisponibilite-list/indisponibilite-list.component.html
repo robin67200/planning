@@ -1,111 +1,159 @@
 <div class="container">
   <br />
   <h2 style="text-align:center">Indisponibilités</h2>
-  <button class="btn btn-outline-info" (click)="ngOnInit()"><i></i>&nbsp;Futur</button>
-  <button class="btn btn-outline-dark" (click)="getIndispAll()"><i></i>&nbsp;Historique</button>
-  <button class="btn btn-primary" style="margin-left: 75%;" (click)="pnlIndisp2.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
-  <hr>
-  <br/>
-  <br/>
+  <button class="btn btn-outline-info" (click)="ngOnInit()">
+    <i></i>&nbsp;Futur
+  </button>
+  <button class="btn btn-outline-dark" (click)="getIndispAll()">
+    <i></i>&nbsp;Historique
+  </button>
+  <button
+    class="btn btn-outline-primary"
+    style="margin-left: 75%;"
+    (click)="pnlIndisp2.display()"
+  >
+    <i class="fas fa-plus"></i>&nbsp;Ajouter
+  </button>
+  <hr />
+  <br />
+  <br />
   <div class="widget-body">
-  <div class="container">
-    <div class="col-10">
-        <form
-        [formGroup]="form"
-        (submit)="save()"
-        #formDir="ngForm"
-        >
-        <div class="form-group row" class="col-6">
-              <div class="input-group">
-                  <input
-                  formControlName="datee"
-                  class="form-control"
-                  type="text"
-                  required
-                  placeholder="Recherche par date dd/mm/yyyy"
-                  />
-                  <button type="submit" class="btn btn-outline-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
-            </div>
+    <form
+      [formGroup]="form"
+      style="margin-left: 1%"
+      (submit)="save()"
+      #formDir="ngForm"
+    >
+      <div class="form-group row">
+        <div class="input-group">
+          <input
+            formControlName="datee"
+            class="form-control"
+            type="text"
+            required
+            placeholder="Rechercher la date par format dd/mm/yyyy"
+          />
+          <button type="submit" class="btn btn-outline-success btn-rounded">
+            <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
+          </button>
         </div>
-        </form>
-        <form
-        [formGroup]="formProf"
-        (submit)="searchByProf()"
-        #formDir="ngForm"
-        >
-        <div class="form-group row" class="col-5">
-              <div class="input-group">
-                <app-prof-select [form]="formProf" ></app-prof-select>
-                <button type="submit" class="btn btn-outline-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
-              </div>
+      </div>
+    </form>
+    <form
+      [formGroup]="formProf"
+      (submit)="searchByProf()"
+      #formDir="ngForm"
+      style="margin-left: 29%;"
+    >
+      <div class="form-group row">
+        <div class="input-group">
+            <app-prof-select [form]="formProf"></app-prof-select>
+            <button type="submit" class="btn btn-outline-success btn-rounded">
+              <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
+            </button>
         </div>
-        </form>
-    </div>
-  </div>
-  <table class="table table-hover table-striped table-bordered" >
-    <thead>
-      <tr>
-        <th>
-          Début
-        </th>
-        <th>
-          Fin
-        </th>
-        <th>
-          Professeur
-        </th>
-      </tr>
-    </thead>
-      <ng-container  *ngFor="let indisp of indispos">
+      </div>
+    </form>
+    <br />
+    <br />
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>
+            Début
+          </th>
+          <th>
+            Fin
+          </th>
+          <th>
+            Professeur
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let indisp of indispos">
         <tr id="list" *ngIf="!affichage">
           <td type="datetime-local">
-            {{ indisp.start | date : 'medium'}}
+            {{ indisp.start | date: "medium" }}
           </td>
           <td type="datetime-local">
-            {{ indisp.end | date : 'medium' }}
+            {{ indisp.end | date: "medium" }}
           </td>
           <td>
             {{ indisp.profName }}
           </td>
           <td style="width: 10%">
             <div class="dropdown">
-              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button
+                class="btn btn-outline-info dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="fas fa-cogs"></i>&nbsp; Actions
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="openIndisp(indisp); pnlIndisp.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
-                <a class="dropdown-item" (click)="deleteIndisp(indisp)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+                <a
+                  class="dropdown-item"
+                  (click)="openIndisp(indisp); pnlIndisp.display()"
+                  style="cursor: pointer;"
+                  ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a
+                >
+                <a
+                  class="dropdown-item"
+                  (click)="deleteIndisp(indisp)"
+                  style="cursor: pointer; background-color: rgb(246, 179, 179);"
+                  ><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a
+                >
               </div>
             </div>
           </td>
         </tr>
       </ng-container>
-      <ng-container  *ngFor="let indisp of indispos">
+      <ng-container *ngFor="let indisp of indispos">
         <tr id="list" *ngIf="affichage">
           <td>
-            {{ indisp.start | date : 'medium' }}
+            {{ indisp.start | date: "medium" }}
           </td>
           <td>
-            {{ indisp.end | date : 'medium'}}
+            {{ indisp.end | date: "medium" }}
           </td>
           <td>
             {{ indisp.profName }}
           </td>
           <td style="width: 10%">
             <div class="dropdown">
-              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button
+                class="btn btn-outline-info dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="fas fa-cogs"></i>&nbsp; Actions
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="openIndisp(indisp); pnlIndisp.display();" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
-                <a class="dropdown-item" (click)="deleteIndisp(indisp)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
+                <a
+                  class="dropdown-item"
+                  (click)="openIndisp(indisp); pnlIndisp.display()"
+                  style="cursor: pointer;"
+                  ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a
+                >
+                <a
+                  class="dropdown-item"
+                  (click)="deleteIndisp(indisp)"
+                  style="cursor: pointer; background-color: rgb(246, 179, 179);"
+                  ><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a
+                >
               </div>
             </div>
           </td>
         </tr>
       </ng-container>
-  </table>
-</div>
+    </table>
+  </div>
 </div>
 <app-app-slide-panel #pnlIndisp>
   <div panel-header style="text-align: center;">
@@ -114,7 +162,8 @@
   <div panel-body>
     <app-indisponibilite-form
       (onUpdating)="onIndispUpdated($event); pnlIndisp.hide()"
-      (onClose)="pnlIndisp.hide()">
+      (onClose)="pnlIndisp.hide()"
+    >
     </app-indisponibilite-form>
   </div>
 </app-app-slide-panel>
@@ -126,7 +175,8 @@
   <div panel-body>
     <app-indisp-form
       (onCreating2)="onIndispCreated($event); pnlIndisp2.hide()"
-      (onClose)="pnlIndisp2.hide()">
+      (onClose)="pnlIndisp2.hide()"
+    >
     </app-indisp-form>
   </div>
 </app-slide-create>

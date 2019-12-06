@@ -89,44 +89,6 @@ export class CoursFormComponent implements OnInit {
       this.form.reset();
       this.form.controls.id.setValue(0);
 
-    } else {
-      this.hasError = true;
-      const controls: AbstractControl[] = [];
-
-      Object.keys(this.form.controls).forEach(key => {
-        controls.push(this.form.get(key));
-      });
-
-      const invalids: AbstractControl[] = controls.filter(a => a.invalid);
-      switch (invalids[0]) {
-        case this.form.controls.title:
-          this.error = 'Le titre est obligatoire';
-          break;
-        case this.form.controls.room:
-          this.error = `La salle est obligatoire`;
-          break;
-        case this.form.controls.start:
-          this.error = `L'heure de début est obligatoire`;
-          break;
-        case this.form.controls.end:
-          this.error = `L'heure de fin est obligatoire et doit être valide`;
-          break;
-        case this.form.controls.color:
-          this.error = `La couleur est obligatoire`;
-          break;
-        case this.form.controls.color:
-          this.error = `La couleur est obligatoire`;
-          break;
-        case this.form.controls.professeurId:
-          this.error = `Le numéro de prof est obligatoire`;
-          break;
-        case this.form.controls.matiereId:
-          this.error = `Le numéro de matière est obligatoire`;
-          break;
-        case this.form.controls.anneeId:
-          this.error = `Le numéro de année est obligatoire`;
-          break;
-      }
     }
   }
 
