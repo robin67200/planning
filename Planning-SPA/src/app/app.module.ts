@@ -1,3 +1,5 @@
+import { AuthGuard } from './view/_guards/auth.guard';
+import { AuthService } from './view/_services/auth.service';
 import { ModalSimpleInputComponent } from './components/modals/simple-input-modals';
 import { ModalConfirmComponent } from './components/modals/confirm-modal';
 import { MatSliderModule } from '@angular/material/slider';
@@ -23,48 +25,66 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { HomeComponent } from './view/home/home.component';
+import { NavComponent } from './view/nav/nav.component';
+import { RegisterComponent } from './view/register/register.component';
+import { UserService } from './view/user/_services/user.service';
+import { AdminService } from './view/_services/admin.service';
+import { AlertifyService } from './view/_services/alertify.service';
 
 
 const appRoutes: Routes = [
   {
     path: '',
+    runGuardsAndResolvers: 'always',
     children: [
       {
         path: 'annees',
         loadChildren: './view/annee/annee.module#AnneesModule',
+        canActivate: [AuthGuard],
       },
       {
         path: 'profs',
         loadChildren: './view/prof/prof.module#ProfsModule',
+        canActivate: [AuthGuard],
       },
       {
         path: 'calendars',
         loadChildren: './view/cours/cours.module#CourssModule',
+        canActivate: [AuthGuard],
       },
       {
         path: 'classes',
         loadChildren: './view/classe/classe.module#ClasseModule',
+        canActivate: [AuthGuard],
       },
       {
         path: 'eleves',
         loadChildren: './view/eleve/eleve.module#ElevesModule',
+        canActivate: [AuthGuard],
       },
       {
         path: 'niveaux',
         loadChildren: './view/niveau/niveau.module#NiveauModule',
+        canActivate: [AuthGuard],
       },
       {
         path: 'matieres',
         loadChildren: './view/matiere/matiere.module#MatiereModule',
+        canActivate: [AuthGuard],
       },
       {
         path: 'indisponibilites',
         loadChildren: './view/indisponibilite/indisponibilite.module#IndisponibiliteModule',
+        canActivate: [AuthGuard],
       }
     ]
   },
 
-  {path: '', redirectTo: 'nav', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent },
+  {path: 'registers', component: RegisterComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '**', redirectTo: 'home', pathMatch: 'full'},
 
 
 ];
@@ -74,6 +94,8 @@ const appRoutes: Routes = [
     ModalConfirmComponent,
     ModalItemSelectorComponent,
     ModalSimpleInputComponent,
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -105,11 +127,18 @@ const appRoutes: Routes = [
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    FormsModule
 
   ],
   entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'FR'},
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'FR'},
+      AuthService,
+      AuthGuard,
+      UserService,
+      AdminService,
+      AlertifyService
    ],
   bootstrap: [AppComponent]
 })

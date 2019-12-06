@@ -3,11 +3,13 @@ mat-sidenav-container {
 }
 
 mat-sidenav, mat-sidenav-content {
-  padding: 16px;
+  padding: 0px;
+
 }
 
 mat-sidenav {
   background-color: whitesmoke;
+  background-image: repeating-linear-gradient(white,rgba(176, 189, 248, 0.404));
   width:250px;
 }
 
@@ -16,6 +18,7 @@ mat-toolbar {
     left: 0;
     right: 0;
     z-index: 998;
+    background-image: repeating-linear-gradient(white,rgba(255, 255, 255, 0.404));
 }
 
 button:focus {
