@@ -26,6 +26,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Prof } from '../../prof/models/prof';
+import { AlertifyService } from '../../_services/alertify.service';
 
 registerLocaleData(localeFr);
 
@@ -88,6 +89,7 @@ export class CalendarComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private profService: ProfService,
     private matiereService: MatiereService,
+    private alertify: AlertifyService
 
     ) {}
 
@@ -198,6 +200,7 @@ export class CalendarComponent implements OnInit {
           this.service.deleteCoursById(cours.id).subscribe(res => {
             this.ngOnInit();
           });
+          this.alertify.succes('Supprimé');
         }
       });
   }
@@ -210,6 +213,7 @@ export class CalendarComponent implements OnInit {
     this.service.putCours(cours.id, cours).subscribe((result) => {
       this.ngOnInit();
     });
+    this.alertify.succes('Modifié');
   }
 
   onCoursCreated(cours: Cours) {
@@ -217,5 +221,6 @@ export class CalendarComponent implements OnInit {
       // this.courss.push(result);
       this.ngOnInit();
     });
+    this.alertify.succes('Ajouté');
   }
 }

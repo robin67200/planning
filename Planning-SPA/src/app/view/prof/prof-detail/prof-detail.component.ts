@@ -10,6 +10,7 @@ import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { ModalItemSelectorComponent } from 'src/app/components/modals/item-selector-modal';
 import { ListItem } from 'src/app/components/model/list-item';
 import { Cours } from '../../cours/models/cours';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-prof-detail',
@@ -33,6 +34,7 @@ export class ProfDetailComponent implements OnInit {
     route: ActivatedRoute,
     private service: ProfService,
     private modals: SimpleModalService,
+    private alertify: AlertifyService
 
   ) {
     route.params.forEach((params: Params) => {
@@ -56,6 +58,7 @@ export class ProfDetailComponent implements OnInit {
         this.service.addMatiere(this.id, result.id).subscribe((res) => {
           this.ngOnInit();
         });
+        this.alertify.succes('Ajouté');
       });
     });
   }
@@ -69,6 +72,7 @@ export class ProfDetailComponent implements OnInit {
         this.service.addClasse(this.id, result.id).subscribe((res) => {
           this.ngOnInit();
         });
+        this.alertify.succes('Ajouté');
       });
     });
   }
@@ -83,6 +87,7 @@ export class ProfDetailComponent implements OnInit {
         this.service.deleteMatiere(prof.id, matiere.id).subscribe((res) => {
           this.ngOnInit();
         });
+        this.alertify.succes('Supprimé');
       } else {
       }
     });
@@ -97,6 +102,7 @@ export class ProfDetailComponent implements OnInit {
         this.service.deleteClasse(prof.id, classe.id).subscribe((res) => {
           this.ngOnInit();
         });
+        this.alertify.succes('Supprimé');
       } else {
       }
     });

@@ -7,6 +7,7 @@ import { Classe } from '../models/classe';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { NiveauService } from '../../niveau/services/niveau.service';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-classe-list',
@@ -29,7 +30,8 @@ export class ClasseListComponent implements OnInit {
     private service2: ClasseService2,
     private modals: SimpleModalService,
     private niveauService: NiveauService,
-    private anneeService: AnneeService
+    private anneeService: AnneeService,
+    private alertify: AlertifyService
     ) { }
 
   ngOnInit() {
@@ -63,6 +65,7 @@ export class ClasseListComponent implements OnInit {
           this.service.deleteClasseById(classe.id).subscribe(res => {
             this.ngOnInit();
           });
+          this.alertify.succes('Supprimé');
         }
       });
   }
@@ -75,6 +78,7 @@ export class ClasseListComponent implements OnInit {
     this.service.putClasse(classe.id, classe).subscribe((result) => {
       this.ngOnInit();
     });
+    this.alertify.succes('Modifié');
   }
 
   onClasseCreated(classe: Classe) {
@@ -82,6 +86,7 @@ export class ClasseListComponent implements OnInit {
       // this.classes.push(result);
       this.ngOnInit();
     });
+    this.alertify.succes('Ajouté');
   }
 }
 

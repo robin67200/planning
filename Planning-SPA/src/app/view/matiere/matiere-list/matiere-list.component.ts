@@ -5,6 +5,7 @@ import { MatiereService } from '../services/matiere.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-matiere-list',
@@ -21,6 +22,7 @@ export class MatiereListComponent implements OnInit {
   constructor(
     private service: MatiereService,
     private modals: SimpleModalService,
+    private alertify: AlertifyService
     ) { }
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class MatiereListComponent implements OnInit {
         this.service.postMatiere(matierep).subscribe(res => {
           this.ngOnInit();
         });
+        this.alertify.succes('Ajouté');
       }
     });
   }
@@ -62,6 +65,7 @@ export class MatiereListComponent implements OnInit {
         this.service.putMatiere(matiere.id, matiere).subscribe(res => {
           this.matierex.push(res);
         });
+        this.alertify.succes('Modifié');
       }
     });
   }
@@ -80,6 +84,7 @@ export class MatiereListComponent implements OnInit {
             // this.matieress.splice(index, 1);
             this.ngOnInit();
           });
+          this.alertify.succes('Supprimé');
         }
       });
   }

@@ -10,6 +10,7 @@ import { registerLocaleData, formatDate } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { AlertifyService } from '../../_services/alertify.service';
 
 
 registerLocaleData(localeFr);
@@ -40,6 +41,7 @@ export class IndisponibiliteListComponent implements OnInit {
     private profService: ProfService,
     private modals: SimpleModalService,
     private fb: FormBuilder,
+    private alertify: AlertifyService
   ) {
     this.form = this.fb.group({
       datee: new FormControl(null, [Validators.required])
@@ -122,6 +124,7 @@ export class IndisponibiliteListComponent implements OnInit {
           this.service.deleteIndisponibiliteById(indisp.id).subscribe(res => {
             this.ngOnInit();
           });
+          this.alertify.succes('Supprimé');
         }
       });
   }
@@ -134,6 +137,7 @@ export class IndisponibiliteListComponent implements OnInit {
     this.service.putIndisponibilite(indisp.id, indisp).subscribe((result) => {
       this.ngOnInit();
     });
+    this.alertify.succes('Modifié');
   }
 
   onIndispCreated(indisp: Indisponibilite) {
@@ -141,6 +145,7 @@ export class IndisponibiliteListComponent implements OnInit {
       // this.classes.push(result);
       this.ngOnInit();
     });
+    this.alertify.succes('Ajouté');
   }
 
 }

@@ -7,6 +7,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-prof-list',
@@ -26,7 +27,8 @@ export class ProfListComponent implements OnInit {
     private service2: ProfService2,
     private modals: SimpleModalService,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertify: AlertifyService
 
     ) { }
 
@@ -54,6 +56,7 @@ export class ProfListComponent implements OnInit {
       .subscribe(result => {
         if (result) {
           this.service.deleteProfById(prof.id).subscribe(res => {
+            this.alertify.succes('Supprimé');
             this.ngOnInit();
           });
         }
@@ -66,6 +69,7 @@ export class ProfListComponent implements OnInit {
 
   onProfUpdated(prof: Prof) {
     this.service.putProf(prof.id, prof).subscribe((result) => {
+      this.alertify.succes('Modifié');
       this.ngOnInit();
     });
   }
@@ -73,6 +77,7 @@ export class ProfListComponent implements OnInit {
   onProfCreated(prof: Prof) {
     this.service.postProf(prof).subscribe(result => {
       // this.profs.push(result);
+      this.alertify.succes('Ajouté');
       this.ngOnInit();
     });
   }

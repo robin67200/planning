@@ -5,6 +5,7 @@ export class Classe {
   id: number;
   niveauName: string;
   anneeName: string;
+  profName: string;
   professeurs: Prof[];
   eleves: Eleve[];
   cours: Cours[];

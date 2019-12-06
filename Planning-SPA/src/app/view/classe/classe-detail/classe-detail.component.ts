@@ -10,6 +10,10 @@ import { ModalItemSelectorComponent } from 'src/app/components/modals/item-selec
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ListItem } from 'src/app/components/model/list-item';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
+import { AlertifyService } from '../../_services/alertify.service';
+import { isToday } from 'date-fns';
+import { ProfService } from '../../prof/services/prof.service';
+import { CoursService } from '../../cours/services/cours.service';
 
 @Component({
   selector: 'app-classe-detail',
@@ -25,11 +29,13 @@ export class ClasseDetailComponent implements OnInit {
   professeurs: Prof[];
   eleves: Eleve[];
   cours: Cours[];
+  classess: Classe[];
 
   constructor(
     route: ActivatedRoute,
     private service: ClasseService,
     private modals: SimpleModalService,
+    private alertify: AlertifyService,
 
   ) {
     route.params.forEach((params: Params) => {
@@ -42,7 +48,7 @@ export class ClasseDetailComponent implements OnInit {
   ngOnInit() {
     this.service.getClasseById(this.id).subscribe(res => {
       this.classe = res;
-    });
+      });
   }
 
   addCours() {
@@ -54,6 +60,7 @@ export class ClasseDetailComponent implements OnInit {
         this.service.addCours(this.id, result.id).subscribe((res) => {
           this.ngOnInit();
         });
+        this.alertify.succes('Ajouté');
       });
     });
   }
@@ -67,6 +74,7 @@ export class ClasseDetailComponent implements OnInit {
         this.service.deleteCours(classe.id, cours.id).subscribe((res) => {
           this.ngOnInit();
         });
+        this.alertify.succes('Supprimé');
       } else {
       }
     });

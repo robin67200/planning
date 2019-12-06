@@ -30,7 +30,7 @@ export class EleveListComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private classeService: ClasseService,
-    private alterifyService: AlertifyService,
+    private alertify: AlertifyService,
 
 
     ) {}
@@ -66,6 +66,7 @@ export class EleveListComponent implements OnInit {
           this.service.deleteEleveById(eleve.id).subscribe(res => {
             this.ngOnInit();
           });
+          this.alertify.succes('Supprimé');
         }
       });
   }
@@ -79,14 +80,15 @@ export class EleveListComponent implements OnInit {
     this.service.putEleve(eleve.id, eleve).subscribe((result) => {
       this.ngOnInit();
     });
+    this.alertify.succes('Modifié');
   }
 
   onEleveCreated(eleve: Eleve) {
     this.service.postEleve(eleve).subscribe(result => {
       // this.eleves.push(result);
       this.ngOnInit();
-
     });
+    this.alertify.succes('Ajouté');
   }
 
 }
