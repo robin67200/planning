@@ -85,9 +85,9 @@
             matInput
             placeholder="Mail"
             #mail
-            maxlength="10"
+            maxlength="30"
           />
-          <mat-hint align="end">{{ mail.value.length }} / 10</mat-hint>
+          <mat-hint align="end">{{ mail.value.length }} / 30</mat-hint>
           <mat-error *ngIf="mail.invalid">Veuillez entrer un mail</mat-error>
         </mat-form-field>
       </div>
