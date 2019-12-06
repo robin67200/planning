@@ -12,9 +12,14 @@
             <span class="input-group-prepend">
             </span>
             <mat-form-field>
-              <input matInput [matDatepicker]="dp" formControlName="start" placeholder="debut" style="width: 85%" id="prepend-input">
-              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-              <mat-datepicker #dp></mat-datepicker>
+              <input
+                matInput
+                formControlName="start"
+                mwlFlatpickr
+                placeholder="Choisir la date et l'heure du début"
+                [enableTime]="true"
+                dateFormat="Y-m-dTH:i"
+              />
             </mat-form-field>
         </div>
       </div>
@@ -26,9 +31,14 @@
             <span class="input-group-prepend">
             </span>
             <mat-form-field>
-              <input matInput [matDatepicker]="dpp" formControlName="end" placeholder="fin" style="width: 85%" id="prepend-input">
-              <mat-datepicker-toggle matSuffix [for]="dpp"></mat-datepicker-toggle>
-              <mat-datepicker #dpp></mat-datepicker>
+              <input
+                matInput
+                formControlName="end"
+                mwlFlatpickr
+                placeholder="Choisir la date et l'heure de la fin"
+                [enableTime]="true"
+                dateFormat="Y-m-dTH:i"
+              />
             </mat-form-field>
         </div>
       </div>

@@ -13,6 +13,8 @@ import { IndispFormComponent } from './components/indisp-form/indisp-form.compon
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { NgbModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { MatInputModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   imports: [CommonModule,
@@ -22,9 +24,12 @@ import { NgbModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
             AppSharedModule,
             ModalModule.forRoot(),
             BsDatepickerModule.forRoot(),
+            FlatpickrModule.forRoot(),
             ProfsModule,
             NgbModule,
-    NgbDatepickerModule
+            NgbDatepickerModule,
+            MatInputModule,
+            MatIconModule,
             ],
   declarations: [
     IndisponibiliteListComponent,
