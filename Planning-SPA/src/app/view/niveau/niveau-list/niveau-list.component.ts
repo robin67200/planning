@@ -6,6 +6,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-niveau-list',
@@ -23,6 +24,7 @@ export class NiveauListComponent implements OnInit {
   constructor(
     private service: NiveauService,
     private modals: SimpleModalService,
+    private alertify: AlertifyService
     ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class NiveauListComponent implements OnInit {
         this.service.postNiveau(niveaup).subscribe(res => {
           this.ngOnInit();
         });
+        this.alertify.succes('Ajouté');
       }
     });
   }
@@ -64,6 +67,7 @@ export class NiveauListComponent implements OnInit {
         this.service.putNiveau(niveau.id, niveau).subscribe(res => {
           this.niveaux.push(res);
         });
+        this.alertify.succes('Modifié');
       }
     });
   }
@@ -82,6 +86,7 @@ export class NiveauListComponent implements OnInit {
             // this.niveauss.splice(index, 1);
             this.ngOnInit();
           });
+          this.alertify.succes('Supprimé');
         }
       });
   }

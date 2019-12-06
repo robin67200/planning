@@ -5,6 +5,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-annee-list',
@@ -21,6 +22,7 @@ export class AnneeListComponent implements OnInit {
   constructor(
     private service: AnneeService,
     private modals: SimpleModalService,
+    private alertify: AlertifyService
     ) { }
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class AnneeListComponent implements OnInit {
         this.service.postAnnee(annee).subscribe(res => {
           this.ngOnInit();
         });
+        this.alertify.succes('Ajouté');
       }
     });
   }
@@ -62,6 +65,7 @@ export class AnneeListComponent implements OnInit {
         this.service.putAnnee(annee.id, annee).subscribe(res => {
           this.anneess.push(res);
         });
+        this.alertify.succes('Modifié');
       }
     });
   }
@@ -80,6 +84,7 @@ export class AnneeListComponent implements OnInit {
             // this.anneess.splice(index, 1);
             this.ngOnInit();
           });
+          this.alertify.succes('Supprimé');
         }
       });
   }
