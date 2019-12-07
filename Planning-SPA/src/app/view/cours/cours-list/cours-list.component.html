@@ -65,6 +65,13 @@
                   <i class="fas fa-cogs"></i>&nbsp; Actions
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a
+                    class="dropdown-item"
+                    (click)="openCoursDetail(cours); pnlCoursDetail.display()"
+                    style="cursor: pointer;"
+                    ><i class="fas fa-info-circle"></i>&nbsp;&nbsp;Detail</a
+                  >
+
                   <a
                     class="dropdown-item"
                     (click)="openCours(cours); pnlCoursEdit.display()"
@@ -84,6 +91,18 @@
         </tbody>
       </table>
     </div>
+    <app-app-slide-panel #pnlCoursDetail>
+        <div panel-header style="text-align: center;">
+          <h4>Detail Planning</h4>
+        </div>
+        <div panel-body>
+          <app-cours-detail
+            (OnDetail)="openCoursDetail($event); pnlCoursDetail.hide()"
+            (onClose)="pnlCoursDetail.hide()"
+          >
+          </app-cours-detail>
+        </div>
+      </app-app-slide-panel>
     <app-app-slide-panel #pnlCoursEdit>
       <div panel-header style="text-align: center;">
         <h4>Modifier remplissage Planning</h4>

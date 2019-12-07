@@ -31,6 +31,7 @@ export class ClasseFormComponent implements OnInit {
 
   ) {
     this.form = this.fb.group({
+      id: new FormControl(''),
       nom: new FormControl('', [Validators.required]),
       anneeId: new FormControl(0, [Validators.required]),
       niveauId: new FormControl(0, [Validators.required]),
@@ -46,7 +47,6 @@ export class ClasseFormComponent implements OnInit {
     if (this.form.valid) {
       this.hasError = false;
       const classe = new Classe('', 0 , 0);
-      classe.id = this.form.value.id;
       classe.nom = this.form.value.nom;
       classe.niveauId = this.form.value.niveauId;
       classe.anneeId = this.form.value.anneeId;

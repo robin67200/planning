@@ -5,7 +5,7 @@ import { ProfsModule } from './../prof/prof.module';
 import { MatInputModule } from '@angular/material/input';
 import { CoursFormComponent } from './components/cours-form/cours-form.component';
 import { CoursService, CoursService2 } from './services/cours.service';
-import { CoursDetailComponent } from './cours-detail/cours-detail.component';
+import { CoursDetailComponent } from './components/cours-detail/cours-detail.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

@@ -50,6 +50,7 @@ export class CoursFormComponent implements OnInit {
     private service: CoursService2
   ) {
     this.form = this.fb.group({
+      id: new FormControl(''),
       title: new FormControl('', [Validators.required]),
       room: new FormControl('', [Validators.required]),
       start: new FormControl('', [Validators.required]),
@@ -61,7 +62,7 @@ export class CoursFormComponent implements OnInit {
     });
 
   }
-
+  
   get title() {return this.form.get('title'); }
   get room() {return this.form.get('room'); }
   get start() {return this.form.get('start'); }
@@ -77,7 +78,6 @@ export class CoursFormComponent implements OnInit {
     if (this.form.valid) {
       this.hasError = false;
       const cours = new Cours('', '' , new Date() , new Date(), '', '', 0, 0);
-      cours.id = this.form.value.id;
       cours.title = this.form.value.title;
       cours.room = this.form.value.room;
       cours.start = this.form.value.start;
@@ -88,6 +88,7 @@ export class CoursFormComponent implements OnInit {
       cours.matiereId = this.form.value.matiereId;
 
       this.onCreating.emit(cours);
+      this.ngForm.resetForm();
 
       this.form.reset();
       this.form.controls.id.setValue(0);

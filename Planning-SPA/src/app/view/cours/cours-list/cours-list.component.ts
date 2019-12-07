@@ -82,6 +82,13 @@ export class CoursListComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  openCoursDetail(cours: Cours) {
+    this.service.getCoursById(cours.id).subscribe(res => {
+      this.cours = res;
+      this.service2.pushObject(cours);
+    });
+  }
 }
 
 

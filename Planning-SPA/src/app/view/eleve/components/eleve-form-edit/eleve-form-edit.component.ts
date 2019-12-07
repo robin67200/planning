@@ -34,7 +34,7 @@ export class EleveFormEditComponent implements OnInit {
     route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
-      id: new FormControl(0, [Validators.required]),
+      id: new FormControl(''),
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),

@@ -43,7 +43,7 @@ export class CoursFormEditComponent implements OnInit {
     private service: CoursService2
   ) {
     this.form = this.fb.group({
-      id: new FormControl(0, [Validators.required]),
+      id: new FormControl(''),
       title: new FormControl('', [Validators.required]),
       room: new FormControl('', [Validators.required]),
       start: new FormControl('', [Validators.required]),
@@ -86,6 +86,7 @@ export class CoursFormEditComponent implements OnInit {
       cours.matiereId = this.form.value.matiereId;
 
       this.onUpdating.emit(cours);
+      this.ngForm.resetForm();
 
       this.form.reset();
       this.form.controls.id.setValue(0);

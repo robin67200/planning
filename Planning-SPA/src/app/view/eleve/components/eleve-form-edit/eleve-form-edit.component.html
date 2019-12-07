@@ -22,10 +22,10 @@
               matInput
               placeholder="Nom"
               #nom
-              maxlength="10"
+              maxlength="30"
             />
-            <mat-hint align="end">{{ nom.value.length }} / 10</mat-hint>
-            <mat-error *ngIf="nom.invalid">Veuillez entrer un nom</mat-error>
+            <mat-hint align="end">{{ nom.value.length }} / 30</mat-hint>
+            <mat-error *ngIf="nom.invalid">Veuillez entrer un titre</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -63,7 +63,7 @@
               matInput
               [matDatepicker]="dp"
               formControlName="dateNaissance"
-              placeholder="debut"
+              placeholder="Date naissance"
               style="width: 85%"
               id="prepend-input"
             />

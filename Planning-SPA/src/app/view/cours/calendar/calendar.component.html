@@ -84,7 +84,7 @@
       [locale]="locale"
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="openCoursDetail(events); pnlCoursDetail.display()"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-month-view>
@@ -98,7 +98,7 @@
       [dayEndHour]="17"
       [locale]="locale"
       [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="openCoursDetail(events); pnlCoursDetail.display()"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-week-view>
@@ -110,7 +110,7 @@
       [locale]="locale"
       [dayStartHour]="8"
       [dayEndHour]="17"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="openCoursDetail(cours); pnlCoursDetail.display()"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-day-view>
@@ -137,6 +137,18 @@
         (onClose)="pnlCoursCreated.hide()"
       >
       </app-cours-form>
+    </div>
+  </app-app-slide-panel>
+  <app-app-slide-panel #pnlCoursDetail>
+    <div panel-header style="text-align: center;">
+      <h4>Detail Planning</h4>
+    </div>
+    <div panel-body>
+      <app-cours-detail
+        (onDetail)="openCoursDetail($event); pnlCoursDetail.hide()"
+        (onClose)="pnlCoursDetail.hide()"
+      >
+      </app-cours-detail>
     </div>
   </app-app-slide-panel>
 

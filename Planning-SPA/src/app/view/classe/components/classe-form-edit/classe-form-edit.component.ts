@@ -32,6 +32,7 @@ export class ClasseFormEditComponent implements OnInit {
 
   ) {
     this.form = this.fb.group({
+      id: new FormControl(''),
       nom: new FormControl('', [Validators.required]),
       anneeId: new FormControl(0, [Validators.required]),
       niveauId: new FormControl(0, [Validators.required]),

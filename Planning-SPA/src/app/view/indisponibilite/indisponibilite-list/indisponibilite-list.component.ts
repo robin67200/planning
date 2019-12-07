@@ -33,7 +33,6 @@ export class IndisponibiliteListComponent implements OnInit {
   format = 'yyyy-MM-dd';
   myDate = '01/01/2019';
   locale = 'en-FR';
-  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(
     private service: IndisponibiliteService,

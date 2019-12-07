@@ -1,0 +1,69 @@
+<div class="container">
+  <section class="widget">
+    <header>
+      <br />
+      <h2 style="text-align: center">{{ cours.title }}</h2>
+      <hr />
+    </header>
+    <br />
+    <div class="widget-controls" style="text-align: right"></div>
+    <br />
+    <table class="table table-hover table-bordered table-striped">
+      <tbody>
+        <tr>
+          <th style="width: 50%" scope="row">Titre :</th>
+          <td style="text-align: center">
+            {{ cours.title }}
+          </td>
+        </tr>
+        <tr>
+          <th style="width: 50%" scope="row">Numéro Salle :</th>
+          <td style="text-align: center">
+            {{ cours.room }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Heure et date de début :</th>
+          <td style="text-align: center">
+            {{ cours.start }}
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">Heure et date de fin :</th>
+          <td style="text-align: center">
+            {{ cours.end }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Couleur du contour :</th>
+          <td style="text-align: center">
+            {{ cours.color }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Couleur de remplissage :</th>
+          <td style="text-align: center">
+            {{ cours.color2 }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Professeur :</th>
+          <td style="text-align: center">
+            {{ cours.professeurId }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Matière :</th>
+          <td style="text-align: center">
+            {{ cours.matiereId }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <button class="btn btn-primary btn-rounded-f" (click)="close()">
+      Retour
+    </button>
+  </section>
+</div>

@@ -58,14 +58,15 @@ export class CalendarComponent implements OnInit {
     {
       label: '<i class="fa fa-fw fa-edit"></i>',
       a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.deleteCours(this.cours);
+      onClick: (): void => {
+        this.openCours(this.cours);
         this.ngOnInit();
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: (): void => {
+        console.log('Clique');
         this.deleteCours(this.cours);
         this.ngOnInit();
       }
@@ -189,18 +190,18 @@ export class CalendarComponent implements OnInit {
 
 ///////////////////////////////////////////////////////////////////////
 
-  deleteCours(cours: Cours) {
+  deleteCours(event: Cours) {
     this.modals
       .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${cours.title} ${cours.id} ?`,
+        title: `Supprimer ${event.title} ${event.id} ?`,
         message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
       })
       .subscribe(result => {
         if (result) {
-          this.service.deleteCoursById(cours.id).subscribe(res => {
+          this.service.deleteCoursById(event.id).subscribe(res => {
+            this.alertify.succes('Supprimé');
             this.ngOnInit();
           });
-          this.alertify.succes('Supprimé');
         }
       });
   }
@@ -211,16 +212,26 @@ export class CalendarComponent implements OnInit {
 
   onCoursUpdated(cours: Cours) {
     this.service.putCours(cours.id, cours).subscribe((result) => {
+      this.alertify.succes('Modifié');
       this.ngOnInit();
     });
-    this.alertify.succes('Modifié');
   }
 
   onCoursCreated(cours: Cours) {
     this.service.postCours(cours).subscribe(result => {
-      // this.courss.push(result);
+      this.alertify.succes('Ajouté');
       this.ngOnInit();
     });
-    this.alertify.succes('Ajouté');
   }
+
+  openCoursDetail(cours: Cours) {
+    this.service.getCoursById(cours.id).subscribe(res => {
+      this.cours = res;
+      this.service2.pushObject(cours);
+      console.log(this.cours);
+
+    });
+    this.alertify.succes('Detail');
+  }
+
 }

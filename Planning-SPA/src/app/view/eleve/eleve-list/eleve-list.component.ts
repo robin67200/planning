@@ -7,7 +7,7 @@ import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Classe } from '../../classe/models/classe';
-import { AlertifyService } from 'src/app/_services/alertify.service';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-eleve-list',
@@ -78,17 +78,16 @@ export class EleveListComponent implements OnInit {
 
   onEleveUpdated(eleve: Eleve) {
     this.service.putEleve(eleve.id, eleve).subscribe((result) => {
+      this.alertify.succes('Modifié');
       this.ngOnInit();
     });
-    this.alertify.succes('Modifié');
   }
 
   onEleveCreated(eleve: Eleve) {
     this.service.postEleve(eleve).subscribe(result => {
-      // this.eleves.push(result);
+      this.alertify.succes('Ajouté');
       this.ngOnInit();
     });
-    this.alertify.succes('Ajouté');
   }
 
 }

@@ -32,6 +32,7 @@ export class ProfFormComponent implements OnInit {
     route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
+      id: new FormControl(''),
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl('', [Validators.required]),
@@ -53,7 +54,6 @@ export class ProfFormComponent implements OnInit {
     if (this.form.valid) {
       this.hasError = false;
       const prof = new Prof('', '', '', '', 0);
-      prof.id = this.form.value.id;
       prof.nom = this.form.value.nom;
       prof.prenom = this.form.value.prenom;
       prof.adresse = this.form.value.adresse;
