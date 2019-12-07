@@ -211,17 +211,22 @@ export class CalendarComponent implements OnInit {
   }
 
   onCoursUpdated(cours: Cours) {
-    this.service.putCours(cours.id, cours).subscribe((result) => {
-      this.alertify.succes('Modifié');
+    this.service.putCoursWithControl(cours.id, cours).subscribe((result) => {
       this.ngOnInit();
+      this.alertify.succes('modifié');
+    }, error => {
+      this.alertify.error('Professeur indisponible ou erreur de saisie dans les dates');
     });
   }
 
   onCoursCreated(cours: Cours) {
-    this.service.postCours(cours).subscribe(result => {
-      this.alertify.succes('Ajouté');
+    this.service.addCoursWithControl(cours).subscribe(result => {
+      // this.courss.push(result);
       this.ngOnInit();
-    });
+      this.alertify.succes('ajouté');
+    }, error => {
+      this.alertify.error('Professeur indisponible ou erreur de saisie dans les dates');
+    } );
   }
 
   openCoursDetail(cours: Cours) {

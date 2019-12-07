@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planning.API.DataAccess.Repositories.Interface;
 using Planning.API.Models;
@@ -55,6 +56,22 @@ namespace Planning.API.DataAccess.Repositories {
         {
             return _context.Cours.Include(c => c.CoursClasses).Where(m => m.CoursClasses.All(a => a.ClasseId != classeId));
         }
+
+        
+
+        public void AddCours(Cours cours)
+        {
+
+            // cours.Start = passwordHash;
+            // user.PasswordSalt = passwordSalt;
+
+            _context.Cours.AddAsync(cours);
+            _context.SaveChangesAsync();
+
+        }
+
+       
+
 
     }
 }

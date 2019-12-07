@@ -36,6 +36,13 @@ namespace Planning.API.Business.Services
 
             return mapped;
         }
+
+        public void AddCours(CoursViewModel cours)
+        {
+            var obj = this._mapper.Map<Cours>(cours);
+            this._repo.AddCours(obj);
+            this._unitOfWork.Commit();
+        }
         
         /*public async override Task<IResult<CoursViewModel>> CreateAsync(CoursViewModel entity)
         {
@@ -64,7 +71,7 @@ namespace Planning.API.Business.Services
         public IEnumerable<CoursViewModel> CoursSchedules(int? classeId, int? profId, int? matiereId)
         {
             var list = _repo.GetFiltered(classeId, profId, matiereId);
-            var mapped = _mapper.Map < IEnumerable<CoursViewModel>>(list);
+            var mapped = _mapper.Map <IEnumerable<CoursViewModel>>(list);
             return mapped;
         }
     }

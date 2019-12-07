@@ -9,5 +9,7 @@ namespace Planning.API.Business.Services.Interface
         IEnumerable<CoursViewModel> CoursSchedules(int? classeId, int? profId, int? matiereId);
 
         IEnumerable<CoursViewModel> GetCoursAvailables(int classeId);
+
+        void AddCours(CoursViewModel cours);
     }
 }

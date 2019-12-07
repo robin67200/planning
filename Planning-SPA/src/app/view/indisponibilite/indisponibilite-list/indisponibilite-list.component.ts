@@ -133,18 +133,22 @@ export class IndisponibiliteListComponent implements OnInit {
   }
 
   onIndispUpdated(indisp: Indisponibilite) {
-    this.service.putIndisponibilite(indisp.id, indisp).subscribe((result) => {
+    this.service.putIndisponibiliteWithControl(indisp.id, indisp).subscribe((result) => {
       this.ngOnInit();
+      this.alertify.succes('Modifié');
+    }, error => {
+      this.alertify.error('date de début supérieure à date de fin');
     });
-    this.alertify.succes('Modifié');
   }
 
   onIndispCreated(indisp: Indisponibilite) {
-    this.service.postIndisponibilite(indisp).subscribe(result => {
+    this.service.postIndisponibiliteWithControl(indisp).subscribe(result => {
       // this.classes.push(result);
       this.ngOnInit();
+      this.alertify.succes('Ajouté');
+    }, error => {
+      this.alertify.error('date de début supérieure à date de fin');
     });
-    this.alertify.succes('Ajouté');
   }
 
 }
