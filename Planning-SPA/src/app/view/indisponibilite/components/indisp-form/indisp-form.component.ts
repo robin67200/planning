@@ -27,6 +27,7 @@ export class IndispFormComponent implements OnInit {
     private service: IndisponibiliteService3<Indisponibilite, number>,
   ) {
     this.form = this.fb.group({
+      id: new FormControl(0, [Validators.required]),
       start: new FormControl(new Date(), [Validators.required]),
       end: new FormControl(new Date(), [Validators.required]),
       professeurId: new FormControl(0, [Validators.required]),

@@ -22,8 +22,14 @@ getIndisponibiliteById(id: number) {
 putIndisponibilite(id: number, indisponibilite: any) {
   return this.http.put<Indisponibilite>('http://localhost:5000/api/indisponibilites/' + id, indisponibilite);
 }
+putIndisponibiliteWithControl(id: number, indisponibilite: any) {
+  return this.http.put<Indisponibilite>('http://localhost:5000/api/indisponibilites/control/' + id, indisponibilite);
+}
 postIndisponibilite(indisponibilite: Indisponibilite) {
   return this.http.post<Indisponibilite>('http://localhost:5000/api/indisponibilites/', indisponibilite);
+}
+postIndisponibiliteWithControl(indisponibilite: Indisponibilite) {
+  return this.http.post<Indisponibilite>('http://localhost:5000/api/indisponibilites/control/', indisponibilite);
 }
 deleteIndisponibiliteById(id: number) {
   return this.http.delete<Indisponibilite>('http://localhost:5000/api/indisponibilites/' + id);

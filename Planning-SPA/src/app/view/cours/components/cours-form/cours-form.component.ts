@@ -3,6 +3,9 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { CoursService2 } from '../../services/cours.service';
+import { Indisponibilite } from 'src/app/view/indisponibilite/models/indisponibilite';
+import { IndisponibiliteService } from 'src/app/view/indisponibilite/services/indisponibilite.service';
+import { AlertifyService } from 'src/app/view/_services/alertify.service';
 
 export interface Room {
   value: string;
@@ -25,6 +28,8 @@ export class CoursFormComponent implements OnInit {
   hasError = false;
   error: string;
   courss: Cours[] = [];
+  indisponibilites: Indisponibilite[];
+  valid: boolean;
 
   rooms: Room[] = [
     {value: 's1', viewValue: 'S1'},
@@ -47,7 +52,9 @@ export class CoursFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: CoursService2
+    private service: CoursService2,
+    private alertify: AlertifyService,
+    private indispService: IndisponibiliteService
   ) {
     this.form = this.fb.group({
       title: new FormControl('', [Validators.required]),
@@ -71,13 +78,18 @@ export class CoursFormComponent implements OnInit {
   get professeurId() {return this.form.get('professeurId'); }
   get matiereId() {return this.form.get('matiereId'); }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.indispService.getIndisponibilites().subscribe(res => {
+      this.indisponibilites = res;
+    });
+  }
 
   save() {
+
     if (this.form.valid) {
       this.hasError = false;
       const cours = new Cours('', '' , new Date() , new Date(), '', '', 0, 0);
-      cours.id = this.form.value.id;
+      // cours.id = this.form.value.id;
       cours.title = this.form.value.title;
       cours.room = this.form.value.room;
       cours.start = this.form.value.start;
@@ -89,8 +101,11 @@ export class CoursFormComponent implements OnInit {
 
       this.onCreating.emit(cours);
 
+      this.ngForm.resetForm();
+
       this.form.reset();
       this.form.controls.id.setValue(0);
+
 
     } else {
       this.hasError = true;
@@ -108,5 +123,7 @@ export class CoursFormComponent implements OnInit {
     this.form.reset();
     this.onClose.emit(null);
   }
+
+
 
 }

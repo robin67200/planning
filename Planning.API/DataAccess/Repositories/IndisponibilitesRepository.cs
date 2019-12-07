@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Planning.API.DataAccess.Repositories.Interface;
 using Planning.API.Models;
@@ -35,6 +36,7 @@ namespace Planning.API.DataAccess.Repositories {
 
             return DbSet.Where(m => m.ProfesseurId == profId);
         }
+
 
 
     }

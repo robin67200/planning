@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import { ClasseModule } from '../classe/classe.module';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { IndisponibiliteModule } from '../indisponibilite/indisponibilite.module';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
             ProfsModule,
             ClasseModule,
             MatiereModule,
+            IndisponibiliteModule,
             FormsModule,
             NgbModalModule,
             FlatpickrModule.forRoot(),

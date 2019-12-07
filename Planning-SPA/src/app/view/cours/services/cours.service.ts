@@ -23,6 +23,12 @@ postCours(cours: Cours) {
 deleteCoursById(id: number) {
   return this.http.delete<Cours>('http://localhost:5000/api/cours/' + id);
 }
+addCoursWithControl(cours: Cours) {
+  return this.http.post<Cours>('http://localhost:5000/api/cours/control/', cours);
+}
+putCoursWithControl(id: number, cours: any) {
+  return this.http.put<Cours>('http://localhost:5000/api/cours/control/' + id, cours);
+}
 
 }
 
