@@ -25,38 +25,38 @@
         <tr>
           <th scope="row">Heure et date de début :</th>
           <td style="text-align: center">
-            {{ cours.start }}
+            {{ cours.start | date: "medium" }}
           </td>
         </tr>
 
         <tr>
           <th scope="row">Heure et date de fin :</th>
           <td style="text-align: center">
-            {{ cours.end }}
+            {{ cours.end | date: "medium"}}
           </td>
         </tr>
         <tr>
           <th scope="row">Couleur du contour :</th>
           <td style="text-align: center">
-            {{ cours.color }}
+            <input type="color" class="input-group" value="{{ cours.color }}" disabled/>
           </td>
         </tr>
         <tr>
           <th scope="row">Couleur de remplissage :</th>
           <td style="text-align: center">
-            {{ cours.color2 }}
+              <input type="color" class="input-group" value="{{ cours.color2 }}" disabled/>
           </td>
         </tr>
         <tr>
           <th scope="row">Professeur :</th>
           <td style="text-align: center">
-            {{ cours.professeurId }}
+            {{ cours.profName }}
           </td>
         </tr>
         <tr>
           <th scope="row">Matière :</th>
           <td style="text-align: center">
-            {{ cours.matiereId }}
+            {{ cours.matiereName }}
           </td>
         </tr>
       </tbody>

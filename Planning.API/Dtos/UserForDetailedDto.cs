@@ -2,7 +2,7 @@ using System;
 
 namespace Planning.API.Dtos
 {
-        public class UserForListDto
+    public class UserForDetailedDto
     {
         public int Id {get; set;}
         public string Status {get; set;}

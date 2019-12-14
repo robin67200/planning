@@ -14,13 +14,13 @@ import { AuthGuard } from './view/_guards/auth.guard';
 import { AdminService } from './view/_services/admin.service';
 import { UserService } from './view/user/_services/user.service';
 import { SlideCreateComponent } from './components/slide-create/slide-create.component';
+import { HasRoleDirective } from './view/_directives/hasRole.directive';
 
 const APP_COMPONENTS = [
   AppSlidePanelComponent,
   SlideCreateComponent,
-  AdminPanelComponent,
-  UserManagementComponent,
-  RolesModalComponent, ];
+  HasRoleDirective,
+   ];
 
 const APP_MODULES = [
   CommonModule,
@@ -39,9 +39,8 @@ const APP_MODULES = [
     UserService,
     AdminService
   ],
-  entryComponents: [
-    RolesModalComponent
-  ],
-  exports: [ APP_MODULES, APP_COMPONENTS ]
+  entryComponents: [],
+  exports: [ APP_MODULES, HasRoleDirective, AppSlidePanelComponent,
+    SlideCreateComponent ]
 })
 export class AppSharedModule {}

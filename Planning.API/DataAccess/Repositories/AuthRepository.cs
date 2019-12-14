@@ -8,9 +8,9 @@ using Planning.API.DataAccess.Repositories.Interface;
 using Planning.API.Models;
 using TechCloud.Tools.DataAccess.Infrastructure;
 
-namespace Planning.API.DataAccess.Repositories {
-
-    public class AuthRepository : GenericRepository<User>, IAuthRepository
+namespace Planning.API.DataAccess.Repositories 
+{
+    public class AuthRepository : GenericRepository<User>, Interface.IAuthRepository
     {
         private readonly PPE2APIContext _context;
         public AuthRepository(PPE2APIContext context)
@@ -24,8 +24,8 @@ namespace Planning.API.DataAccess.Repositories {
             if(user == null)
                 return null;
 
-            if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
+            // if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            //    return null;
 
             return user;    
         }
@@ -48,11 +48,12 @@ namespace Planning.API.DataAccess.Repositories {
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            // user.PasswordHash = passwordHash;
+            // user.PasswordSalt = passwordSalt;
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+
             return user;
 
         }

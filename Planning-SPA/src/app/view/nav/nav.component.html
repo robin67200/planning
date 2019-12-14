@@ -39,6 +39,14 @@
           <li class="nav-item">
             <mat-list-item class="nav-link" style="text-align: center;" routerLink="indisponibilites" (click)="opened=!opened">Indisponibilités<mat-icon matListIcon>perm_contact_calendar</mat-icon></mat-list-item>
           </li>
+          <br>
+          <li class="nav-item" *appHasRole="['Admin']">
+            <mat-list-item class="nav-link text-dark" style="text-align: center;" routerLink="admin" (click)="opened=!opened">Admin<mat-icon matListIcon>contacts</mat-icon></mat-list-item>
+          </li>
+          <br>
+          <li class="nav-item">
+            <mat-list-item class="nav-link text-dark" style="text-align: center;" routerLink="members" (click)="opened=!opened">Membres<mat-icon matListIcon>contacts</mat-icon></mat-list-item>
+          </li>
           </ul>
         </mat-nav-list>
             </mat-sidenav>
@@ -68,11 +76,13 @@
                 </div>
 
 
-               <div *ngIf="loggedIn()" class="dropdown" dropdown style="margin-left: 93%">
-                  <button matTooltip="Se déconnecter"
+               <div *ngIf="loggedIn()" style="margin-left: 80%;">
+                <a id="rv" class="text-dark">
+                  Bienvenue {{authService.decodedToken?.unique_name | titlecase}}
+                </a>
+                  <button style="margin-left: 8%;" matTooltip="Se déconnecter"
                   class="btn btn-outline-info" (click)="logout()"><i class="fas fa-power-off"></i></button>
                </div>
-
           </div>
         </nav>
       </mat-toolbar>

@@ -20,6 +20,9 @@ using Planning.API.Business.Services.Interface;
 using Planning.API.DataAccess.Repositories;
 using Planning.API.DataAccess.Repositories.Interface;
 using Planning.API.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using TechCloud.Tools.DataAccess.Infrastructure;
 
 namespace Planning.API
@@ -36,6 +39,22 @@ namespace Planning.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Mapper.Reset();
+            services.AddDbContext<PPE2APIContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            IdentityBuilder builder = services.AddIdentityCore<User>(opt => {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 6;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            });
+
+            builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
+            builder.AddEntityFrameworkStores<PPE2APIContext>();
+            builder.AddRoleValidator<RoleValidator<Role>>();
+            builder.AddRoleManager<RoleManager<Role>>();
+            builder.AddSignInManager<SignInManager<User>>();
+
             services.AddAutoMapper(typeof(MappingToModel), typeof(MappingToDomain));
             services.AddScoped<IClassesService, ClassesService>();
             services.AddScoped<IElevesService, ElevesService>();
@@ -60,11 +79,27 @@ namespace Planning.API
             services.AddScoped<IDbContext>(f => {
                 return f.GetService<PPE2APIContext>();
             });
+                services.AddMvc(options => 
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                   // options.Filters.Add(new AuthorizeFilter(policy));
+                }
+            )
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opt => {
+                    opt.SerializerSettings.ReferenceLoopHandling = 
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
+                
+                
+                services.AddAuthorization(options => {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("ModerateDataRole", policy => policy.RequireRole("Admin", "Moderator"));
+                options.AddPolicy("VipOnle", policy => policy.RequireRole("VIP"));
+            });
             
-            
-            services.AddDbContext<PPE2APIContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddCors();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
@@ -77,10 +112,13 @@ namespace Planning.API
                         ValidateAudience = false
                     };
                 });
+
+            services.AddCors();
+            services.AddTransient<Seed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-         public void Configure(IApplicationBuilder app, IHostingEnvironment env )  //
+         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder )  //
         {
             if (env.IsDevelopment())
         {
@@ -93,6 +131,7 @@ namespace Planning.API
             }
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            seeder.SeedUsers();
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();

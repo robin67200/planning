@@ -42,4 +42,21 @@ namespace Planning.API.Business.Services
             CreateMap<IndisponibiliteViewModel, Indisponibilite>();
         }
     }
+
+        public class AutoMapperProfiles : Profile
+    {
+        public AutoMapperProfiles()
+        {
+            CreateMap<User, UserForListDto>()
+                .ForMember(dest => dest.Age, opt => {
+                    opt.MapFrom(d => d.DateOfBirth.CalculateAge());
+                });
+            CreateMap<User, UserForDetailedDto>()
+                .ForMember(dest => dest.Age, opt => {
+                    opt.MapFrom(d => d.DateOfBirth.CalculateAge());
+                });
+
+            CreateMap<UserForRegisterDto, User>();
+        }
+    }
 }

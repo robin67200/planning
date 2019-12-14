@@ -6,12 +6,13 @@
     #formDir="ngForm"
   >
   <div class="form-group row">
-    <label class="form-control-label text-md-right col-4"></label>
+    <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
           <div class="input-group">
             <span class="input-group-prepend">
             </span>
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-icon matSuffix>date_range</mat-icon>
               <input
                 matInput
                 formControlName="start"
@@ -25,12 +26,13 @@
       </div>
   </div>
   <div class="form-group row">
-    <label class="form-control-label text-md-right col-4"></label>
+    <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
           <div class="input-group">
             <span class="input-group-prepend">
             </span>
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-icon matSuffix>date_range</mat-icon>
               <input
                 matInput
                 formControlName="end"
@@ -45,7 +47,7 @@
   </div>
   <br />
   <div class="form-group row">
-    <label class="form-control-label text-md-right col-4" ></label>
+    <label class="form-control-label text-md-right col-3" ></label>
     <div class="col-7">
         <app-prof-select [form]="form"></app-prof-select>
     </div>
@@ -63,4 +65,3 @@
   </div>
   </form>
 </div>
-

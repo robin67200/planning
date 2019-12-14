@@ -102,8 +102,6 @@ export class CoursFormComponent implements OnInit {
       this.onCreating.emit(cours);
       this.ngForm.resetForm();
 
-      this.ngForm.resetForm();
-
       this.form.reset();
       this.form.controls.id.setValue(0);
 
