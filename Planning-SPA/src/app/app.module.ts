@@ -37,72 +37,6 @@ import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.compon
 import { TabsModule } from 'ngx-tabset';
 import { HasRoleDirective } from './view/_directives/hasRole.directive';
 
-const appRoutes: Routes = [
-  {
-    path: '',
-    runGuardsAndResolvers: 'always',
-    children: [
-      {
-        path: 'annees',
-        loadChildren: './view/annee/annee.module#AnneesModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'profs',
-        loadChildren: './view/prof/prof.module#ProfsModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'calendars',
-        loadChildren: './view/cours/cours.module#CourssModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'classes',
-        loadChildren: './view/classe/classe.module#ClasseModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'eleves',
-        loadChildren: './view/eleve/eleve.module#ElevesModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'niveaux',
-        loadChildren: './view/niveau/niveau.module#NiveauModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'matieres',
-        loadChildren: './view/matiere/matiere.module#MatiereModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'indisponibilites',
-        loadChildren: './view/indisponibilite/indisponibilite.module#IndisponibiliteModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'members',
-        loadChildren: './view/user/member.module#MembersModule',
-        canActivate: [AuthGuard],
-     },
-     {
-        path: 'admin',
-        component: AdminPanelComponent,
-        data: {roles: ['Admin', 'Moderator']}
-     }
-    ]
-  },
-
-  {path: 'home', component: HomeComponent },
-  {path: 'registers', component: RegisterComponent},
-  {path: 'user-management', component: UserManagementComponent },
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', redirectTo: 'home', pathMatch: 'full'},
-
-
-];
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +54,6 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AppSharedModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     FormsModule,
     NavModule,

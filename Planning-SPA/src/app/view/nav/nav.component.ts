@@ -2,6 +2,7 @@ import { AlertifyService } from './../_services/alertify.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
+import { AdminService } from '../_services/admin.service';
 
 @Component({
   selector: 'app-nav',
@@ -15,9 +16,11 @@ export class NavComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private alertify: AlertifyService,
-    private router: Router) { }
+    private router: Router,
+    private admin: AdminService) { }
 
   ngOnInit() {
+    this.admin.getUsersWithRoles();
   }
 
   login() {
