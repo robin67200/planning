@@ -84,7 +84,7 @@
       [locale]="locale"
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="openCoursDetail(events); pnlCoursDetail.display()"
+      (eventClicked)="openCoursDetail($event); pnlCoursDetail.display()"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-month-view>

@@ -40,7 +40,7 @@ export class CalendarComponent implements OnInit {
   locale = 'fr';
   courss: Cours[];
   bsModalRef: BsModalRef;
-  cours: any;
+  cours: Cours;
   profs: Prof[] = [];
   matieres: Matiere[] = [];
 
@@ -53,24 +53,23 @@ export class CalendarComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   };
+  eventss: CalendarEvent;
 
   actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-fw fa-edit"></i>',
-      a11yLabel: 'Edit',
-      onClick: (): void => {
-        this.openCours(this.cours);
-        this.ngOnInit();
-      }
-    },
-    {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: (): void => {
-        console.log('Clique');
-        this.deleteCours(this.cours);
-        this.ngOnInit();
-      }
-    }
+    // {
+    //   label: '<i class="fa fa-fw fa-edit"></i>',
+    //   a11yLabel: 'Edit',
+    //   onClick: (): void => {
+    //     this.openCours(this.eventss.id);
+    //   }
+    // },
+    // {
+    //   label: '<i class="fa fa-fw fa-times"></i>',
+    //   onClick: (): void => {
+    //     console.log('Clique');
+    //     this.deleteCours(this.eventss.id);
+    //   }
+    // }
   ];
 
   refresh: Subject<any> = new Subject();
@@ -190,20 +189,25 @@ export class CalendarComponent implements OnInit {
 
 ///////////////////////////////////////////////////////////////////////
 
-  deleteCours(event: Cours) {
-    this.modals
+  deleteCours(event: number) {
+    event = this.cours.id;
+    this.service.getCoursById(this.cours.id).subscribe(res => {
+      this.cours = res;
+      this.modals
       .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${event.title} ${event.id} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
+        title: `Supprimer un cours ?`,
+        message: 'Êtes-vous sûr de cette suppresion ?'
       })
       .subscribe(result => {
         if (result) {
-          this.service.deleteCoursById(event.id).subscribe(res => {
+          this.service.deleteCoursById(this.cours.id).subscribe(resp => {
             this.alertify.succes('Supprimé');
             this.ngOnInit();
           });
         }
       });
+    });
+
   }
 
   openCours(cours: Cours) {
@@ -230,13 +234,29 @@ export class CalendarComponent implements OnInit {
   }
 
   openCoursDetail(cours: Cours) {
+    // this.events = this.courss.map(res => {
+    //   return {
+    //     id: this.eventss.id,
+    //     start: new Date(cours.start),
+    //     end: new Date(cours.end),
+    //     title: cours.title,
+    //     room: cours.room,
+    //     actions: this.actions,
+    //     color: {
+    //       primary: cours.color,
+    //       secondary: cours.color2
+    //     },
+    //     professeurId: cours.professeurId,
+    //     matiereId: cours.matiereId,
+    //   };
+    // });
+    const f = this.events.filter(c => c.id = cours.id);
+    cours.id = this.eventss.id;
     this.service.getCoursById(cours.id).subscribe(res => {
-      this.cours = res;
       this.service2.pushObject(cours);
       console.log(this.cours);
 
     });
-    this.alertify.succes('Detail');
   }
 
 }
