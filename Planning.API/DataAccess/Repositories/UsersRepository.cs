@@ -9,10 +9,20 @@ namespace Planning.API.DataAccess.Repositories {
 
     public class UsersRepository : GenericRepository<User>, IUsersRepository
     {
-        private readonly PPE2APIContext _context;
-        public UsersRepository(PPE2APIContext context) : base(context)
+    private readonly PPE2APIContext _context;
+        public UsersRepository(PPE2APIContext context)
         {
-             _context = context;
+            _context = context;
+
+        }
+        public void add<T>(T entity) where T : class
+        {
+            _context.Add(entity);
+        }
+
+        public void Delete<T>(T entity) where T : class
+        {
+            _context.Remove(entity);
         }
 
         public async Task<User> GetUser(int id)
@@ -27,6 +37,11 @@ namespace Planning.API.DataAccess.Repositories {
             var users = await _context.Users.ToListAsync();
             
             return users;
+        }
+
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
         }
 
     }

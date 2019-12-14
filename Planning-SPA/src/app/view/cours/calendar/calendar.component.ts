@@ -2,7 +2,7 @@ import { MatiereService } from './../../matiere/services/matiere.service';
 import { ProfService } from './../../prof/services/prof.service';
 import { Matiere } from './../../matiere/models/matiere';
 import { Cours } from './../models/cours';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import {startOfDay, endOfDay, subDays,
         addDays, endOfMonth, isSameDay,
         isSameMonth, addHours} from 'date-fns';
@@ -16,7 +16,8 @@ import {
   CalendarViewPeriod,
   CalendarWeekViewBeforeRenderEvent,
   CalendarMonthViewBeforeRenderEvent,
-  CalendarDayViewBeforeRenderEvent
+  CalendarDayViewBeforeRenderEvent,
+  DAYS_OF_WEEK
 } from 'angular-calendar';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr'; // to register french
@@ -27,19 +28,23 @@ import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Prof } from '../../prof/models/prof';
 import { AlertifyService } from '../../_services/alertify.service';
+import { Params, ActivatedRoute } from '@angular/router';
 
 registerLocaleData(localeFr);
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./calendar.component.css']
+
 })
 export class CalendarComponent implements OnInit {
 
   locale = 'fr';
   courss: Cours[];
   bsModalRef: BsModalRef;
+  id: number;
   cours: any;
   profs: Prof[] = [];
   matieres: Matiere[] = [];
@@ -58,29 +63,35 @@ export class CalendarComponent implements OnInit {
     {
       label: '<i class="fa fa-fw fa-edit"></i>',
       a11yLabel: 'Edit',
-      onClick: (): void => {
-        this.openCours(this.cours);
-        this.ngOnInit();
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.handleEvent('Edited', event);
+
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
+      a11yLabel: 'Delete',
       onClick: (): void => {
-        console.log('Clique');
+        console.log(this.cours);
+        console.log(this.events);
         this.deleteCours(this.cours);
-        this.ngOnInit();
-      }
     }
-  ];
+  }
+];
 
   refresh: Subject<any> = new Subject();
-  events: CalendarEvent[] = [];
+  events: CalendarEvent[];
 
   period: CalendarViewPeriod;
   activeDayIsOpen = false;
   form: FormGroup;
+  excludeDays: number[] = [0, 6];
+
+  weekStartsOn = DAYS_OF_WEEK.SUNDAY;
+
 
   constructor(
+    route: ActivatedRoute,
     private modal: NgbModal,
     private service: CoursService,
     private modalService: BsModalService,
@@ -92,7 +103,13 @@ export class CalendarComponent implements OnInit {
     private matiereService: MatiereService,
     private alertify: AlertifyService
 
-    ) {}
+    ) {
+      route.params.forEach((params: Params) => {
+      if (params.id != null) {
+        this.id = +params.id;
+      }
+    });
+  }
 
     ngOnInit() {
       this.service.getCours().subscribe(courss => {
@@ -190,15 +207,16 @@ export class CalendarComponent implements OnInit {
 
 ///////////////////////////////////////////////////////////////////////
 
-  deleteCours(event: Cours) {
+  deleteCours(courss: Cours) {
+    console.log(courss);
     this.modals
       .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${event.title} ${event.id} ?`,
+        title: `Supprimer ${courss.title} ${courss.id} ?`,
         message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
       })
       .subscribe(result => {
         if (result) {
-          this.service.deleteCoursById(event.id).subscribe(res => {
+          this.service.deleteCoursById(courss.id).subscribe(res => {
             this.alertify.succes('Supprimé');
             this.ngOnInit();
           });
@@ -213,7 +231,7 @@ export class CalendarComponent implements OnInit {
   onCoursUpdated(cours: Cours) {
     this.service.putCoursWithControl(cours.id, cours).subscribe((result) => {
       this.ngOnInit();
-      this.alertify.succes('modifié');
+      this.alertify.succes('Modifié');
     }, error => {
       this.alertify.error('Professeur indisponible ou erreur de saisie dans les dates');
     });
@@ -223,7 +241,7 @@ export class CalendarComponent implements OnInit {
     this.service.addCoursWithControl(cours).subscribe(result => {
       // this.courss.push(result);
       this.ngOnInit();
-      this.alertify.succes('ajouté');
+      this.alertify.succes('Ajouté');
     }, error => {
       this.alertify.error('Professeur indisponible ou erreur de saisie dans les dates');
     } );
@@ -234,7 +252,6 @@ export class CalendarComponent implements OnInit {
       this.cours = res;
       this.service2.pushObject(cours);
       console.log(this.cours);
-
     });
     this.alertify.succes('Detail');
   }

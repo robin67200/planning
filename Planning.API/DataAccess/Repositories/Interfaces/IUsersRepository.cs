@@ -5,9 +5,12 @@ using TechCloud.Tools.DataAccess.Infrastructure;
 
 namespace Planning.API.DataAccess.Repositories.Interface
 {
-    public interface IUsersRepository : IRepository<User>
+    public interface IUsersRepository
     {
-        Task<User> GetUser(int id);
-        Task<IEnumerable<User>> GetUsers();
+         void add<T>(T entity) where T: class;
+         void Delete<T>(T entity) where T: class;
+         Task<bool> SaveAll();
+         Task<IEnumerable<User>> GetUsers();
+         Task<User> GetUser(int id);
     }
 }

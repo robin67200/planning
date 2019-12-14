@@ -62,6 +62,7 @@ export class CoursListComponent implements OnInit {
   }
 
   deleteCours(cours: Cours) {
+    console.log(cours);
     this.modals
       .addModal(ModalConfirmComponent, {
         title: `Supprimer ${cours.title} ${cours.id} ?`,
@@ -93,7 +94,7 @@ export class CoursListComponent implements OnInit {
     this.service.addCoursWithControl(cours).subscribe(result => {
       // this.courss.push(result);
       this.ngOnInit();
-      this.alertify.succes('ajouté');
+      this.alertify.succes('Ajouté');
     }, error => {
       this.alertify.error('Professeur indisponible ou erreur de saisie dans les dates');
     } );

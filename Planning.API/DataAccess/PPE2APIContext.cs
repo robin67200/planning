@@ -1,12 +1,13 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Planning.API.DataAccess;
 using Planning.API.Models;
 using TechCloud.Tools.DataAccess.Infrastructure;
 
 namespace Planning.API.Models {
-    public class PPE2APIContext : DbContext, IDbContext
+    public class PPE2APIContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>,
+     UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>, IDbContext
     {
         public PPE2APIContext(DbContextOptions<PPE2APIContext> options)
             : base(options){}
@@ -21,11 +22,7 @@ namespace Planning.API.Models {
         public DbSet<Planning.API.Models.Prof> Profs { get; set; }
         public DbSet<Planning.API.Models.ProfClasse> ProfClasses { get; set; }
         public DbSet<Planning.API.Models.ProfMatiere> ProfMatieres { get; set; }
-        public DbSet<Planning.API.Models.Indisponibilite> Indisponibilites { get; set; }
-        public DbSet<Planning.API.Models.User> Users { get; set; }
-        
-       
-    
+        public DbSet<Planning.API.Models.Indisponibilite> Indisponibilites { get; set; }        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,8 +39,17 @@ namespace Planning.API.Models {
             modelBuilder.ApplyConfiguration(new ProfClasseConfig());
             modelBuilder.ApplyConfiguration(new ProfMatiereConfig());
             modelBuilder.ApplyConfiguration(new IndisponibiliteConfig());
-            modelBuilder.ApplyConfiguration(new UserConfig());
             
+            modelBuilder.Entity<UserRole>(userRole => 
+            {
+                userRole.HasKey(ur => new {ur.UserId, ur.RoleId});
+                
+                userRole.HasOne(ur => ur.Role).WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId).IsRequired();
+
+                userRole.HasOne(ur => ur.User).WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId).IsRequired();
+            });
         }
     }
 }

@@ -1,3 +1,4 @@
+import { RolesModalComponent } from './view/admin/roles-modal/roles-modal.component';
 import { AuthGuard } from './view/_guards/auth.guard';
 import { AuthService } from './view/_services/auth.service';
 import { ModalSimpleInputComponent } from './components/modals/simple-input-modals';
@@ -31,7 +32,10 @@ import { RegisterComponent } from './view/register/register.component';
 import { UserService } from './view/user/_services/user.service';
 import { AdminService } from './view/_services/admin.service';
 import { AlertifyService } from './view/_services/alertify.service';
-
+import { UserManagementComponent } from './view/admin/user-management/user-management.component';
+import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.component';
+import { TabsModule } from 'ngx-tabset';
+import { HasRoleDirective } from './view/_directives/hasRole.directive';
 
 const appRoutes: Routes = [
   {
@@ -77,12 +81,23 @@ const appRoutes: Routes = [
         path: 'indisponibilites',
         loadChildren: './view/indisponibilite/indisponibilite.module#IndisponibiliteModule',
         canActivate: [AuthGuard],
-      }
+      },
+      {
+        path: 'members',
+        loadChildren: './view/user/member.module#MembersModule',
+        canActivate: [AuthGuard],
+     },
+     {
+        path: 'admin',
+        component: AdminPanelComponent,
+        data: {roles: ['Admin', 'Moderator']}
+     }
     ]
   },
 
   {path: 'home', component: HomeComponent },
   {path: 'registers', component: RegisterComponent},
+  {path: 'user-management', component: UserManagementComponent },
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', redirectTo: 'home', pathMatch: 'full'},
 
@@ -94,8 +109,11 @@ const appRoutes: Routes = [
     ModalConfirmComponent,
     ModalItemSelectorComponent,
     ModalSimpleInputComponent,
+    AdminPanelComponent,
+    UserManagementComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    RolesModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +124,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     NavModule,
+    TabsModule.forRoot(),
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
@@ -131,7 +150,7 @@ const appRoutes: Routes = [
     FormsModule
 
   ],
-  entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent],
+  entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent, RolesModalComponent ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'FR'},
       AuthService,
@@ -140,7 +159,7 @@ const appRoutes: Routes = [
       AdminService,
       AlertifyService
    ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(
