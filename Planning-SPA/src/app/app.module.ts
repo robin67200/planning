@@ -37,6 +37,10 @@ import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.compon
 import { TabsModule } from 'ngx-tabset';
 import { HasRoleDirective } from './view/_directives/hasRole.directive';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -99,8 +103,7 @@ const appRoutes: Routes = [
   {path: 'registers', component: RegisterComponent},
   {path: 'user-management', component: UserManagementComponent },
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', redirectTo: 'home', pathMatch: 'full'},
-
+  {path: '**', redirectTo: 'classes', pathMatch: 'full'},
 
 ];
 @NgModule({
@@ -150,7 +153,11 @@ const appRoutes: Routes = [
     FormsModule
 
   ],
-  entryComponents: [ModalConfirmComponent, ModalItemSelectorComponent, ModalSimpleInputComponent, RolesModalComponent ],
+  entryComponents: [
+    ModalConfirmComponent,
+    ModalItemSelectorComponent,
+    ModalSimpleInputComponent,
+    RolesModalComponent ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'FR'},
       AuthService,
@@ -160,6 +167,7 @@ const appRoutes: Routes = [
       AlertifyService
    ],
   bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule {
   constructor(

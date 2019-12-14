@@ -1,3 +1,4 @@
+import { AppSharedModule } from 'src/app/app-shared.module';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,7 @@ import { TimeAgoPipe } from 'time-ago-pipe';
 
 @NgModule({
   imports: [CommonModule,
+            AppSharedModule,
             ReactiveFormsModule,
             FormsModule,
             MembersRoutingModule,

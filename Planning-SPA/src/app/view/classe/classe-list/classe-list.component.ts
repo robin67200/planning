@@ -39,10 +39,8 @@ export class ClasseListComponent implements OnInit {
       this.classes = response;
       this.niveauService.getNiveau().subscribe(niveaux => {
         this.niveaux = niveaux;
-        console.log(niveaux);
         this.anneeService.getAnnee().subscribe(annees => {
           this.annees = annees;
-          console.log(annees);
           this.classes.forEach(c => {
             const niveau = this.niveaux.find(n => n.id === c.niveauId);
             c.niveauName = niveau.nom;

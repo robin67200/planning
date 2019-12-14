@@ -249,24 +249,6 @@ export class CalendarComponent implements OnInit {
   }
 
   openCoursDetail(cours: Cours) {
-    // this.events = this.courss.map(res => {
-    //   return {
-    //     id: this.eventss.id,
-    //     start: new Date(cours.start),
-    //     end: new Date(cours.end),
-    //     title: cours.title,
-    //     room: cours.room,
-    //     actions: this.actions,
-    //     color: {
-    //       primary: cours.color,
-    //       secondary: cours.color2
-    //     },
-    //     professeurId: cours.professeurId,
-    //     matiereId: cours.matiereId,
-    //   };
-    // });
-    const f = this.events.filter(c => c.id = cours.id);
-    cours.id = this.eventss.id;
     this.service.getCoursById(cours.id).subscribe(res => {
       this.service2.pushObject(cours);
       console.log(this.cours);

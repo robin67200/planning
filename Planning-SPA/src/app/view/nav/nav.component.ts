@@ -15,18 +15,19 @@ export class NavComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private alertify: AlertifyService,
-    private router: Router) { }
+    private router: Router,
+    ) { }
 
   ngOnInit() {
   }
 
   login() {
     this.authService.login(this.model).subscribe(next => {
-      this.router.navigate(['/classes']);
       this.alertify.succes('Connection réussie !');
     }, error => {
       this.alertify.error('Echec connection');
     }, () => {
+      this.router.navigate(['/classes']);
 
     });
   }
@@ -36,19 +37,18 @@ export class NavComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/home']);
     localStorage.removeItem('token');
     this.alertify.message('Deconnexion');
+    this.router.navigate(['/home']);
   }
 
   register() {
     this.authService.register(this.model).subscribe(() => {
-      this.router.navigate(['/classes']);
       this.alertify.succes('Inscription terminée !');
     }, error => {
       this.alertify.error(error);
     }, () => {
-
+      this.router.navigate(['/classes']);
     });
   }
 

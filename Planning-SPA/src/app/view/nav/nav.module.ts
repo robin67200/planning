@@ -12,6 +12,8 @@ import { AppSharedModule } from 'src/app/app-shared.module';
   declarations: [NavComponent],
   imports:
       [CommonModule,
+      ReactiveFormsModule,
+      AppSharedModule,
       MatSidenavModule,
       MatToolbarModule,
       MatIconModule,
@@ -19,9 +21,7 @@ import { AppSharedModule } from 'src/app/app-shared.module';
       RouterModule,
       MatListModule,
       FormsModule,
-      ReactiveFormsModule,
       MatTooltipModule,
-      AppSharedModule
 
     ],
   exports: [NavComponent],

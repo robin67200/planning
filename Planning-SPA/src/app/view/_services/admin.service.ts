@@ -19,7 +19,4 @@ constructor(private http: HttpClient) { }
   updateUsersRoles(user: User, roles: {}) {
     return this.http.post(this.baseUrl + 'admin/editRoles/' + user.username, roles);
   }
-  getUsers() {
-    return this.http.get<User[]>('http://localhost:5000/api/users');
-  }
 }
