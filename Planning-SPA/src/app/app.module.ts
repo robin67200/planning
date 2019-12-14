@@ -37,6 +37,10 @@ import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.compon
 import { TabsModule } from 'ngx-tabset';
 import { HasRoleDirective } from './view/_directives/hasRole.directive';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,9 +54,9 @@ import { HasRoleDirective } from './view/_directives/hasRole.directive';
     RolesModalComponent,
   ],
   imports: [
+    AppSharedModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppSharedModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,

@@ -19,7 +19,6 @@ import { HasRoleDirective } from './view/_directives/hasRole.directive';
 const APP_COMPONENTS = [
   AppSlidePanelComponent,
   SlideCreateComponent,
-  HasRoleDirective,
    ];
 
 const APP_MODULES = [
@@ -31,13 +30,9 @@ const APP_MODULES = [
 ];
 
 @NgModule({
-  declarations: [ APP_COMPONENTS ],
+  declarations: [HasRoleDirective, APP_COMPONENTS ],
   imports: [ APP_MODULES ],
   providers: [
-    AuthService,
-    AuthGuard,
-    UserService,
-    AdminService
   ],
   entryComponents: [],
   exports: [ APP_MODULES, HasRoleDirective, AppSlidePanelComponent,

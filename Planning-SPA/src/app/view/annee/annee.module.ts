@@ -10,11 +10,11 @@ import { AnneesRoutingModule } from './annee.routing';
 import { AnneeSelectComponent } from './components/annee-select/annee-select.component';
 
 @NgModule({
-  imports: [CommonModule,
+  imports: [AppSharedModule,
+            CommonModule,
             ReactiveFormsModule,
             FormsModule,
             AnneesRoutingModule,
-            AppSharedModule,
             ModalModule.forRoot()
             ],
   declarations: [

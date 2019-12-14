@@ -4,6 +4,10 @@ import { HomeComponent } from './view/home/home.component';
 import { AuthGuard } from './view/_guards/auth.guard';
 import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.component';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {
