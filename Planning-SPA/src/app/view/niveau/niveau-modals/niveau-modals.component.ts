@@ -1,4 +1,4 @@
-import { AlertifyService } from 'src/app/_services/alertify.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import { NiveauService } from './../services/niveau.service';
 import { Niveau } from './../models/niveau';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
