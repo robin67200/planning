@@ -12,6 +12,7 @@ import { NiveauCreateComponent } from './components/niveau-select/niveau-create/
 import { NiveauEditComponent } from './components/niveau-select/niveau-edit/niveau-edit.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule,
     MatMenuModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule } from '@angular/material';
+import { NiveauModalsComponent } from './niveau-modals/niveau-modals.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -35,10 +36,12 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule,
     NiveauListComponent,
     NiveauSelectComponent,
     NiveauCreateComponent,
-    NiveauEditComponent
+    NiveauEditComponent,
+    NiveauModalsComponent
   ],
   providers: [NiveauService, NiveauService2],
-  entryComponents: [],
-  exports: [NiveauSelectComponent, NiveauCreateComponent, NiveauEditComponent]
+  exports: [NiveauSelectComponent, NiveauCreateComponent, NiveauEditComponent],
+  entryComponents: [NiveauModalsComponent],
+
 })
 export class NiveauModule {}

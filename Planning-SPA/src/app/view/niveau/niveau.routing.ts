@@ -9,7 +9,9 @@ export const routes: Routes = [
   },
     {path: 'list', component: NiveauListComponent},
 
+
   ];
+
 
 @NgModule({
     imports: [ RouterModule.forChild(routes) ],
