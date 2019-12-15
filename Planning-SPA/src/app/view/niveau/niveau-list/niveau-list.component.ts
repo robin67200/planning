@@ -1,12 +1,14 @@
+import { NiveauModalsComponent } from './../niveau-modals/niveau-modals.component';
 import { Niveau } from './../models/niveau';
 import { NiveauService } from './../services/niveau.service';
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap';
-import { SimpleModalService } from 'ngx-simple-modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { SimpleModalService, SimpleModalServiceConfig } from 'ngx-simple-modal';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
 import { AlertifyService } from '../../_services/alertify.service';
+import { RolesModalComponent } from '../../admin/roles-modal/roles-modal.component';
 
 @Component({
   selector: 'app-niveau-list',
@@ -24,6 +26,7 @@ export class NiveauListComponent implements OnInit {
   constructor(
     private service: NiveauService,
     private modals: SimpleModalService,
+    private modalService: BsModalService,
     private alertify: AlertifyService
     ) { }
 
@@ -38,7 +41,7 @@ export class NiveauListComponent implements OnInit {
     );
   }
 
- addniveau() {
+  addniveau() {
     this.modals.addModal(ModalSimpleInputComponent, {
       title: `Ajout d'un nouveau niveau`,
       message: 'Veuillez entrer son nom',
@@ -55,39 +58,12 @@ export class NiveauListComponent implements OnInit {
     });
   }
 
-   modifyniveau(niveau: Niveau) {
-    this.modals.addModal(ModalSimpleInputComponent, {
-      title:  `Modification`,
-      message: `Veuillez modifier le niveau`,
-      defaultValue: niveau.nom,
-      label: 'nom'
-    }).subscribe(result => {
-      if (result) {
-        niveau.nom = result.toString();
-        this.service.putNiveau(niveau.id, niveau).subscribe(res => {
-          this.niveaux.push(res);
-        });
-        this.alertify.succes('Modifié');
-      }
-    });
-  }
-
-
   deleteniveau(niveau: Niveau) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer le niveau ${niveau.nom} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer ce niveau ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteNiveauById(niveau.id).subscribe(res => {
-            // const index = this.niveauss.indexOf(niveau);
-            // this.niveauss.splice(index, 1);
-            this.ngOnInit();
-          });
-          this.alertify.succes('Supprimé');
-        }
-      });
+    const initialState = {
+      niveau
+    };
+    this.bsModalRef = this.modalService.show(NiveauModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
   }
 }

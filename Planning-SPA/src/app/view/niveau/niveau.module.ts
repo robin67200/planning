@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
+import { NiveauModalsComponent } from './niveau-modals/niveau-modals.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -19,10 +20,11 @@ import { ModalModule } from 'ngx-bootstrap';
             ],
   declarations: [
     NiveauListComponent,
-    NiveauSelectComponent
+    NiveauSelectComponent,
+    NiveauModalsComponent
   ],
   providers: [NiveauService],
-  entryComponents: [],
+  entryComponents: [NiveauModalsComponent],
   exports: [NiveauSelectComponent]
 })
 export class NiveauModule {}
