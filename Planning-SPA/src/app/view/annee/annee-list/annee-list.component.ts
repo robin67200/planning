@@ -6,6 +6,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { AlertifyService } from '../../_services/alertify.service';
+import { AnneeModalComponent } from '../annee-modal/annee-modal.component';
 
 @Component({
   selector: 'app-annee-list',
@@ -15,14 +16,15 @@ import { AlertifyService } from '../../_services/alertify.service';
 export class AnneeListComponent implements OnInit {
 
   anneess: Annee[] = [];
-  annees: any;
+  annees: Annee[];
   bsModalRef: BsModalRef;
   annee: Annee;
 
   constructor(
     private service: AnneeService,
     private modals: SimpleModalService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private modalService: BsModalService,
     ) { }
 
   ngOnInit() {
@@ -70,22 +72,34 @@ export class AnneeListComponent implements OnInit {
     });
   }
 
-
-  deleteAnnee(annee: Annee) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer l'année ${annee.nom} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cette année ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteAnneById(annee.id).subscribe(res => {
-            // const index = this.anneess.indexOf(annee);
-            // this.anneess.splice(index, 1);
-            this.ngOnInit();
-          });
-          this.alertify.succes('Supprimé');
-        }
-      });
+  deletModal(annee: Annee) {
+    const initialState = {
+      annee
+    };
+    this.bsModalRef = this.modalService.show(AnneeModalComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+    this.ngOnInit();
+    
   }
+
+
+
+
+  // deleteAnnee(annee: Annee) {
+  //   this.modals
+  //     .addModal(ModalConfirmComponent, {
+  //       title: `Supprimer l'année ${annee.nom} ?`,
+  //       message: 'Êtes-vous sûr de vouloir supprimer cette année ?'
+  //     })
+  //     .subscribe(result => {
+  //       if (result) {
+  //         this.service.deleteAnneById(annee.id).subscribe(res => {
+  //           // const index = this.anneess.indexOf(annee);
+  //           // this.anneess.splice(index, 1);
+  //           this.ngOnInit();
+  //         });
+  //         this.alertify.succes('Supprimé');
+  //       }
+  //     });
+  // }
 }
