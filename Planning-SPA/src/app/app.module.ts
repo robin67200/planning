@@ -36,6 +36,7 @@ import { UserManagementComponent } from './view/admin/user-management/user-manag
 import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.component';
 import { TabsModule } from 'ngx-tabset';
 import { HasRoleDirective } from './view/_directives/hasRole.directive';
+import { JwtModule } from '@auth0/angular-jwt';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -84,7 +85,14 @@ export function tokenGetter() {
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    FormsModule
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:5000'],
+        blacklistedRoutes: ['localhost:5000/api/auth']
+      }
+    })
 
   ],
   entryComponents: [

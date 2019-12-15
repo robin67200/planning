@@ -3,6 +3,7 @@ bin
 obj
 *.db
 migrations
+wwwroot
 
 # dependencies
 node_modules

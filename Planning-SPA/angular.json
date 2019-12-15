@@ -33,9 +33,6 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-
-
-
             ]
           },
           "configurations": {
@@ -54,7 +51,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",

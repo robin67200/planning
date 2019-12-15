@@ -10,7 +10,7 @@ import { User } from '../user/_models/user';
   providedIn: 'root'
 })
 export class AuthService {
- baseUrl = 'https://localhost:5001/api/auth/';
+ baseUrl = 'http://localhost:5000/api/auth/';
  jwtHelper = new JwtHelperService();
  decodedToken: any;
 

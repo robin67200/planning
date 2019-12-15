@@ -12,6 +12,7 @@ import { AdminService } from '../_services/admin.service';
 export class NavComponent implements OnInit {
 
   model: any = {};
+  opened: boolean;
 
   constructor(
     public authService: AuthService,
