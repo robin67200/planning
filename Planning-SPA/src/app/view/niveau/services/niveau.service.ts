@@ -1,6 +1,8 @@
 import { Niveau } from './../models/niveau';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CrudService } from 'src/app/_services/crud.service';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 @Injectable()
 export class NiveauService {
@@ -23,3 +25,14 @@ deleteNiveauById(id: number) {
 }
 
 }
+
+export class NiveauService2 extends CrudService<Niveau, number> {
+  constructor(protected http: HttpClient, protected modals: SimpleModalService) {
+      super(http, modals);
+      // this.baseUrl = 'http://localhost:5000/api/';
+      this.controller = 'niveaux';
+      this.url = `${this.baseUrl}${this.controller}/`;
+    }
+
+
+  }

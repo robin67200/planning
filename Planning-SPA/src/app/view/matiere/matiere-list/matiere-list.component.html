@@ -1,7 +1,7 @@
 <div class="container">
   <br />
   <h2 style="text-align:center">Matières</h2>
-  <button *appHasRole="['Admin','Moderator']" class="btn btn-outline-primary" style="margin-left: 91%;" (click)="addmatiere()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+  <button *appHasRole="['Admin','Moderator']" class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlCreate.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
   <hr>
   <br />
   <br />
@@ -23,7 +23,7 @@
               <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i>&nbsp; Action
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="modifymatiere(matiere)" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
+                <a class="dropdown-item" (click)="openMatiere(matiere); pnlEdit.display()" style="cursor: pointer;" ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a>
                 <a class="dropdown-item" (click)="deletematiere(matiere)" style="cursor: pointer; background-color: rgb(246, 179, 179);"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a>
               </div>
             </div>
@@ -31,3 +31,25 @@
       </tr>
   </table>
 </div>
+<app-app-slide-panel #pnlCreate>
+  <div panel-header style="text-align: center;">
+    <h4>Formulaire Matiere</h4>
+  </div>
+  <div panel-body>
+    <app-matiere-create
+      (onCreating)="onMatiereCreated($event); pnlCreate.hide()"
+      (onClose)="pnlCreate.hide()">
+    </app-matiere-create>
+  </div>
+</app-app-slide-panel>
+<app-app-slide-panel #pnlEdit>
+  <div panel-header style="text-align: center;">
+    <h4>Formulaire Matière</h4>
+  </div>
+  <div panel-body>
+    <app-matiere-edit
+      (onUpdating)="onMatiereUpdated($event); pnlEdit.hide()"
+      (onClose)="pnlEdit.hide()">
+    </app-matiere-edit>
+  </div>
+</app-app-slide-panel>

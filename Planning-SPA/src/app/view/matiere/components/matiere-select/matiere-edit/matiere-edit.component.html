@@ -1,0 +1,48 @@
+<form
+  class="form-horizontal form-label-left parsleyjs ng-untouched ng-pristine ng-valid"
+  [formGroup]="form"
+  (submit)="save()"
+  #formDir="ngForm"
+>
+  <fieldset>
+    <legend>
+      Veuillez renseigner les informations suivantes...
+    </legend>
+    <br />
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+        <div class="input-group ">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>contacts</mat-icon>
+            <input
+              formControlName="nom"
+              type="text"
+              matInput
+              placeholder="Nom"
+              #nom
+              maxlength="30"
+            />
+            <mat-hint align="end">{{ nom.value.length }} / 30</mat-hint>
+            <mat-error *ngIf="nom.invalid">Veuillez entrer un nom</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+  </fieldset>
+  <div class="form-actions" style="text-align: center; margin-right: 11%;">
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-rounded "
+      (click)="close()"
+    >
+      <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
+    </button>
+    <button type="submit" class="btn btn-success btn-rounded">
+      <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
+    </button>
+  </div>
+</form>
