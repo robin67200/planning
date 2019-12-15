@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class NiveauModalsComponent implements OnInit {
 
-  @Output() delNiveaux = new EventEmitter();
+@Output() delNiveaux = new EventEmitter();
 
   closeBtnName: string;
   niveaux: Niveau;
@@ -34,6 +34,7 @@ export class NiveauModalsComponent implements OnInit {
       this.router.navigateByUrl('/NiveauListComponent', { skipLocationChange: true}).then(() => {
         this.router.navigate(['/niveaux/list']);
     });
+      this.alertify.succes('supprimé');
     });
   }
 }

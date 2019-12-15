@@ -79,7 +79,7 @@ export class AnneeListComponent implements OnInit {
     this.bsModalRef = this.modalService.show(AnneeModalComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
     this.ngOnInit();
-    
+
   }
 
 

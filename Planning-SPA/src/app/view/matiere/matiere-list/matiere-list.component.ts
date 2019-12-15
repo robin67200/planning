@@ -1,11 +1,13 @@
+import { MatiereModalsComponent } from './../matiere-modals/matiere-modals.component';
 import { Component, OnInit } from '@angular/core';
 import { Matiere } from '../models/matiere';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { MatiereService } from '../services/matiere.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { AlertifyService } from '../../_services/alertify.service';
+import { NiveauModalsComponent } from '../../niveau/niveau-modals/niveau-modals.component';
 
 @Component({
   selector: 'app-matiere-list',
@@ -22,7 +24,8 @@ export class MatiereListComponent implements OnInit {
   constructor(
     private service: MatiereService,
     private modals: SimpleModalService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private modalService: BsModalService
     ) { }
 
   ngOnInit() {
@@ -71,21 +74,12 @@ export class MatiereListComponent implements OnInit {
   }
 
 
-  deletematiere(matiere: Matiere) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer le matiere ${matiere.nom} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cette matière ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteMatiereById(matiere.id).subscribe(res => {
-            // const index = this.matieress.indexOf(matiere);
-            // this.matieress.splice(index, 1);
-            this.ngOnInit();
-          });
-          this.alertify.succes('Supprimé');
-        }
-      });
+  deleteMatiere(matiere: Matiere) {
+    const initialState = {
+      matiere
+    };
+    this.bsModalRef = this.modalService.show(MatiereModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
   }
 }

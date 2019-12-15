@@ -1,3 +1,4 @@
+import { ClasseModalsComponent } from './classe-modals/classe-modals.component';
 import { ClasseFormEditComponent } from './components/classe-form-edit/classe-form-edit.component';
 import { ClasseFormComponent } from './components/classe-form/classe-form.component';
 import { ClasseDetailComponent } from './classe-detail/classe-detail.component';
@@ -43,10 +44,11 @@ import { MatInputModule, MatIconModule, MatNativeDateModule,
     ClasseDetailComponent,
     ClasseFormComponent,
     ClasseSelectComponent,
-    ClasseFormEditComponent
+    ClasseFormEditComponent,
+    ClasseModalsComponent
   ],
   providers: [ClasseService, ClasseService2],
-  entryComponents: [],
+  entryComponents: [ClasseModalsComponent],
   exports: [ClasseSelectComponent, ClasseFormComponent, ClasseFormEditComponent]
 })
 export class ClasseModule {}

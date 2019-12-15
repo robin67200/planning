@@ -1,3 +1,4 @@
+import { CoursModalsComponent } from './cours-modals/cours-modals.component';
 import { CoursListComponent } from './cours-list/cours-list.component';
 import { CoursFormEditComponent } from './components/cours-form-edit/cours-form-edit.component';
 import { MatiereModule } from './../matiere/matiere.module';
@@ -62,10 +63,11 @@ import { IndisponibiliteModule } from '../indisponibilite/indisponibilite.module
     CoursListComponent,
     CoursFormComponent,
     CalendarComponent,
-    CoursFormEditComponent
+    CoursFormEditComponent,
+    CoursModalsComponent
     ],
   providers: [CoursService, CoursService2],
-  entryComponents: [],
+  entryComponents: [CoursModalsComponent],
   exports: [CoursFormComponent, CalendarComponent, CoursFormEditComponent]
 })
 export class CourssModule {}

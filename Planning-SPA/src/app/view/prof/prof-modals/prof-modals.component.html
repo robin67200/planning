@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">Supprimer le niveau {{niveau.nom}} ?</h4>
+  <h4 class="modal-title pull-left">Supprimer prof {{prof.nom}} ?</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -8,6 +8,6 @@
   <h5>Etes vous sûr ?</h5>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-danger" (click)="deleteNiveau(niveau)" (click)="bsModalRef.hide()">Supprimer</button>
+  <button type="button" class="btn btn-danger" (click)="deleteProf(prof)" (click)="bsModalRef.hide()">Supprimer</button>
   <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Annuler</button>
 </div>

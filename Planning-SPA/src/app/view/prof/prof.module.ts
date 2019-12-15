@@ -1,3 +1,4 @@
+import { ProfModalsComponent } from './prof-modals/prof-modals.component';
 import { ProfFormEditComponent } from './components/prof-form-edit/prof-form-edit.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfFormComponent } from './components/prof-form/prof-form.component';
@@ -46,11 +47,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ProfListComponent,
     ProfSelectComponent,
     ProfFormComponent,
-    ProfFormEditComponent
+    ProfFormEditComponent,
+    ProfModalsComponent,
 
   ],
   providers: [ProfService, ProfService2],
-  entryComponents: [],
+  entryComponents: [ProfModalsComponent],
   exports: [ProfSelectComponent, ProfFormComponent, ProfFormEditComponent]
 })
 export class ProfsModule {}

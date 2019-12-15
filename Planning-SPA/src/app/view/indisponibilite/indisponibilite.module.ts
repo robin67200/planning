@@ -1,3 +1,4 @@
+import { IndisponibiliteModalsComponent } from './indisponibilite-modals/indisponibilite-modals.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -35,9 +36,10 @@ import { MatInputModule, MatIconModule } from '@angular/material';
     IndisponibiliteListComponent,
     IndisponibiliteFormComponent,
     IndispFormComponent,
+    IndisponibiliteModalsComponent
   ],
   providers: [IndisponibiliteService, IndisponibiliteService3],
-  entryComponents: [],
+  entryComponents: [IndisponibiliteModalsComponent],
   exports: [IndisponibiliteFormComponent, IndispFormComponent],
 })
 export class IndisponibiliteModule {}

@@ -1,3 +1,4 @@
+import { ProfModalsComponent } from './../prof-modals/prof-modals.component';
 import { ProfService, ProfService2 } from './../services/prof.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -20,6 +21,7 @@ export class ProfListComponent implements OnInit {
   id: number;
   prof: Prof;
   searchText: any;
+  bsModalRef: BsModalRef;
 
   constructor(
     private service: ProfService,
@@ -47,21 +49,6 @@ export class ProfListComponent implements OnInit {
       this.profs = res;
     });
   }
-  deleteProf(prof: Prof) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${prof.prenom} ${prof.nom} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cet prof ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteProfById(prof.id).subscribe(res => {
-            this.alertify.succes('Supprimé');
-            this.ngOnInit();
-          });
-        }
-      });
-  }
 
   openProf(prof: Prof) {
     this.service2.pushObject(prof);
@@ -80,6 +67,14 @@ export class ProfListComponent implements OnInit {
       this.alertify.succes('Ajouté');
       this.ngOnInit();
     });
+  }
+  deleteProf(prof: Prof) {
+    const initialState = {
+      prof
+    };
+    this.bsModalRef = this.modalService.show(ProfModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
   }
 }
 

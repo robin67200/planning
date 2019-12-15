@@ -11,6 +11,8 @@ import { Prof } from '../../prof/models/prof';
 import { IndisponibiliteService } from '../../indisponibilite/services/indisponibilite.service';
 import { Indisponibilite } from '../../indisponibilite/models/indisponibilite';
 import { AlertifyService } from '../../_services/alertify.service';
+import { CoursModalsComponent } from '../cours-modals/cours-modals.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-cours-list',
@@ -26,6 +28,7 @@ export class CoursListComponent implements OnInit {
   profs: Prof[] = [];
   matieres: Matiere[] = [];
   valid: boolean;
+  bsModalRef: BsModalRef;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -35,6 +38,7 @@ export class CoursListComponent implements OnInit {
     private service: CoursService,
     private service2: CoursService2,
     private modals: SimpleModalService,
+    private modalService: BsModalService,
     private profService: ProfService,
     private matiereService: MatiereService,
     private indispoService: IndisponibiliteService
@@ -59,22 +63,6 @@ export class CoursListComponent implements OnInit {
         });
       });
     });
-  }
-
-  deleteCours(cours: Cours) {
-    console.log(cours);
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${cours.title} ${cours.id} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cet cours ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteCoursById(cours.id).subscribe(res => {
-            this.ngOnInit();
-          });
-        }
-      });
   }
 
   openCours(cours: Cours) {
@@ -105,6 +93,15 @@ export class CoursListComponent implements OnInit {
       this.cours = res;
       this.service2.pushObject(cours);
     });
+  }
+
+  deleteCours(cours: Cours) {
+    const initialState = {
+      cours
+    };
+    this.bsModalRef = this.modalService.show(CoursModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
   }
 }
 

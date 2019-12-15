@@ -8,6 +8,8 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { NiveauService } from '../../niveau/services/niveau.service';
 import { AlertifyService } from '../../_services/alertify.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ClasseModalsComponent } from '../classe-modals/classe-modals.component';
 
 @Component({
   selector: 'app-classe-list',
@@ -24,11 +26,15 @@ export class ClasseListComponent implements OnInit {
   niveaux: Niveau[] = [];
   annees: Annee[] = [];
 
+  bsModalRef: BsModalRef;
+
+
 
   constructor(
     private service: ClasseService,
     private service2: ClasseService2,
     private modals: SimpleModalService,
+    private modalService: BsModalService,
     private niveauService: NiveauService,
     private anneeService: AnneeService,
     private alertify: AlertifyService
@@ -52,22 +58,6 @@ export class ClasseListComponent implements OnInit {
     });
   }
 
-  deleteClasse(classe: Classe) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${classe.nom} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cette classe ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteClasseById(classe.id).subscribe(res => {
-            this.ngOnInit();
-          });
-          this.alertify.succes('Supprimé');
-        }
-      });
-  }
-
   openClasse(classe: Classe) {
     this.service2.pushObject(classe);
   }
@@ -85,6 +75,15 @@ export class ClasseListComponent implements OnInit {
       this.ngOnInit();
     });
     this.alertify.succes('Ajouté');
+  }
+
+  deleteClasse(classe: Classe) {
+    const initialState = {
+      classe
+    };
+    this.bsModalRef = this.modalService.show(ClasseModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
   }
 }
 

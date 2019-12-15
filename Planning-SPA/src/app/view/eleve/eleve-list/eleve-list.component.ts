@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Classe } from '../../classe/models/classe';
 import { AlertifyService } from '../../_services/alertify.service';
+import { EleveModalsComponent } from '../eleve-modals/eleve-modals.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-eleve-list',
@@ -22,11 +24,12 @@ export class EleveListComponent implements OnInit {
   id: number;
   eleve: Eleve;
   searchText: any;
+  bsModalRef: BsModalRef;
 
   constructor(
     private service: EleveService,
     private service2: EleveService2,
-    private modals: SimpleModalService,
+    private modalService: BsModalService,
     private route: ActivatedRoute,
     private http: HttpClient,
     private classeService: ClasseService,
@@ -55,22 +58,6 @@ export class EleveListComponent implements OnInit {
     });
   }
 
-  deleteEleve(eleve: Eleve) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${eleve.prenom} ${eleve.nom} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cet élève ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteEleveById(eleve.id).subscribe(res => {
-            this.ngOnInit();
-          });
-          this.alertify.succes('Supprimé');
-        }
-      });
-  }
-
   openEleve(eleve: Eleve) {
     this.service2.pushObject(eleve);
 
@@ -89,5 +76,12 @@ export class EleveListComponent implements OnInit {
       this.ngOnInit();
     });
   }
+  deleteEleve(eleve: Eleve) {
+    const initialState = {
+      eleve
+    };
+    this.bsModalRef = this.modalService.show(EleveModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
 
+  }
 }

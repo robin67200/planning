@@ -1,3 +1,4 @@
+import { IndisponibiliteModalsComponent } from './../indisponibilite-modals/indisponibilite-modals.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Output } from '@angular/core';
 import { IndisponibiliteService, IndisponibiliteService3 } from '../services/indisponibilite.service';
@@ -9,8 +10,9 @@ import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { registerLocaleData, formatDate } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { AlertifyService } from '../../_services/alertify.service';
+import { EleveModalsComponent } from '../../eleve/eleve-modals/eleve-modals.component';
 
 
 registerLocaleData(localeFr);
@@ -30,6 +32,7 @@ export class IndisponibiliteListComponent implements OnInit {
   indisp: Indisponibilite;
   date = new Date();
   affichage: boolean;
+  bsModalRef: BsModalRef;
   format = 'yyyy-MM-dd';
   myDate = '01/01/2019';
   locale = 'en-FR';
@@ -39,6 +42,7 @@ export class IndisponibiliteListComponent implements OnInit {
     private service2: IndisponibiliteService3<Indisponibilite, number>,
     private profService: ProfService,
     private modals: SimpleModalService,
+    private modalService: BsModalService,
     private fb: FormBuilder,
     private alertify: AlertifyService
   ) {
@@ -110,24 +114,6 @@ export class IndisponibiliteListComponent implements OnInit {
     this.affichage = false;
   }
 
-
-
-  deleteIndisp(indisp: Indisponibilite) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer l'indisponibilite du ${indisp.start} au ${indisp.end} de ${indisp.profName} ?`,
-        message: 'Êtes-vous sûr de cette suppression ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.service.deleteIndisponibiliteById(indisp.id).subscribe(res => {
-            this.ngOnInit();
-          });
-          this.alertify.succes('Supprimé');
-        }
-      });
-  }
-
   openIndisp(indisp: Indisponibilite) {
     this.service2.pushObject(indisp);
   }
@@ -151,4 +137,12 @@ export class IndisponibiliteListComponent implements OnInit {
     });
   }
 
+  deleteIndisp(indisp: Indisponibilite) {
+    const initialState = {
+      indisp
+    };
+    this.bsModalRef = this.modalService.show(IndisponibiliteModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
+  }
 }

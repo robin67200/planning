@@ -1,3 +1,4 @@
+import { MatiereModalsComponent } from './matiere-modals/matiere-modals.component';
 import { MatiereSelectComponent } from './components/matiere-select/matiere-select.component';
 import { MatieresRoutingModule } from './matiere.routing';
 import { MatiereService } from './services/matiere.service';
@@ -22,9 +23,10 @@ import { MatSelectModule } from '@angular/material';
   declarations: [
     MatiereListComponent,
     MatiereSelectComponent,
+    MatiereModalsComponent,
   ],
   providers: [MatiereService],
-  entryComponents: [],
+  entryComponents: [MatiereModalsComponent],
   exports: [MatiereSelectComponent]
 })
 export class MatiereModule {}
