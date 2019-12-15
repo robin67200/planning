@@ -1,7 +1,7 @@
 import { MatiereModalsComponent } from './matiere-modals/matiere-modals.component';
 import { MatiereSelectComponent } from './components/matiere-select/matiere-select.component';
 import { MatieresRoutingModule } from './matiere.routing';
-import { MatiereService } from './services/matiere.service';
+import { MatiereService, MatiereService2 } from './services/matiere.service';
 import { MatiereListComponent } from './matiere-list/matiere-list.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -9,7 +9,10 @@ import { CommonModule } from '@angular/common';
 
 import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule, MatTableModule, MatPaginatorModule, MatSortModule,
+   MatIconModule, MatMenuModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatiereCreateComponent } from './components/matiere-select/matiere-create/matiere-create.component';
+import { MatiereEditComponent } from './components/matiere-select/matiere-edit/matiere-edit.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -18,15 +21,27 @@ import { MatSelectModule } from '@angular/material';
             MatieresRoutingModule,
             MatSelectModule,
             AppSharedModule,
-            ModalModule.forRoot()
+            ModalModule.forRoot(),
+            MatTableModule,
+            MatPaginatorModule,
+            MatSortModule,
+            MatIconModule,
+            MatMenuModule,
+            MatButtonModule,
+            MatInputModule,
+            MatDatepickerModule,
+            MatNativeDateModule,
+            MatSelectModule,
             ],
   declarations: [
     MatiereListComponent,
     MatiereSelectComponent,
-    MatiereModalsComponent,
+    MatiereCreateComponent,
+    MatiereEditComponent,
+    MatiereModalsComponent
   ],
-  providers: [MatiereService],
+  providers: [MatiereService, MatiereService2],
   entryComponents: [MatiereModalsComponent],
-  exports: [MatiereSelectComponent]
+  exports: [MatiereSelectComponent, MatiereEditComponent, MatiereCreateComponent]
 })
 export class MatiereModule {}

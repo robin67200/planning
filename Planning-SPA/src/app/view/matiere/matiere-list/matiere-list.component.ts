@@ -2,7 +2,7 @@ import { MatiereModalsComponent } from './../matiere-modals/matiere-modals.compo
 import { Component, OnInit } from '@angular/core';
 import { Matiere } from '../models/matiere';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { MatiereService } from '../services/matiere.service';
+import { MatiereService, MatiereService2 } from '../services/matiere.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { ModalSimpleInputComponent } from 'src/app/components/modals/simple-input-modals';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
@@ -23,6 +23,7 @@ export class MatiereListComponent implements OnInit {
 
   constructor(
     private service: MatiereService,
+    private service2: MatiereService2,
     private modals: SimpleModalService,
     private alertify: AlertifyService,
     private modalService: BsModalService
@@ -82,4 +83,24 @@ export class MatiereListComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
 
   }
+
+  openMatiere(matiere: Matiere) {
+    this.service2.pushObject(matiere);
+
+  }
+
+  onMatiereUpdated(matiere: Matiere) {
+    this.service.putMatiere(matiere.id, matiere).subscribe((result) => {
+      this.alertify.succes('Modifié');
+      this.ngOnInit();
+    });
+  }
+
+  onMatiereCreated(matiere: Matiere) {
+    this.service.postMatiere(matiere).subscribe(result => {
+      this.alertify.succes('Ajouté');
+      this.ngOnInit();
+    });
+  }
+
 }

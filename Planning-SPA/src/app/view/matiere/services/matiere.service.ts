@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Matiere } from '../models/matiere';
+import { CrudService } from 'src/app/_services/crud.service';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 @Injectable()
 export class MatiereService {
@@ -23,3 +25,14 @@ deleteMatiereById(id: number) {
 }
 
 }
+
+export class MatiereService2 extends CrudService<Matiere, number> {
+  constructor(protected http: HttpClient, protected modals: SimpleModalService) {
+      super(http, modals);
+      // this.baseUrl = 'http://localhost:5000/api/';
+      this.controller = 'matieres';
+      this.url = `${this.baseUrl}${this.controller}/`;
+    }
+
+
+  }

@@ -1,6 +1,6 @@
 import { NiveauModalsComponent } from './../niveau-modals/niveau-modals.component';
 import { Niveau } from './../models/niveau';
-import { NiveauService } from './../services/niveau.service';
+import { NiveauService, NiveauService2 } from './../services/niveau.service';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SimpleModalService, SimpleModalServiceConfig } from 'ngx-simple-modal';
@@ -25,6 +25,7 @@ export class NiveauListComponent implements OnInit {
 
   constructor(
     private service: NiveauService,
+    private service2: NiveauService2,
     private modals: SimpleModalService,
     private modalService: BsModalService,
     private alertify: AlertifyService
@@ -66,4 +67,24 @@ export class NiveauListComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
 
   }
+
+  openNiveau(niveau: Niveau) {
+    this.service2.pushObject(niveau);
+
+  }
+
+  onNiveauUpdated(niveau: Niveau) {
+    this.service.putNiveau(niveau.id, niveau).subscribe((result) => {
+      this.alertify.succes('Modifié');
+      this.ngOnInit();
+    });
+  }
+
+  onNiveauCreated(niveau: Niveau) {
+    this.service.postNiveau(niveau).subscribe(result => {
+      this.alertify.succes('Ajouté');
+      this.ngOnInit();
+    });
+  }
+
 }

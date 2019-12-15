@@ -1,5 +1,5 @@
 import { Annee } from './../models/annee';
-import { AnneeService } from './../services/annee.service';
+import { AnneeService, AnneeService2 } from './../services/annee.service';
 import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { SimpleModalService } from 'ngx-simple-modal';
@@ -25,6 +25,7 @@ export class AnneeListComponent implements OnInit {
     private modals: SimpleModalService,
     private alertify: AlertifyService,
     private modalService: BsModalService,
+    private service2: AnneeService2,
     ) { }
 
   ngOnInit() {
@@ -80,6 +81,25 @@ export class AnneeListComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
     this.ngOnInit();
 
+  }
+
+  openAnnee(annee: Annee) {
+    this.service2.pushObject(annee);
+
+  }
+
+  onAnneeUpdated(annee: Annee) {
+    this.service.putAnnee(annee.id, annee).subscribe((result) => {
+      this.alertify.succes('Modifié');
+      this.ngOnInit();
+    });
+  }
+
+  onAnneeCreated(annee: Annee) {
+    this.service.postAnnee(annee).subscribe(result => {
+      this.alertify.succes('Ajouté');
+      this.ngOnInit();
+    });
   }
 
 
