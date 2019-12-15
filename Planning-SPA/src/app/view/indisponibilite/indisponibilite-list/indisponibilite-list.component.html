@@ -8,6 +8,7 @@
     <i></i>&nbsp;Historique
   </button>
   <button
+    *appHasRole="['Admin','Moderator']"
     class="btn btn-outline-primary"
     style="margin-left: 75%;"
     (click)="pnlIndisp2.display()"
@@ -24,7 +25,7 @@
       (submit)="save()"
       #formDir="ngForm"
     >
-      <div class="form-group row">
+      <div *appHasRole="['Admin','Moderator']" class="form-group row">
         <div class="input-group">
           <input
             formControlName="datee"
@@ -39,7 +40,7 @@
         </div>
       </div>
     </form>
-    <form
+    <form *appHasRole="['Admin','Moderator']"
       [formGroup]="formProf"
       (submit)="searchByProf()"
       #formDir="ngForm"
@@ -47,10 +48,13 @@
     >
       <div class="form-group row">
         <div class="input-group">
-            <app-prof-select [form]="formProf" style="width: 75%;"></app-prof-select>
-            <button type="submit" class="btn btn-outline-success btn-rounded">
-              <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
-            </button>
+          <app-prof-select
+            [form]="formProf"
+            style="width: 75%;"
+          ></app-prof-select>
+          <button type="submit" class="btn btn-outline-success btn-rounded">
+            <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
+          </button>
         </div>
       </div>
     </form>

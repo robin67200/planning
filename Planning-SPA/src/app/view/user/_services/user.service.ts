@@ -21,4 +21,8 @@ getUserById(id: number) {
   return this.http.get<User>(this.baseUrl + 'users/' + id);
 }
 
+deleteUserfById(id: number) {
+  return this.http.delete<User>(this.baseUrl + 'users/' + id);
+}
+
 }

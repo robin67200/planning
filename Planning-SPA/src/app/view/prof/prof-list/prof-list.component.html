@@ -3,6 +3,7 @@
   <br>
   <h2 style="text-align:center">Professeurs</h2>
   <button
+    *appHasRole="['Admin','Moderator']"
     class="btn btn-outline-primary"
     style="margin-left: 91%;"
     (click)="pnlProfCreated.display()"
@@ -10,7 +11,6 @@
     <i class="fas fa-plus"></i>&nbsp;Ajouter
   </button>
   <hr />
-  <br />
   <br />
   <mat-form-field>
       <input

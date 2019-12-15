@@ -9,6 +9,7 @@
       <i class="fas fa-arrow-alt-circle-left"></i>&nbsp;Retour
     </button>
     <button
+      *appHasRole="['Admin','Moderator']"
       class="btn btn-outline-primary"
       style="margin-left: 87%;"
       (click)="pnlCoursCreated.display()"

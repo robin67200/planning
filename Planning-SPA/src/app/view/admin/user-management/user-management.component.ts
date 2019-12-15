@@ -1,9 +1,12 @@
+import { UserService } from './../../user/_services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
 import { AdminService } from '../../_services/admin.service';
 import { User } from '../../user/_models/user';
+import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-user-management',
@@ -16,7 +19,11 @@ export class UserManagementComponent implements OnInit {
   bsModalRef: BsModalRef;
 
   constructor(private adminService: AdminService, private alertifyService: AlertifyService,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService,
+              private userService: UserService,
+              private alertify: AlertifyService,
+              private modals: SimpleModalService,
+              ) { }
 
   ngOnInit() {
     this.getUsersWithRoles();
@@ -79,5 +86,21 @@ export class UserManagementComponent implements OnInit {
       }
     }
     return roles;
+  }
+
+  deleteUser(user: User) {
+    this.modals
+      .addModal(ModalConfirmComponent, {
+        title: `Supprimer ${user.username} ?`,
+        message: 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?'
+      })
+      .subscribe(result => {
+        if (result) {
+          this.userService.deleteUserfById(user.id).subscribe(res => {
+            this.alertify.succes('Supprimé');
+            this.ngOnInit();
+          });
+        }
+      });
   }
 }

@@ -1,6 +1,7 @@
 <div class="container">
   <h2 style="text-align:center">Eleve</h2>
   <button
+    *appHasRole="['Admin','Moderator']"
     class="btn btn-outline-primary"
     style="margin-left: 91%;"
     (click)="pnlEleveCreated.display()"

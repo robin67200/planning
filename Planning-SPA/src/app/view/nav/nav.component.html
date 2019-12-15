@@ -49,9 +49,11 @@
 
   <mat-sidenav-content >
     <mat-toolbar >
+      <div *ngIf="!loggedIn()">
+        <p>PPE2 Gestion de planning</p>
+      </div>
         <nav class="navbar navbar-expand-md fixed-top" style="background-image: repeating-linear-gradient(white,rgba(197, 197, 197, 0.404)); position:fixed">
           <div class="navbar-collapse collapse" id="navbarCollapse" style>
-
                 <form *ngIf="!loggedIn()" #LoginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()" style="margin-left: 65%;">
                     <input class="form-control mr-sm-2" type="text" name="username"
                       placeholder="Identifiant" required [(ngModel)]="model.username">
