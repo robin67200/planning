@@ -6,7 +6,7 @@ export class User {
         public age: number,
         public username: string,
         public created: string,
-        public lastActive: string,
+        public lastActive: any,
         public roles?: string[]
         ) {
             this.id = 0;
