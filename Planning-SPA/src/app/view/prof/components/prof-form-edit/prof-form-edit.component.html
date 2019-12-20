@@ -114,6 +114,23 @@
       </div>
     </div>
   </div>
+  <div class="form-group row" *appHasRole="['Admin']">
+    <label class="form-control-label text-md-right col-3"></label>
+    <div class="col-7">
+      <div class="input-group ">
+        <span class="input-group-prepend"> </span>
+        <mat-form-field class="example-full-width">
+          <mat-icon matSuffix></mat-icon>
+          <input
+            formControlName="note"
+            type="number"
+            matInput
+            placeholder="Note sur 20"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
 <br/>
 </fieldset>
 <div class="form-actions" style="text-align: center;">

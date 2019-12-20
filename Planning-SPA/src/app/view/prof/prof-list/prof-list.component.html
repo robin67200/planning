@@ -36,8 +36,11 @@
         <th>
           mail
         </th>
-        <th>
+        <th >
           telephone
+        </th>
+        <th *appHasRole="['Admin']">
+          Note
         </th>
       </tr>
     </thead>
@@ -56,6 +59,9 @@
         </td>
         <td>
           {{ prof.telephone }}
+        </td>
+        <td *appHasRole="['Admin']">
+          {{ prof.note }} / 20
         </td>
         <td style="width: 10%">
           <div class="dropdown">

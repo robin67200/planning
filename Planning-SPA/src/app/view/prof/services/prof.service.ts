@@ -12,13 +12,13 @@ export class ProfService {
 
 constructor(private http: HttpClient) { }
 getProf() {
-  return this.http.get<Prof[]>('http://localhost:5000/api/profs');
+  return this.http.get<Prof[]>('http://localhost:5000/api/profs/new');
 }
 getProfById(id: number) {
   return this.http.get<Prof>('http://localhost:5000/api/profs/' + id);
 }
 putProf(id: number, prof: any) {
-  return this.http.put<Prof>('http://localhost:5000/api/profs/' + id, prof);
+  return this.http.put<Prof>('http://localhost:5000/api/profs/new/' + id, prof);
 }
 postProf(prof: Prof) {
   return this.http.post<Prof>('http://localhost:5000/api/profs/', prof);

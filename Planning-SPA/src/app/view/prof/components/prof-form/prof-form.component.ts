@@ -39,6 +39,7 @@ export class ProfFormComponent implements OnInit {
       mail: new FormControl('', [Validators.required,
       Validators.email]),
       telephone: new FormControl('', [Validators.required]),
+      note: new FormControl('')
     });
   }
 
@@ -53,7 +54,7 @@ export class ProfFormComponent implements OnInit {
   save() {
     if (this.form.valid) {
       this.hasError = false;
-      const prof = new Prof('', '', '', '', 0);
+      const prof = new Prof('', '', '', '', 0, 0);
       prof.nom = this.form.value.nom;
       prof.prenom = this.form.value.prenom;
       prof.adresse = this.form.value.adresse;

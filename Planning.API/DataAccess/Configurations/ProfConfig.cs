@@ -16,6 +16,7 @@ namespace Planning.API.DataAccess {
             builder.Property(x => x.Adresse).HasColumnName("Adresse").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.Mail).HasColumnName("Mail").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.Telephone).HasColumnName("Telephone").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.Note).HasColumnName("Note").HasColumnType("INTEGER");
             
             builder.HasMany(z => z.Cours).WithOne(x => x.Professeur).HasForeignKey(z => z.ProfesseurId);
             builder.HasMany(x => x.Indisponibiltes).WithOne(z => z.Professeur).HasForeignKey(a => a.ProfesseurId);

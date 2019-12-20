@@ -39,6 +39,7 @@ export class ProfFormEditComponent implements OnInit {
       mail: new FormControl('', [Validators.required,
       Validators.email]),
       telephone: new FormControl('', [Validators.required]),
+      note: new FormControl('')
     });
   }
 
@@ -57,13 +58,14 @@ export class ProfFormEditComponent implements OnInit {
   save() {
     if (this.form.valid) {
       this.hasError = false;
-      const prof = new Prof('', '', '', '', 0);
+      const prof = new Prof('', '', '', '', 0, 0);
       prof.id = this.form.value.id;
       prof.nom = this.form.value.nom;
       prof.prenom = this.form.value.prenom;
       prof.adresse = this.form.value.adresse;
       prof.mail = this.form.value.mail;
       prof.telephone = this.form.value.telephone;
+      prof.note = this.form.value.note;
 
       this.onUpdating.emit(prof);
       this.ngForm.resetForm();
