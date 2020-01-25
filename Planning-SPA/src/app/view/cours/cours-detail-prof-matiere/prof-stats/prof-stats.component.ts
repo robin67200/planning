@@ -20,8 +20,8 @@ export class ProfStatsComponent implements OnInit {
 
   id: number;
   matiereId: number;
-  prof: Prof = new Prof('', '', '', '', 0);
-  profs: Prof = new Prof('', '', '', '', 0);
+  prof: Prof = new Prof('', '', '', '', 0, 0);
+  profs: Prof = new Prof('', '', '', '', 0, 0);
   bsModalRef: BsModalRef;
   matieres: Matiere[];
   classes: Classe[];

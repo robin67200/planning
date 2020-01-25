@@ -36,11 +36,24 @@ namespace Planning.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<PPE2APIContext>(x => x.UseSqlite
+            (Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<PPE2APIContext>(x => x.UseMySql
+            (Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             Mapper.Reset();
-            services.AddDbContext<PPE2APIContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             IdentityBuilder builder = services.AddIdentityCore<User>(opt => {
                 opt.Password.RequireDigit = false;
@@ -134,7 +147,16 @@ namespace Planning.API
             seeder.SeedUsers();
             app.UseAuthentication();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseMvc(routes =>
+            {
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new {controller = "Fallback",
+                    action = "Index"}
+                );
+            });
             
         }
     }
