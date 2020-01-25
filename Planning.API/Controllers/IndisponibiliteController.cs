@@ -14,7 +14,7 @@ namespace Planning.API.Controllers
     [ApiController]
     public class IndisponibilitesController : CrudController<IIndisponibiliteService, IndisponibiliteViewModel, int>
     {
-        private readonly IIndisponibiliteService _service;
+        new private readonly IIndisponibiliteService _service;
         private readonly PPE2APIContext _context;
         public IndisponibilitesController(IIndisponibiliteService service, PPE2APIContext context) : base(service)
         {

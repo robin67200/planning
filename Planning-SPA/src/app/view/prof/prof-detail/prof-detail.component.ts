@@ -1,3 +1,6 @@
+import { ProfDelMatiereModalsComponent } from './prof-del-matiere-modals/prof-del-matiere-modals.component';
+import { ProfAddClasseModalsComponent } from './prof-add-classe-modals/prof-add-classe-modals.component';
+import { ProfAddMatiereModalsComponent } from './prof-add-matiere-modals/prof-add-matiere-modals.component';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -11,6 +14,8 @@ import { ModalItemSelectorComponent } from 'src/app/components/modals/item-selec
 import { ListItem } from 'src/app/components/model/list-item';
 import { Cours } from '../../cours/models/cours';
 import { AlertifyService } from '../../_services/alertify.service';
+import { ProfDelClasseModalsComponent } from './prof-del-classe-modals/prof-del-classe-modals.component';
+import { MatiereService } from '../../matiere/services/matiere.service';
 
 @Component({
   selector: 'app-prof-detail',
@@ -33,8 +38,7 @@ export class ProfDetailComponent implements OnInit {
   constructor(
     route: ActivatedRoute,
     private service: ProfService,
-    private modals: SimpleModalService,
-    private alertify: AlertifyService
+    private modalService: BsModalService,
 
   ) {
     route.params.forEach((params: Params) => {
@@ -49,6 +53,44 @@ export class ProfDetailComponent implements OnInit {
       this.prof = res;
     });
 }
+
+  addMatiereM(prof: Prof) {
+    const initialState = {
+      prof
+    };
+    this.bsModalRef = this.modalService.show(ProfAddMatiereModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
+  }
+
+  addClasseM(prof: Prof) {
+    const initialState = {
+      prof
+    };
+    this.bsModalRef = this.modalService.show(ProfAddClasseModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  deleteMatiereM(prof: Prof, matiere: Matiere) {
+    const initialState = {
+      prof,
+      matiere
+    };
+    this.bsModalRef = this.modalService.show(ProfDelMatiereModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  deleteClasseM(prof: Prof, classe: Classe) {
+    const initialState = {
+      prof,
+      classe,
+    };
+    this.bsModalRef = this.modalService.show(ProfDelClasseModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
+  }
+
+/*
   addMatiere() {
     this.service.getMatieresAvailable(this.id).subscribe((matieres) => {
       this.modals.addModal(ModalItemSelectorComponent, {
@@ -76,7 +118,6 @@ export class ProfDetailComponent implements OnInit {
       });
     });
   }
-
 
   deleteMatiere2(prof: Prof, matiere: Matiere) {
     this.modals.addModal(ModalConfirmComponent, {
@@ -107,6 +148,6 @@ export class ProfDetailComponent implements OnInit {
       }
     });
   }
-
+*/
 
 }

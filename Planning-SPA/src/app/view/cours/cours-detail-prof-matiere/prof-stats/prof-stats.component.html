@@ -1,0 +1,57 @@
+<div class="container">
+  <button
+  class="btn btn-outline-primary btn-rounded-f"
+  [routerLink]="['/calendars/stats/list']"
+>
+  <i class="fas fa-arrow-alt-circle-left"></i>&nbsp;Retour
+</button>
+<h2 style="text-align: center">{{prof.prenom}} {{prof.nom}}</h2>
+<hr/>
+<br />
+<div class="widget-controls" style="text-align: right">
+</div>
+<br>
+<table class="table table-hover table-bordered table-striped">
+  <tbody>
+    <tr>
+      <th style="width: 50%" scope="row">Nom</th>
+      <td style="text-align: center">
+          {{ prof.nom }}
+        </td>
+    </tr>
+    <tr>
+      <th scope="row">Prénom</th>
+      <td style="text-align: center">
+          {{ prof.prenom }}
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-6">
+    <section class="widget">
+      <header>
+        <h2>Matieres</h2>
+      </header>
+      <table class="table table-hover table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="row">Nom</th>
+          </tr>
+        </thead>
+          <tr id="list" *ngFor="let mat of prof.matieres">
+            <td>{{mat.nom}}</td>
+          </tr>
+      </table>
+    </section>
+  </div>
+  <div style="display: block;">
+  <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [chartType]="barChartType">
+  </canvas>
+</div>
+</div>

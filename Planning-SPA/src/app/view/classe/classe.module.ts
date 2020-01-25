@@ -1,3 +1,7 @@
+import { CoursService } from './../cours/services/cours.service';
+import { ClasseDetailDelCoursComponent } from './classe-detail/classe-detail-del-cours/classe-detail-del-cours.component';
+import { ClasseDetailAddCoursComponent } from './classe-detail/classe-detail-add-cours/classe-detail-add-cours.component';
+import { ProfAddClasseModalsComponent } from './../prof/prof-detail/prof-add-classe-modals/prof-add-classe-modals.component';
 import { ClasseModalsComponent } from './classe-modals/classe-modals.component';
 import { ClasseFormEditComponent } from './components/classe-form-edit/classe-form-edit.component';
 import { ClasseFormComponent } from './components/classe-form/classe-form.component';
@@ -45,10 +49,15 @@ import { MatInputModule, MatIconModule, MatNativeDateModule,
     ClasseFormComponent,
     ClasseSelectComponent,
     ClasseFormEditComponent,
-    ClasseModalsComponent
+    ClasseModalsComponent,
+    ClasseDetailAddCoursComponent,
+    ClasseDetailDelCoursComponent,
   ],
-  providers: [ClasseService, ClasseService2],
-  entryComponents: [ClasseModalsComponent],
+  providers: [ClasseService, ClasseService2, CoursService],
+  entryComponents: [
+    ClasseModalsComponent,
+    ClasseDetailAddCoursComponent,
+    ClasseDetailDelCoursComponent],
   exports: [ClasseSelectComponent, ClasseFormComponent, ClasseFormEditComponent]
 })
 export class ClasseModule {}

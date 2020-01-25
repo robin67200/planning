@@ -85,7 +85,7 @@
           <td>
             {{ indisp.profName }}
           </td>
-          <td style="width: 10%">
+          <td *appHasRole="['Admin','Moderator']" style="width: 10%">
             <div class="dropdown">
               <button
                 class="btn btn-outline-info dropdown-toggle"

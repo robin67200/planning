@@ -56,12 +56,12 @@
               <thead>
                 <tr>
                   <th scope="row">Nom</th>
-                  <th><button class="btn btn-success btn-rounded-f" (click)="addMatiere()"><i class="fas fa-plus"></i></button> </th>
+                  <th><button class="btn btn-success btn-rounded-f" (click)="addMatiereM(prof)"><i class="fas fa-plus"></i></button></th>
                 </tr>
               </thead>
                 <tr id="list" *ngFor="let mat of prof.matieres">
                   <td>{{mat.nom}}</td>
-                  <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteMatiere2(prof, mat)"><i class="fas fa-trash-alt"></i></button></td>
+                  <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteMatiereM(prof, mat)"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>
             </table>
           </section>
@@ -75,12 +75,12 @@
               <thead>
                 <tr>
                   <th scope="row">Nom</th>
-                  <th><button class="btn btn-success btn-rounded-f" (click)="addClasse()"><i class="fas fa-plus"></i></button> </th>
+                  <th><button class="btn btn-success btn-rounded-f" (click)="addClasseM(prof)"><i class="fas fa-plus"></i></button> </th>
                 </tr>
               </thead>
                 <tr id="list" *ngFor="let classe of prof.classes">
                     <td>{{classe.nom}}</td>
-                    <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteClasse(prof, classe)"><i class="fas fa-trash-alt"></i></button></td>
+                    <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteMatiereM(prof, classe)"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>
           </table>
           </section>

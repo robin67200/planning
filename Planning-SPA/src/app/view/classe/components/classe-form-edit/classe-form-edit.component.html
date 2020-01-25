@@ -17,10 +17,10 @@
               type="text"
               matInput
               placeholder="Nom"
-              #nom
+              #noml
               maxlength="30"
             />
-            <mat-hint align="end">{{ nom.value.length }} / 30</mat-hint>
+            <mat-hint align="end">{{ noml.value.length }} / 30</mat-hint>
             <mat-error *ngIf="nom.invalid">Veuillez entrer un titre</mat-error>
           </mat-form-field>
         </div>
@@ -33,7 +33,6 @@
         <app-annee-select [form]="form"></app-annee-select>
       </div>
     </div>
-    <br />
     <div class="form-group row">
       <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
@@ -41,6 +40,7 @@
         <app-niveau-select [form]="form"></app-niveau-select>
       </div>
     </div>
+    <br />
     <div class="form-actions" style="text-align: center;">
       <button
         type="button"

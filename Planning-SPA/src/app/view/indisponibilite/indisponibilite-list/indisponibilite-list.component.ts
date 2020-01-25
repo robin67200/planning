@@ -123,7 +123,7 @@ export class IndisponibiliteListComponent implements OnInit {
       this.ngOnInit();
       this.alertify.succes('Modifié');
     }, error => {
-      this.alertify.error('date de début supérieure à date de fin');
+      this.alertify.error('Date de début supérieure à date de fin');
     });
   }
 
@@ -133,7 +133,7 @@ export class IndisponibiliteListComponent implements OnInit {
       this.ngOnInit();
       this.alertify.succes('Ajouté');
     }, error => {
-      this.alertify.error('date de début supérieure à date de fin');
+      this.alertify.error('Date de début supérieure à date de fin');
     });
   }
 

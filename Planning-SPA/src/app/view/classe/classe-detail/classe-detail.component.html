@@ -3,7 +3,7 @@
       <header>
         <br />
         <h2 style="text-align: center">Classe {{classe.nom}}</h2>
-        <button class="btn btn-primary btn-rounded-f" [routerLink]="['/classes/list/']">
+        <button class="btn btn-outline-primary btn-rounded-f" [routerLink]="['/classes/list/']">
           <i class="fas fa-arrow-alt-circle-left"></i>&nbsp;Retour
         </button>
         <hr/>
@@ -69,7 +69,7 @@
                       <th scope="row">Début</th>
                       <th scope="row">Fin</th>
                       <th scope="row">Professeur</th>
-                      <th><button class="btn btn-success btn-rounded-f" (click)="addCours()"><i class="fas fa-plus"></i></button> </th>
+                      <th><button class="btn btn-success btn-rounded-f" (click)="addCoursM(classe)"><i class="fas fa-plus"></i></button> </th>
                     </tr>
                   </thead>
                     <tr id="list" *ngFor="let cours of classe.cours">
@@ -77,16 +77,13 @@
                         <td>{{cours.start}}</td>
                         <td>{{cours.end}}</td>
                         <td>{{cours.professeurId}}</td>
-                        <td style="width: 5%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteCours(classe, cours)"><i class="fas fa-trash-alt"></i></button></td>
+                        <td style="width: 5%;"><button class="btn btn-danger btn-rounded-f" (click)="delCoursM(classe, cours)"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
               </table>
               </section>
             </div>
 
         </div>
-
-
-
     </section>
     </div>
 

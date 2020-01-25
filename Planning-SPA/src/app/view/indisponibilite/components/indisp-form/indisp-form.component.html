@@ -5,63 +5,69 @@
     (submit)="save()"
     #formDir="ngForm"
   >
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-3"></label>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
       <div class="col-7">
-          <div class="input-group">
-            <span class="input-group-prepend">
-            </span>
-            <mat-form-field class="example-full-width">
-              <mat-icon matSuffix>date_range</mat-icon>
-              <input
-                matInput
-                formControlName="start"
-                mwlFlatpickr
-                placeholder="Choisir la date et l'heure du début"
-                [enableTime]="true"
-                dateFormat="Y-m-dTH:i"
-              />
-            </mat-form-field>
+        <div class="input-group">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>date_range</mat-icon>
+            <input
+              matInput
+              formControlName="start"
+              mwlFlatpickr
+              placeholder="Choisir la date et l'heure du début"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+            />
+            <mat-error *ngIf="start.invalid"
+              >Veuillez rentrer l'heure de début</mat-error
+            >
+          </mat-form-field>
         </div>
       </div>
-  </div>
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-3"></label>
-      <div class="col-7">
-          <div class="input-group">
-            <span class="input-group-prepend">
-            </span>
-            <mat-form-field class="example-full-width">
-              <mat-icon matSuffix>date_range</mat-icon>
-              <input
-                matInput
-                formControlName="end"
-                mwlFlatpickr
-                placeholder="Choisir la date et l'heure de la fin"
-                [enableTime]="true"
-                dateFormat="Y-m-dTH:i"
-              />
-            </mat-form-field>
-        </div>
-      </div>
-  </div>
-  <br />
-  <div class="form-group row">
-    <label class="form-control-label text-md-right col-3" ></label>
-    <div class="col-7">
-        <app-prof-select [form]="form"></app-prof-select>
     </div>
-</div>
-<br/>
-<div class="form-actions" style="text-align: center;">
-    <button
-    type="button"
-    class="btn btn-outline-danger btn-rounded"
-    (click)="close()"
-    >
-  <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
-  </button>
-  <button type="submit" class="btn btn-success btn-rounded"><i class="glyphicon glyphicon-ok"></i>&nbsp;Valider</button>
-  </div>
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+        <div class="input-group">
+          <span class="input-group-prepend"> </span>
+          <mat-form-field class="example-full-width">
+            <mat-icon matSuffix>date_range</mat-icon>
+            <input
+              matInput
+              formControlName="end"
+              mwlFlatpickr
+              placeholder="Choisir la date et l'heure de la fin"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+            />
+            <mat-error *ngIf="end.invalid"
+              >Veuillez rentrer l'heure de fin</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label class="form-control-label text-md-right col-3"></label>
+      <div class="col-7">
+        <app-prof-select [form]="form"></app-prof-select>
+      </div>
+    </div>
+    <br />
+    <div class="form-actions" style="text-align: center;">
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-rounded"
+        (click)="close()"
+      >
+        <i class="glyphicon glyphicon-remove"></i>&nbsp;Annuler
+      </button>
+      <button type="submit" class="btn btn-success btn-rounded">
+        <i class="glyphicon glyphicon-ok"></i>&nbsp;Valider
+      </button>
+    </div>
   </form>
 </div>

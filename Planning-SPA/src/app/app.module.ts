@@ -14,12 +14,11 @@ import { AppRoutingModule } from './app.routing';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
-import { SimpleModalModule, SimpleModalOptions } from 'ngx-simple-modal';
+import { BsDropdownModule, BsDatepickerModule, ModalModule, TabsModule } from 'ngx-bootstrap';
+import { SimpleModalModule, SimpleModalOptions, defaultSimpleModalOptions } from 'ngx-simple-modal';
 import { ModalItemSelectorComponent } from './components/modals/item-selector-modal';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { NavModule } from './view/nav/nav.module';
-import { defaultSimpleModalOptions } from 'ngx-simple-modal/dist/simple-modal/simple-modal-options';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -34,7 +33,6 @@ import { AdminService } from './view/_services/admin.service';
 import { AlertifyService } from './view/_services/alertify.service';
 import { UserManagementComponent } from './view/admin/user-management/user-management.component';
 import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.component';
-import { TabsModule } from 'ngx-tabset';
 import { HasRoleDirective } from './view/_directives/hasRole.directive';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -62,12 +60,6 @@ export function tokenGetter() {
     ReactiveFormsModule,
     FormsModule,
     NavModule,
-    TabsModule.forRoot(),
-    ReactiveFormsModule,
-    BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    ModalModule.forRoot(),
-    AppRoutingModule,
     SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{
       closeOnEscape: true,
       closeOnClickOutside: true,
@@ -76,6 +68,11 @@ export function tokenGetter() {
       wrapperClass: 'show',
       animationDuration: 300,
     }}),
+    TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    ModalModule.forRoot(),
+    AppRoutingModule,
     MatSliderModule,
     MatSidenavModule,
     AngularFontAwesomeModule,

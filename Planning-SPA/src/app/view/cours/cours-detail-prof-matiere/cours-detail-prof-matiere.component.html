@@ -1,0 +1,33 @@
+<div class="container">
+  <br />
+  <br>
+  <h2 style="text-align:center">Liste des professeurs pour les statistiques</h2>
+  <hr />
+  <br />
+  <div class="widget-body">
+    <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          nom
+        </th>
+        <th>
+          prenom
+        </th>
+    </thead>
+      <tr id="list" *ngFor="let prof of profs">
+        <td>
+          {{ prof.nom }}
+        </td>
+        <td>
+          {{ prof.prenom }}
+        </td>
+        <td *appHasRole="['Admin','Moderator']" style="width: 10%">
+            <button class="btn btn-outline-info" [routerLink]="['/calendars/statsdetail/',prof.id]" >
+              <i class="fas fa-cogs"></i>&nbsp; Statistiques
+            </button>
+        </td>
+      </tr>
+  </table>
+</div>
+</div>

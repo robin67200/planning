@@ -1,3 +1,5 @@
+import { ProfStatsComponent } from './cours-detail-prof-matiere/prof-stats/prof-stats.component';
+import { CoursDetailProfMatiereComponent } from './cours-detail-prof-matiere/cours-detail-prof-matiere.component';
 import { CoursModalsComponent } from './cours-modals/cours-modals.component';
 import { CoursListComponent } from './cours-list/cours-list.component';
 import { CoursFormEditComponent } from './components/cours-form-edit/cours-form-edit.component';
@@ -64,6 +66,8 @@ import { IndisponibiliteModule } from '../indisponibilite/indisponibilite.module
     CoursFormComponent,
     CalendarComponent,
     CoursFormEditComponent,
+    CoursDetailProfMatiereComponent,
+    ProfStatsComponent,
     CoursModalsComponent
     ],
   providers: [CoursService, CoursService2],

@@ -1,3 +1,5 @@
+import { ClasseDetailDelCoursComponent } from './classe-detail-del-cours/classe-detail-del-cours.component';
+import { ClasseDetailAddCoursComponent } from './classe-detail-add-cours/classe-detail-add-cours.component';
 import { Component, OnInit } from '@angular/core';
 import { Prof } from '../../prof/models/prof';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -11,9 +13,6 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { ListItem } from 'src/app/components/model/list-item';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { AlertifyService } from '../../_services/alertify.service';
-import { isToday } from 'date-fns';
-import { ProfService } from '../../prof/services/prof.service';
-import { CoursService } from '../../cours/services/cours.service';
 
 @Component({
   selector: 'app-classe-detail',
@@ -26,7 +25,7 @@ export class ClasseDetailComponent implements OnInit {
   classes: Classe = new Classe('', 0, 0);
   classe: Classe = new Classe('', 0, 0);
   bsModalRef: BsModalRef;
-  professeurs: Prof[];
+  prof: Prof[];
   eleves: Eleve[];
   cours: Cours[];
   classess: Classe[];
@@ -36,6 +35,8 @@ export class ClasseDetailComponent implements OnInit {
     private service: ClasseService,
     private modals: SimpleModalService,
     private alertify: AlertifyService,
+    private modalService: BsModalService,
+
 
   ) {
     route.params.forEach((params: Params) => {
@@ -51,6 +52,24 @@ export class ClasseDetailComponent implements OnInit {
       });
   }
 
+  addCoursM(classe: Classe) {
+    const initialState = {
+      classe
+    };
+    this.bsModalRef = this.modalService.show(ClasseDetailAddCoursComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
+  }
+
+  delCoursM(classe: Classe, cours: Cours) {
+    const initialState = {
+      classe,
+      cours
+    };
+    this.bsModalRef = this.modalService.show(ClasseDetailDelCoursComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+/*
   addCours() {
     this.service.getCoursAvailable(this.id).subscribe((cours) => {
       this.modals.addModal(ModalItemSelectorComponent, {
@@ -79,5 +98,5 @@ export class ClasseDetailComponent implements OnInit {
       }
     });
   }
-
+*/
 }

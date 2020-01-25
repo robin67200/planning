@@ -4,16 +4,18 @@
   <button
   style="margin-left: 90%;"
   class="btn btn-outline-primary btn-rounded-f"
-  [routerLink]="['/members']"
+  routerLink="/members"
 >
   <i class="fas fa-arrow-alt-circle-left"></i>&nbsp;Retour
 </button>
   <br>
   <div class="tab-panel">
-    <ngx-tabset class="member-tabset" heading="User Management">
-      <div class="container">
-          <app-user-management></app-user-management>
-      </div>
-    </ngx-tabset>
+    <tabset class="member-tabset">
+      <tab heading="User Management" *appHasRole="['Admin']">
+        <div class="container">
+            <app-user-management></app-user-management>
+        </div>
+      </tab>
+    </tabset>
   </div>
 </div>

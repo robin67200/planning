@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Veuillez selectionner une matière</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<table class="table table-hover table-striped">
+    <tr>
+      <th scope="row">Nom</th>
+      <th></th>
+    </tr>
+    <tr id="list" *ngFor="let matiere of matieres">
+        <td>{{matiere.nom}}</td>
+        <td><button style="margin-left: auto" class="btn btn-success btn-rounded-f" (click)="AddMatiereByProf(matiere);" (click)="bsModalRef.hide()"><i class="fas fa-plus"></i></button></td>
+    </tr>
+</table>
