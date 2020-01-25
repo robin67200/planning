@@ -11,6 +11,7 @@ namespace Planning.API.Models
         public string Adresse {get; set;}
         public string Mail {get; set;}
         public string Telephone {get; set;}
+        public int? Note {get; set;}
 
         public ICollection<ProfMatiere> ProfMatieres { get; set;}
         public ICollection<ProfClasse> ProfClasses { get; set;}

@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Planning.API.Business.Services.Interface;
 using Planning.API.Business.ViewModels;
+using Planning.API.Models;
 using TechCloud.Tools.Mvc;
 
 namespace Planning.API.Controllers
@@ -12,11 +16,48 @@ namespace Planning.API.Controllers
     {
         private readonly IMatieresService _matieres;
         private readonly IClassesService _classes;
-
-        public ProfsController (IProfsService service, IMatieresService matieres, IClassesService classes) : base(service)
+        private readonly PPE2APIContext _context;
+        public ProfsController (IProfsService service, IMatieresService matieres, IClassesService classes, PPE2APIContext context) : base(service)
         {
             this._matieres = matieres;
             this._classes = classes;
+            _context = context;
+        }
+
+        [HttpGet("new/order")]
+        public async Task<IActionResult> ProfsOrder()
+        {
+            var profs = await _context.Profs.OrderByDescending(x => x.Note)
+            .ToListAsync();
+
+            return Ok(profs);
+        }
+
+        [HttpGet("new")]
+        public async Task<IActionResult> Profs()
+        {
+            var profs = await _context.Profs.OrderByDescending(x => x.Note)
+            .ToListAsync();
+
+            return Ok(profs);
+        }
+
+        [HttpPut("new/{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] Prof prof)
+        {
+            var dbProf = _context.Profs.FirstOrDefault(x => x.Id == id);
+            dbProf.Nom = prof.Nom;
+            dbProf.Prenom = prof.Prenom;
+            dbProf.Adresse = prof.Adresse;
+            dbProf.Mail = prof.Mail;
+            dbProf.Telephone = prof.Telephone;
+            dbProf.Nom = prof.Nom;
+            dbProf.Note = prof.Note;
+
+            _context.Profs.Update(dbProf);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         [HttpGet("{id}/matieres/availables")]

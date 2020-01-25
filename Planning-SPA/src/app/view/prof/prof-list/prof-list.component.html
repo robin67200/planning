@@ -36,8 +36,11 @@
         <th>
           mail
         </th>
-        <th>
+        <th >
           telephone
+        </th>
+        <th *appHasRole="['Admin']">
+          Note
         </th>
       </tr>
     </thead>
@@ -57,7 +60,10 @@
         <td>
           {{ prof.telephone }}
         </td>
-        <td *appHasRole="['Admin','Moderator']" style="width: 10%">
+        <td *appHasRole="['Admin']">
+          {{ prof.note }} / 20
+        </td>
+        <td style="width: 10%">
           <div class="dropdown">
             <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs"></i>&nbsp; Actions

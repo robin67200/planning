@@ -12,6 +12,7 @@ export class Prof {
     public adresse: string,
     public mail: string,
     public telephone: number,
+    public note: number,
   ) {
     this.id = 0;
   }

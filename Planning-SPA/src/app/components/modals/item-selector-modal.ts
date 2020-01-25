@@ -25,6 +25,7 @@ export interface SimpleInputModel {
         </div>
       </div>
     </div>
+    <footer><button class="btn btn-primary" (click)="close()">fermer</button></footer>
   `
 })
 export class ModalItemSelectorComponent
@@ -39,8 +40,11 @@ export class ModalItemSelectorComponent
 
   ngOnInit() {}
   confirm(item: ListItem) {
-
     this.result = item;
+    this.close();
+  }
+
+  cancel() {
     this.close();
   }
 }
