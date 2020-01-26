@@ -10,7 +10,7 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Classes");
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired().UseMySqlIdentityColumn().ValueGeneratedOnAdd();
             builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.NiveauId).HasColumnName("NiveauId").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.AnneeId).HasColumnName("AnneeId").HasColumnType("INTEGER").IsRequired();

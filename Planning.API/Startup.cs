@@ -53,8 +53,6 @@ namespace Planning.API
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            Mapper.Reset();
-
             IdentityBuilder builder = services.AddIdentityCore<User>(opt => {
                 opt.Password.RequireDigit = false;
                 opt.Password.RequiredLength = 6;
@@ -131,7 +129,7 @@ namespace Planning.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder )  //
+         public void Configure(IApplicationBuilder app, IHostingEnvironment env )  //
         {
             if (env.IsDevelopment())
         {
@@ -144,7 +142,7 @@ namespace Planning.API
             }
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            seeder.SeedUsers();
+            //seeder.SeedUsers();
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseDefaultFiles();

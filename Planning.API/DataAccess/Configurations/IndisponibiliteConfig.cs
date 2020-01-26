@@ -11,7 +11,7 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Indisponibilites");
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired().UseMySqlIdentityColumn().ValueGeneratedOnAdd();
             builder.Property(x => x.Start).HasColumnName("Debut").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.End).HasColumnName("Fin").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.ProfesseurId).HasColumnName("ProfId").HasColumnType("INTEGER").IsRequired();

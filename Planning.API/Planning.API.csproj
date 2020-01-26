@@ -16,7 +16,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1"/>
     <PackageReference Include="TechCloud.Tools.Mvc" Version="2.2.0"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6"/>
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0"/>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.6"/>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
