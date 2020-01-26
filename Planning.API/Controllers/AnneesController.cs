@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Planning.API.Business.Services.Interface;
 using Planning.API.Business.ViewModels;
@@ -11,6 +12,13 @@ namespace Planning.API.Controllers
     {
         public AnneesController(IAnneeService service) : base(service)
         {
+        }
+
+        [HttpPost("bacon")]
+        public async Task<IActionResult> PostAnnee([FromBody] AnneeViewModel model)
+        {
+            var result = await _service.CreateAnnee(model);
+            return Ok(model);
         }
     }
 }
