@@ -18,7 +18,7 @@ putAnnee(id: number, annee: any) {
   return this.http.put<Annee>('http://localhost:5000/api/annees/' + id, annee);
 }
 postAnnee(annee: Annee) {
-  return this.http.post<Annee>('http://localhost:5000/api/annees/', annee);
+  return this.http.post<Annee>('http://localhost:5000/api/annees/bacon', annee);
 }
 deleteAnneById(id: number) {
   return this.http.delete<Annee>('http://localhost:5000/api/annees/' + id);
