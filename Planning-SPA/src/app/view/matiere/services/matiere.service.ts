@@ -3,25 +3,29 @@ import { HttpClient } from '@angular/common/http';
 import { Matiere } from '../models/matiere';
 import { CrudService } from 'src/app/_services/crud.service';
 import { SimpleModalService } from 'ngx-simple-modal';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class MatiereService {
 
+baseUrl = environment.apiUrl + 'matieres/';
+
+
 constructor(private http: HttpClient) { }
 getMatiere() {
-  return this.http.get<Matiere[]>('http://localhost:5000/api/matieres');
+  return this.http.get<Matiere[]>(this.baseUrl);
 }
 getMatiereById(id: number) {
-  return this.http.get<Matiere>('http://localhost:5000/api/matieres/' + id);
+  return this.http.get<Matiere>(this.baseUrl + id);
 }
 putMatiere(id: number, matiere: any) {
-  return this.http.put<Matiere>('http://localhost:5000/api/matieres/' + id, matiere);
+  return this.http.put<Matiere>(this.baseUrl + id, matiere);
 }
 postMatiere(matiere: Matiere) {
-  return this.http.post<Matiere>('http://localhost:5000/api/matieres/', matiere);
+  return this.http.post<Matiere>(this.baseUrl + 'perso/', matiere);
 }
 deleteMatiereById(id: number) {
-  return this.http.delete<Matiere>('http://localhost:5000/api/matieres/' + id);
+  return this.http.delete<Matiere>(this.baseUrl + id);
 }
 
 }

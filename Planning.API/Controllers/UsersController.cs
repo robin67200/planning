@@ -2,15 +2,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Planning.API.Business;
-using Planning.API.Business.Services.Interface;
-using Planning.API.Business.ViewModels;
 using Planning.API.DataAccess.Repositories.Interface;
 using Planning.API.Dtos;
-using TechCloud.Tools.Mvc;
+using Planning.API.Models;
 
 namespace Planning.API.Controllers
 {
@@ -18,12 +13,14 @@ namespace Planning.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly PPE2APIContext _context;
         private readonly IUsersRepository _repo;
         private readonly IMapper _mapper;
-        public UsersController(IUsersRepository repo, IMapper mapper)
+        public UsersController(IUsersRepository repo, IMapper mapper, PPE2APIContext context)
         {
             _mapper = mapper;
             _repo = repo;
+            _context = context;
 
         }
 
@@ -46,6 +43,13 @@ namespace Planning.API.Controllers
 
             return Ok(userToReturn);
         }
+        
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var user = await _repo.RemoveUser(id);
 
+            return Ok(user);
+        }
     }
 }

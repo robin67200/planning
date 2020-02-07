@@ -19,6 +19,25 @@ namespace Planning.API.DataAccess.Repositories {
             this._context = context;
         }
 
+        public async Task<Indisponibilite> CreateIndisponibilite(Indisponibilite indisponibilite)
+        {
+            var lists = this._context.Indisponibilites.ToList();
+            indisponibilite.Id = 1;
+
+            foreach(Indisponibilite list in lists) {
+                if (list.Id == indisponibilite.Id) {
+                    indisponibilite.Id += 1;
+                }
+            }
+
+            await _context.Indisponibilites.AddAsync(indisponibilite);
+            await _context.SaveChangesAsync();
+
+            return indisponibilite;
+
+
+        }
+
         public IEnumerable<Indisponibilite> GetByDate()
         {
             DateTime date = DateTime.Today;

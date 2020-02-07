@@ -6,38 +6,40 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { Subject } from 'rxjs';
 import { Prof } from '../../prof/models/prof';
 import { Cours } from '../../cours/models/cours';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ClasseService {
   protected $object: Subject<Classe> = new Subject<Classe>();
+  baseUrl = environment.apiUrl + 'classes/';
 
 constructor(private http: HttpClient) { }
 getClasse() {
-  return this.http.get<Classe[]>('http://localhost:5000/api/classes');
+  return this.http.get<Classe[]>(this.baseUrl);
 }
 getClasseById(id: number) {
-  return this.http.get<Classe>('http://localhost:5000/api/classes/' + id);
+  return this.http.get<Classe>(this.baseUrl + id);
 }
 putClasse(id: number, classe: any) {
-  return this.http.put<Classe>('http://localhost:5000/api/classes/' + id, classe);
+  return this.http.put<Classe>(this.baseUrl + id, classe);
 }
 postClasse(classe: Classe) {
-  return this.http.post<Classe>('http://localhost:5000/api/classes/', classe);
+  return this.http.post<Classe>(this.baseUrl + 'perso/', classe);
 }
 deleteClasseById(id: number) {
-  return this.http.delete<Classe>('http://localhost:5000/api/classes/' + id);
+  return this.http.delete<Classe>(this.baseUrl + id);
 }
 getProfs(id: number) {
-  return this.http.get<Prof[]>('http://localhost:5000/api/classes/' + id + '/profs/classe');
+  return this.http.get<Prof[]>(this.baseUrl + id + 'profs/classe');
 }
 getCoursAvailable(id: number) {
-  return this.http.get<Cours[]>('http://localhost:5000/api/classes/' + id + '/cours/availables');
+  return this.http.get<Cours[]>(this.baseUrl + id + 'cours/availables');
 }
 addCours(id: number, coursId: number) {
-  return this.http.put<Cours>('http://localhost:5000/api/classes' + `/${id}/cours/${coursId}`, null );
+  return this.http.put<Cours>(this.baseUrl + `${id}/cours/${coursId}`, null );
 }
 deleteCours(id: number, coursId: number) {
-  return this.http.delete<Cours>('http://localhost:5000/api/classes' + `/${id}/cours/${coursId}`);
+  return this.http.delete<Cours>(this.baseUrl + `${id}/cours/${coursId}`);
 }
 
 }

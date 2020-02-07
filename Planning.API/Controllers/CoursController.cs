@@ -26,11 +26,26 @@ namespace Planning.API.Controllers
             return _service.CoursSchedules(filters.ClasseId, filters.ProfId, filters.MatiereId);
         }
 
+        [HttpPost("perso")]
+        public async Task<IActionResult> PostCours([FromBody] CoursViewModel model)
+        {
+            var result = await _service.CreateCours(model);
+            return Ok(model);
+        }
+
         [HttpPost("control")]
         public async Task<IActionResult> addCours(Cours cours)
         {
             var indisp = _context.Indisponibilites.Where(a => a.ProfesseurId == cours.ProfesseurId).ToList();
+            var lists = this._context.Cours.ToList();
+            cours.Id = 1;
 
+            foreach(Cours list in lists) {
+                if (list.Id == cours.Id) {
+                    cours.Id += 1;
+                }
+            }
+            
             foreach (var item in indisp)
             {
                 if(cours.Start >= item.Start && cours.Start <= item.End)

@@ -22,7 +22,7 @@ namespace Planning.API.Business.Services
             CreateMap<Annee, AnneeViewModel>();
             CreateMap<ProfMatiere, ProfMatiereViewModel>();
             CreateMap<Indisponibilite, IndisponibiliteViewModel>();
-            // CreateMap<User, UserForListDto>();
+            CreateMap<User, UserForListDto>();
         }
     }
 

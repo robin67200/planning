@@ -3,31 +3,33 @@ import { HttpClient } from '@angular/common/http';
 import { Cours } from '../models/cours';
 import { CrudService } from 'src/app/_services/crud.service';
 import { SimpleModalService } from 'ngx-simple-modal';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CoursService {
+  baseUrl = environment.apiUrl + 'cours/';
 
 constructor(private http: HttpClient) { }
 getCours() {
-  return this.http.get<Cours[]>('http://localhost:5000/api/cours');
+  return this.http.get<Cours[]>(this.baseUrl);
 }
 getCoursById(id: number) {
-  return this.http.get<Cours>('http://localhost:5000/api/cours/' + id);
+  return this.http.get<Cours>(this.baseUrl + id);
 }
 putCours(id: number, cours: any) {
-  return this.http.put<Cours>('http://localhost:5000/api/cours/' + id, cours);
+  return this.http.put<Cours>(this.baseUrl + id, cours);
 }
 postCours(cours: Cours) {
-  return this.http.post<Cours>('http://localhost:5000/api/cours/', cours);
+  return this.http.post<Cours>(this.baseUrl + 'perso/', cours);
 }
 deleteCoursById(id: number) {
-  return this.http.delete<Cours>('http://localhost:5000/api/cours/' + id);
+  return this.http.delete<Cours>(this.baseUrl + id);
 }
 addCoursWithControl(cours: Cours) {
-  return this.http.post<Cours>('http://localhost:5000/api/cours/control/', cours);
+  return this.http.post<Cours>(this.baseUrl + 'perso/', cours);
 }
 putCoursWithControl(id: number, cours: any) {
-  return this.http.put<Cours>('http://localhost:5000/api/cours/control/' + id, cours);
+  return this.http.put<Cours>(this.baseUrl + 'control/' + id, cours);
 }
 
 }

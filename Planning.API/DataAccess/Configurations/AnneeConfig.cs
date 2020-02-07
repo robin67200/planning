@@ -10,7 +10,7 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Anneess");
             builder.HasKey(a => a.Id);
 
-            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired().UseMySqlIdentityColumn().ValueGeneratedOnAdd();
+            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("TEXT").IsRequired();
 
             builder.HasMany(z => z.Classes).WithOne(z => z.Annee).HasForeignKey(z => z.AnneeId);

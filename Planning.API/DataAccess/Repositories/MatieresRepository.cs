@@ -15,6 +15,25 @@ namespace Planning.API.DataAccess.Repositories {
         {
             this._context = context;
         }
+        public async Task<Matiere> CreateMatiere(Matiere matiere)
+        {
+            var lists = this._context.Matieres.ToList();
+            matiere.Id = 1;
+
+            foreach(Matiere list in lists) {
+                if (list.Id == matiere.Id) {
+                    matiere.Id += 1;
+                }
+            }
+
+            await _context.Matieres.AddAsync(matiere);
+            await _context.SaveChangesAsync();
+
+            return matiere;
+
+
+        }
+
 
         public override async Task<Matiere> GetByIdAsync(object id)
         {

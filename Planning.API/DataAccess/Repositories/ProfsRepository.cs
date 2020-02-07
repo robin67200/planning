@@ -16,6 +16,26 @@ namespace Planning.API.DataAccess.Repositories {
             this._context = context;
         }
 
+        public async Task<Prof> CreateProf(Prof prof)
+        {
+            var lists = this._context.Profs.ToList();
+            prof.Id = 1;
+
+            foreach(Prof list in lists) {
+                if (list.Id == prof.Id) {
+                    prof.Id += 1;
+                }
+            }
+
+            await _context.Profs.AddAsync(prof);
+            await _context.SaveChangesAsync();
+
+            return prof;
+
+
+        }
+
+
         public override Task<Prof> GetByIdAsync(object id)
         {
             int converted = id.ToInt();

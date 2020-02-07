@@ -43,6 +43,7 @@ namespace Planning.API.Controllers
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+            _userManager.AddToRoleAsync(userToCreate, "Member").Wait();
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
 

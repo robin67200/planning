@@ -10,6 +10,7 @@ namespace Planning.API.Business.Services.Interface
     {
         void AddProf(ProfClasseViewModel model);
         void RemoveProf(ProfClasseViewModel model);
+        Task<Classe> CreateClasse(ClasseViewModel classe);
         Task<ClasseViewModel> GetByIdFullAsync(int id);
         IEnumerable<ClasseViewModel> GetProfClasse(int profId);
         IEnumerable<ClasseViewModel> GetClassesAvailables(int profId);

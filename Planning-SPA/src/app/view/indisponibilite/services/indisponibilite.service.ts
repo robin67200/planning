@@ -4,41 +4,43 @@ import { Indisponibilite } from '../models/indisponibilite';
 import { CrudService } from 'src/app/_services/crud.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class IndisponibiliteService {
 
+baseUrl = environment.apiUrl + 'indisponibilites/';
 
 constructor(private http: HttpClient) { }
 getIndisponibilites() {
-  return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites');
+  return this.http.get<Indisponibilite[]>(this.baseUrl);
 }
 getByDateToday() {
-  return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites/date');
+  return this.http.get<Indisponibilite[]>(this.baseUrl);
 }
 getIndisponibiliteById(id: number) {
-  return this.http.get<Indisponibilite>('http://localhost:5000/api/indisponibilites/' + id);
+  return this.http.get<Indisponibilite>(this.baseUrl + id);
 }
 putIndisponibilite(id: number, indisponibilite: any) {
-  return this.http.put<Indisponibilite>('http://localhost:5000/api/indisponibilites/' + id, indisponibilite);
+  return this.http.put<Indisponibilite>(this.baseUrl + id, indisponibilite);
 }
 putIndisponibiliteWithControl(id: number, indisponibilite: any) {
-  return this.http.put<Indisponibilite>('http://localhost:5000/api/indisponibilites/control/' + id, indisponibilite);
+  return this.http.put<Indisponibilite>(this.baseUrl + 'control/' + id, indisponibilite);
 }
 postIndisponibilite(indisponibilite: Indisponibilite) {
-  return this.http.post<Indisponibilite>('http://localhost:5000/api/indisponibilites/', indisponibilite);
+  return this.http.post<Indisponibilite>(this.baseUrl + 'perso/', indisponibilite);
 }
 postIndisponibiliteWithControl(indisponibilite: Indisponibilite) {
-  return this.http.post<Indisponibilite>('http://localhost:5000/api/indisponibilites/control/', indisponibilite);
+  return this.http.post<Indisponibilite>(this.baseUrl + 'control/', indisponibilite);
 }
 deleteIndisponibiliteById(id: number) {
-  return this.http.delete<Indisponibilite>('http://localhost:5000/api/indisponibilites/' + id);
+  return this.http.delete<Indisponibilite>(this.baseUrl + id);
 }
 searchDate(date: Date) {
-  return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites/search?date=' + date);
+  return this.http.get<Indisponibilite[]>(this.baseUrl + 'search?date=' + date);
 }
 searchByProf(profId: number) {
-  return this.http.get<Indisponibilite[]>('http://localhost:5000/api/indisponibilites/prof/' + profId);
+  return this.http.get<Indisponibilite[]>(this.baseUrl + 'prof/' + profId);
 }
 
 }

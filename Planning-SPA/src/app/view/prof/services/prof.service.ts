@@ -6,52 +6,55 @@ import { CrudService } from 'src/app/_services/crud.service';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { Matiere } from '../../matiere/models/matiere';
 import { Classe } from '../../classe/models/classe';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ProfService {
 
+baseUrl = environment.apiUrl;
+
 constructor(private http: HttpClient) { }
 getProf() {
-  return this.http.get<Prof[]>('http://localhost:5000/api/profs/new');
+  return this.http.get<Prof[]>(this.baseUrl + 'profs/new/');
 }
 getProfById(id: number) {
-  return this.http.get<Prof>('http://localhost:5000/api/profs/' + id);
+  return this.http.get<Prof>(this.baseUrl + 'profs/' + id);
 }
 putProf(id: number, prof: any) {
-  return this.http.put<Prof>('http://localhost:5000/api/profs/new/' + id, prof);
+  return this.http.put<Prof>(this.baseUrl + 'profs/new/' + id, prof);
 }
 postProf(prof: Prof) {
-  return this.http.post<Prof>('http://localhost:5000/api/profs/', prof);
+  return this.http.post<Prof>(this.baseUrl + 'profs/perso/', prof);
 }
 deleteProfById(id: number) {
-  return this.http.delete<Prof>('http://localhost:5000/api/profs/' + id);
+  return this.http.delete<Prof>(this.baseUrl + 'profs/' + id);
 }
 getByName(nom: string) {
-  return this.http.get<Prof[]>('http://localhost:5000/api/eleves/nom' + nom);
+  return this.http.get<Prof[]>(this.baseUrl + 'eleves/nom' + nom);
 }
 getMatiere(id: number) {
-  return this.http.get<Matiere[]>('http://localhost:5000/api/profs/' + id + '/matieres/prof');
+  return this.http.get<Matiere[]>(this.baseUrl + 'profs/' + id + '/matieres/prof');
 }
 getMatieresAvailable(id: number) {
-  return this.http.get<Matiere[]>('http://localhost:5000/api/profs/' + id + '/matieres/availables');
+  return this.http.get<Matiere[]>(this.baseUrl + 'profs/' + id + '/matieres/availables');
 }
 getClasse(id: number) {
-  return this.http.get<Classe[]>('http://localhost:5000/api/profs/' + id + '/classes/prof');
+  return this.http.get<Classe[]>(this.baseUrl + 'profs/' + id + '/classes/prof');
 }
 getClasseAvailable(id: number) {
-  return this.http.get<Classe[]>('http://localhost:5000/api/profs/' + id + '/classes/availables');
+  return this.http.get<Classe[]>(this.baseUrl + 'profs/' + id + '/classes/availables');
 }
 addMatiere(id: number, matiereId: number) {
-  return this.http.put<Matiere>('http://localhost:5000/api/profs' + `/${id}/matieres/${matiereId}`, null );
+  return this.http.put<Matiere>(this.baseUrl + 'profs/' + `${id}/matieres/${matiereId}`, null );
 }
 deleteMatiere(id: number, matiereId: number) {
-  return this.http.delete<Matiere>('http://localhost:5000/api/profs' + `/${id}/matieres/${matiereId}`);
+  return this.http.delete<Matiere>(this.baseUrl + 'profs/' + `${id}/matieres/${matiereId}`);
 }
 addClasse(id: number, classeId: number) {
-  return this.http.put<Classe>('http://localhost:5000/api/profs' + `/${id}/classes/${classeId}`, null );
+  return this.http.put<Classe>(this.baseUrl + 'profs/' + `${id}/classes/${classeId}`, null );
 }
 deleteClasse(id: number, classeId: number) {
-  return this.http.delete<Classe>('http://localhost:5000/api/profs' + `/${id}/classes/${classeId}`);
+  return this.http.delete<Classe>(this.baseUrl + 'profs/' + `${id}/classes/${classeId}`);
 }
 
 

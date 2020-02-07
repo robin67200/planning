@@ -53,7 +53,7 @@
             <td>
               {{ cours.matiereName }}
             </td>
-            <td *appHasRole="['Admin','Moderator']" style="width: 10%">
+            <td style="width: 10%">
               <div class="dropdown">
                 <button
                   class="btn btn-outline-info dropdown-toggle"
@@ -73,12 +73,15 @@
                     ><i class="fas fa-info-circle"></i>&nbsp;&nbsp;Detail</a
                   >
                   <a
+                    *appHasRole="['Admin','Moderator']"
                     class="dropdown-item"
                     (click)="openCours(cours); pnlCoursEdit.display()"
                     style="cursor: pointer;"
                     ><i class="far fa-edit"></i>&nbsp;&nbsp;Modifier</a
+
                   >
                   <a
+                    *appHasRole="['Admin','Moderator']"
                     class="dropdown-item"
                     (click)="deleteCours(cours)"
                     style="cursor: pointer; background-color: rgb(246, 179, 179);"

@@ -20,10 +20,12 @@ using Planning.API.Business.Services.Interface;
 using Planning.API.DataAccess.Repositories;
 using Planning.API.DataAccess.Repositories.Interface;
 using Planning.API.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using TechCloud.Tools.DataAccess.Infrastructure;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Planning.API
 {
@@ -53,12 +55,14 @@ namespace Planning.API
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            IdentityBuilder builder = services.AddIdentityCore<User>(opt => {
+            IdentityBuilder builder = services.AddIdentityCore<User>(opt =>
+            {
                 opt.Password.RequireDigit = false;
                 opt.Password.RequiredLength = 6;
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireUppercase = false;
             });
+            
 
             builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
             builder.AddEntityFrameworkStores<PPE2APIContext>();
@@ -87,33 +91,37 @@ namespace Planning.API
             services.AddScoped<IIndisponibilitesRepository, IndisponibilitesRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IDbContext>(f => {
+            services.AddScoped<IDbContext>(f =>
+            {
                 return f.GetService<PPE2APIContext>();
             });
-                services.AddMvc(options => 
-                {
-                    var policy = new AuthorizationPolicyBuilder()
-                        .RequireAuthenticatedUser()
-                        .Build();
-                   // options.Filters.Add(new AuthorizeFilter(policy));
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                    // options.Filters.Add(new AuthorizeFilter(policy));
                 }
-            )
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(opt => {
-                    opt.SerializerSettings.ReferenceLoopHandling = 
-                    Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                });
-                
-                
-                services.AddAuthorization(options => {
+        )
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling =
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+
+            services.AddAuthorization(options =>
+            {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("ModerateDataRole", policy => policy.RequireRole("Admin", "Moderator"));
                 options.AddPolicy("VipOnle", policy => policy.RequireRole("VIP"));
             });
-            
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
+                .AddJwtBearer(options =>
+                {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
@@ -129,33 +137,37 @@ namespace Planning.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-         public void Configure(IApplicationBuilder app, IHostingEnvironment env )  //
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)  //
         {
             if (env.IsDevelopment())
-        {
+            {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                // app.UseHsts();
             }
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //seeder.SeedUsers();
             app.UseAuthentication();
-            app.UseHttpsRedirection();
-            app.UseDefaultFiles();
+
+            app.UseAuthentication();
+            //app.UseHttpsRedirection();
+           // app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
-                    defaults: new {controller = "Fallback",
-                    action = "Index"}
+                    defaults: new
+                    {
+                        controller = "Fallback",
+                        action = "Index"
+                    }
                 );
             });
-            
+
         }
     }
 }

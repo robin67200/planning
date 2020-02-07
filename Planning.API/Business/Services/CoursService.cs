@@ -15,10 +15,21 @@ namespace Planning.API.Business.Services
     public class CoursService : BaseService<Cours, CoursViewModel>, ICoursService
     {
         private readonly ICoursRepository _repo;
+        private readonly IUnitOfWork _uof;
+
 
         public CoursService(ICoursRepository repo, IUnitOfWork unitOfWork, IMapper mapper) : base(repo, unitOfWork, mapper)
         {
+            _uof = unitOfWork;
             _repo = repo;
+        }
+        public async Task<Cours> CreateCours(CoursViewModel annee)
+        {
+            var obj = this._mapper.Map<Cours>(annee);
+            await this._repo.CreateCours(obj);
+            await this._unitOfWork.CommitAsync();
+
+            return obj;
         }
 
         public IEnumerable<CoursViewModel> GetCoursAvailables(int classeId)

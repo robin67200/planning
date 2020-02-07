@@ -14,10 +14,13 @@ namespace Planning.API.Business.Services
     public class ProfsService : BaseService<Prof, ProfViewModel>, IProfsService
     {
         private readonly IProfsRepository _repo;
+        private readonly IUnitOfWork _uof;
 
         public ProfsService(IProfsRepository repo, IUnitOfWork unitOfWork, IMapper mapper) : base(repo, unitOfWork, mapper)
         {
             _repo = repo;
+            _uof = unitOfWork;
+
         }
 
         public async override Task<ProfViewModel> GetByIdAsync(object id)
@@ -30,6 +33,14 @@ namespace Planning.API.Business.Services
             mapped.Indisponibilites = _mapper.Map<ICollection<IndisponibiliteViewModel>>(prof.Indisponibiltes.ToList());
 
             return mapped;
+        }
+        public async Task<Prof> CreateProf(ProfViewModel prof)
+        {
+            var obj = this._mapper.Map<Prof>(prof);
+            await this._repo.CreateProf(obj);
+            await this._unitOfWork.CommitAsync();
+
+            return obj;
         }
 
         public void AddMatiere(ProfMatiereViewModel model)

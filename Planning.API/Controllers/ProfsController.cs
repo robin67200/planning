@@ -24,6 +24,12 @@ namespace Planning.API.Controllers
             _context = context;
         }
 
+        [HttpPost("perso")]
+        public async Task<IActionResult> PostProf([FromBody] ProfViewModel model)
+        {
+            var result = await _service.CreateProf(model);
+            return Ok(model);
+        }
         [HttpGet("new/order")]
         public async Task<IActionResult> ProfsOrder()
         {

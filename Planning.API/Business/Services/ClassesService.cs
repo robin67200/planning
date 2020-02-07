@@ -14,13 +14,24 @@ namespace Planning.API.Business.Services
 {
     public class ClassesService : BaseService<Classe, ClasseViewModel>, IClassesService
     {
+        private readonly IUnitOfWork _uof;
         private readonly IClassesRepository _repo;
 
         public ClassesService(IClassesRepository repo, IUnitOfWork unitOfWork, IMapper mapper) : base(repo, unitOfWork, mapper)
         {
+            _uof = unitOfWork;
             _repo = repo;
-        }
 
+
+        }
+         public async Task<Classe> CreateClasse(ClasseViewModel classe)
+        {
+            var obj = this._mapper.Map<Classe>(classe);
+            await this._repo.CreateClasse(obj);
+            await this._unitOfWork.CommitAsync();
+
+            return obj;
+        }
         public async override Task<ClasseViewModel> GetByIdAsync(object id)
         {
             var classe = await _repo.GetByIdAsync(id);

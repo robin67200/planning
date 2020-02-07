@@ -21,6 +21,8 @@ import { MatInputModule, MatIconModule } from '@angular/material';
   imports: [CommonModule,
             ReactiveFormsModule,
             FormsModule,
+            MatInputModule,
+            MatIconModule,
             IndisponibilitesRoutingModule,
             AppSharedModule,
             ModalModule.forRoot(),
@@ -29,8 +31,6 @@ import { MatInputModule, MatIconModule } from '@angular/material';
             ProfsModule,
             NgbModule,
             NgbDatepickerModule,
-            MatInputModule,
-            MatIconModule,
             ],
   declarations: [
     IndisponibiliteListComponent,

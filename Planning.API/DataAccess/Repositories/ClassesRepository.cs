@@ -17,6 +17,26 @@ namespace Planning.API.DataAccess.Repositories {
             this._context = context;
         }
 
+         public async Task<Classe> CreateClasse(Classe classe)
+        {
+            var lists = this._context.Classes.ToList();
+            classe.Id = 1;
+
+            foreach(Classe list in lists) {
+                if (list.Id == classe.Id) {
+                    classe.Id += 1;
+                }
+            }
+
+            await _context.Classes.AddAsync(classe);
+            await _context.SaveChangesAsync();
+
+            return classe;
+
+
+        }
+
+
         public override Task<Classe> GetByIdAsync(object id)
         {
             int converted = id.ToInt();

@@ -10,5 +10,7 @@ namespace Planning.API.DataAccess.Repositories.Interface
         
         IEnumerable<Matiere> GetProfAvailables(int profId);
         IEnumerable<Matiere> GetProfs(int profId);
+        Task<Matiere> CreateMatiere(Matiere matiere);
+
     }
 }

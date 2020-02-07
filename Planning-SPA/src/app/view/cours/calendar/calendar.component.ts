@@ -57,7 +57,6 @@ export class CalendarComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   };
-  eventss: CalendarEvent;
 
   actions: CalendarEventAction[] = [
     // {

@@ -12,5 +12,6 @@ namespace Planning.API.DataAccess.Repositories.Interface
          Task<bool> SaveAll();
          Task<IEnumerable<User>> GetUsers();
          Task<User> GetUser(int id);
+         Task<User> RemoveUser(int id);
     }
 }

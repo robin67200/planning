@@ -1,3 +1,4 @@
+import { AlertifyService } from '../../../_services/alertify.service';
 import { IndisponibiliteService3 } from './../../services/indisponibilite.service';
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
@@ -25,6 +26,7 @@ export class IndispFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private alertify: AlertifyService,
     private service: IndisponibiliteService3<Indisponibilite, number>,
   ) {
     this.form = this.fb.group({
@@ -50,19 +52,25 @@ export class IndispFormComponent implements OnInit {
       indispo.end = this.form.value.end;
       indispo.professeurId = this.form.value.professeurId;
 
+     // if (indispo.start > indispo.end) {
+      //  this.alertify.error('La date de début est supérieure à la date de fin');
+     // } else if (indispo.end === indispo.start) {
+     //   this.alertify.error('Les dates ne peuvent être égales');
+     // } else {
       this.onCreating2.emit(indispo);
       this.ngForm.resetForm();
 
       this.form.reset();
       this.form.controls.id.setValue(0);
-
+     // }
     }
   }
-
   close() {
     this.ngForm.resetForm();
     this.form.reset();
     this.onClose.emit(null);
   }
-
 }
+
+
+

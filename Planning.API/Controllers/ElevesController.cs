@@ -18,6 +18,13 @@ namespace Planning.API.Controllers
 
         }
 
+         [HttpPost("perso")]
+        public async Task<IActionResult> PostEleve([FromBody] EleveViewModel model)
+        {
+            var result = await _service.CreateEleve(model);
+            return Ok(model);
+        }
+
         [HttpGet("nom/{nom}")]
         public IEnumerable<EleveViewModel> GetByName([FromRoute]string nom)
         {

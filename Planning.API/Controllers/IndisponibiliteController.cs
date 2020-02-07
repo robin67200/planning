@@ -28,6 +28,12 @@ namespace Planning.API.Controllers
             return this._service.GetByDate();
         }
 
+        [HttpPost("perso")]
+        public async Task<IActionResult> PostIndisponibilite([FromBody] IndisponibiliteViewModel model)
+        {
+            var result = await _service.CreateIndisponibilite(model);
+            return Ok(model);
+        }
         [HttpGet("search")]
         public IEnumerable<IndisponibiliteViewModel> SearchDate(string date)
         {
@@ -43,6 +49,14 @@ namespace Planning.API.Controllers
         [HttpPost("control")]
         public async Task<IActionResult> addIndisponibilite(Indisponibilite indisp)
         {   
+            var lists = this._context.Indisponibilites.ToList();
+            indisp.Id = 1;
+
+            foreach(Indisponibilite list in lists) {
+                if (list.Id == indisp.Id) {
+                    indisp.Id += 1;
+                }
+            }
             if (indisp.Start > indisp.End)
                 return BadRequest("Date de fin inférieure à la date de début");
             

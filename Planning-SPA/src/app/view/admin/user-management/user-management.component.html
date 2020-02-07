@@ -10,9 +10,35 @@
       <td>{{user.id}}</td>
       <td>{{user.username}}</td>
       <td>{{user.roles}}</td>
-      <td><button class="btn btn-outline-info" (click)="editRolesModal(user)"><i class="fas fa-cogs"></i>&nbsp;Editer
-      </button>
+      <td>
+        <div class="dropdown">
+          <button
+            class="btn btn-outline-info dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fas fa-cogs"></i>&nbsp; Actions
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a
+              class="dropdown-item"
+              (click)="editRolesModal(user)"
+              style="cursor: pointer;"
+              ><i class="far fa-edit"></i>&nbsp;&nbsp;Editer un rôle</a
+            >
+            <a
+              class="dropdown-item"
+              (click)="deleteUser(user)"
+              style="cursor: pointer; background-color: rgb(246, 179, 179);"
+              ><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Supprimer</a
+            >
+          </div>
+        </div>
       </td>
+
     </tr>
   </table>
 </div>

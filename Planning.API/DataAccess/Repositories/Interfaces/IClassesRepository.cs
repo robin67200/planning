@@ -9,6 +9,7 @@ namespace Planning.API.DataAccess.Repositories.Interface
     {
         Task<Classe> AddClasse(Classe classe);
         Task<Classe> GetByIdFullAsync(int id);
+        Task<Classe> CreateClasse(Classe classe);
         void AddProf(ProfClasse model);
         void RemoveProf(ProfClasse model);
         IEnumerable<Classe> GetProfClasses(int profId);

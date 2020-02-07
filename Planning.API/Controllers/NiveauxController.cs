@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Planning.API.Business.Services.Interface;
 using Planning.API.Business.ViewModels;
 using TechCloud.Tools.Mvc;
+using System.Threading.Tasks;
 
 namespace Planning.API.Controllers
 {
@@ -12,5 +13,13 @@ namespace Planning.API.Controllers
         public NiveauxController(INiveauService service) : base(service)
         {
         }
+
+        [HttpPost("perso")]
+        public async Task<IActionResult> PostNiveau([FromBody] NiveauViewModel model)
+        {
+            var result = await _service.CreateNiveau(model);
+            return Ok(model);
+        }
+
     }
 }

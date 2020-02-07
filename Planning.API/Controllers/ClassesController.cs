@@ -21,6 +21,12 @@ namespace Planning.API.Controllers
             this._cours = cours;
         }
 
+          [HttpPost("perso")]
+        public async Task<IActionResult> PostClasse([FromBody] ClasseViewModel model)
+        {
+            var result = await _service.CreateClasse(model);
+            return Ok(model);
+        }
 
         [HttpGet("{id}/full")]
         public async Task<IActionResult> GetByIdFullAsync([FromRoute]int id)

@@ -44,5 +44,13 @@ namespace Planning.API.DataAccess.Repositories {
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<User> RemoveUser(int id)
+        {
+            var users = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Remove(users);
+            await _context.SaveChangesAsync();
+
+            return users;
+        }
     }
 }

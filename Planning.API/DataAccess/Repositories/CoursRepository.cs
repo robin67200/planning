@@ -29,6 +29,24 @@ namespace Planning.API.DataAccess.Repositories {
                     .ThenInclude(c => c.Classe)
                 .FirstOrDefaultAsync(x => x.Id == id.ToInt());
         }
+        public async Task<Cours> CreateCours(Cours cours)
+        {
+            var lists = this._context.Cours.ToList();
+            cours.Id = 1;
+
+            foreach(Cours list in lists) {
+                if (list.Id == cours.Id) {
+                    cours.Id += 1;
+                }
+            }
+
+            await _context.Cours.AddAsync(cours);
+            await _context.SaveChangesAsync();
+
+            return cours;
+
+
+        }
 
         public IEnumerable<Cours> GetFiltered(int? classeId, int? profId, int? matiereId)
         {

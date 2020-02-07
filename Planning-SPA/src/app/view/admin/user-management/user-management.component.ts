@@ -1,6 +1,6 @@
 import { UserService } from './../../user/_services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { AlertifyService } from 'src/app/_services/alertify.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
 import { AdminService } from '../../_services/admin.service';
@@ -18,10 +18,10 @@ export class UserManagementComponent implements OnInit {
   users: User[];
   bsModalRef: BsModalRef;
 
-  constructor(private adminService: AdminService, private alertifyService: AlertifyService,
+  constructor(private adminService: AdminService,
+              private alertify: AlertifyService,
               private modalService: BsModalService,
               private userService: UserService,
-              private alertify: AlertifyService,
               private modals: SimpleModalService,
               ) { }
 
@@ -33,7 +33,7 @@ export class UserManagementComponent implements OnInit {
     this.adminService.getUsersWithRoles().subscribe((users: User[]) => {
       this.users = users;
     }, error => {
-      this.alertifyService.error('erreur');
+      this.alertify.error('erreur');
     });
   }
 
@@ -50,9 +50,9 @@ export class UserManagementComponent implements OnInit {
       if (rolesToUpdate) {
         this.adminService.updateUsersRoles(user, rolesToUpdate).subscribe(() => {
           user.roles = [...rolesToUpdate.roleNames];
-          this.alertifyService.succes('Role Modifier');
+          this.alertify.succes('Role Modifier');
         }, error => {
-          this.alertifyService.error('erreur');
+          this.alertify.error('erreur');
         });
       }
 
@@ -68,6 +68,7 @@ export class UserManagementComponent implements OnInit {
       {name: 'Member', value: 'Member'},
       {name: 'VIP', value: 'VIP'}
     ];
+
 // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < avaibleRoles.length; i++) {
       let isMatch = false;

@@ -14,7 +14,7 @@ namespace Planning.API.Controllers
         {
         }
 
-        [HttpPost("bacon")]
+        [HttpPost("perso")]
         public async Task<IActionResult> PostAnnee([FromBody] AnneeViewModel model)
         {
             var result = await _service.CreateAnnee(model);

@@ -6,5 +6,7 @@ namespace Planning.API.DataAccess.Repositories.Interface
 {
     public interface INiveauxRepository : IRepository<Niveau>
     {
+        Task<Niveau> CreateNiveau(Niveau niveau);
+
     }
 }

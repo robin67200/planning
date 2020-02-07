@@ -10,13 +10,13 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Cours");
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired().UseMySqlIdentityColumn().ValueGeneratedOnAdd();
+            builder.Property(x => x.Id).HasColumnName("Id").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.Title).HasColumnName("Title").HasColumnType("TEXT").IsRequired();
-            builder.Property(x => x.Start).HasColumnName("Start").HasColumnType("INTEGER").IsRequired();
-            builder.Property(x => x.End).HasColumnName("End").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Start).HasColumnName("Start").HasColumnType("DATETIME").IsRequired();
+            builder.Property(x => x.End).HasColumnName("End").HasColumnType("DATETIME").IsRequired();
             builder.Property(x => x.Room).HasColumnName("Room").HasColumnType("TEXT").IsRequired();
-            builder.Property(x => x.Color).HasColumnName("Color").HasColumnType("INTEGER").IsRequired();
-            builder.Property(x => x.Color2).HasColumnName("Color2").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.Color).HasColumnName("Color").HasColumnType("TEXT").IsRequired();
+            builder.Property(x => x.Color2).HasColumnName("Color2").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.MatiereId).HasColumnName("MatiereId").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.ProfesseurId).HasColumnName("ProfesseurId").HasColumnType("INTEGER").IsRequired();
 

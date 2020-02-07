@@ -80,7 +80,7 @@
               </thead>
                 <tr id="list" *ngFor="let classe of prof.classes">
                     <td>{{classe.nom}}</td>
-                    <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteMatiereM(prof, classe)"><i class="fas fa-trash-alt"></i></button></td>
+                    <td style="width: 10%;"><button class="btn btn-danger btn-rounded-f" (click)="deleteClasseM(prof, classe)"><i class="fas fa-trash-alt"></i></button></td>
                 </tr>
           </table>
           </section>

@@ -1,5 +1,5 @@
 <div class="container">
-  <form
+  <form ngbAutofocus
     class="form-horizontal form-label-left parsleyjs ng-untouched ng-pristine ng-valid"
     [formGroup]="form"
     (submit)="save()"
@@ -18,7 +18,7 @@
               mwlFlatpickr
               placeholder="Choisir la date et l'heure du début"
               [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
+              dateFormat="Y-m-d H:i"
             />
             <mat-error *ngIf="start.invalid"
               >Veuillez rentrer l'heure de début</mat-error
@@ -40,7 +40,7 @@
               mwlFlatpickr
               placeholder="Choisir la date et l'heure de la fin"
               [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
+              dateFormat="Y-m-d H:i"
             />
             <mat-error *ngIf="end.invalid"
               >Veuillez rentrer l'heure de fin</mat-error

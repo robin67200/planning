@@ -10,13 +10,13 @@ namespace Planning.API.DataAccess {
             builder.ToTable("Eleves");
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired().UseMySqlIdentityColumn().ValueGeneratedOnAdd();
+            builder.Property(x => x.Id).HasColumnName("ID").HasColumnType("INTEGER").IsRequired();
             builder.Property(x => x.Nom).HasColumnName("Nom").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.Prenom).HasColumnName("Prenom").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.Adresse).HasColumnName("Adresse").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.Mail).HasColumnName("Mail").HasColumnType("TEXT").IsRequired();
             builder.Property(x => x.Telephone).HasColumnName("Telephone").HasColumnType("TEXT").IsRequired();
-            builder.Property(x => x.DateNaissance).HasColumnName("DateNaissance").HasColumnType("INTEGER").IsRequired();
+            builder.Property(x => x.DateNaissance).HasColumnName("DateNaissance").HasColumnType("DATETIME").IsRequired();
             builder.Property(x => x.ClasseId).HasColumnName("ClasseId").HasColumnType("INTEGER").IsRequired();
 
 

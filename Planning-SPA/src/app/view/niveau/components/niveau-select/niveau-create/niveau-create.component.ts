@@ -46,10 +46,10 @@ export class NiveauCreateComponent implements OnInit {
       niveau.nom = this.form.value.nom;
 
       this.onCreating.emit(niveau);
-      this.ngForm.resetForm();
 
-      this.form.reset();
       this.form.controls.id.setValue(0);
+      this.ngForm.resetForm();
+      this.form.reset();
 
   } else {
     this.hasError = true;
