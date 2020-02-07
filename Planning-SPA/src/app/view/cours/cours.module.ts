@@ -4,7 +4,7 @@ import { CoursModalsComponent } from './cours-modals/cours-modals.component';
 import { CoursListComponent } from './cours-list/cours-list.component';
 import { CoursFormEditComponent } from './components/cours-form-edit/cours-form-edit.component';
 import { MatiereModule } from './../matiere/matiere.module';
-import { ProfsModule } from './../prof/prof.module';
+import { ProfModule } from './../prof/prof.module';
 import { MatInputModule } from '@angular/material/input';
 import { CoursFormComponent } from './components/cours-form/cours-form.component';
 import { CoursService, CoursService2 } from './services/cours.service';
@@ -48,7 +48,7 @@ import { IndisponibiliteModule } from '../indisponibilite/indisponibilite.module
             MatDatepickerModule,
             MatNativeDateModule,
             MatSelectModule,
-            ProfsModule,
+            ProfModule,
             ClasseModule,
             MatiereModule,
             IndisponibiliteModule,
@@ -74,4 +74,4 @@ import { IndisponibiliteModule } from '../indisponibilite/indisponibilite.module
   entryComponents: [CoursModalsComponent],
   exports: [CoursFormComponent, CalendarComponent, CoursFormEditComponent]
 })
-export class CourssModule {}
+export class CoursModule {}

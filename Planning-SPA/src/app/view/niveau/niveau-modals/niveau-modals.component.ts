@@ -2,7 +2,7 @@ import { AlertifyService } from '../../_services/alertify.service';
 import { NiveauService } from './../services/niveau.service';
 import { Niveau } from './../models/niveau';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { User } from '../../user/_models/user';
+import { User } from '../../member/_models/user';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 

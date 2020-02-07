@@ -16,7 +16,7 @@ import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
 import { ClassesRoutingModule } from './classe.routing';
 import { ClasseSelectComponent } from './components/classe-select/classe-select.component';
-import { AnneesModule } from '../annee/annee.module';
+import { AnneeModule } from '../annee/annee.module';
 import { NiveauModule } from '../niveau/niveau.module';
 import { MatInputModule, MatIconModule, MatNativeDateModule,
   MatDatepickerModule, MatSelectModule, MatTableModule, MatSortModule,
@@ -29,7 +29,7 @@ import { MatInputModule, MatIconModule, MatNativeDateModule,
             ClassesRoutingModule,
             AppSharedModule,
             ModalModule.forRoot(),
-            AnneesModule,
+            AnneeModule,
             NiveauModule,
             MatIconModule,
             MatInputModule,

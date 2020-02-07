@@ -52,4 +52,4 @@ import {MatMenuModule} from '@angular/material/menu';
   entryComponents: [EleveModalsComponent],
   exports: [EleveFormComponent, EleveFormEditComponent]
 })
-export class ElevesModule {}
+export class EleveModule {}

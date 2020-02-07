@@ -47,4 +47,4 @@ import { MatTableModule, MatPaginatorModule, MatSortModule,
   exports: [AnneeSelectComponent, AnneeModalComponent,
        AppAnneeCreateComponent, AppAnneeEditComponent]
 })
-export class AnneesModule {}
+export class AnneeModule {}

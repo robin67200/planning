@@ -2,7 +2,7 @@ import { AlertifyService } from './../_services/alertify.service';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { User } from '../user/_models/user';
+import { User } from '../member/_models/user';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 

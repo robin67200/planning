@@ -28,7 +28,7 @@ import { MAT_DATE_LOCALE } from '@angular/material';
 import { HomeComponent } from './view/home/home.component';
 import { NavComponent } from './view/nav/nav.component';
 import { RegisterComponent } from './view/register/register.component';
-import { UserService } from './view/user/_services/user.service';
+import { UserService } from './view/member/_services/user.service';
 import { AdminService } from './view/_services/admin.service';
 import { AlertifyService } from './view/_services/alertify.service';
 import { UserManagementComponent } from './view/admin/user-management/user-management.component';

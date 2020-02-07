@@ -22,4 +22,4 @@ import { TimeAgoPipe } from 'time-ago-pipe';
   ],
   providers: [UserService]
 })
-export class MembersModule {}
+export class MemberModule {}

@@ -1,10 +1,10 @@
-import { UserService } from './../../user/_services/user.service';
+import { UserService } from './../../member/_services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from '../../_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
 import { AdminService } from '../../_services/admin.service';
-import { User } from '../../user/_models/user';
+import { User } from '../../member/_models/user';
 import { ModalConfirmComponent } from 'src/app/components/modals/confirm-modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 

@@ -73,4 +73,4 @@ import { ClasseService } from '../classe/services/classe.service';
   ],
   exports: [ProfSelectComponent, ProfFormComponent, ProfFormEditComponent]
 })
-export class ProfsModule {}
+export class ProfModule {}

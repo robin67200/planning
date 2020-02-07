@@ -5,7 +5,6 @@ import { NiveauService, NiveauService2 } from './services/niveau.service';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import { AppSharedModule } from '../../app-shared.module';
 import { ModalModule } from 'ngx-bootstrap';
 import { NiveauCreateComponent } from './components/niveau-select/niveau-create/niveau-create.component';

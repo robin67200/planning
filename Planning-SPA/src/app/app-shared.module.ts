@@ -12,7 +12,7 @@ import { RolesModalComponent } from './view/admin/roles-modal/roles-modal.compon
 import { AuthService } from './view/_services/auth.service';
 import { AuthGuard } from './view/_guards/auth.guard';
 import { AdminService } from './view/_services/admin.service';
-import { UserService } from './view/user/_services/user.service';
+import { UserService } from './view/member/_services/user.service';
 import { SlideCreateComponent } from './components/slide-create/slide-create.component';
 import { HasRoleDirective } from './view/_directives/hasRole.directive';
 import { ChartsModule } from 'ng2-charts';

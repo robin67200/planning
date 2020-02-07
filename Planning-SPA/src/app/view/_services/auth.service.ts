@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { logging } from 'protractor';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from '../user/_models/user';
+import { User } from '../member/_models/user';
 import { environment } from 'src/environments/environment';
 
 

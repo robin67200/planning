@@ -17,17 +17,17 @@ export const routes: Routes = [
     children: [
       {
         path: 'annees',
-        loadChildren: './view/annee/annee.module#AnneesModule',
+        loadChildren: './view/annee/annee.module#AnneeModule',
         canActivate: [AuthGuard],
       },
       {
         path: 'profs',
-        loadChildren: './view/prof/prof.module#ProfsModule',
+        loadChildren: './view/prof/prof.module#ProfModule',
         canActivate: [AuthGuard],
       },
       {
         path: 'calendars',
-        loadChildren: './view/cours/cours.module#CourssModule',
+        loadChildren: './view/cours/cours.module#CoursModule',
         canActivate: [AuthGuard],
       },
       {
@@ -37,7 +37,7 @@ export const routes: Routes = [
       },
       {
         path: 'eleves',
-        loadChildren: './view/eleve/eleve.module#ElevesModule',
+        loadChildren: './view/eleve/eleve.module#EleveModule',
         canActivate: [AuthGuard],
       },
       {
@@ -57,7 +57,7 @@ export const routes: Routes = [
       },
       {
         path: 'members',
-        loadChildren: './view/user/member.module#MembersModule',
+        loadChildren: './view/member/member.module#MemberModule',
         canActivate: [AuthGuard],
      },
      {
