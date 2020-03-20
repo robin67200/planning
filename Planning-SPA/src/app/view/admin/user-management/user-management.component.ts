@@ -1,3 +1,4 @@
+import { DeleteModalsComponent } from './../roles-modal/delete-modals/delete-modals.component';
 import { UserService } from './../../member/_services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from '../../_services/alertify.service';
@@ -43,9 +44,9 @@ export class UserManagementComponent implements OnInit {
       roles: this.getRolesArray(user)
     };
     this.bsModalRef = this.modalService.show(RolesModalComponent, {initialState});
-    this.bsModalRef.content.updateSelectedRoles.subscribe((values) => {
+    this.bsModalRef.content.updateSelectedRoles.subscribe((values: any[]) => {
       const rolesToUpdate = {
-        roleNames: [...values.filter(el => el.checked === true).map(el => el.name)]
+        roleNames: [...values.filter((el: { checked: boolean; }) => el.checked === true).map((el: { name: any; }) => el.name)]
       };
       if (rolesToUpdate) {
         this.adminService.updateUsersRoles(user, rolesToUpdate).subscribe(() => {
@@ -59,7 +60,7 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  private getRolesArray(user) {
+  private getRolesArray(user: User) {
     const roles = [];
     const userRoles = user.roles;
     const avaibleRoles: any[] = [
@@ -90,18 +91,11 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    this.modals
-      .addModal(ModalConfirmComponent, {
-        title: `Supprimer ${user.username} ?`,
-        message: 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?'
-      })
-      .subscribe(result => {
-        if (result) {
-          this.userService.deleteUserfById(user.id).subscribe(res => {
-            this.alertify.succes('Supprimé');
-            this.ngOnInit();
-          });
-        }
-      });
+    const initialState = {
+      user
+    };
+    this.bsModalRef = this.modalService.show(DeleteModalsComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+
   }
 }

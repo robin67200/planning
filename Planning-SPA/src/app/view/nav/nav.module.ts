@@ -11,7 +11,8 @@ import { AppSharedModule } from 'src/app/app-shared.module';
 @NgModule({
   declarations: [NavComponent],
   imports:
-      [CommonModule,
+      [
+      CommonModule,
       ReactiveFormsModule,
       AppSharedModule,
       MatSidenavModule,
@@ -22,7 +23,6 @@ import { AppSharedModule } from 'src/app/app-shared.module';
       MatListModule,
       FormsModule,
       MatTooltipModule,
-
     ],
   exports: [NavComponent],
   entryComponents: [],

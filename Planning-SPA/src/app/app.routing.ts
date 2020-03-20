@@ -9,7 +9,7 @@ export function tokenGetter() {
 }
 
 export const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, data: {animation: 'HomePage'}},
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -19,16 +19,19 @@ export const routes: Routes = [
         path: 'annees',
         loadChildren: './view/annee/annee.module#AnneeModule',
         canActivate: [AuthGuard],
+        data: {animation: 'AnneePage'}
       },
       {
         path: 'profs',
         loadChildren: './view/prof/prof.module#ProfModule',
         canActivate: [AuthGuard],
+        data: {animation: 'ProfPage'}
       },
       {
         path: 'calendars',
         loadChildren: './view/cours/cours.module#CoursModule',
         canActivate: [AuthGuard],
+        data: {animation: 'CalendarPage'}
       },
       {
         path: 'classes',

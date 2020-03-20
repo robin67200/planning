@@ -33,8 +33,8 @@ import { AdminService } from './view/_services/admin.service';
 import { AlertifyService } from './view/_services/alertify.service';
 import { UserManagementComponent } from './view/admin/user-management/user-management.component';
 import { AdminPanelComponent } from './view/admin/admin-panel/admin-panel.component';
-import { HasRoleDirective } from './view/_directives/hasRole.directive';
 import { JwtModule } from '@auth0/angular-jwt';
+import { DeleteModalsComponent } from './view/admin/roles-modal/delete-modals/delete-modals.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -51,6 +51,7 @@ export function tokenGetter() {
     HomeComponent,
     RegisterComponent,
     RolesModalComponent,
+    DeleteModalsComponent,
   ],
   imports: [
     AppSharedModule,
@@ -96,7 +97,9 @@ export function tokenGetter() {
     ModalConfirmComponent,
     ModalItemSelectorComponent,
     ModalSimpleInputComponent,
-    RolesModalComponent ],
+    RolesModalComponent,
+    DeleteModalsComponent
+   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'FR'},
       AuthService,

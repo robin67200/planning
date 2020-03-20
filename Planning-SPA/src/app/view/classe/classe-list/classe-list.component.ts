@@ -25,10 +25,7 @@ export class ClasseListComponent implements OnInit {
   classes: Classe[] = [];
   niveaux: Niveau[] = [];
   annees: Annee[] = [];
-
   bsModalRef: BsModalRef;
-
-
 
   constructor(
     private service: ClasseService,
@@ -56,8 +53,12 @@ export class ClasseListComponent implements OnInit {
         });
       });
     });
+
   }
 
+  isEmptyObject(obj: {}) {
+    return (obj && (Object.keys(obj).length === 0));
+  }
   openClasse(classe: Classe) {
     this.service2.pushObject(classe);
   }

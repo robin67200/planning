@@ -1,6 +1,14 @@
 <div class="container">
     <br />
     <h2 style="text-align:center">Classes </h2>
+    <!--
+    <div *ngIf="isEmptyObject(annees) || isEmptyObject(niveaux) else ajouter">
+    <button *appHasRole="['Admin','Moderator']" class="btn btn-outline-primary" style="margin-left: 91%;" disabled><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+    </div>
+    <ng-template #ajouter>
+
+    </ng-template>
+    -->
     <button *appHasRole="['Admin','Moderator']" class="btn btn-outline-primary" style="margin-left: 91%;" (click)="pnlClasseCreated.display()"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
     <hr>
     <br />

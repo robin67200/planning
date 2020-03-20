@@ -31,18 +31,18 @@ displayHeader = true;
 displayFooter = false;
 @Input() width = '600px';
 
-constructor(private renderer: Renderer) { }
+constructor(private renderer: Renderer2) { }
 
 ngOnInit() {}
 
 display(args: any) {
   this.displayed = true;
-  this.renderer.setElementStyle(document.body, 'overflow-y', 'hidden');
+  this.renderer.setStyle(document.body, 'overflow-y', 'hidden');
 }
 
 hide() {
   this.displayed = false;
-  this.renderer.setElementStyle(document.body, 'overflow-y', 'auto');
+  this.renderer.setStyle(document.body, 'overflow-y', 'auto');
 }
 
 }

@@ -20,7 +20,7 @@ import { AnneeModule } from '../annee/annee.module';
 import { NiveauModule } from '../niveau/niveau.module';
 import { MatInputModule, MatIconModule, MatNativeDateModule,
   MatDatepickerModule, MatSelectModule, MatTableModule, MatSortModule,
-   MatPaginatorModule, MatMenuModule, MatButtonModule } from '@angular/material';
+   MatPaginatorModule, MatMenuModule, MatButtonModule, MatTooltipModule } from '@angular/material';
 
 @NgModule({
   imports: [CommonModule,
@@ -41,7 +41,8 @@ import { MatInputModule, MatIconModule, MatNativeDateModule,
             MatSortModule,
             MatIconModule,
             MatMenuModule,
-            MatButtonModule
+            MatButtonModule,
+            MatTooltipModule
             ],
   declarations: [
     ClasseListComponent,

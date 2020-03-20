@@ -1,3 +1,4 @@
-<router-outlet></router-outlet>
-<app-nav></app-nav>
+<div [@routeAnimations]="prepareRoute(outlet)" >
+  <router-outlet (activate)="onActivate($event)" #outlet="outlet"></router-outlet></div>
+  <app-nav></app-nav>
 <div id="modal-container"></div>

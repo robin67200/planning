@@ -10,8 +10,8 @@ export class MatiereService {
 
 baseUrl = environment.apiUrl + 'matieres/';
 
-
 constructor(private http: HttpClient) { }
+
 getMatiere() {
   return this.http.get<Matiere[]>(this.baseUrl);
 }
@@ -37,6 +37,4 @@ export class MatiereService2 extends CrudService<Matiere, number> {
       this.controller = 'matieres';
       this.url = `${this.baseUrl}${this.controller}/`;
     }
-
-
   }

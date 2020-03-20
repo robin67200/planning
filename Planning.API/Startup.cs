@@ -150,11 +150,10 @@ namespace Planning.API
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //seeder.SeedUsers();
-            app.UseAuthentication();
 
             app.UseAuthentication();
             //app.UseHttpsRedirection();
-           // app.UseDefaultFiles();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
